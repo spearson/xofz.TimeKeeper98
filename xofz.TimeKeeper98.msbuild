@@ -24,7 +24,7 @@
       AssemblyCopyright="Copyright (c) X of Z"
       AssemblyTrademark=""
       ComVisible="false"
-      Guid="2d54ac5c-c76a-4892-8756-a746445024cd"
+      Guid="084c471d-35ef-46d1-b6a3-3d79091feaa8"
       AssemblyVersion="$(Version)"
       AssemblyFileVersion="$(Version)" />
   </Target>
