@@ -1,0 +1,47 @@
+<Project DefaultTargets="ChangeVersion;Build;Deploy" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+
+  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
+
+
+  <PropertyGroup>
+    <Version>$(BUILD_NUMBER)</Version>
+    <ProjectName>xofz.TimeKeeper98</ProjectName>
+    <BuildDir>$(ProjectName)\bin\Release</BuildDir>
+    <DeployFolder>C:\Dropbox\xofz.Apps\TimeKeeper98\$(ProjectName)-$(Version)</DeployFolder>
+  </PropertyGroup>
+
+
+  <Target Name="ChangeVersion">
+    <AssemblyInfo
+      CodeLanguage="CS" 
+      OutputFile="$(ProjectName)\Properties\AssemblyInfo.cs"
+      AssemblyTitle="$(ProjectName)" 
+      AssemblyDescription="This app is for tracking the number of hours worked each week."
+      AssemblyConfiguration=""
+      AssemblyCompany="X of Z"
+      AssemblyProduct="TimeKeeper98"
+      AssemblyCopyright="Copyright (c) X of Z"
+      AssemblyTrademark=""
+      ComVisible="false"
+      Guid="2d54ac5c-c76a-4892-8756-a746445024cd"
+      AssemblyVersion="$(Version)"
+      AssemblyFileVersion="$(Version)" />
+  </Target>
+
+
+  <Target Name="Build" DependsOnTargets="ChangeVersion">
+    <RemoveDir Directories="$(BuildDir)" />
+    <MSBuild Projects="$(ProjectName).sln" Targets="Build" Properties="Configuration=Release;Platform=Any CPU" />
+  </Target>
+  
+
+  <Target Name="Deploy" DependsOnTargets="Build">
+    <MakeDir Directories="$(DeployFolder)" Condition="!Exists('$(DeployFolder)')"/>
+    <ItemGroup>
+      <FilesToMove Include="$(BuildDir)\$(ProjectName).exe" />
+      <FilesToMove Include="$(BuildDir)\$(ProjectName).exe.config" />
+    </ItemGroup>
+    <MV SourceFiles="@(FilesToMove)" DestinationFolder="$(DeployFolder)" />
+  </Target>
+</Project>

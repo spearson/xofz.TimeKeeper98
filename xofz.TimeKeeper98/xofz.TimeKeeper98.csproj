@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{084C471D-35EF-46D1-B6A3-3D79091FEAA8}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>xofz.TimeKeeper98</RootNamespace>
+    <AssemblyName>xofz.TimeKeeper98</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="xofz.Core98, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Dropbox\Libraries\xofz.Core98\xofz.Core98.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Framework\DateCalculator.cs" />
+    <Compile Include="Framework\StatisticsCalculator.cs" />
+    <Compile Include="Framework\TimeSpanViewer.cs" />
+    <Compile Include="Framework\TimestampManager.cs" />
+    <Compile Include="Framework\TimestampReader.cs" />
+    <Compile Include="Framework\TimestampWriter.cs" />
+    <Compile Include="Presentation\HomeNavPresenter.cs" />
+    <Compile Include="Presentation\HomePresenter.cs" />
+    <Compile Include="Presentation\StatisticsPresenter.cs" />
+    <Compile Include="Presentation\TimesKeptPresenter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Root\Commands\SetupHomeCommand.cs" />
+    <Compile Include="Root\Commands\SetupMethodWebCommand.cs" />
+    <Compile Include="Root\Commands\SetupStatisticsCommand.cs" />
+    <Compile Include="Root\Commands\SetupTimesKeptCommand.cs" />
+    <Compile Include="Root\EntryPoint.cs" />
+    <Compile Include="Root\FormsBootstrapper.cs" />
+    <Compile Include="UI\Forms\FormMainUi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\FormMainUi.Designer.cs">
+      <DependentUpon>FormMainUi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\UserControlHomeNavUi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\UserControlHomeNavUi.Designer.cs">
+      <DependentUpon>UserControlHomeNavUi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\UserControlHomeUi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\UserControlHomeUi.Designer.cs">
+      <DependentUpon>UserControlHomeUi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\UserControlNavUi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\UserControlNavUi.Designer.cs">
+      <DependentUpon>UserControlNavUi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\UserControlStatisticsUi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\UserControlStatisticsUi.Designer.cs">
+      <DependentUpon>UserControlStatisticsUi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\UserControlTimesKeptUi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\UserControlTimesKeptUi.Designer.cs">
+      <DependentUpon>UserControlTimesKeptUi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\HomeNavUi.cs" />
+    <Compile Include="UI\HomeUi.cs" />
+    <Compile Include="UI\StatisticsUi.cs" />
+    <Compile Include="UI\TimesKeptUi.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="UI\Forms\FormMainUi.resx">
+      <DependentUpon>FormMainUi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\UserControlHomeNavUi.resx">
+      <DependentUpon>UserControlHomeNavUi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\UserControlHomeUi.resx">
+      <DependentUpon>UserControlHomeUi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\UserControlNavUi.resx">
+      <DependentUpon>UserControlNavUi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\UserControlStatisticsUi.resx">
+      <DependentUpon>UserControlStatisticsUi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\UserControlTimesKeptUi.resx">
+      <DependentUpon>UserControlTimesKeptUi.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
