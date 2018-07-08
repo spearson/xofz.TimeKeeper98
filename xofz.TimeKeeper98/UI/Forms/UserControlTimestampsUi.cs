@@ -2,22 +2,22 @@
 {
     using xofz.UI.Forms;
 
-    public partial class UserControlTimesKeptUi :
-        UserControlUi, TimesKeptUi
+    public partial class UserControlTimestampsUi :
+        UserControlUi, TimestampsUi
     {
-        public UserControlTimesKeptUi(Materializer materializer)
+        public UserControlTimestampsUi(Materializer materializer)
         {
             this.materializer = materializer;
 
             this.InitializeComponent();
         }
 
-        private UserControlTimesKeptUi()
+        private UserControlTimestampsUi()
         {
             this.InitializeComponent();
         }
 
-        MaterializedEnumerable<string> TimesKeptUi.InTimes
+        MaterializedEnumerable<string> TimestampsUi.InTimes
         {
             get => this.materializer.Materialize(
                 this.timesInTextBox.Lines);
@@ -41,7 +41,7 @@
             }
         }
 
-        MaterializedEnumerable<string> TimesKeptUi.OutTimes
+        MaterializedEnumerable<string> TimestampsUi.OutTimes
         {
             get => this.materializer.Materialize(
                 this.timesOutTextBox.Lines);
@@ -65,7 +65,7 @@
             }
         }
 
-        void TimesKeptUi.SetSplicedInOutTimes(
+        void TimestampsUi.SetSplicedInOutTimes(
             MaterializedEnumerable<string> inOutTimes)
         {
             var tslb = this.timesSplicedListBox;

@@ -10,7 +10,7 @@
     public class SetupTimesKeptCommand : Command
     {
         public SetupTimesKeptCommand(
-            TimesKeptUi ui,
+            TimestampsUi ui,
             ShellUi shell,
             MethodWeb web)
         {
@@ -22,7 +22,7 @@
         public override void Execute()
         {
             this.registerDependencies();
-            new TimesKeptPresenter(
+            new TimestampsPresenter(
                     this.ui,
                     this.shell,
                     this.web)
@@ -38,7 +38,7 @@
                 new EnumerableSplicer());
         }
 
-        private readonly TimesKeptUi ui;
+        private readonly TimestampsUi ui;
         private readonly ShellUi shell;
         private readonly MethodWeb web;
     }

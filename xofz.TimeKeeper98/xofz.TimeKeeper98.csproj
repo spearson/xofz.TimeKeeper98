@@ -51,7 +51,7 @@
     <Compile Include="Presentation\HomeNavPresenter.cs" />
     <Compile Include="Presentation\HomePresenter.cs" />
     <Compile Include="Presentation\StatisticsPresenter.cs" />
-    <Compile Include="Presentation\TimesKeptPresenter.cs" />
+    <Compile Include="Presentation\TimestampsPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Root\Commands\SetupHomeCommand.cs" />
     <Compile Include="Root\Commands\SetupMethodWebCommand.cs" />
@@ -89,16 +89,16 @@
     <Compile Include="UI\Forms\UserControlStatisticsUi.Designer.cs">
       <DependentUpon>UserControlStatisticsUi.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\UserControlTimesKeptUi.cs">
+    <Compile Include="UI\Forms\UserControlTimestampsUi.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Forms\UserControlTimesKeptUi.Designer.cs">
-      <DependentUpon>UserControlTimesKeptUi.cs</DependentUpon>
+    <Compile Include="UI\Forms\UserControlTimestampsUi.Designer.cs">
+      <DependentUpon>UserControlTimestampsUi.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\HomeNavUi.cs" />
     <Compile Include="UI\HomeUi.cs" />
     <Compile Include="UI\StatisticsUi.cs" />
-    <Compile Include="UI\TimesKeptUi.cs" />
+    <Compile Include="UI\TimestampsUi.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -124,8 +124,8 @@
     <EmbeddedResource Include="UI\Forms\UserControlStatisticsUi.resx">
       <DependentUpon>UserControlStatisticsUi.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\UserControlTimesKeptUi.resx">
-      <DependentUpon>UserControlTimesKeptUi.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\UserControlTimestampsUi.resx">
+      <DependentUpon>UserControlTimestampsUi.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

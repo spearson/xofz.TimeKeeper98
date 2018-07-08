@@ -54,7 +54,7 @@
         private void ui_TimestampsKeyTapped()
         {
             var w = this.web;
-            w.Run<Navigator>(n => n.Present<TimesKeptPresenter>());
+            w.Run<Navigator>(n => n.Present<TimestampsPresenter>());
         }
 
         private void ui_ExitKeyTapped()

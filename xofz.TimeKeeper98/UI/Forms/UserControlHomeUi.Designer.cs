@@ -84,7 +84,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(496, 0);
+            this.label2.Location = new System.Drawing.Point(532, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 20);
             this.label2.TabIndex = 3;
@@ -94,7 +94,7 @@
             // 
             this.timeThisWeekLabel.AutoSize = true;
             this.timeThisWeekLabel.Font = new System.Drawing.Font("Consolas", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeThisWeekLabel.Location = new System.Drawing.Point(494, 20);
+            this.timeThisWeekLabel.Location = new System.Drawing.Point(530, 20);
             this.timeThisWeekLabel.Name = "timeThisWeekLabel";
             this.timeThisWeekLabel.Size = new System.Drawing.Size(191, 34);
             this.timeThisWeekLabel.TabIndex = 4;
@@ -111,7 +111,7 @@
             // 
             this.timeTodayLabel.AutoSize = true;
             this.timeTodayLabel.Font = new System.Drawing.Font("Consolas", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeTodayLabel.Location = new System.Drawing.Point(494, 74);
+            this.timeTodayLabel.Location = new System.Drawing.Point(530, 74);
             this.timeTodayLabel.Name = "timeTodayLabel";
             this.timeTodayLabel.Size = new System.Drawing.Size(191, 34);
             this.timeTodayLabel.TabIndex = 7;
@@ -121,7 +121,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(496, 54);
+            this.label4.Location = new System.Drawing.Point(532, 54);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 20);
             this.label4.TabIndex = 6;

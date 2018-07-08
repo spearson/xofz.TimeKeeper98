@@ -42,7 +42,7 @@
                 var nk = this.navKeys;
                 foreach (var navKey in nk)
                 {
-                    if (navKey.BackColor == SystemColors.ActiveCaption)
+                    if (navKey.BackColor == SystemColors.ControlDark)
                     {
                         return navKey.Text;
                     }
@@ -62,7 +62,7 @@
                             keyToReset.BackColor = SystemColors.Control;
                         }
 
-                        navKey.BackColor = SystemColors.ActiveCaption;
+                        navKey.BackColor = SystemColors.ControlDark;
                         break;
                     }
                 }

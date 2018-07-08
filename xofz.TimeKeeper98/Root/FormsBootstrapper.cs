@@ -58,7 +58,7 @@
                     homeUi,
                     w))
                 .Execute(new SetupTimesKeptCommand(
-                    new UserControlTimesKeptUi(
+                    new UserControlTimestampsUi(
                         new LinkedListMaterializer()),
                     homeUi,
                     w))
@@ -74,7 +74,7 @@
                 {
                     n.Present<HomePresenter>();
                     n.PresentFluidly<HomeNavPresenter>();
-                    n.PresentFluidly<TimesKeptPresenter>();
+                    n.PresentFluidly<TimestampsPresenter>();
                 });
         }
 

@@ -11,10 +11,10 @@
     using xofz.TimeKeeper98.UI;
     using xofz.UI;
 
-    public sealed class TimesKeptPresenter : Presenter
+    public sealed class TimestampsPresenter : Presenter
     {
-        public TimesKeptPresenter(
-            TimesKeptUi ui, 
+        public TimestampsPresenter(
+            TimestampsUi ui, 
             ShellUi shell,
             MethodWeb web) 
             : base(ui, shell)
@@ -161,7 +161,7 @@
         }
 
         private long setupIf1, startedIf1;
-        private readonly TimesKeptUi ui;
+        private readonly TimestampsUi ui;
         private readonly ShellUi shell;
         private readonly MethodWeb web;
     }

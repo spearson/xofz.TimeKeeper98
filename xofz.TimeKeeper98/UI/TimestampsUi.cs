@@ -2,7 +2,7 @@
 {
     using xofz.UI;
 
-    public interface TimesKeptUi : Ui
+    public interface TimestampsUi : Ui
     {
         MaterializedEnumerable<string> InTimes { get; set; }
 

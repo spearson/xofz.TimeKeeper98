@@ -1,6 +1,6 @@
 ﻿namespace xofz.TimeKeeper98.UI.Forms
 {
-    partial class UserControlTimesKeptUi
+    partial class UserControlTimestampsUi
     {
         /// <summary> 
         /// Required designer variable.
@@ -47,6 +47,7 @@
             this.timesInTextBox.ReadOnly = true;
             this.timesInTextBox.Size = new System.Drawing.Size(180, 244);
             this.timesInTextBox.TabIndex = 0;
+            this.timesInTextBox.TabStop = false;
             // 
             // label1
             // 
@@ -80,6 +81,7 @@
             this.timesOutTextBox.ReadOnly = true;
             this.timesOutTextBox.Size = new System.Drawing.Size(180, 244);
             this.timesOutTextBox.TabIndex = 2;
+            this.timesOutTextBox.TabStop = false;
             // 
             // label3
             // 
@@ -88,9 +90,9 @@
             this.label3.Location = new System.Drawing.Point(358, 29);
             this.label3.Margin = new System.Windows.Forms.Padding(0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(160, 25);
+            this.label3.Size = new System.Drawing.Size(258, 25);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Times Spliced";
+            this.label3.Text = "Times spliced together:";
             // 
             // timesSplicedListBox
             // 
@@ -106,11 +108,12 @@
             this.timesSplicedListBox.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.timesSplicedListBox.Size = new System.Drawing.Size(418, 228);
             this.timesSplicedListBox.TabIndex = 5;
+            this.timesSplicedListBox.TabStop = false;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(0, 0);
             this.label4.Margin = new System.Windows.Forms.Padding(0);
             this.label4.Name = "label4";
@@ -118,7 +121,7 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "Timestamps";
             // 
-            // UserControlTimesKeptUi
+            // UserControlTimestampsUi
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.label4);
@@ -129,7 +132,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.timesInTextBox);
             this.Margin = new System.Windows.Forms.Padding(0);
-            this.Name = "UserControlTimesKeptUi";
+            this.Name = "UserControlTimestampsUi";
             this.Size = new System.Drawing.Size(784, 298);
             this.ResumeLayout(false);
             this.PerformLayout();
