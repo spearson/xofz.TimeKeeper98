@@ -34,6 +34,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.timeThisWeekLabel = new System.Windows.Forms.Label();
             this.screenPanel = new System.Windows.Forms.Panel();
+            this.timeTodayLabel = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -81,20 +83,20 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(497, 0);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(496, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(187, 37);
+            this.label2.Size = new System.Drawing.Size(97, 20);
             this.label2.TabIndex = 3;
             this.label2.Text = "This Week:";
             // 
             // timeThisWeekLabel
             // 
             this.timeThisWeekLabel.AutoSize = true;
-            this.timeThisWeekLabel.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeThisWeekLabel.Location = new System.Drawing.Point(497, 37);
+            this.timeThisWeekLabel.Font = new System.Drawing.Font("Consolas", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeThisWeekLabel.Location = new System.Drawing.Point(494, 20);
             this.timeThisWeekLabel.Name = "timeThisWeekLabel";
-            this.timeThisWeekLabel.Size = new System.Drawing.Size(215, 37);
+            this.timeThisWeekLabel.Size = new System.Drawing.Size(191, 34);
             this.timeThisWeekLabel.TabIndex = 4;
             this.timeThisWeekLabel.Text = "00h 00m 00s";
             // 
@@ -105,9 +107,31 @@
             this.screenPanel.Size = new System.Drawing.Size(784, 298);
             this.screenPanel.TabIndex = 5;
             // 
+            // timeTodayLabel
+            // 
+            this.timeTodayLabel.AutoSize = true;
+            this.timeTodayLabel.Font = new System.Drawing.Font("Consolas", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeTodayLabel.Location = new System.Drawing.Point(494, 74);
+            this.timeTodayLabel.Name = "timeTodayLabel";
+            this.timeTodayLabel.Size = new System.Drawing.Size(191, 34);
+            this.timeTodayLabel.TabIndex = 7;
+            this.timeTodayLabel.Text = "00h 00m 00s";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(496, 54);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(62, 20);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Today:";
+            // 
             // UserControlHomeUi
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.timeTodayLabel);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.screenPanel);
             this.Controls.Add(this.timeThisWeekLabel);
             this.Controls.Add(this.label2);
@@ -130,5 +154,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label timeThisWeekLabel;
         private System.Windows.Forms.Panel screenPanel;
+        private System.Windows.Forms.Label timeTodayLabel;
+        private System.Windows.Forms.Label label4;
     }
 }

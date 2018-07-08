@@ -27,8 +27,7 @@
                 return;
             }
 
-            this.ui.InKeyTapped += this.ui_InKeyTapped;
-            this.ui.OutKeyTapped += this.ui_OutKeyTapped;
+
             var w = this.web;
             var calc = w.Run<StatisticsCalculator>();
             var currentlyIn = calc.ClockedIn();
@@ -38,16 +37,26 @@
                 this.ui.OutKeyVisible = currentlyIn;
             });
 
-            this.timer_Elapsed();
-            w.Run<xofz.Framework.Timer, EventSubscriber>(
-                (t, subscriber) =>
-                {
-                    subscriber.Subscribe(
-                        t,
-                        nameof(t.Elapsed),
-                        this.timer_Elapsed);
-                },
-                "HomeTimer");
+            w.Run<EventSubscriber>(subscriber =>
+            {
+                subscriber.Subscribe(
+                    this.ui,
+                    nameof(this.ui.InKeyTapped),
+                    this.ui_InKeyTapped);
+                subscriber.Subscribe(
+                    this.ui,
+                    nameof(this.ui.OutKeyTapped),
+                    this.ui_OutKeyTapped);
+                w.Run<xofz.Framework.Timer>(t =>
+                    {
+                        subscriber.Subscribe(
+                            t,
+                            nameof(t.Elapsed),
+                            this.timer_Elapsed);
+                    },
+                    "HomeTimer");
+            });
+
             w.Run<Navigator>(n => n.RegisterPresenter(this));
         }
 
@@ -102,16 +111,19 @@
         private void timer_Elapsed()
         {
             var w = this.web;
-            var calc = w.Run<StatisticsCalculator>();
-            var timeThisWeek = calc.TimeWorkedThisWeek();
-            w.Run<TimeSpanViewer>(viewer =>
+            w.Run<StatisticsCalculator, TimeSpanViewer>((calc, viewer) =>
             {
-                var readableString = viewer.ReadableString(
-                    timeThisWeek);
+                var timeThisWeek = calc.TimeWorkedThisWeek();
+                var timeToday = calc.TimeWorkedToday();
+                var thisWeekString = viewer.ReadableString(timeThisWeek);
+                var todayString = viewer.ReadableString(timeToday);
                 UiHelpers.Write(
                     this.ui,
-                    () => this.ui.TimeWorkedThisWeek = readableString);
-                this.ui.WriteFinished.WaitOne();
+                    () =>
+                    {
+                        this.ui.TimeWorkedThisWeek = thisWeekString;
+                        this.ui.TimeWorkedToday = todayString;
+                    });
             });
         }
 

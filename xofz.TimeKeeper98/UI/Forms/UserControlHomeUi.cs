@@ -6,7 +6,8 @@
     using xofz.UI;
     using xofz.UI.Forms;
 
-    public partial class UserControlHomeUi : UserControlUi, HomeUi
+    public partial class UserControlHomeUi 
+        : UserControlUi, HomeUi
     {
         public UserControlHomeUi()
         {
@@ -44,6 +45,13 @@
             get => this.timeThisWeekLabel.Text;
 
             set => this.timeThisWeekLabel.Text = value;
+        }
+
+        string HomeUi.TimeWorkedToday
+        {
+            get => this.timeTodayLabel.Text;
+
+            set => this.timeTodayLabel.Text = value;
         }
 
         private void inKey_Click(object sender, EventArgs e)

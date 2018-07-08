@@ -43,9 +43,17 @@
             var calc = w.Run<DateCalculator>();
             var beginning = calc.StartOfWeek();
             var end = calc.EndOfWeek().AddDays(1);
-            var worked = this.TimeWorked(beginning, end);
 
-            return worked;
+            return this.TimeWorked(beginning, end);
+        }
+
+        public TimeSpan TimeWorkedToday()
+        {
+            var today = DateTime.Today;
+            var beginning = today;
+            var end = today.AddDays(1);
+
+            return this.TimeWorked(beginning, end);
         }
 
         public virtual TimeSpan TimeWorked(DateTime beginning, DateTime end)

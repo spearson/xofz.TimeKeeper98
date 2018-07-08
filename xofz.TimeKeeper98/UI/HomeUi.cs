@@ -13,5 +13,7 @@
         bool OutKeyVisible { get; set; }
 
         string TimeWorkedThisWeek { get; set; }
+
+        string TimeWorkedToday { get; set; }
     }
 }
