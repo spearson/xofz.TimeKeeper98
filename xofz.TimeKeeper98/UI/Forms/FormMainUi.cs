@@ -2,6 +2,7 @@
 {
     using System.Threading;
     using System.Windows.Forms;
+    using xofz.TimeKeeper98.Properties;
     using xofz.UI;
     using xofz.UI.Forms;
 
@@ -10,6 +11,10 @@
         public FormMainUi()
         {
             this.InitializeComponent();
+
+            this.Icon = Resources.TimeKeeper98_Icon;
+
+            var h = this.Handle;
         }
 
         public event Action ShutdownRequested;

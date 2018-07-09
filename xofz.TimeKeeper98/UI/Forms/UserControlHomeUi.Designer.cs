@@ -41,7 +41,7 @@
             // welcomeLabel
             // 
             this.welcomeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.welcomeLabel.ForeColor = System.Drawing.Color.SaddleBrown;
+            this.welcomeLabel.ForeColor = System.Drawing.Color.SteelBlue;
             this.welcomeLabel.Location = new System.Drawing.Point(0, 0);
             this.welcomeLabel.Name = "welcomeLabel";
             this.welcomeLabel.Size = new System.Drawing.Size(488, 37);

@@ -59,5 +59,15 @@ namespace xofz.TimeKeeper98.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon TimeKeeper98_Icon {
+            get {
+                object obj = ResourceManager.GetObject("TimeKeeper98_Icon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }

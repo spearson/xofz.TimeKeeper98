@@ -7,9 +7,9 @@
     using xofz.TimeKeeper98.UI;
     using xofz.UI;
 
-    public class SetupTimesKeptCommand : Command
+    public class SetupTimestampsCommand : Command
     {
-        public SetupTimesKeptCommand(
+        public SetupTimestampsCommand(
             TimestampsUi ui,
             ShellUi shell,
             MethodWeb web)

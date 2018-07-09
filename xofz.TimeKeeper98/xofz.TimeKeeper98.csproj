@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\TimeKeeper98 Icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
@@ -57,7 +60,7 @@
     <Compile Include="Root\Commands\SetupHomeCommand.cs" />
     <Compile Include="Root\Commands\SetupMethodWebCommand.cs" />
     <Compile Include="Root\Commands\SetupStatisticsCommand.cs" />
-    <Compile Include="Root\Commands\SetupTimesKeptCommand.cs" />
+    <Compile Include="Root\Commands\SetupTimestampsCommand.cs" />
     <Compile Include="Root\EntryPoint.cs" />
     <Compile Include="Root\FormsBootstrapper.cs" />
     <Compile Include="UI\Forms\FormMainUi.cs">
@@ -140,6 +143,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TimeKeeper98 Icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterResolveReferences">

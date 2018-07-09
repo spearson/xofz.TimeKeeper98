@@ -57,7 +57,7 @@
                     new UserControlStatisticsUi(),
                     homeUi,
                     w))
-                .Execute(new SetupTimesKeptCommand(
+                .Execute(new SetupTimestampsCommand(
                     new UserControlTimestampsUi(
                         new LinkedListMaterializer()),
                     homeUi,
