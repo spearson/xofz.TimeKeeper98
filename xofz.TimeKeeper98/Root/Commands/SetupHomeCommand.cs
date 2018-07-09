@@ -60,6 +60,8 @@
                 new TimeSpanViewer());
             w.RegisterDependency(
                 new StatisticsCalculator(w));
+            w.RegisterDependency(
+                new VersionReader());
         }
 
         private readonly HomeUi ui;

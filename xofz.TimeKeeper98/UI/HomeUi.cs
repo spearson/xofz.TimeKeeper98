@@ -15,5 +15,7 @@
         string TimeWorkedThisWeek { get; set; }
 
         string TimeWorkedToday { get; set; }
+
+        string WelcomeMessage { get; set; }
     }
 }

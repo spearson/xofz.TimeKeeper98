@@ -54,14 +54,33 @@
             set => this.timeTodayLabel.Text = value;
         }
 
+        string HomeUi.WelcomeMessage
+        {
+            get => this.welcomeLabel.Text;
+
+            set => this.welcomeLabel.Text = value;
+        }
+
         private void inKey_Click(object sender, EventArgs e)
         {
-            new Thread(() => this.InKeyTapped?.Invoke()).Start();
+            var ikt = this.InKeyTapped;
+            if (ikt == null)
+            {
+                return;
+            }
+
+            ThreadPool.QueueUserWorkItem(o => ikt.Invoke());
         }
 
         private void outKey_Click(object sender, EventArgs e)
         {
-            new Thread(() => this.OutKeyTapped?.Invoke()).Start();
+            var okt = this.OutKeyTapped;
+            if (okt == null)
+            {
+                return;
+            }
+
+            ThreadPool.QueueUserWorkItem(o => okt.Invoke());
         }
     }
 }

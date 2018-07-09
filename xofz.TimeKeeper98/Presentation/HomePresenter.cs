@@ -1,6 +1,6 @@
 ﻿namespace xofz.TimeKeeper98.Presentation
 {
-    using System;
+    using System.Text;
     using System.Threading;
     using xofz.Framework;
     using xofz.Presentation;
@@ -56,6 +56,19 @@
                     },
                     "HomeTimer");
             });
+
+            var welcomeBuilder = new StringBuilder();
+            welcomeBuilder.Append("Welcome to TimeKeeper98");
+            w.Run<VersionReader>(vr =>
+            {
+                welcomeBuilder.Append(" v" + vr.Read());
+            });
+            welcomeBuilder.Append("!");
+
+            var welcomeMessage = welcomeBuilder.ToString();
+            UiHelpers.Write(
+                this.ui,
+                () => this.ui.WelcomeMessage = welcomeMessage);
 
             w.Run<Navigator>(n => n.RegisterPresenter(this));
         }

@@ -142,7 +142,7 @@
         {
             if (Interlocked.Read(ref this.startedIf1) == 1)
             {
-                this.Start();
+                this.startInternal();
             }
         }
 
@@ -150,7 +150,7 @@
         {
             if (Interlocked.Read(ref this.startedIf1) == 1)
             {
-                this.Start();
+                this.startInternal();
             }
         }
 

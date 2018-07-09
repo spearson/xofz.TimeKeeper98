@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.welcomeLabel = new System.Windows.Forms.Label();
             this.inKey = new System.Windows.Forms.Button();
             this.outKey = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -38,15 +38,15 @@
             this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label1
+            // welcomeLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(398, 37);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Welcome to TimeKeeper!";
+            this.welcomeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.welcomeLabel.ForeColor = System.Drawing.Color.SaddleBrown;
+            this.welcomeLabel.Location = new System.Drawing.Point(0, 0);
+            this.welcomeLabel.Name = "welcomeLabel";
+            this.welcomeLabel.Size = new System.Drawing.Size(488, 37);
+            this.welcomeLabel.TabIndex = 0;
+            this.welcomeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // inKey
             // 
@@ -137,7 +137,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.outKey);
             this.Controls.Add(this.inKey);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.welcomeLabel);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "UserControlHomeUi";
             this.Size = new System.Drawing.Size(784, 411);
@@ -148,7 +148,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label welcomeLabel;
         private System.Windows.Forms.Button inKey;
         private System.Windows.Forms.Button outKey;
         private System.Windows.Forms.Label label2;
