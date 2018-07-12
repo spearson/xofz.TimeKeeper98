@@ -17,5 +17,9 @@
         string TimeWorkedToday { get; set; }
 
         string WelcomeMessage { get; set; }
+
+        string Version { get; set; }
+
+        string CoreVersion { get; set; }
     }
 }

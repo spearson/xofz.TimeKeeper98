@@ -51,7 +51,6 @@
     <Compile Include="Framework\TimestampManager.cs" />
     <Compile Include="Framework\TimestampReader.cs" />
     <Compile Include="Framework\TimestampWriter.cs" />
-    <Compile Include="Framework\VersionReader.cs" />
     <Compile Include="Presentation\HomeNavPresenter.cs" />
     <Compile Include="Presentation\HomePresenter.cs" />
     <Compile Include="Presentation\StatisticsPresenter.cs" />

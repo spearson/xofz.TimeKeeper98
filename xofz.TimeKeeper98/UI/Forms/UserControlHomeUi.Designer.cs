@@ -36,6 +36,8 @@
             this.screenPanel = new System.Windows.Forms.Panel();
             this.timeTodayLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.coreVersionLabel = new System.Windows.Forms.Label();
+            this.versionLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // welcomeLabel
@@ -102,6 +104,8 @@
             // 
             // screenPanel
             // 
+            this.screenPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.screenPanel.Location = new System.Drawing.Point(0, 113);
             this.screenPanel.Name = "screenPanel";
             this.screenPanel.Size = new System.Drawing.Size(784, 298);
@@ -127,9 +131,33 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "Today:";
             // 
+            // coreVersionLabel
+            // 
+            this.coreVersionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.coreVersionLabel.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.coreVersionLabel.Location = new System.Drawing.Point(584, 431);
+            this.coreVersionLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.coreVersionLabel.Name = "coreVersionLabel";
+            this.coreVersionLabel.Size = new System.Drawing.Size(200, 34);
+            this.coreVersionLabel.TabIndex = 8;
+            this.coreVersionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // versionLabel
+            // 
+            this.versionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.versionLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.versionLabel.Location = new System.Drawing.Point(0, 431);
+            this.versionLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.versionLabel.Name = "versionLabel";
+            this.versionLabel.Size = new System.Drawing.Size(200, 34);
+            this.versionLabel.TabIndex = 9;
+            this.versionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // UserControlHomeUi
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.versionLabel);
+            this.Controls.Add(this.coreVersionLabel);
             this.Controls.Add(this.timeTodayLabel);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.screenPanel);
@@ -140,7 +168,7 @@
             this.Controls.Add(this.welcomeLabel);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "UserControlHomeUi";
-            this.Size = new System.Drawing.Size(784, 411);
+            this.Size = new System.Drawing.Size(784, 465);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -156,5 +184,7 @@
         private System.Windows.Forms.Panel screenPanel;
         private System.Windows.Forms.Label timeTodayLabel;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label coreVersionLabel;
+        private System.Windows.Forms.Label versionLabel;
     }
 }

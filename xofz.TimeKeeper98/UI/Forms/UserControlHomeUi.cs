@@ -61,6 +61,44 @@
             set => this.welcomeLabel.Text = value;
         }
 
+        private const string VersionFlavorText = @"v";
+
+        string HomeUi.Version
+        {
+            get
+            {
+                var text = this.versionLabel.Text;
+                if (text?.Contains(VersionFlavorText)
+                    ?? false)
+                {
+                    return text.Substring(VersionFlavorText.Length);
+                }
+
+                return string.Empty;
+            }
+
+                set => this.versionLabel.Text = VersionFlavorText + value;
+        }
+
+        private const string CoreVersionFlavorText = @"Powered by xofz.Core98 v";
+
+        string HomeUi.CoreVersion
+        {
+            get
+            {
+                var text = this.coreVersionLabel.Text;
+                if (text?.Contains(CoreVersionFlavorText)
+                    ?? false)
+                {
+                    return text.Substring(CoreVersionFlavorText.Length);
+                }
+
+                return string.Empty;
+            }
+
+            set => this.coreVersionLabel.Text = CoreVersionFlavorText + value;
+        }
+
         private void inKey_Click(object sender, EventArgs e)
         {
             var ikt = this.InKeyTapped;

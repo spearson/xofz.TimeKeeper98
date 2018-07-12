@@ -45,13 +45,13 @@
             this.screenPanel.Location = new System.Drawing.Point(0, 50);
             this.screenPanel.Margin = new System.Windows.Forms.Padding(0);
             this.screenPanel.Name = "screenPanel";
-            this.screenPanel.Size = new System.Drawing.Size(784, 411);
+            this.screenPanel.Size = new System.Drawing.Size(784, 465);
             this.screenPanel.TabIndex = 1;
             // 
             // FormMainUi
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(784, 461);
+            this.ClientSize = new System.Drawing.Size(784, 515);
             this.Controls.Add(this.screenPanel);
             this.Controls.Add(this.navUi);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

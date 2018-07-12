@@ -27,7 +27,6 @@
                 return;
             }
 
-
             var w = this.web;
             var calc = w.Run<StatisticsCalculator>();
             var currentlyIn = calc.ClockedIn();
@@ -57,18 +56,21 @@
                     "HomeTimer");
             });
 
-            var welcomeBuilder = new StringBuilder();
-            welcomeBuilder.Append("Welcome to TimeKeeper98");
-            w.Run<VersionReader>(vr =>
-            {
-                welcomeBuilder.Append(" v" + vr.Read());
-            });
-            welcomeBuilder.Append("!");
-
-            var welcomeMessage = welcomeBuilder.ToString();
             UiHelpers.Write(
                 this.ui,
-                () => this.ui.WelcomeMessage = welcomeMessage);
+                () => this.ui.WelcomeMessage = "Welcome to TimeKeeper98!");
+            w.Run<VersionReader>(vr =>
+            {
+                var appVersion = vr.Read();
+                var coreVersion = vr.ReadCoreVersion();
+                UiHelpers.Write(
+                    this.ui,
+                    () =>
+                    {
+                        this.ui.Version = appVersion;
+                        this.ui.CoreVersion = coreVersion;
+                    });
+            });
 
             w.Run<Navigator>(n => n.RegisterPresenter(this));
         }

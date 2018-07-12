@@ -1,6 +1,7 @@
 ﻿namespace xofz.TimeKeeper98.Root.Commands
 {
     using System;
+    using System.Reflection;
     using xofz.Framework;
     using xofz.Framework.Transformation;
     using xofz.Root;
@@ -61,7 +62,8 @@
             w.RegisterDependency(
                 new StatisticsCalculator(w));
             w.RegisterDependency(
-                new VersionReader());
+                new VersionReader(
+                    Assembly.GetExecutingAssembly()));
         }
 
         private readonly HomeUi ui;
