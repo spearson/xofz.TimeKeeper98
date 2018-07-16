@@ -78,7 +78,7 @@
                 {
                     var start = calc.StartOfWeek();
                     var end = calc.EndOfWeek().AddDays(1);
-                    var allTimes = reader.Read();
+                    var allTimes = new LinkedList<DateTime>(reader.Read());
                     var timesThisWeek = new LinkedList<DateTime>();
                     foreach (var time in allTimes)
                     {
@@ -95,6 +95,20 @@
                         timesThisWeek.AddLast(time);
                     }
 
+                    if (timesThisWeek.Count % 2 == 1)
+                    {
+                        if (allTimes.Count % 2 == 1)
+                        {
+                            goto afterCheckClockedIn;
+                            // clocked in currently, do nothing
+                        }
+
+                        // clocked out now but was clocked in at start of week
+                        // thus, give them a free time at midnight on the start of the week
+                        timesThisWeek.AddFirst(start.Date);
+                    }
+
+                    afterCheckClockedIn:
                     var splitTimesThisWeek = splitter.Split(
                         timesThisWeek,
                         2);

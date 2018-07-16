@@ -13,28 +13,7 @@
 
         public virtual bool ClockedIn()
         {
-            var w = this.web;
-            var allTimes = this.allTimes();
-            var calc = w.Run<DateCalculator>();
-            var start = calc.StartOfWeek();
-            var end = calc.EndOfWeek().AddDays(1);
-            var timesThisWeek = new LinkedList<DateTime>();
-            foreach (var time in allTimes)
-            {
-                if (time < start)
-                {
-                    continue;
-                }
-
-                if (time > end)
-                {
-                    continue;
-                }
-
-                timesThisWeek.AddLast(time);
-            }
-
-            return timesThisWeek.Count % 2 == 1;
+            return this.allTimes().Count % 2 == 1;            
         }
 
         public virtual TimeSpan TimeWorkedThisWeek()
@@ -67,7 +46,12 @@
                 if (time < beginning)
                 {
                     ++timeCounter;
-                    continue;
+                    if (timeCounter < allTimes.Count)
+                    {
+                        continue;
+                    }
+
+                    goto checkIfClockedInBeforeFirst;
                 }
 
                 if (time > end)
@@ -81,10 +65,15 @@
                     break;
                 }
 
+                checkIfClockedInBeforeFirst:
                 if (timesInRange.Count == 0 && timeCounter % 2 == 1)
                 {
                     // clocked in at start of range
-                    timesInRange.AddLast(beginning);
+                    timesInRange.AddFirst(beginning);
+                    if (timeCounter >= allTimes.Count)
+                    {
+                        break;
+                    }
                 }
 
                 timesInRange.AddLast(time);
@@ -182,17 +171,17 @@
             return maxTimeWorked;
         }
 
-        private IList<DateTime> allTimes()
+        private ICollection<DateTime> allTimes()
         {
             var w = this.web;
-            var list = default(IList<DateTime>);
+            var collection = default(ICollection<DateTime>);
             w.Run<TimestampReader>(reader =>
             {
-                list = new List<DateTime>(
+                collection = new LinkedList<DateTime>(
                     reader.Read());
             });
 
-            return list ?? new List<DateTime>();
+            return collection ?? new LinkedList<DateTime>();
         }
 
         private readonly MethodWeb web;
