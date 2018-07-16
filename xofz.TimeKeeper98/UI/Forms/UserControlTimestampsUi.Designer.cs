@@ -45,6 +45,7 @@
             this.timesInTextBox.Multiline = true;
             this.timesInTextBox.Name = "timesInTextBox";
             this.timesInTextBox.ReadOnly = true;
+            this.timesInTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.timesInTextBox.Size = new System.Drawing.Size(180, 244);
             this.timesInTextBox.TabIndex = 0;
             this.timesInTextBox.TabStop = false;
@@ -79,6 +80,7 @@
             this.timesOutTextBox.Multiline = true;
             this.timesOutTextBox.Name = "timesOutTextBox";
             this.timesOutTextBox.ReadOnly = true;
+            this.timesOutTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.timesOutTextBox.Size = new System.Drawing.Size(180, 244);
             this.timesOutTextBox.TabIndex = 2;
             this.timesOutTextBox.TabStop = false;

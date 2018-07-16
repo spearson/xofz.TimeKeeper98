@@ -55,6 +55,7 @@
             this.Controls.Add(this.screenPanel);
             this.Controls.Add(this.navUi);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "FormMainUi";
             this.Text = "X of Z TimeKeeper98";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.this_FormClosing);
