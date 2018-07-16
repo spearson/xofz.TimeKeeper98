@@ -70,10 +70,11 @@
                 {
                     // clocked in at start of range
                     timesInRange.AddFirst(beginning);
-                    if (timeCounter >= allTimes.Count)
-                    {
-                        break;
-                    }
+                }
+
+                if (timeCounter >= allTimes.Count)
+                {
+                    break;
                 }
 
                 timesInRange.AddLast(time);
