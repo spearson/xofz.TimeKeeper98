@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.welcomeLabel = new System.Windows.Forms.Label();
             this.inKey = new System.Windows.Forms.Button();
             this.outKey = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -38,17 +37,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.coreVersionLabel = new System.Windows.Forms.Label();
             this.versionLabel = new System.Windows.Forms.Label();
+            this.editKey = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // welcomeLabel
-            // 
-            this.welcomeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.welcomeLabel.ForeColor = System.Drawing.Color.SteelBlue;
-            this.welcomeLabel.Location = new System.Drawing.Point(0, 0);
-            this.welcomeLabel.Name = "welcomeLabel";
-            this.welcomeLabel.Size = new System.Drawing.Size(488, 37);
-            this.welcomeLabel.TabIndex = 0;
-            this.welcomeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // inKey
             // 
@@ -58,7 +48,8 @@
             this.inKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.inKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.inKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.inKey.Location = new System.Drawing.Point(10, 40);
+            this.inKey.Location = new System.Drawing.Point(0, 20);
+            this.inKey.Margin = new System.Windows.Forms.Padding(0);
             this.inKey.Name = "inKey";
             this.inKey.Size = new System.Drawing.Size(217, 67);
             this.inKey.TabIndex = 1;
@@ -74,7 +65,8 @@
             this.outKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.outKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.outKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.outKey.Location = new System.Drawing.Point(233, 40);
+            this.outKey.Location = new System.Drawing.Point(272, 20);
+            this.outKey.Margin = new System.Windows.Forms.Padding(0);
             this.outKey.Name = "outKey";
             this.outKey.Size = new System.Drawing.Size(255, 67);
             this.outKey.TabIndex = 2;
@@ -106,7 +98,8 @@
             // 
             this.screenPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.screenPanel.Location = new System.Drawing.Point(0, 113);
+            this.screenPanel.Location = new System.Drawing.Point(0, 130);
+            this.screenPanel.Margin = new System.Windows.Forms.Padding(0);
             this.screenPanel.Name = "screenPanel";
             this.screenPanel.Size = new System.Drawing.Size(784, 298);
             this.screenPanel.TabIndex = 5;
@@ -153,9 +146,27 @@
             this.versionLabel.TabIndex = 9;
             this.versionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // editKey
+            // 
+            this.editKey.AutoSize = true;
+            this.editKey.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.editKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.editKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.editKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.editKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editKey.Location = new System.Drawing.Point(0, 94);
+            this.editKey.Margin = new System.Windows.Forms.Padding(0);
+            this.editKey.Name = "editKey";
+            this.editKey.Size = new System.Drawing.Size(209, 36);
+            this.editKey.TabIndex = 10;
+            this.editKey.Text = "Edit Last Timestamp";
+            this.editKey.UseVisualStyleBackColor = true;
+            this.editKey.Click += new System.EventHandler(this.editKey_Click);
+            // 
             // UserControlHomeUi
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.editKey);
             this.Controls.Add(this.versionLabel);
             this.Controls.Add(this.coreVersionLabel);
             this.Controls.Add(this.timeTodayLabel);
@@ -165,7 +176,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.outKey);
             this.Controls.Add(this.inKey);
-            this.Controls.Add(this.welcomeLabel);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "UserControlHomeUi";
             this.Size = new System.Drawing.Size(784, 465);
@@ -175,8 +185,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label welcomeLabel;
         private System.Windows.Forms.Button inKey;
         private System.Windows.Forms.Button outKey;
         private System.Windows.Forms.Label label2;
@@ -186,5 +194,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label coreVersionLabel;
         private System.Windows.Forms.Label versionLabel;
+        private System.Windows.Forms.Button editKey;
     }
 }

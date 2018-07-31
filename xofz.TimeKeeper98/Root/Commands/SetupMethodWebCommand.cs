@@ -4,14 +4,16 @@
     using xofz.Framework.Materialization;
     using xofz.Presentation;
     using xofz.Root;
-    using xofz.TimeKeeper98.Framework;
     using xofz.UI;
+    using xofz.TimeKeeper98.Framework;
 
     public class SetupMethodWebCommand : Command
     {
         public SetupMethodWebCommand(
+            Func<MethodWeb> createWeb,
             Messenger messenger)
         {
+            this.createWeb = createWeb;
             this.messenger = messenger;
         }
 
@@ -19,7 +21,7 @@
 
         public override void Execute()
         {
-            this.setWeb(new MethodWeb());
+            this.setWeb(this.createWeb());
             this.registerDependencies();
         }
 
@@ -41,9 +43,15 @@
                 new LinkedListMaterializer());
             w.RegisterDependency(
                 new EventSubscriber());
+            w.RegisterDependency(
+                new GlobalSettingsHolder()
+                {
+                    TimestampFormat = "MM/dd hh:mm:ss tt"
+                });
         }
 
         private MethodWeb web;
+        private readonly Func<MethodWeb> createWeb;
         private readonly Messenger messenger;
     }
 }

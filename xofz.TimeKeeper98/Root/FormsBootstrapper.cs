@@ -2,6 +2,7 @@
 {
     using System.Threading;
     using System.Windows.Forms;
+    using xofz.Framework;
     using xofz.Framework.Materialization;
     using xofz.Presentation;
     using xofz.Root;
@@ -41,6 +42,7 @@
 
             var e = this.executor;
             e.Execute(new SetupMethodWebCommand(
+                () => new MethodWeb(),
                 fm));
 
             var w = e.Get<SetupMethodWebCommand>().Web;
@@ -60,6 +62,10 @@
                 .Execute(new SetupTimestampsCommand(
                     new UserControlTimestampsUi(
                         new LinkedListMaterializer()),
+                    homeUi,
+                    w))
+                .Execute(new SetupTimestampEditCommand(
+                    new UserControlTimestampEditUi(),
                     homeUi,
                     w))
                 .Execute(new SetupMainCommand(

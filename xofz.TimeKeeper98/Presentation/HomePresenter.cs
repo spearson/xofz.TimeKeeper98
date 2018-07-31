@@ -30,10 +30,21 @@
             var w = this.web;
             var calc = w.Run<StatisticsCalculator>();
             var currentlyIn = calc.ClockedIn();
+            var editKeyEnabled = false;
+            w.Run<TimestampReader>(reader =>
+            {
+                foreach (var timestamp in reader.Read())
+                {
+                    editKeyEnabled = true;
+                    break;
+                }
+            });
+
             UiHelpers.Write(this.ui, () =>
             {
                 this.ui.InKeyVisible = !currentlyIn;
                 this.ui.OutKeyVisible = currentlyIn;
+                this.ui.EditKeyEnabled = editKeyEnabled;
             });
 
             w.Run<EventSubscriber>(subscriber =>
@@ -46,6 +57,10 @@
                     this.ui,
                     nameof(this.ui.OutKeyTapped),
                     this.ui_OutKeyTapped);
+                subscriber.Subscribe(
+                    this.ui,
+                    nameof(this.ui.EditKeyTapped),
+                    this.ui_EditKeyTapped);
                 w.Run<xofz.Framework.Timer>(t =>
                     {
                         subscriber.Subscribe(
@@ -56,9 +71,6 @@
                     "HomeTimer");
             });
 
-            UiHelpers.Write(
-                this.ui,
-                () => this.ui.WelcomeMessage = "Welcome to TimeKeeper98!");
             w.Run<VersionReader>(vr =>
             {
                 var appVersion = vr.Read();
@@ -114,6 +126,12 @@
                 });
             this.ui.WriteFinished.WaitOne();
             this.writeTimestamp();
+        }
+
+        private void ui_EditKeyTapped()
+        {
+            var w = this.web;
+            w.Run<Navigator>(n => n.Present<TimestampEditPresenter>());
         }
 
         private void writeTimestamp()

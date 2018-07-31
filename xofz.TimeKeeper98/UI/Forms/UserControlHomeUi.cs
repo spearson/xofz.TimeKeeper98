@@ -18,6 +18,8 @@
 
         public event Action OutKeyTapped;
 
+        public event Action EditKeyTapped;
+
         bool HomeUi.InKeyVisible
         {
             get => this.inKey.Visible;
@@ -30,6 +32,13 @@
             get => this.outKey.Visible;
 
             set => this.outKey.Visible = value;
+        }
+
+        bool HomeUi.EditKeyEnabled
+        {
+            get => this.editKey.Enabled;
+
+            set => this.editKey.Enabled = value;
         }
 
         void ShellUi.SwitchUi(Ui newUi)
@@ -52,13 +61,6 @@
             get => this.timeTodayLabel.Text;
 
             set => this.timeTodayLabel.Text = value;
-        }
-
-        string HomeUi.WelcomeMessage
-        {
-            get => this.welcomeLabel.Text;
-
-            set => this.welcomeLabel.Text = value;
         }
 
         private const string VersionFlavorText = @"v";
@@ -119,6 +121,17 @@
             }
 
             ThreadPool.QueueUserWorkItem(o => okt.Invoke());
+        }
+
+        private void editKey_Click(object sender, EventArgs e)
+        {
+            var ekt = this.EditKeyTapped;
+            if (ekt == null)
+            {
+                return;
+            }
+
+            ThreadPool.QueueUserWorkItem(o => ekt.Invoke());
         }
     }
 }

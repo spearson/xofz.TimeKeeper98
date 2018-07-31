@@ -15,7 +15,7 @@
             this.mainDirectory = "Data";
         }
 
-        public IEnumerable<DateTime> Read()
+        IEnumerable<DateTime> TimestampReader.Read()
         {
             var w = this.web;
 
@@ -84,6 +84,34 @@
             var serializableTimes = new string[times.Count];
             times.CopyTo(serializableTimes);
             File.WriteAllLines(filePath, serializableTimes);
+            Interlocked.CompareExchange(ref this.needToTrapIf1, 1, 0);
+        }
+
+        void TimestampWriter.EditLastTimestamp(DateTime newTimestamp)
+        {
+            var md = this.mainDirectory;
+            if (!Directory.Exists(md))
+            {
+                return;
+            }
+
+            var orderedPaths = EnumerableHelpers.OrderByDescending<string, string>(
+                Directory.GetFiles(md), s => s);
+            if (orderedPaths.Count == 0)
+            {
+                return;
+            }
+
+            var path = orderedPaths[0];
+            var times = File.ReadAllLines(path);
+            if (times.Length == 0)
+            {
+                return;
+            }
+
+            times[times.Length - 1]
+                = newTimestamp.Ticks.ToString();
+            File.WriteAllLines(path, times);
             Interlocked.CompareExchange(ref this.needToTrapIf1, 1, 0);
         }
 

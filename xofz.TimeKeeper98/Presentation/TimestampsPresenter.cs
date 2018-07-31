@@ -170,8 +170,15 @@
 
         private string formatTimestamp(DateTime timeStamp)
         {
-            return timeStamp.ToString(
-                "MM/dd hh:mm:ss tt");
+            var w = this.web;
+            string s = null;
+            w.Run<GlobalSettingsHolder>(settings =>
+            {
+                s = timeStamp.ToString(
+                    settings.TimestampFormat);
+            });
+
+            return s;
         }
 
         private long setupIf1, startedIf1;
