@@ -52,7 +52,7 @@
             this.inKey.Margin = new System.Windows.Forms.Padding(0);
             this.inKey.Name = "inKey";
             this.inKey.Size = new System.Drawing.Size(217, 67);
-            this.inKey.TabIndex = 1;
+            this.inKey.TabIndex = 0;
             this.inKey.Text = "Clock In";
             this.inKey.UseVisualStyleBackColor = true;
             this.inKey.Click += new System.EventHandler(this.inKey_Click);
@@ -65,11 +65,11 @@
             this.outKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.outKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.outKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.outKey.Location = new System.Drawing.Point(272, 20);
+            this.outKey.Location = new System.Drawing.Point(233, 20);
             this.outKey.Margin = new System.Windows.Forms.Padding(0);
             this.outKey.Name = "outKey";
             this.outKey.Size = new System.Drawing.Size(255, 67);
-            this.outKey.TabIndex = 2;
+            this.outKey.TabIndex = 1;
             this.outKey.Text = "Clock Out";
             this.outKey.UseVisualStyleBackColor = true;
             this.outKey.Click += new System.EventHandler(this.outKey_Click);
@@ -102,7 +102,8 @@
             this.screenPanel.Margin = new System.Windows.Forms.Padding(0);
             this.screenPanel.Name = "screenPanel";
             this.screenPanel.Size = new System.Drawing.Size(784, 298);
-            this.screenPanel.TabIndex = 5;
+            this.screenPanel.TabIndex = 3;
+            this.screenPanel.TabStop = true;
             // 
             // timeTodayLabel
             // 
@@ -127,24 +128,26 @@
             // coreVersionLabel
             // 
             this.coreVersionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.coreVersionLabel.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.coreVersionLabel.Location = new System.Drawing.Point(584, 431);
+            this.coreVersionLabel.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.coreVersionLabel.Location = new System.Drawing.Point(506, 431);
             this.coreVersionLabel.Margin = new System.Windows.Forms.Padding(0);
             this.coreVersionLabel.Name = "coreVersionLabel";
-            this.coreVersionLabel.Size = new System.Drawing.Size(200, 34);
-            this.coreVersionLabel.TabIndex = 8;
-            this.coreVersionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.coreVersionLabel.Padding = new System.Windows.Forms.Padding(0, 0, 10, 10);
+            this.coreVersionLabel.Size = new System.Drawing.Size(278, 34);
+            this.coreVersionLabel.TabIndex = 99;
+            this.coreVersionLabel.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // versionLabel
             // 
-            this.versionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.versionLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.versionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.versionLabel.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.versionLabel.Location = new System.Drawing.Point(0, 431);
             this.versionLabel.Margin = new System.Windows.Forms.Padding(0);
             this.versionLabel.Name = "versionLabel";
+            this.versionLabel.Padding = new System.Windows.Forms.Padding(10, 0, 0, 10);
             this.versionLabel.Size = new System.Drawing.Size(200, 34);
-            this.versionLabel.TabIndex = 9;
-            this.versionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.versionLabel.TabIndex = 99;
+            this.versionLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // editKey
             // 
@@ -158,7 +161,7 @@
             this.editKey.Margin = new System.Windows.Forms.Padding(0);
             this.editKey.Name = "editKey";
             this.editKey.Size = new System.Drawing.Size(209, 36);
-            this.editKey.TabIndex = 10;
+            this.editKey.TabIndex = 2;
             this.editKey.Text = "Edit Last Timestamp";
             this.editKey.UseVisualStyleBackColor = true;
             this.editKey.Click += new System.EventHandler(this.editKey_Click);

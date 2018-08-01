@@ -66,7 +66,7 @@
             this.exitKey.Margin = new System.Windows.Forms.Padding(0);
             this.exitKey.Name = "exitKey";
             this.exitKey.Size = new System.Drawing.Size(196, 50);
-            this.exitKey.TabIndex = 1;
+            this.exitKey.TabIndex = 2;
             this.exitKey.Text = "Exit";
             this.exitKey.UseVisualStyleBackColor = true;
             this.exitKey.Click += new System.EventHandler(this.exitKey_Click);
@@ -83,7 +83,7 @@
             this.statisticsKey.Margin = new System.Windows.Forms.Padding(0);
             this.statisticsKey.Name = "statisticsKey";
             this.statisticsKey.Size = new System.Drawing.Size(196, 50);
-            this.statisticsKey.TabIndex = 0;
+            this.statisticsKey.TabIndex = 1;
             this.statisticsKey.Text = "Statistics";
             this.statisticsKey.UseVisualStyleBackColor = true;
             this.statisticsKey.Click += new System.EventHandler(this.statisticsKey_Click);
@@ -100,7 +100,7 @@
             this.timestampsKey.Margin = new System.Windows.Forms.Padding(0);
             this.timestampsKey.Name = "timestampsKey";
             this.timestampsKey.Size = new System.Drawing.Size(196, 50);
-            this.timestampsKey.TabIndex = 2;
+            this.timestampsKey.TabIndex = 0;
             this.timestampsKey.Text = "Timestamps";
             this.timestampsKey.UseVisualStyleBackColor = true;
             this.timestampsKey.Click += new System.EventHandler(this.timestampsKey_Click);

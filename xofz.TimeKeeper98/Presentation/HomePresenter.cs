@@ -110,6 +110,7 @@
                 {
                     this.ui.InKeyVisible = false;
                     this.ui.OutKeyVisible = true;
+                    this.ui.EditKeyEnabled = true;
                 });
             this.ui.WriteFinished.WaitOne();
             this.writeTimestamp();
@@ -123,6 +124,7 @@
                 {
                     this.ui.InKeyVisible = true;
                     this.ui.OutKeyVisible = false;
+                    this.ui.EditKeyEnabled = true;
                 });
             this.ui.WriteFinished.WaitOne();
             this.writeTimestamp();

@@ -28,17 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.navUi = new xofz.TimeKeeper98.UI.Forms.UserControlNavUi();
             this.screenPanel = new System.Windows.Forms.Panel();
+            this.navUi = new xofz.TimeKeeper98.UI.Forms.UserControlNavUi();
             this.SuspendLayout();
-            // 
-            // navUi
-            // 
-            this.navUi.Location = new System.Drawing.Point(0, 0);
-            this.navUi.Margin = new System.Windows.Forms.Padding(0);
-            this.navUi.Name = "navUi";
-            this.navUi.Size = new System.Drawing.Size(784, 50);
-            this.navUi.TabIndex = 0;
             // 
             // screenPanel
             // 
@@ -47,6 +39,15 @@
             this.screenPanel.Name = "screenPanel";
             this.screenPanel.Size = new System.Drawing.Size(784, 465);
             this.screenPanel.TabIndex = 1;
+            this.screenPanel.TabStop = true;
+            // 
+            // navUi
+            // 
+            this.navUi.Location = new System.Drawing.Point(0, 0);
+            this.navUi.Margin = new System.Windows.Forms.Padding(0);
+            this.navUi.Name = "navUi";
+            this.navUi.Size = new System.Drawing.Size(784, 50);
+            this.navUi.TabIndex = 0;
             // 
             // FormMainUi
             // 

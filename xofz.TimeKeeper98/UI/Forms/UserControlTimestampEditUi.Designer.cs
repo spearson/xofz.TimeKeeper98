@@ -58,7 +58,7 @@
             this.saveKey.Margin = new System.Windows.Forms.Padding(0);
             this.saveKey.Name = "saveKey";
             this.saveKey.Size = new System.Drawing.Size(77, 37);
-            this.saveKey.TabIndex = 11;
+            this.saveKey.TabIndex = 1;
             this.saveKey.Text = "Save";
             this.saveKey.UseVisualStyleBackColor = true;
             this.saveKey.Click += new System.EventHandler(this.saveKey_Click);
@@ -75,7 +75,7 @@
             this.cancelKey.Margin = new System.Windows.Forms.Padding(0);
             this.cancelKey.Name = "cancelKey";
             this.cancelKey.Size = new System.Drawing.Size(97, 37);
-            this.cancelKey.TabIndex = 12;
+            this.cancelKey.TabIndex = 2;
             this.cancelKey.Text = "Cancel";
             this.cancelKey.UseVisualStyleBackColor = true;
             this.cancelKey.Click += new System.EventHandler(this.cancelKey_Click);
