@@ -8,7 +8,7 @@
     <Version>$(BUILD_NUMBER)</Version>
     <ProjectName>xofz.TimeKeeper98</ProjectName>
     <BuildDir>$(ProjectName)\bin\Release</BuildDir>
-    <DeployFolder>C:\Dropbox\xofz.Apps\TimeKeeper98\$(ProjectName)-$(Version)</DeployFolder>
+    <DeployFolder>H:\Dropbox\xofz.Apps\TimeKeeper98\$(ProjectName)-$(Version)</DeployFolder>
   </PropertyGroup>
 
 
@@ -19,9 +19,9 @@
       AssemblyTitle="$(ProjectName)" 
       AssemblyDescription="This app is for tracking the number of hours worked each week."
       AssemblyConfiguration=""
-      AssemblyCompany="X of Z"
+      AssemblyCompany="x(z)"
       AssemblyProduct="TimeKeeper98"
-      AssemblyCopyright="Copyright (c) X of Z"
+      AssemblyCopyright="Copyright (c) x(z)"
       AssemblyTrademark=""
       ComVisible="false"
       Guid="084c471d-35ef-46d1-b6a3-3d79091feaa8"
