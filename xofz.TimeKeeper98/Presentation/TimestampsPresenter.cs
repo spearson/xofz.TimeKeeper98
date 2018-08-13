@@ -78,7 +78,7 @@
                 {
                     var start = calc.StartOfWeek();
                     var end = calc.EndOfWeek().AddDays(1);
-                    var allTimes = new LinkedList<DateTime>(reader.Read());
+                    var allTimes = reader.ReadAll();
                     var timesThisWeek = new LinkedList<DateTime>();
                     foreach (var time in allTimes)
                     {

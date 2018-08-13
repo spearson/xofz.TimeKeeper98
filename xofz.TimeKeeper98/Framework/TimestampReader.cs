@@ -6,5 +6,7 @@
     public interface TimestampReader
     {
         IEnumerable<DateTime> Read();
+
+        ICollection<DateTime> ReadAll();
     }
 }

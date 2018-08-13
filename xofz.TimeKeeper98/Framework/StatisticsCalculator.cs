@@ -175,14 +175,8 @@
         private ICollection<DateTime> allTimes()
         {
             var w = this.web;
-            var collection = default(ICollection<DateTime>);
-            w.Run<TimestampReader>(reader =>
-            {
-                collection = new LinkedList<DateTime>(
-                    reader.Read());
-            });
-
-            return collection ?? new LinkedList<DateTime>();
+            var reader = w.Run<TimestampReader>();
+            return reader.ReadAll();
         }
 
         private readonly MethodWeb web;
