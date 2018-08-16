@@ -172,8 +172,8 @@
             // 
             this.previousWeekKey.AutoSize = true;
             this.previousWeekKey.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.previousWeekKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.previousWeekKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Lime;
+            this.previousWeekKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.previousWeekKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.previousWeekKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.previousWeekKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.previousWeekKey.Location = new System.Drawing.Point(0, 247);
@@ -189,8 +189,8 @@
             // 
             this.nextWeekKey.AutoSize = true;
             this.nextWeekKey.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.nextWeekKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.nextWeekKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Lime;
+            this.nextWeekKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.nextWeekKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.nextWeekKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.nextWeekKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nextWeekKey.Location = new System.Drawing.Point(357, 247);
@@ -206,8 +206,8 @@
             // 
             this.currentWeekKey.AutoSize = true;
             this.currentWeekKey.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.currentWeekKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.currentWeekKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Lime;
+            this.currentWeekKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.currentWeekKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.currentWeekKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.currentWeekKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.currentWeekKey.Location = new System.Drawing.Point(192, 247);
