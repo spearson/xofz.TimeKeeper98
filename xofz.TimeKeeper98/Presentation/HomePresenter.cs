@@ -104,7 +104,7 @@
 
         private void ui_InKeyTapped()
         {
-            UiHelpers.Write(
+            UiHelpers.WriteSync(
                 this.ui,
                 () =>
                 {
@@ -112,13 +112,12 @@
                     this.ui.OutKeyVisible = true;
                     this.ui.EditKeyEnabled = true;
                 });
-            this.ui.WriteFinished.WaitOne();
             this.writeTimestamp();
         }
 
         private void ui_OutKeyTapped()
         {
-            UiHelpers.Write(
+            UiHelpers.WriteSync(
                 this.ui,
                 () =>
                 {
@@ -126,7 +125,6 @@
                     this.ui.OutKeyVisible = false;
                     this.ui.EditKeyEnabled = true;
                 });
-            this.ui.WriteFinished.WaitOne();
             this.writeTimestamp();
         }
 

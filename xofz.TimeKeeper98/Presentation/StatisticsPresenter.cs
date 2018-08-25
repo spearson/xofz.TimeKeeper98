@@ -31,14 +31,13 @@
             {
                 var startOfWeek = calc.StartOfWeek();
                 var endOfWeek = calc.Friday();
-                UiHelpers.Write(
+                UiHelpers.WriteSync(
                     this.ui,
                     () =>
                     {
                         this.ui.StartDate = startOfWeek;
                         this.ui.EndDate = endOfWeek;
                     });
-                this.ui.WriteFinished.WaitOne();
             });
             w.Run<EventSubscriber>(subscriber =>
             {
@@ -182,46 +181,42 @@
             // because we are waiting on the UI write to finish,
             // this variable will not be overwritten by its second assignment
             // until it is ready
-            UiHelpers.Write(
+            UiHelpers.WriteSync(
                 this.ui, 
                 () =>
                 {
                     this.ui.TimeWorked = readableString;
                 });
-            this.ui.WriteFinished.WaitOne();
 
             var avgDaily = calc.AverageDailyTimeWorked(startDate, endDate);
             readableString = viewer.ReadableString(avgDaily);
             // ReSharper disable once AccessToModifiedClosure
-            UiHelpers.Write(
+            UiHelpers.WriteSync(
                 this.ui,
                 () =>
                 {
                     this.ui.AvgDailyTimeWorked = readableString;
                 });
-            this.ui.WriteFinished.WaitOne();
 
             var minDaily = calc.MinDailyTimeWorked(startDate, endDate);
             readableString = viewer.ReadableString(minDaily);
             // ReSharper disable once AccessToModifiedClosure
-            UiHelpers.Write(
+            UiHelpers.WriteSync(
                 this.ui,
                 () =>
                 {
                     this.ui.MinDailyTimeWorked = readableString;
                 });
-            this.ui.WriteFinished.WaitOne();
 
             var maxDaily = calc.MaxDailyTimeWorked(startDate, endDate);
             readableString = viewer.ReadableString(maxDaily);
             // ReSharper disable once AccessToModifiedClosure
-            UiHelpers.Write(
+            UiHelpers.WriteSync(
                 this.ui,
                 () =>
                 {
                     this.ui.MaxDailyTimeWorked = readableString;
                 });
-            this.ui.WriteFinished.WaitOne();
         }
 
         private int setupIf1;
