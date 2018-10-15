@@ -29,11 +29,11 @@
             this.InitializeComponent();
         }
 
-        public event Action StatisticsKeyTapped;
+        public event Do StatisticsKeyTapped;
 
-        public event Action TimestampsKeyTapped;
+        public event Do TimestampsKeyTapped;
 
-        public event Action ExitKeyTapped;
+        public event Do ExitKeyTapped;
 
         string HomeNavUi.ActiveKeyLabel
         {

@@ -13,9 +13,9 @@
             InitializeComponent();
         }
 
-        public event Action SaveKeyTapped;
+        public event Do SaveKeyTapped;
 
-        public event Action CancelKeyTapped;
+        public event Do CancelKeyTapped;
 
         string TimestampEditUi.TimestampFormat
         {

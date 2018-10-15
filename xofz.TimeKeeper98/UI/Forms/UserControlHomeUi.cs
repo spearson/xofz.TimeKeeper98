@@ -14,11 +14,11 @@
             this.InitializeComponent();
         }
 
-        public event Action InKeyTapped;
+        public event Do InKeyTapped;
 
-        public event Action OutKeyTapped;
+        public event Do OutKeyTapped;
 
-        public event Action EditKeyTapped;
+        public event Do EditKeyTapped;
 
         bool HomeUi.InKeyVisible
         {

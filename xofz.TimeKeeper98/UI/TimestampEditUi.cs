@@ -5,9 +5,9 @@
 
     public interface TimestampEditUi : Ui
     {
-        event Action SaveKeyTapped;
+        event Do SaveKeyTapped;
 
-        event Action CancelKeyTapped;
+        event Do CancelKeyTapped;
 
         string TimestampFormat { get; set; }
 

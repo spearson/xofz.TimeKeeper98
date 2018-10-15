@@ -12,13 +12,13 @@
             this.InitializeComponent();
         }
 
-        public event Action DateChanged;
+        public event Do DateChanged;
 
-        public event Action PreviousWeekKeyTapped;
+        public event Do PreviousWeekKeyTapped;
 
-        public event Action CurrentWeekKeyTapped;
+        public event Do CurrentWeekKeyTapped;
 
-        public event Action NextWeekKeyTapped;
+        public event Do NextWeekKeyTapped;
 
         DateTime StatisticsUi.StartDate
         {

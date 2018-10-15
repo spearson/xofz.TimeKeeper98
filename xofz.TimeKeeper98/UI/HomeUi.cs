@@ -4,11 +4,11 @@
 
     public interface HomeUi : ShellUi
     {
-        event Action InKeyTapped;
+        event Do InKeyTapped;
 
-        event Action OutKeyTapped;
+        event Do OutKeyTapped;
 
-        event Action EditKeyTapped;
+        event Do EditKeyTapped;
 
         bool InKeyVisible { get; set; }
 

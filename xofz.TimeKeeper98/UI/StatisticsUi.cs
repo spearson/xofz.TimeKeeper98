@@ -5,13 +5,13 @@
 
     public interface StatisticsUi : Ui
     {
-        event Action DateChanged;
+        event Do DateChanged;
 
-        event Action PreviousWeekKeyTapped;
+        event Do PreviousWeekKeyTapped;
 
-        event Action CurrentWeekKeyTapped;
+        event Do CurrentWeekKeyTapped;
 
-        event Action NextWeekKeyTapped;
+        event Do NextWeekKeyTapped;
 
         DateTime StartDate { get; set; }
 

@@ -4,11 +4,11 @@
 
     public interface HomeNavUi : Ui
     {
-        event Action StatisticsKeyTapped;
+        event Do StatisticsKeyTapped;
 
-        event Action TimestampsKeyTapped;
+        event Do TimestampsKeyTapped;
 
-        event Action ExitKeyTapped;
+        event Do ExitKeyTapped;
 
         string ActiveKeyLabel { get; set; }
     }
