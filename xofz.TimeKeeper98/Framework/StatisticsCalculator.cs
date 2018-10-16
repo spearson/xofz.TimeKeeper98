@@ -89,7 +89,11 @@
                     var now = DateTime.Now;
                     if (end.Date > now)
                     {
-                        timeWorked += now - inTime;
+                        if (inTime < now)
+                        {
+                            timeWorked += now - inTime;
+                        }
+                        
                         break;
                     }
 
