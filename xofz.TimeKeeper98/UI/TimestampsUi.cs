@@ -4,6 +4,10 @@
 
     public interface TimestampsUi : Ui
     {
+        event Do CurrentKeyTapped;
+
+        event Do StatisticsRangeKeyTapped;
+
         MaterializedEnumerable<string> InTimes { get; set; }
 
         MaterializedEnumerable<string> OutTimes { get; set; }

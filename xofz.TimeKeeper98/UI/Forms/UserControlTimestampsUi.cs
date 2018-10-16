@@ -1,11 +1,14 @@
 ﻿namespace xofz.TimeKeeper98.UI.Forms
 {
+    using System;
+    using System.Threading;
     using xofz.UI.Forms;
 
     public partial class UserControlTimestampsUi :
         UserControlUi, TimestampsUi
     {
-        public UserControlTimestampsUi(Materializer materializer)
+        public UserControlTimestampsUi(
+            Materializer materializer)
         {
             this.materializer = materializer;
 
@@ -16,6 +19,10 @@
         {
             this.InitializeComponent();
         }
+
+        public event Do CurrentKeyTapped;
+
+        public event Do StatisticsRangeKeyTapped;
 
         MaterializedEnumerable<string> TimestampsUi.InTimes
         {
@@ -91,6 +98,33 @@
                 switchTimeType:
                 isInTime = !isInTime;
             }
+        }
+
+        private void currentKey_CheckedChanged(
+            object sender, 
+            EventArgs e)
+        {
+            if (this.currentKey.Checked)
+            {
+                var ckt = this.CurrentKeyTapped;
+                if (ckt == null)
+                {
+                    return;
+                }
+
+                ThreadPool.QueueUserWorkItem(
+                    o => ckt.Invoke());
+                return;
+            }
+
+            var srkt = this.StatisticsRangeKeyTapped;
+            if (srkt == null)
+            {
+                return;
+            }
+
+            ThreadPool.QueueUserWorkItem(
+                o => srkt.Invoke());
         }
 
         private readonly Materializer materializer;

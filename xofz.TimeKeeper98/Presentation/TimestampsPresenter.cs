@@ -43,6 +43,14 @@
                     homeUi,
                     nameof(homeUi.OutKeyTapped),
                     this.homeUi_OutKeyTapped);
+                subscriber.Subscribe(
+                    this.ui,
+                    nameof(this.ui.CurrentKeyTapped),
+                    this.ui_CurrentKeyTapped);
+                subscriber.Subscribe(
+                    this.ui,
+                    nameof(this.ui.StatisticsRangeKeyTapped),
+                    this.ui_StatisticsRangeKeyTapped);
             });
 
             w.Run<Navigator>(n => n.RegisterPresenter(this));
@@ -67,19 +75,45 @@
                 var homeNavUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
                 UiHelpers.Write(
                     homeNavUi,
-                    () => { homeNavUi.ActiveKeyLabel = "Timestamps"; });
+                    () =>
+                    {
+                        homeNavUi.ActiveKeyLabel = "Timestamps";
+                    });
             });
+
+            var showCurrent = Interlocked.Read(ref this.currentIf0) == 0;
+            DateTime start = DateTime.Today, end = DateTime.Today;
+            if (showCurrent)
+            {
+                w.Run<DateCalculator>(
+                    calc =>
+                    {
+                        start = calc.StartOfWeek();
+                        end = calc.EndOfWeek().AddDays(1);
+                    });
+                goto findAndSetTimesInRange;
+            }
+
+            w.Run<Navigator>(n =>
+            {
+                var statsUi = n.GetUi<StatisticsPresenter, StatisticsUi>();
+                start = UiHelpers.Read(
+                    statsUi,
+                    () => statsUi.StartDate);
+                end = UiHelpers.Read(
+                    statsUi,
+                    () => statsUi.EndDate);
+            });
+
+            findAndSetTimesInRange:
             w.Run<
-                DateCalculator,
                 TimestampReader,
                 Materializer,
                 EnumerableSplitter>(
-                (calc, reader, mz, splitter) =>
+                (reader, mz, splitter) =>
                 {
-                    var start = calc.StartOfWeek();
-                    var end = calc.EndOfWeek().AddDays(1);
                     var allTimes = reader.ReadAll();
-                    var timesThisWeek = new LinkedList<DateTime>();
+                    var timesInRange = new LinkedList<DateTime>();
                     foreach (var time in allTimes)
                     {
                         if (time < start)
@@ -92,10 +126,10 @@
                             continue;
                         }
 
-                        timesThisWeek.AddLast(time);
+                        timesInRange.AddLast(time);
                     }
 
-                    if (timesThisWeek.Count % 2 == 1)
+                    if (timesInRange.Count % 2 == 1)
                     {
                         if (allTimes.Count % 2 == 1)
                         {
@@ -105,12 +139,12 @@
 
                         // clocked out now but was clocked in at start of week
                         // thus, give them a free time at midnight on the start of the week
-                        timesThisWeek.AddFirst(start.Date);
+                        timesInRange.AddFirst(start.Date);
                     }
 
                     afterCheckClockedIn:
                     var splitTimesThisWeek = splitter.Split(
-                        timesThisWeek,
+                        timesInRange,
                         2);
                     var inTimes = splitTimesThisWeek[0];
                     var uiTimesIn = mz.Materialize(
@@ -168,6 +202,24 @@
             }
         }
 
+        private void ui_CurrentKeyTapped()
+        {
+            Interlocked.CompareExchange(ref this.currentIf0, 0, 1);
+            if (Interlocked.Read(ref this.startedIf1) == 1)
+            {
+                this.startInternal();
+            }            
+        }
+
+        private void ui_StatisticsRangeKeyTapped()
+        {
+            Interlocked.CompareExchange(ref this.currentIf0, 1, 0);
+            if (Interlocked.Read(ref this.startedIf1) == 1)
+            {
+                this.startInternal();
+            }
+        }
+
         private string formatTimestamp(DateTime timeStamp)
         {
             var w = this.web;
@@ -181,7 +233,7 @@
             return s;
         }
 
-        private long setupIf1, startedIf1;
+        private long setupIf1, startedIf1, currentIf0;
         private readonly TimestampsUi ui;
         private readonly ShellUi shell;
         private readonly MethodWeb web;
