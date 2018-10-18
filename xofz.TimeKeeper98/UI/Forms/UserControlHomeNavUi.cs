@@ -63,8 +63,13 @@
                         }
 
                         navKey.BackColor = SystemColors.ControlDark;
-                        break;
+                        return;
                     }
+                }
+
+                foreach (var eachKey in nk)
+                {
+                    eachKey.BackColor = SystemColors.Control;
                 }
             }
         }

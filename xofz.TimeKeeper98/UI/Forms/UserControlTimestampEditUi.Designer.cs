@@ -39,7 +39,7 @@
             this.dateTimePicker.CalendarFont = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker.Location = new System.Drawing.Point(0, 0);
+            this.dateTimePicker.Location = new System.Drawing.Point(0, 3);
             this.dateTimePicker.Margin = new System.Windows.Forms.Padding(0);
             this.dateTimePicker.MinimumSize = new System.Drawing.Size(240, 0);
             this.dateTimePicker.Name = "dateTimePicker";
@@ -54,7 +54,7 @@
             this.saveKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.saveKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveKey.Location = new System.Drawing.Point(545, 0);
+            this.saveKey.Location = new System.Drawing.Point(290, 0);
             this.saveKey.Margin = new System.Windows.Forms.Padding(0);
             this.saveKey.Name = "saveKey";
             this.saveKey.Size = new System.Drawing.Size(77, 37);
@@ -71,7 +71,7 @@
             this.cancelKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.cancelKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelKey.Location = new System.Drawing.Point(687, 0);
+            this.cancelKey.Location = new System.Drawing.Point(384, 0);
             this.cancelKey.Margin = new System.Windows.Forms.Padding(0);
             this.cancelKey.Name = "cancelKey";
             this.cancelKey.Size = new System.Drawing.Size(97, 37);
@@ -84,7 +84,7 @@
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label1.Location = new System.Drawing.Point(381, 240);
+            this.label1.Location = new System.Drawing.Point(-3, 46);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(403, 58);

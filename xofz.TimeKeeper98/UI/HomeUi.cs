@@ -16,6 +16,8 @@
 
         bool EditKeyEnabled { get; set; }
 
+        bool Editing { get; set; }
+
         string TimeWorkedThisWeek { get; set; }
 
         string TimeWorkedToday { get; set; }

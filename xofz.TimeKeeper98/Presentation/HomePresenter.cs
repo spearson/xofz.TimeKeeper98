@@ -131,7 +131,10 @@
         private void ui_EditKeyTapped()
         {
             var w = this.web;
-            w.Run<Navigator>(n => n.Present<TimestampEditPresenter>());
+            w.Run<Navigator>(n =>
+            {
+                n.Present<TimestampEditPresenter>();
+            });
         }
 
         private void writeTimestamp()

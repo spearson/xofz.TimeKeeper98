@@ -41,6 +41,21 @@
             set => this.editKey.Enabled = value;
         }
 
+        bool HomeUi.Editing
+        {
+            get => this.editing;
+
+            set
+            {
+                this.editing = value;
+                this.editKey.BackColor = value
+                    ? System.Drawing.SystemColors.ControlDark
+                    : System.Drawing.SystemColors.Control;
+            }
+        }
+
+        private bool editing;
+
         void ShellUi.SwitchUi(Ui newUi)
         {
             var control = newUi as Control;

@@ -67,6 +67,39 @@
                     this.ui,
                     () => this.ui.EditedTimestamp = lastTimestamp);
             });
+
+            w.Run<Navigator>(n =>
+            {
+                var hnUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
+                this.setOldActiveKeyLabel(
+                    UiHelpers.Read(
+                        hnUi,
+                        () => hnUi.ActiveKeyLabel));
+                UiHelpers.Write(
+                    hnUi,
+                    () => hnUi.ActiveKeyLabel = null);
+                var homeUi = n.GetUi<HomePresenter, HomeUi>();
+                UiHelpers.Write(
+                    homeUi,
+                    () => homeUi.Editing = true);
+            });
+        }
+
+        private void setOldActiveKeyLabel(string oldActiveKeyLabel)
+        {
+            this.oldActiveKeyLabel = oldActiveKeyLabel;
+        }
+
+        public override void Stop()
+        {
+            var w = this.web;
+            w.Run<Navigator>(n =>
+            {
+                var homeUi = n.GetUi<HomePresenter, HomeUi>();
+                UiHelpers.Write(
+                    homeUi,
+                    () => homeUi.Editing = false);
+            });
         }
 
         private void ui_SaveKeyTapped()
@@ -121,8 +154,7 @@
 
                 w.Run<Navigator>(n =>
                 {
-                    var navUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
-                    switch (UiHelpers.Read(navUi, () => navUi.ActiveKeyLabel))
+                    switch (this.oldActiveKeyLabel)
                     {
                         case "Timestamps":
                             n.Present<TimestampsPresenter>();
@@ -141,7 +173,7 @@
             w.Run<Navigator>(n =>
             {
                 var navUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
-                switch (UiHelpers.Read(navUi, () => navUi.ActiveKeyLabel))
+                switch (this.oldActiveKeyLabel)
                 {
                     case "Timestamps":
                         n.Present<TimestampsPresenter>();
@@ -154,6 +186,7 @@
         }
 
         private long setupIf1;
+        private volatile string oldActiveKeyLabel;
         private readonly TimestampEditUi ui;
         private readonly ShellUi shell;
         private readonly MethodWeb web;
