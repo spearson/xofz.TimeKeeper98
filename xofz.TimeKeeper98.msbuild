@@ -12,7 +12,7 @@
     <BuildDir>$(ProjectName)\bin\Release</BuildDir>
     <WorkingFolder>$(BuildDir)</WorkingFolder>
     <ZipFolder>$(BuildDir)\$(ProjectName)-v$(Version)</ZipFolder>
-    <DeployFolder>C:\Booboo\xofz.Apps\TimeKeeper98</DeployFolder>
+    <DeployFolder>H:\Dropbox\xofz.Apps\TimeKeeper98</DeployFolder>
   </PropertyGroup>
 
 
@@ -66,7 +66,7 @@
   <Target Name="Deploy" DependsOnTargets="Build">
     <MakeDir Directories="$(DeployFolder)" Condition="!Exists('$(DeployFolder)')"/>
     <ItemGroup>
-      <FilesToDeploy Include="$(BuildDir)\$(ProjectName)-v($Version).zip" />
+      <FilesToDeploy Include="$(BuildDir)\$(ProjectName)-v$(Version).zip" />
     </ItemGroup>
     <MV SourceFiles="@(FilesToDeploy)" DestinationFolder="$(DeployFolder)" />
   </Target>
