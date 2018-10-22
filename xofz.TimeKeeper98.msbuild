@@ -66,8 +66,8 @@
   <Target Name="Deploy" DependsOnTargets="Build">
     <MakeDir Directories="$(DeployFolder)" Condition="!Exists('$(DeployFolder)')"/>
     <ItemGroup>
-      <FilesToMove Include="$(BuildDir)\$(ProjectName)-v($Version).zip" />
+      <FilesToDeploy Include="$(BuildDir)\$(ProjectName)-v($Version).zip" />
     </ItemGroup>
-    <MV SourceFiles="@(FilesToMove)" DestinationFolder="$(DeployFolder)" />
+    <MV SourceFiles="@(FilesToDeploy)" DestinationFolder="$(DeployFolder)" />
   </Target>
 </Project>
