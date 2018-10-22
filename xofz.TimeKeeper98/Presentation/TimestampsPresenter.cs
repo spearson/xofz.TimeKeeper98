@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Threading;
     using xofz.Framework;
-    using xofz.Framework.Materialization;
     using xofz.Framework.Transformation;
     using xofz.Presentation;
     using xofz.TimeKeeper98.Framework;
@@ -108,7 +107,7 @@
             findAndSetTimesInRange:
             w.Run<
                 TimestampReader,
-                Materializer,
+                Lotter,
                 EnumerableSplitter>(
                 (reader, mz, splitter) =>
                 {
@@ -165,9 +164,10 @@
                         this.ui,
                         () => { this.ui.OutTimes = uiTimesOut; });
 
-                    w.Run<EnumerableSplicer>(splicer =>
+                    w.Run<EnumerableSplicer, Lotter>(
+                        (splicer, lotter) =>
                     {
-                        var llme = new LinkedListMaterializedEnumerable<string>(
+                        var lot = lotter.Materialize(
                             EnumerableHelpers.Select(
                                 splicer.Splice(
                                     new[]
@@ -179,7 +179,7 @@
 
                         UiHelpers.Write(
                             this.ui,
-                            () => { this.ui.SetSplicedInOutTimes(llme); });
+                            () => { this.ui.SetSplicedInOutTimes(lot); });
                     });
                 });
 

@@ -1,7 +1,7 @@
 ﻿namespace xofz.TimeKeeper98.Root.Commands
 {
     using xofz.Framework;
-    using xofz.Framework.Materialization;
+    using xofz.Framework.Lotters;
     using xofz.Presentation;
     using xofz.Root;
     using xofz.UI;
@@ -40,7 +40,7 @@
             w.RegisterDependency(
                 new EventRaiser());
             w.RegisterDependency(
-                new LinkedListMaterializer());
+                new LinkedListLotter());
             w.RegisterDependency(
                 new EventSubscriber());
             w.RegisterDependency(

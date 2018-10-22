@@ -8,9 +8,9 @@
         UserControlUi, TimestampsUi
     {
         public UserControlTimestampsUi(
-            Materializer materializer)
+            Lotter lotter)
         {
-            this.materializer = materializer;
+            this.lotter = lotter;
 
             this.InitializeComponent();
         }
@@ -24,9 +24,9 @@
 
         public event Do StatisticsRangeKeyTapped;
 
-        MaterializedEnumerable<string> TimestampsUi.InTimes
+        Lot<string> TimestampsUi.InTimes
         {
-            get => this.materializer.Materialize(
+            get => this.lotter.Materialize(
                 this.timesInTextBox.Lines);
 
             set
@@ -48,9 +48,9 @@
             }
         }
 
-        MaterializedEnumerable<string> TimestampsUi.OutTimes
+        Lot<string> TimestampsUi.OutTimes
         {
-            get => this.materializer.Materialize(
+            get => this.lotter.Materialize(
                 this.timesOutTextBox.Lines);
 
             set
@@ -73,7 +73,7 @@
         }
 
         void TimestampsUi.SetSplicedInOutTimes(
-            MaterializedEnumerable<string> inOutTimes)
+            Lot<string> inOutTimes)
         {
             var tslb = this.timesSplicedListBox;
             tslb.Items.Clear();
@@ -127,6 +127,6 @@
                 o => srkt.Invoke());
         }
 
-        private readonly Materializer materializer;
+        private readonly Lotter lotter;
     }
 }

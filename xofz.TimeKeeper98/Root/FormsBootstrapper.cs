@@ -3,7 +3,7 @@
     using System.Threading;
     using System.Windows.Forms;
     using xofz.Framework;
-    using xofz.Framework.Materialization;
+    using xofz.Framework.Lotters;
     using xofz.Presentation;
     using xofz.Root;
     using xofz.Root.Commands;
@@ -51,7 +51,7 @@
                 .Execute(new SetupHomeCommand(
                     homeUi,
                     new UserControlHomeNavUi(
-                        new LinkedListMaterializer()),
+                        new LinkedListLotter()),
                     mf,
                     mf.NavUi,
                     w))
@@ -61,7 +61,7 @@
                     w))
                 .Execute(new SetupTimestampsCommand(
                     new UserControlTimestampsUi(
-                        new LinkedListMaterializer()),
+                        new LinkedListLotter()),
                     homeUi,
                     w))
                 .Execute(new SetupTimestampEditCommand(

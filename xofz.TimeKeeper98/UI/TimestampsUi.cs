@@ -8,10 +8,10 @@
 
         event Do StatisticsRangeKeyTapped;
 
-        MaterializedEnumerable<string> InTimes { get; set; }
+        Lot<string> InTimes { get; set; }
 
-        MaterializedEnumerable<string> OutTimes { get; set; }
+        Lot<string> OutTimes { get; set; }
 
-        void SetSplicedInOutTimes(MaterializedEnumerable<string> inOutTimes);
+        void SetSplicedInOutTimes(Lot<string> inOutTimes);
     }
 }

@@ -9,13 +9,13 @@
     public partial class UserControlHomeNavUi 
         : UserControlUi, HomeNavUi
     {
-        public UserControlHomeNavUi(Materializer materializer)
+        public UserControlHomeNavUi(Lotter Lotter)
         {
-            this.materializer = materializer;
+            this.Lotter = Lotter;
 
             this.InitializeComponent();
 
-            this.navKeys = materializer.Materialize(
+            this.navKeys = Lotter.Materialize(
                 new[]
                 {
                     this.timestampsKey,
@@ -109,7 +109,7 @@
                 tkt.Invoke());
         }
 
-        private MaterializedEnumerable<Button> navKeys;
-        private readonly Materializer materializer;
+        private Lot<Button> navKeys;
+        private readonly Lotter Lotter;
     }
 }

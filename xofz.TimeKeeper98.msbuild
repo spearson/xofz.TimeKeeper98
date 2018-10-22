@@ -1,4 +1,6 @@
-<Project DefaultTargets="ChangeVersion;Build;Deploy" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project
+  DefaultTargets="ChangeVersion;Build;Zip;Deploy"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
 
   <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
@@ -8,7 +10,9 @@
     <Version>$(BUILD_NUMBER)</Version>
     <ProjectName>xofz.TimeKeeper98</ProjectName>
     <BuildDir>$(ProjectName)\bin\Release</BuildDir>
-    <DeployFolder>H:\Dropbox\xofz.Apps\TimeKeeper98\$(ProjectName)-$(Version)</DeployFolder>
+    <WorkingFolder>$(BuildDir)</WorkingFolder>
+    <ZipFolder>$(BuildDir)\$(ProjectName)-v$(Version)</ZipFolder>
+    <DeployFolder>C:\Booboo\xofz.Apps\TimeKeeper98</DeployFolder>
   </PropertyGroup>
 
 
@@ -35,12 +39,34 @@
     <MSBuild Projects="$(ProjectName).sln" Targets="Build" Properties="Configuration=Release;Platform=Any CPU" />
   </Target>
   
+  
+  <Target 
+    Name="Zip" 
+    DependsOnTargets="Build">
+  <MakeDir 
+    Directories="$(ZipFolder)" 
+    Condition="!Exists('$(ZipFolder)')" />
+  <ItemGroup>
+    <FilesToMove Include="$(BuildDir)\$(ProjectName).exe" />
+    <FilesToMove Include="$(BuildDir)\$(ProjectName).exe.config" />
+  </ItemGroup>
+  <MV
+    SourceFiles="@(FilesToMove)"
+    DestinationFolder="$(ZipFolder)" />
+  <ItemGroup>
+    <FilesToZip Include="$(ZipFolder)\*.*" />
+  </ItemGroup>
+  <Zip 
+    ZipFileName="$(ProjectName)-v$(Version).zip" 
+    WorkingDirectory="$(BuildDir)"
+    Files="@(FilesToZip)" />
+  </Target>
+  
 
   <Target Name="Deploy" DependsOnTargets="Build">
     <MakeDir Directories="$(DeployFolder)" Condition="!Exists('$(DeployFolder)')"/>
     <ItemGroup>
-      <FilesToMove Include="$(BuildDir)\$(ProjectName).exe" />
-      <FilesToMove Include="$(BuildDir)\$(ProjectName).exe.config" />
+      <FilesToMove Include="$(BuildDir)\$(ProjectName)-v($Version).zip" />
     </ItemGroup>
     <MV SourceFiles="@(FilesToMove)" DestinationFolder="$(DeployFolder)" />
   </Target>
