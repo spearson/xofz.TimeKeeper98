@@ -106,8 +106,9 @@
                     statsUi,
                     () => statsUi.StartDate);
                 end = UiHelpers.Read(
-                    statsUi,
-                    () => statsUi.EndDate);
+                        statsUi,
+                        () => statsUi.EndDate)
+                    .AddDays(1);
             });
 
             findAndSetTimesInRange:
