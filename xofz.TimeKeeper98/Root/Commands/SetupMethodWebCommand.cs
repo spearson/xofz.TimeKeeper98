@@ -44,7 +44,7 @@
             w.RegisterDependency(
                 new EventSubscriber());
             w.RegisterDependency(
-                new GlobalSettingsHolder()
+                new GlobalSettingsHolder
                 {
                     TimestampFormat = "MM/dd hh:mm:ss tt"
                 });

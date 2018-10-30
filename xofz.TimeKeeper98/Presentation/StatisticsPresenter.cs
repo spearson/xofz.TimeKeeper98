@@ -81,7 +81,10 @@
                 var homeNavUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
                 UiHelpers.Write(
                     homeNavUi,
-                    () => { homeNavUi.ActiveKeyLabel = "Statistics"; });
+                    () =>
+                    {
+                        homeNavUi.ActiveKeyLabel = "Statistics";
+                    });
             });
 
             w.Run<xofz.Framework.Timer, EventRaiser>(
@@ -178,9 +181,6 @@
             var viewer = w.Run<TimeSpanViewer>();
             var readableString = viewer.ReadableString(timeWorked);
             // ReSharper disable once AccessToModifiedClosure
-            // because we are waiting on the UI write to finish,
-            // this variable will not be overwritten by its second assignment
-            // until it is ready
             UiHelpers.WriteSync(
                 this.ui, 
                 () =>

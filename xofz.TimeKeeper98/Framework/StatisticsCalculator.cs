@@ -35,7 +35,9 @@
             return this.TimeWorked(beginning, end);
         }
 
-        public virtual TimeSpan TimeWorked(DateTime beginning, DateTime end)
+        public virtual TimeSpan TimeWorked(
+            DateTime beginning, 
+            DateTime end)
         {
             var allTimes = this.allTimes();
             TimeSpan timeWorked = TimeSpan.Zero;
@@ -109,7 +111,9 @@
             return timeWorked;
         }
 
-        public virtual TimeSpan AverageDailyTimeWorked(DateTime beginning, DateTime end)
+        public virtual TimeSpan AverageDailyTimeWorked(
+            DateTime beginning, 
+            DateTime end)
         {
             var totalTimeWorked = this.TimeWorked(beginning, end);
             var numberOfDays = (end - beginning).Days;
@@ -121,7 +125,9 @@
             return new TimeSpan(totalTimeWorked.Ticks / numberOfDays);
         }
 
-        public virtual TimeSpan MinDailyTimeWorked(DateTime beginning, DateTime end)
+        public virtual TimeSpan MinDailyTimeWorked(
+            DateTime beginning, 
+            DateTime end)
         {
             if (beginning > end)
             {
@@ -151,7 +157,9 @@
             return minTimeWorked;
         }
 
-        public virtual TimeSpan MaxDailyTimeWorked(DateTime beginning, DateTime end)
+        public virtual TimeSpan MaxDailyTimeWorked(
+            DateTime beginning, 
+            DateTime end)
         {
             if (beginning > end)
             {

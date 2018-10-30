@@ -31,8 +31,7 @@
                 case DayOfWeek.Sunday:
                     daysToSubtract = 6;
                     break;
-                default: // switch statements shouldn't need a default case if 
-                    //all the enum's values have been covered
+                default:
                     daysToSubtract = 0;
                     break;
             }
@@ -68,8 +67,7 @@
                 case DayOfWeek.Sunday:
                     daysToAdd = -2;
                     break;
-                default: // switch statements shouldn't need a default case if 
-                    //all the enum's values have been covered
+                default:
                     daysToAdd = 0;
                     break;
             }
@@ -105,8 +103,7 @@
                 case DayOfWeek.Sunday:
                     daysToAdd = 0;
                     break;
-                default: // switch statements shouldn't need a default case if 
-                    //all the enum's values have been covered
+                default:
                     daysToAdd = 0;
                     break;
             }

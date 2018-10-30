@@ -97,7 +97,7 @@
                 set => this.versionLabel.Text = VersionFlavorText + value;
         }
 
-        private const string CoreVersionFlavorText = @"Powered by xofz.Core98 v";
+        private const string CoreVersionFlavorText = @"Powered by x(z) Core98 v";
 
         string HomeUi.CoreVersion
         {

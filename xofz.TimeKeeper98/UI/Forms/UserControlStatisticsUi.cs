@@ -64,27 +64,57 @@
 
         private void startDatePicker_DateChanged(object sender, DateRangeEventArgs e)
         {
-            new Thread(() => this.DateChanged?.Invoke()).Start();
+            var dc = this.DateChanged;
+            if (dc == null)
+            {
+                return;
+            }
+
+            ThreadPool.QueueUserWorkItem(o => dc.Invoke());
         }
 
         private void endDatePicker_DateChanged(object sender, DateRangeEventArgs e)
         {
-            new Thread(() => this.DateChanged?.Invoke()).Start();
+            var dc = this.DateChanged;
+            if (dc == null)
+            {
+                return;
+            }
+
+            ThreadPool.QueueUserWorkItem(o => dc.Invoke());
         }
 
         private void previousWeekKey_Click(object sender, EventArgs e)
         {
-            new Thread(() => this.PreviousWeekKeyTapped?.Invoke()).Start();
+            var pwkt = this.PreviousWeekKeyTapped;
+            if (pwkt == null)
+            {
+                return;
+            }
+
+            ThreadPool.QueueUserWorkItem(o => pwkt.Invoke());
         }
 
         private void nextWeekKey_Click(object sender, EventArgs e)
         {
-            new Thread(() => this.NextWeekKeyTapped?.Invoke()).Start();
+            var nwkt = this.NextWeekKeyTapped;
+            if (nwkt == null)
+            {
+                return;
+            }
+
+            ThreadPool.QueueUserWorkItem(o => nwkt.Invoke());
         }
 
         private void currentWeekKey_Click(object sender, EventArgs e)
         {
-            new Thread(() => this.CurrentWeekKeyTapped?.Invoke()).Start();
+            var cwkt = this.CurrentWeekKeyTapped;
+            if (cwkt == null)
+            {
+                return;
+            }
+
+            ThreadPool.QueueUserWorkItem(o => cwkt.Invoke());
         }
     }
 }

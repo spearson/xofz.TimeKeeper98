@@ -31,25 +31,28 @@
             }
 
             var w = this.web;
-            w.Run<Navigator, EventSubscriber>((n, subscriber) =>
+            w.Run<EventSubscriber>(sub =>
             {
-                var homeUi = n.GetUi<HomePresenter, HomeUi>();
-                subscriber.Subscribe(
-                    homeUi,
-                    nameof(homeUi.InKeyTapped),
-                    this.homeUi_InKeyTapped);
-                subscriber.Subscribe(
-                    homeUi,
-                    nameof(homeUi.OutKeyTapped),
-                    this.homeUi_OutKeyTapped);
-                subscriber.Subscribe(
+                sub.Subscribe(
                     this.ui,
                     nameof(this.ui.CurrentKeyTapped),
                     this.ui_CurrentKeyTapped);
-                subscriber.Subscribe(
+                sub.Subscribe(
                     this.ui,
                     nameof(this.ui.StatisticsRangeKeyTapped),
                     this.ui_StatisticsRangeKeyTapped);
+                w.Run<Navigator>(n =>
+                {
+                    var homeUi = n.GetUi<HomePresenter, HomeUi>();
+                    sub.Subscribe(
+                        homeUi,
+                        nameof(homeUi.InKeyTapped),
+                        this.homeUi_InKeyTapped);
+                    sub.Subscribe(
+                        homeUi,
+                        nameof(homeUi.OutKeyTapped),
+                        this.homeUi_OutKeyTapped);
+                });
             });
 
             w.Run<Navigator>(n => n.RegisterPresenter(this));
@@ -58,6 +61,9 @@
         public override void Start()
         {
             Interlocked.CompareExchange(ref this.startedIf1, 1, 0);
+
+            base.Start();
+
             this.startInternal();
         }
 
@@ -109,7 +115,7 @@
                 TimestampReader,
                 Lotter,
                 EnumerableSplitter>(
-                (reader, mz, splitter) =>
+                (reader, lotter, splitter) =>
                 {
                     var allTimes = reader.ReadAll();
                     var timesInRange = new LinkedList<DateTime>();
@@ -146,7 +152,7 @@
                         timesInRange,
                         2);
                     var inTimes = splitTimesThisWeek[0];
-                    var uiTimesIn = mz.Materialize(
+                    var uiTimesIn = lotter.Materialize(
                         EnumerableHelpers.Select(
                             inTimes,
                             this.formatTimestamp));
@@ -155,7 +161,7 @@
                         () => { this.ui.InTimes = uiTimesIn; });
 
                     var outTimes = splitTimesThisWeek[1];
-                    var uiTimesOut = mz.Materialize(
+                    var uiTimesOut = lotter.Materialize(
                         EnumerableHelpers.Select(
                             outTimes,
                             this.formatTimestamp));
@@ -164,26 +170,27 @@
                         this.ui,
                         () => { this.ui.OutTimes = uiTimesOut; });
 
-                    w.Run<EnumerableSplicer, Lotter>(
-                        (splicer, lotter) =>
-                    {
-                        var lot = lotter.Materialize(
-                            EnumerableHelpers.Select(
-                                splicer.Splice(
-                                    new[]
-                                    {
-                                        inTimes,
-                                        outTimes
-                                    }),
-                                this.formatTimestamp));
+                    w.Run<EnumerableSplicer>(
+                        splicer =>
+                        {
+                            var lot = lotter.Materialize(
+                                EnumerableHelpers.Select(
+                                    splicer.Splice(
+                                        new[]
+                                        {
+                                            inTimes,
+                                            outTimes
+                                        }),
+                                    this.formatTimestamp));
 
-                        UiHelpers.Write(
-                            this.ui,
-                            () => { this.ui.SetSplicedInOutTimes(lot); });
-                    });
+                            UiHelpers.Write(
+                                this.ui,
+                                () =>
+                                {
+                                    this.ui.SetSplicedInOutTimes(lot);
+                                });
+                        });
                 });
-
-            base.Start();
         }
 
         private void homeUi_InKeyTapped()

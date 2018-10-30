@@ -112,8 +112,7 @@
                     return;
                 }
 
-                ThreadPool.QueueUserWorkItem(
-                    o => ckt.Invoke());
+                ThreadPool.QueueUserWorkItem(o => ckt.Invoke());
                 return;
             }
 
@@ -123,8 +122,7 @@
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(
-                o => srkt.Invoke());
+            ThreadPool.QueueUserWorkItem(o => srkt.Invoke());
         }
 
         private readonly Lotter lotter;

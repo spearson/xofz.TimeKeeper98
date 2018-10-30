@@ -24,7 +24,9 @@
         void ShellUi.SwitchUi(Ui newUi)
         {
             var control = newUi as Control;
-            ControlHelpers.SafeReplace(control, this.screenPanel);
+            ControlHelpers.SafeReplace(
+                control, 
+                this.screenPanel);
         }
 
         private void this_FormClosing(
@@ -33,8 +35,13 @@
         {
             e.Cancel = true;
 
-            new Thread(() => this.ShutdownRequested?.Invoke())
-                .Start();
+            var sr = this.ShutdownRequested;
+            if (sr == null)
+            {
+                return;
+            }
+
+            ThreadPool.QueueUserWorkItem(o => sr.Invoke());
         }
     }
 }

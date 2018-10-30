@@ -118,8 +118,8 @@
 
                 var previousTimestamp = allTimes
                     .Last
-                    .Previous
-                    .Value;
+                    ?.Previous
+                    ?.Value;
                 if (timestamp < previousTimestamp)
                 {
                     w.Run<Messenger>(m =>
