@@ -3,7 +3,9 @@
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
 
-  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
+  <Import
+    Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"
+  />
 
 
   <PropertyGroup>
@@ -30,44 +32,72 @@
       ComVisible="false"
       Guid="084c471d-35ef-46d1-b6a3-3d79091feaa8"
       AssemblyVersion="$(Version)"
-      AssemblyFileVersion="$(Version)" />
+      AssemblyFileVersion="$(Version)"
+    />
   </Target>
 
 
-  <Target Name="Build" DependsOnTargets="ChangeVersion">
-    <RemoveDir Directories="$(BuildDir)" />
-    <MSBuild Projects="$(ProjectName).sln" Targets="Build" Properties="Configuration=Release;Platform=Any CPU" />
+  <Target
+    Name="Build"
+    DependsOnTargets="ChangeVersion">
+    <RemoveDir
+      Directories="$(BuildDir)"
+    />
+    <MSBuild
+      Projects="$(ProjectName).sln"
+      Targets="Build"
+      Properties="Configuration=Release;Platform=Any CPU"
+    />
   </Target>
   
   
   <Target 
     Name="Zip" 
     DependsOnTargets="Build">
-  <MakeDir 
-    Directories="$(ZipFolder)" 
-    Condition="!Exists('$(ZipFolder)')" />
-  <ItemGroup>
-    <FilesToMove Include="$(BuildDir)\$(ProjectName).exe" />
-    <FilesToMove Include="$(BuildDir)\$(ProjectName).exe.config" />
-  </ItemGroup>
-  <MV
-    SourceFiles="@(FilesToMove)"
-    DestinationFolder="$(ZipFolder)" />
-  <ItemGroup>
-    <FilesToZip Include="$(ZipFolder)\*.*" />
-  </ItemGroup>
-  <Zip 
-    ZipFileName="$(ProjectName)-v$(Version).zip" 
-    WorkingDirectory="$(WorkingFolder)"
-    Files="@(FilesToZip)" />
+    <MakeDir 
+      Directories="$(ZipFolder)" 
+      Condition="!Exists('$(ZipFolder)')"
+    />
+    <ItemGroup>
+      <FilesToMove
+        Include="$(BuildDir)\$(ProjectName).exe"
+      />
+      <FilesToMove
+        Include="$(BuildDir)\$(ProjectName).exe.config"
+      />
+    </ItemGroup>
+    <MV
+      SourceFiles="@(FilesToMove)"
+      DestinationFolder="$(ZipFolder)"
+    />
+    <ItemGroup>
+      <FilesToZip
+        Include="$(ZipFolder)\*.*"
+      />
+    </ItemGroup>
+    <Zip 
+      ZipFileName="$(ProjectName)-v$(Version).zip" 
+      WorkingDirectory="$(WorkingFolder)"
+      Files="@(FilesToZip)"
+    />
   </Target>
   
 
-  <Target Name="Deploy" DependsOnTargets="Build">
-    <MakeDir Directories="$(DeployFolder)" Condition="!Exists('$(DeployFolder)')"/>
+  <Target
+    Name="Deploy"
+    DependsOnTargets="Zip">
+    <MakeDir
+      Directories="$(DeployFolder)"
+      Condition="!Exists('$(DeployFolder)')"
+    />
     <ItemGroup>
-      <FilesToDeploy Include="$(ProjectName)-v$(Version).zip" />
+      <FilesToDeploy
+        Include="$(ProjectName)-v$(Version).zip"
+      />
     </ItemGroup>
-    <MV SourceFiles="@(FilesToDeploy)" DestinationFolder="$(DeployFolder)" />
+    <MV
+      SourceFiles="@(FilesToDeploy)"
+      DestinationFolder="$(DeployFolder)"
+    />
   </Target>
 </Project>
