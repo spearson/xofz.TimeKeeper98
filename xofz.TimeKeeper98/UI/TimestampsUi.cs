@@ -8,6 +8,8 @@
 
         event Do StatisticsRangeKeyTapped;
 
+        event Do<bool> ShowDurationChanged;
+
         Lot<string> InTimes { get; set; }
 
         Lot<string> OutTimes { get; set; }

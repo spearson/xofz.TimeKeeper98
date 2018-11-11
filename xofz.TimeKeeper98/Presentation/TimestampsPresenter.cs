@@ -41,6 +41,10 @@
                     this.ui,
                     nameof(this.ui.StatisticsRangeKeyTapped),
                     this.ui_StatisticsRangeKeyTapped);
+                sub.Subscribe<bool>(
+                    this.ui,
+                    nameof(this.ui.ShowDurationChanged),
+                    this.ui_ShowDurationChanged);
                 w.Run<Navigator>(n =>
                 {
                     var homeUi = n.GetUi<HomePresenter, HomeUi>();
@@ -143,8 +147,15 @@
                             // clocked in currently, do nothing
                         }
 
+                        
+                        if (isInTime(EnumerableHelpers.First(timesInRange)))
+                        {
+                            // clocked in at end of week
+                            timesInRange.AddLast(end.Date);
+                            goto afterCheckClockedIn;
+                        }
+
                         // clocked out now but was clocked in at start of week
-                        // thus, give them a free time at midnight on the start of the week
                         timesInRange.AddFirst(start.Date);
                     }
 
@@ -174,15 +185,74 @@
                     w.Run<EnumerableSplicer>(
                         splicer =>
                         {
-                            var lot = lotter.Materialize(
-                                EnumerableHelpers.Select(
-                                    splicer.Splice(
+                            var splicedTimes = splicer.Splice(
                                         new[]
                                         {
                                             inTimes,
                                             outTimes
-                                        }),
+                                        });
+                            byte indexer = 0;
+                            DateTime 
+                                currentInTime = default(DateTime), 
+                                currentOutTime = default(DateTime);
+                            ICollection<TimeSpan> durations = new LinkedList<TimeSpan>();
+                            foreach (var splicedTime in splicedTimes)
+                            {
+                                if (indexer == 0)
+                                {
+                                    // in time
+                                    currentInTime = splicedTime;
+                                    ++indexer;
+                                    continue;
+                                }
+
+                                if (indexer == 1)
+                                {
+                                    // out time
+                                    currentOutTime = splicedTime;
+                                    durations.Add(currentOutTime - currentInTime);
+                                    indexer = 0;
+                                    continue;
+                                }
+                            }
+
+                            var lot = lotter.Materialize(
+                                EnumerableHelpers.Select(
+                                    splicedTimes,
                                     this.formatTimestamp));
+                            ICollection<string> newInOutTimes = new LinkedList<string>();
+                            if (Interlocked.Read(ref this.showDurationsIf1) == 1)
+                            {
+                                w.Run<TimeSpanViewer>(v =>
+                                {
+                                    indexer = 0;
+                                    var e = durations.GetEnumerator();
+                                    foreach (var item in lot)
+                                    {
+                                        if (indexer % 2 == 1)
+                                        {
+                                            if (!e.MoveNext())
+                                            {
+                                                break;
+                                            }
+
+                                            newInOutTimes.Add(
+                                                item
+                                                + ' '
+                                                + '('
+                                                + v.ReadableString(e.Current)
+                                                + ')');
+                                            ++indexer;
+                                            continue;
+                                        }
+
+                                        newInOutTimes.Add(item);
+                                        ++indexer;
+                                    }
+                                });
+
+                                lot = lotter.Materialize(newInOutTimes);
+                            }
 
                             UiHelpers.Write(
                                 this.ui,
@@ -192,6 +262,28 @@
                                 });
                         });
                 });
+        }
+
+        private bool isInTime(DateTime timestamp)
+        {
+            var w = this.web;
+            var inTime = false;
+            w.Run<TimestampReader>(reader =>
+            {
+                long indexer = 0;
+                foreach(var ts in reader.ReadAll())
+                {
+                    if (timestamp == ts)
+                    {
+                        inTime = indexer % 2 == 0;
+                        break;
+                    }
+
+                    ++indexer;
+                }
+            });
+
+            return inTime;
         }
 
         private void homeUi_InKeyTapped()
@@ -228,6 +320,20 @@
             }
         }
 
+        private void ui_ShowDurationChanged(bool shouldShow)
+        {
+            long oldValue = Interlocked.Read(
+                ref this.showDurationsIf1);
+            long newValue = shouldShow
+                ? 1
+                : 0;
+            Interlocked.CompareExchange(
+                ref this.showDurationsIf1, 
+                newValue, 
+                oldValue);
+            this.startInternal();
+        }
+
         private string formatTimestamp(DateTime timeStamp)
         {
             var w = this.web;
@@ -241,7 +347,11 @@
             return s;
         }
 
-        private long setupIf1, startedIf1, currentIf0;
+        private long 
+            setupIf1, 
+            startedIf1,
+            currentIf0,
+            showDurationsIf1;
         private readonly TimestampsUi ui;
         private readonly ShellUi shell;
         private readonly MethodWeb web;

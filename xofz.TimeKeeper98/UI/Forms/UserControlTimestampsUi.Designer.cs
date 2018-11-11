@@ -37,6 +37,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.currentKey = new System.Windows.Forms.RadioButton();
             this.statisticsRangeKey = new System.Windows.Forms.RadioButton();
+            this.showDurationsCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // timesInTextBox
@@ -158,9 +159,22 @@
             this.statisticsRangeKey.Text = "Statistics Range";
             this.statisticsRangeKey.UseVisualStyleBackColor = true;
             // 
+            // showDurationsCheckBox
+            // 
+            this.showDurationsCheckBox.AutoSize = true;
+            this.showDurationsCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showDurationsCheckBox.Location = new System.Drawing.Point(406, 9);
+            this.showDurationsCheckBox.Name = "showDurationsCheckBox";
+            this.showDurationsCheckBox.Size = new System.Drawing.Size(147, 22);
+            this.showDurationsCheckBox.TabIndex = 7;
+            this.showDurationsCheckBox.Text = "Show Durations";
+            this.showDurationsCheckBox.UseVisualStyleBackColor = true;
+            this.showDurationsCheckBox.CheckedChanged += new System.EventHandler(this.showDurationsCheckBox_CheckedChanged);
+            // 
             // UserControlTimestampsUi
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.showDurationsCheckBox);
             this.Controls.Add(this.statisticsRangeKey);
             this.Controls.Add(this.currentKey);
             this.Controls.Add(this.label4);
@@ -189,5 +203,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RadioButton currentKey;
         private System.Windows.Forms.RadioButton statisticsRangeKey;
+        private System.Windows.Forms.CheckBox showDurationsCheckBox;
     }
 }

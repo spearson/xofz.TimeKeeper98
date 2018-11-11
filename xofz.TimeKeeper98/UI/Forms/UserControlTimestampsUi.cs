@@ -24,6 +24,8 @@
 
         public event Do StatisticsRangeKeyTapped;
 
+        public event Do<bool> ShowDurationChanged;
+
         Lot<string> TimestampsUi.InTimes
         {
             get => this.lotter.Materialize(
@@ -123,6 +125,21 @@
             }
 
             ThreadPool.QueueUserWorkItem(o => srkt.Invoke());
+        }
+
+        private void showDurationsCheckBox_CheckedChanged(
+            object sender, 
+            EventArgs e)
+        {
+            var sdc = this.ShowDurationChanged;
+            if (sdc == null)
+            {
+                return;
+            }
+
+            var shouldShow = this.showDurationsCheckBox.Checked;
+            ThreadPool.QueueUserWorkItem(
+                o => sdc.Invoke(shouldShow));
         }
 
         private readonly Lotter lotter;
