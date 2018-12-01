@@ -79,10 +79,10 @@
         private void startInternal()
         {
             var w = this.web;
-            w.Run<Navigator>(n =>
+            w.Run<UiReaderWriter, Navigator>((rw, n) =>
             {
                 var homeNavUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
-                UiHelpers.Write(
+                rw.Write(
                     homeNavUi,
                     () =>
                     {
@@ -103,13 +103,13 @@
                 goto findAndSetTimesInRange;
             }
 
-            w.Run<Navigator>(n =>
+            w.Run<Navigator, UiReaderWriter>((n, rw) =>
             {
                 var statsUi = n.GetUi<StatisticsPresenter, StatisticsUi>();
-                start = UiHelpers.Read(
+                start = rw.Read(
                     statsUi,
                     () => statsUi.StartDate);
-                end = UiHelpers.Read(
+                end = rw.Read(
                         statsUi,
                         () => statsUi.EndDate)
                     .AddDays(1);
@@ -119,8 +119,9 @@
             w.Run<
                 TimestampReader,
                 Lotter,
-                EnumerableSplitter>(
-                (reader, lotter, splitter) =>
+                EnumerableSplitter,
+                UiReaderWriter>(
+                (reader, lotter, splitter, rw) =>
                 {
                     var allTimes = reader.ReadAll();
                     var timesInRange = new LinkedList<DateTime>();
@@ -168,7 +169,7 @@
                         EnumerableHelpers.Select(
                             inTimes,
                             this.formatTimestamp));
-                    UiHelpers.Write(
+                    rw.Write(
                         this.ui,
                         () => { this.ui.InTimes = uiTimesIn; });
 
@@ -178,7 +179,7 @@
                             outTimes,
                             this.formatTimestamp));
 
-                    UiHelpers.Write(
+                    rw.Write(
                         this.ui,
                         () => { this.ui.OutTimes = uiTimesOut; });
 
@@ -254,7 +255,7 @@
                                 lot = lotter.Materialize(newInOutTimes);
                             }
 
-                            UiHelpers.Write(
+                            rw.Write(
                                 this.ui,
                                 () =>
                                 {

@@ -30,10 +30,11 @@
             }
 
             var w = this.web;
-            w.Run<GlobalSettingsHolder>(gsh =>
+            w.Run<GlobalSettingsHolder, UiReaderWriter>(
+                (settings, rw) =>
             {
-                var format = gsh.TimestampFormat;
-                UiHelpers.Write(
+                var format = settings.TimestampFormat;
+                rw.Write(
                     this.ui,
                     () => this.ui.TimestampFormat = format);
             });
@@ -58,28 +59,28 @@
             base.Start();
 
             var w = this.web;
-            w.Run<TimestampReader>(reader =>
+            w.Run<TimestampReader, UiReaderWriter>((reader, rw) =>
             {
                 var lastTimestamp = new LinkedList<DateTime>(reader.Read())
                     .Last
                     .Value;
-                UiHelpers.Write(
+                rw.Write(
                     this.ui,
                     () => this.ui.EditedTimestamp = lastTimestamp);
             });
 
-            w.Run<Navigator>(n =>
+            w.Run<Navigator, UiReaderWriter>((n, rw) =>
             {
                 var hnUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
                 this.setOldActiveKeyLabel(
-                    UiHelpers.Read(
+                    rw.Read(
                         hnUi,
                         () => hnUi.ActiveKeyLabel));
-                UiHelpers.Write(
+                rw.Write(
                     hnUi,
                     () => hnUi.ActiveKeyLabel = null);
                 var homeUi = n.GetUi<HomePresenter, HomeUi>();
-                UiHelpers.Write(
+                rw.Write(
                     homeUi,
                     () => homeUi.Editing = true);
             });
@@ -93,10 +94,10 @@
         public override void Stop()
         {
             var w = this.web;
-            w.Run<Navigator>(n =>
+            w.Run<Navigator, UiReaderWriter>((n, rw) =>
             {
                 var homeUi = n.GetUi<HomePresenter, HomeUi>();
-                UiHelpers.Write(
+                rw.Write(
                     homeUi,
                     () => homeUi.Editing = false);
             });
@@ -105,11 +106,12 @@
         private void ui_SaveKeyTapped()
         {
             var w = this.web;
-            var timestamp = UiHelpers.Read(
-                this.ui,
-                () => this.ui.EditedTimestamp);
-            w.Run<TimestampReader>(reader =>
+            
+            w.Run<TimestampReader, UiReaderWriter>((reader, rw) =>
             {
+                var timestamp = rw.Read(
+                    this.ui,
+                    () => this.ui.EditedTimestamp);
                 var allTimes = new LinkedList<DateTime>(reader.Read());
                 if (allTimes.Count < 2)
                 {
@@ -124,7 +126,7 @@
                 {
                     w.Run<Messenger>(m =>
                     {
-                        UiHelpers.Write(
+                        rw.Write(
                             m.Subscriber,
                             () => m.GiveError(
                                 "Time must be after previous timestamp."));
@@ -138,7 +140,7 @@
                 {
                     w.Run<Messenger>(m =>
                     {
-                        UiHelpers.Write(
+                        rw.Write(
                             m.Subscriber,
                             () => m.GiveError(
                                 "Time must be before present time."));

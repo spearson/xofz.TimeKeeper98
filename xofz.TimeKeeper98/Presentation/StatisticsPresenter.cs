@@ -27,11 +27,11 @@
             }
 
             var w = this.web;
-            w.Run<DateCalculator>(calc =>
+            w.Run<DateCalculator, UiReaderWriter>((calc, rw) =>
             {
                 var startOfWeek = calc.StartOfWeek();
                 var endOfWeek = calc.Friday();
-                UiHelpers.WriteSync(
+                rw.WriteSync(
                     this.ui,
                     () =>
                     {
@@ -76,10 +76,10 @@
 
             base.Start();
 
-            w.Run<Navigator>(n =>
+            w.Run<Navigator, UiReaderWriter>((n, rw) =>
             {
                 var homeNavUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
-                UiHelpers.Write(
+                rw.Write(
                     homeNavUi,
                     () =>
                     {
@@ -87,12 +87,15 @@
                     });
             });
 
-            w.Run<xofz.Framework.Timer, EventRaiser>(
-                (t, er) =>
+            w.Run<xofz.Framework.Timer>(
+                t =>
                 {
-                    er.Raise(
-                        t,
-                        nameof(t.Elapsed));
+                    w.Run<EventRaiser>(er =>
+                    {
+                        er.Raise(
+                            t,
+                            nameof(t.Elapsed));
+                    });                    
                     t.Start(1000);
                 },
                 "StatisticsTimer");
@@ -112,53 +115,64 @@
         private void ui_CurrentWeekKeyTapped()
         {
             var w = this.web;
-            var calc = w.Run<DateCalculator>();
-            var start = calc.StartOfWeek();
-            var end = calc.Friday();
-
-            UiHelpers.Write(
-                this.ui,
-                () =>
+            w.Run<DateCalculator, UiReaderWriter>(
+                (calc, rw) =>
                 {
-                    this.ui.StartDate = start;
-                    this.ui.EndDate = end;
+                    var start = calc.StartOfWeek();
+                    var end = calc.Friday();
+                    rw.Write(
+                        this.ui,
+                        () =>
+                        {
+                            this.ui.StartDate = start;
+                            this.ui.EndDate = end;
+                        });
                 });
+
         }
 
         private void ui_PreviousWeekKeyTapped()
         {
-            var currentStart = UiHelpers.Read(
-                this.ui,
-                () => this.ui.StartDate);
-            var currentEnd = UiHelpers.Read(
-                this.ui,
-                () => this.ui.EndDate);
-            var newStart = currentStart.AddDays(-7);
-            var newEnd = currentEnd.AddDays(-7);
-
-            UiHelpers.Write(this.ui, () =>
+            var w = this.web;
+            w.Run<UiReaderWriter>(rw =>
             {
-                this.ui.StartDate = newStart;
-                this.ui.EndDate = newEnd;
+                var currentStart = rw.Read(
+                    this.ui,
+                    () => this.ui.StartDate);
+                var currentEnd = rw.Read(
+                    this.ui,
+                    () => this.ui.EndDate);
+                var newStart = currentStart.AddDays(-7);
+                var newEnd = currentEnd.AddDays(-7);
+
+                rw.Write(this.ui, () =>
+                {
+                    this.ui.StartDate = newStart;
+                    this.ui.EndDate = newEnd;
+                });
             });
         }
 
         private void ui_NextWeekKeyTapped()
         {
-            var currentStart = UiHelpers.Read(
-                this.ui,
-                () => this.ui.StartDate);
-            var currentEnd = UiHelpers.Read(
-                this.ui,
-                () => this.ui.EndDate);
-            var newStart = currentStart.AddDays(7);
-            var newEnd = currentEnd.AddDays(7);
-
-            UiHelpers.Write(this.ui, () =>
+            var w = this.web;
+            w.Run<UiReaderWriter>(rw =>
             {
-                this.ui.StartDate = newStart;
-                this.ui.EndDate = newEnd;
-            });
+                var currentStart = rw.Read(
+                    this.ui,
+                    () => this.ui.StartDate);
+                var currentEnd = rw.Read(
+                    this.ui,
+                    () => this.ui.EndDate);
+                var newStart = currentStart.AddDays(7);
+                var newEnd = currentEnd.AddDays(7);
+
+                rw.Write(this.ui, () =>
+                {
+                    this.ui.StartDate = newStart;
+                    this.ui.EndDate = newEnd;
+                });
+            });            
         }
 
         private void ui_DateChanged()
@@ -173,50 +187,57 @@
 
         private void computeStatistics()
         {
-            var startDate = UiHelpers.Read(this.ui, () => this.ui.StartDate);
-            var endDate = UiHelpers.Read(this.ui, () => this.ui.EndDate).AddDays(1);
             var w = this.web;
-            var calc = w.Run<StatisticsCalculator>();
-            var timeWorked = calc.TimeWorked(startDate, endDate);
-            var viewer = w.Run<TimeSpanViewer>();
-            var readableString = viewer.ReadableString(timeWorked);
-            // ReSharper disable once AccessToModifiedClosure
-            UiHelpers.WriteSync(
-                this.ui, 
-                () =>
+            w.Run<
+                UiReaderWriter,
+                StatisticsCalculator,
+                TimeSpanViewer>(
+                (rw, calc, viewer) =>
                 {
-                    this.ui.TimeWorked = readableString;
+                    var startDate = rw.Read(this.ui, () => this.ui.StartDate);
+                    var endDate = rw.Read(this.ui, () => this.ui.EndDate).AddDays(1);
+
+                    var timeWorked = calc.TimeWorked(startDate, endDate);                    
+                    var readableString = viewer.ReadableString(timeWorked);
+                    // ReSharper disable once AccessToModifiedClosure
+                    rw.WriteSync(
+                        this.ui,
+                        () =>
+                        {
+                            this.ui.TimeWorked = readableString;
+                        });
+
+                    var avgDaily = calc.AverageDailyTimeWorked(startDate, endDate);
+                    readableString = viewer.ReadableString(avgDaily);
+                    // ReSharper disable once AccessToModifiedClosure
+                    rw.WriteSync(
+                        this.ui,
+                        () =>
+                        {
+                            this.ui.AvgDailyTimeWorked = readableString;
+                        });
+
+                    var minDaily = calc.MinDailyTimeWorked(startDate, endDate);
+                    readableString = viewer.ReadableString(minDaily);
+                    // ReSharper disable once AccessToModifiedClosure
+                    rw.WriteSync(
+                        this.ui,
+                        () =>
+                        {
+                            this.ui.MinDailyTimeWorked = readableString;
+                        });
+
+                    var maxDaily = calc.MaxDailyTimeWorked(startDate, endDate);
+                    readableString = viewer.ReadableString(maxDaily);
+                    // ReSharper disable once AccessToModifiedClosure
+                    rw.WriteSync(
+                        this.ui,
+                        () =>
+                        {
+                            this.ui.MaxDailyTimeWorked = readableString;
+                        });
                 });
 
-            var avgDaily = calc.AverageDailyTimeWorked(startDate, endDate);
-            readableString = viewer.ReadableString(avgDaily);
-            // ReSharper disable once AccessToModifiedClosure
-            UiHelpers.WriteSync(
-                this.ui,
-                () =>
-                {
-                    this.ui.AvgDailyTimeWorked = readableString;
-                });
-
-            var minDaily = calc.MinDailyTimeWorked(startDate, endDate);
-            readableString = viewer.ReadableString(minDaily);
-            // ReSharper disable once AccessToModifiedClosure
-            UiHelpers.WriteSync(
-                this.ui,
-                () =>
-                {
-                    this.ui.MinDailyTimeWorked = readableString;
-                });
-
-            var maxDaily = calc.MaxDailyTimeWorked(startDate, endDate);
-            readableString = viewer.ReadableString(maxDaily);
-            // ReSharper disable once AccessToModifiedClosure
-            UiHelpers.WriteSync(
-                this.ui,
-                () =>
-                {
-                    this.ui.MaxDailyTimeWorked = readableString;
-                });
         }
 
         private int setupIf1;

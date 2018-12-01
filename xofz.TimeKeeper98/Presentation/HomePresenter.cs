@@ -1,6 +1,5 @@
 ﻿namespace xofz.TimeKeeper98.Presentation
 {
-    using System.Text;
     using System.Threading;
     using xofz.Framework;
     using xofz.Presentation;
@@ -40,11 +39,14 @@
                 }
             });
 
-            UiHelpers.Write(this.ui, () =>
+            w.Run<UiReaderWriter>(rw =>
             {
-                this.ui.InKeyVisible = !currentlyIn;
-                this.ui.OutKeyVisible = currentlyIn;
-                this.ui.EditKeyEnabled = editKeyEnabled;
+                rw.Write(this.ui, () =>
+                {
+                    this.ui.InKeyVisible = !currentlyIn;
+                    this.ui.OutKeyVisible = currentlyIn;
+                    this.ui.EditKeyEnabled = editKeyEnabled;
+                });
             });
 
             w.Run<EventSubscriber>(subscriber =>
@@ -71,11 +73,11 @@
                     "HomeTimer");
             });
 
-            w.Run<VersionReader>(vr =>
+            w.Run<VersionReader, UiReaderWriter>((vr, rw) =>
             {
                 var appVersion = vr.Read();
                 var coreVersion = vr.ReadCoreVersion();
-                UiHelpers.Write(
+                rw.Write(
                     this.ui,
                     () =>
                     {
@@ -92,11 +94,15 @@
             base.Start();
 
             var w = this.web;
-            w.Run<xofz.Framework.Timer, EventRaiser>((t, er) =>
+            w.Run<xofz.Framework.Timer>(t =>
                 {
-                    er.Raise(
-                        t,
-                        nameof(t.Elapsed));
+                    w.Run<xofz.Framework.EventRaiser>(er =>
+                    {
+                        er.Raise(
+                            t,
+                            nameof(t.Elapsed));
+                    });
+                    
                     t.Start(1000);
                 },
                 "HomeTimer");
@@ -104,28 +110,36 @@
 
         private void ui_InKeyTapped()
         {
-            UiHelpers.WriteSync(
-                this.ui,
-                () =>
-                {
-                    this.ui.InKeyVisible = false;
-                    this.ui.OutKeyVisible = true;
-                    this.ui.EditKeyEnabled = true;
-                });
-            this.writeTimestamp();
+            var w = this.web;
+            w.Run<UiReaderWriter>(rw =>
+            {
+                rw.WriteSync(
+                    this.ui,
+                    () =>
+                    {
+                        this.ui.InKeyVisible = false;
+                        this.ui.OutKeyVisible = true;
+                        this.ui.EditKeyEnabled = true;
+                    });
+                this.writeTimestamp();
+            });            
         }
 
         private void ui_OutKeyTapped()
         {
-            UiHelpers.WriteSync(
-                this.ui,
-                () =>
-                {
-                    this.ui.InKeyVisible = true;
-                    this.ui.OutKeyVisible = false;
-                    this.ui.EditKeyEnabled = true;
-                });
-            this.writeTimestamp();
+            var w = this.web;
+            w.Run<UiReaderWriter>(rw =>
+            {
+                rw.WriteSync(
+                    this.ui,
+                    () =>
+                    {
+                        this.ui.InKeyVisible = true;
+                        this.ui.OutKeyVisible = false;
+                        this.ui.EditKeyEnabled = true;
+                    });
+                this.writeTimestamp();
+            });
         }
 
         private void ui_EditKeyTapped()
@@ -147,13 +161,14 @@
         private void timer_Elapsed()
         {
             var w = this.web;
-            w.Run<StatisticsCalculator, TimeSpanViewer>((calc, viewer) =>
+            w.Run<UiReaderWriter, StatisticsCalculator, TimeSpanViewer>(
+                (rw, calc, viewer) =>
             {
                 var timeThisWeek = calc.TimeWorkedThisWeek();
                 var timeToday = calc.TimeWorkedToday();
                 var thisWeekString = viewer.ReadableString(timeThisWeek);
                 var todayString = viewer.ReadableString(timeToday);
-                UiHelpers.Write(
+                rw.Write(
                     this.ui,
                     () =>
                     {
@@ -163,7 +178,7 @@
             });
         }
 
-        private int setupIf1;
+        private long setupIf1;
         private readonly HomeUi ui;
         private readonly MethodWeb web;
     }

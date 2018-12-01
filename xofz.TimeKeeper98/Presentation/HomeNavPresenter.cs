@@ -63,7 +63,7 @@
             w.Run<Navigator>(n => n.Present<ShutdownPresenter>());
         }
 
-        private int setupIf1;
+        private long setupIf1;
         private readonly HomeNavUi ui;
         private readonly MethodWeb web;
     }

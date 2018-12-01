@@ -29,7 +29,7 @@
                 .Setup();
         }
 
-        private void registerDependencies()
+        protected virtual void registerDependencies()
         {
             var w = this.web;
             w.RegisterDependency(

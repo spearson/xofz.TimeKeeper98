@@ -25,14 +25,16 @@
             this.registerDependencies();
         }
 
-        private void setWeb(MethodWeb web)
+        protected virtual void setWeb(MethodWeb web)
         {
             this.web = web;
         }
 
-        private void registerDependencies()
+        protected virtual void registerDependencies()
         {
             var w = this.web;
+            w.RegisterDependency(
+                new UiReaderWriter());
             w.RegisterDependency(
                 this.messenger);
             w.RegisterDependency(
@@ -50,8 +52,8 @@
                 });
         }
 
-        private MethodWeb web;
-        private readonly Gen<MethodWeb> createWeb;
-        private readonly Messenger messenger;
+        protected MethodWeb web;
+        protected readonly Gen<MethodWeb> createWeb;
+        protected readonly Messenger messenger;
     }
 }
