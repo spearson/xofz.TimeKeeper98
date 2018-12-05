@@ -111,6 +111,12 @@
         private void ui_InKeyTapped()
         {
             var w = this.web;
+            var writer = w.Run<TimestampWriter>();
+            if (!writer.Write())
+            {
+                return;
+            }
+
             w.Run<UiReaderWriter>(rw =>
             {
                 rw.WriteSync(
@@ -121,13 +127,18 @@
                         this.ui.OutKeyVisible = true;
                         this.ui.EditKeyEnabled = true;
                     });
-                this.writeTimestamp();
             });            
         }
 
         private void ui_OutKeyTapped()
         {
             var w = this.web;
+            var writer = w.Run<TimestampWriter>();
+            if (!writer.Write())
+            {
+                return;
+            }
+
             w.Run<UiReaderWriter>(rw =>
             {
                 rw.WriteSync(
@@ -138,7 +149,6 @@
                         this.ui.OutKeyVisible = false;
                         this.ui.EditKeyEnabled = true;
                     });
-                this.writeTimestamp();
             });
         }
 
@@ -149,13 +159,6 @@
             {
                 n.Present<TimestampEditPresenter>();
             });
-        }
-
-        private void writeTimestamp()
-        {
-            var w = this.web;
-            w.Run<TimestampWriter>(
-                writer => writer.Write());
         }
 
         private void timer_Elapsed()

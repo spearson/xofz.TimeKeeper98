@@ -73,21 +73,43 @@
 
             foreach (var filePath in Directory.GetFiles(md))
             {
-                foreach (var tickCount in File.ReadAllLines(filePath))
+                IEnumerable<string> lines;
+                try
                 {
-                    collection.Add(new DateTime(long.Parse(tickCount)));
+                    lines = File.ReadAllLines(filePath);
+                }
+                catch
+                {
+                    continue;
+                }
+
+                foreach (var line in lines)
+                {
+                    if (!long.TryParse(line, out var ticks))
+                    {
+                        continue;
+                    }
+
+                    collection.Add(new DateTime(ticks));
                 }
             }
 
             return collection;
         }
 
-        void TimestampWriter.Write()
+        bool TimestampWriter.Write()
         {
             var md = this.mainDirectory;
             if (!Directory.Exists(md))
             {
-                Directory.CreateDirectory(md);
+                try
+                {
+                    Directory.CreateDirectory(md);
+                }
+                catch
+                {
+                    return false;
+                }                
             }
 
             var w = this.web;
@@ -110,8 +132,17 @@
             times.AddLast(now.Ticks.ToString());
             var serializableTimes = new string[times.Count];
             times.CopyTo(serializableTimes, 0);
-            File.WriteAllLines(filePath, serializableTimes);
+            try
+            {
+                File.WriteAllLines(filePath, serializableTimes);
+            }
+            catch
+            {
+                return false;
+            }
+            
             Interlocked.CompareExchange(ref this.needToTrapIf1, 1, 0);
+            return true;
         }
 
         void TimestampWriter.EditLastTimestamp(DateTime newTimestamp)
@@ -131,7 +162,16 @@
             }
 
             var path = EnumerableHelpers.First(orderedPaths);
-            var times = File.ReadAllLines(path);
+            string[] times;
+            try
+            {
+                times = File.ReadAllLines(path);
+            }
+            catch
+            {
+                return;
+            }        
+            
             if (times.Length == 0)
             {
                 return;
@@ -139,7 +179,15 @@
 
             times[times.Length - 1]
                 = newTimestamp.Ticks.ToString();
-            File.WriteAllLines(path, times);
+            try
+            {
+                File.WriteAllLines(path, times);
+            }
+            catch
+            {
+                return;
+            }
+            
             Interlocked.CompareExchange(ref this.needToTrapIf1, 1, 0);
         }
 

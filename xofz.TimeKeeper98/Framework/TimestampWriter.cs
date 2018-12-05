@@ -4,7 +4,7 @@
 
     public interface TimestampWriter
     {
-        void Write();
+        bool Write();
 
         void EditLastTimestamp(DateTime newTimestamp);
     }
