@@ -47,10 +47,36 @@
   <ItemGroup>
     <Compile Include="Framework\DateCalculator.cs" />
     <Compile Include="Framework\GlobalSettingsHolder.cs" />
+    <Compile Include="Framework\Home\InKeyTappedHandler.cs" />
+    <Compile Include="Framework\Home\OutKeyTappedHandler.cs" />
+    <Compile Include="Framework\Home\SetupHandler.cs" />
+    <Compile Include="Framework\Home\StartHandler.cs" />
+    <Compile Include="Framework\Home\TimerHandler.cs" />
     <Compile Include="Framework\StatisticsCalculator.cs" />
+    <Compile Include="Framework\Statistics\CurrentWeekKeyTappedHandler.cs" />
+    <Compile Include="Framework\Statistics\DateChangedHandler.cs" />
+    <Compile Include="Framework\Statistics\NextWeekKeyTappedHandler.cs" />
+    <Compile Include="Framework\Statistics\PreviousWeekKeyTappedHandler.cs" />
+    <Compile Include="Framework\Statistics\SetupHandler.cs" />
+    <Compile Include="Framework\Statistics\StartHandler.cs" />
+    <Compile Include="Framework\Statistics\StopHandler.cs" />
+    <Compile Include="Framework\Statistics\TimerHandler.cs" />
     <Compile Include="Framework\TimeSpanViewer.cs" />
+    <Compile Include="Framework\TimestampEdit\CancelKeyTappedHandler.cs" />
+    <Compile Include="Framework\TimestampEdit\SaveKeyTappedHandler.cs" />
+    <Compile Include="Framework\TimestampEdit\SettingsHolder.cs" />
+    <Compile Include="Framework\TimestampEdit\SetupHandler.cs" />
+    <Compile Include="Framework\TimestampEdit\StartHandler.cs" />
+    <Compile Include="Framework\TimestampEdit\StopHandler.cs" />
     <Compile Include="Framework\TimestampManager.cs" />
     <Compile Include="Framework\TimestampReader.cs" />
+    <Compile Include="Framework\Timestamps\CurrentKeyTappedHandler.cs" />
+    <Compile Include="Framework\Timestamps\HomeUiInKeyTappedHandler.cs" />
+    <Compile Include="Framework\Timestamps\HomeUiOutKeyTappedHandler.cs" />
+    <Compile Include="Framework\Timestamps\SettingsHolder.cs" />
+    <Compile Include="Framework\Timestamps\ShowDurationsChangedHandler.cs" />
+    <Compile Include="Framework\Timestamps\StartHandler.cs" />
+    <Compile Include="Framework\Timestamps\StatisticsRangeKeyTappedHandler.cs" />
     <Compile Include="Framework\TimestampWriter.cs" />
     <Compile Include="Presentation\HomeNavPresenter.cs" />
     <Compile Include="Presentation\HomePresenter.cs" />
@@ -159,6 +185,7 @@
   <ItemGroup>
     <None Include="Resources\TimeKeeper98 Icon.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterResolveReferences">
     <ItemGroup>

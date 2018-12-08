@@ -1,12 +1,9 @@
 ﻿namespace xofz.TimeKeeper98.Presentation
 {
-    using System;
-    using System.Collections.Generic;
     using System.Threading;
     using xofz.Framework;
-    using xofz.Framework.Transformation;
     using xofz.Presentation;
-    using xofz.TimeKeeper98.Framework;
+    using xofz.TimeKeeper98.Framework.Timestamps;
     using xofz.TimeKeeper98.UI;
     using xofz.UI;
 
@@ -19,7 +16,6 @@
             : base(ui, shell)
         {
             this.ui = ui;
-            this.shell = shell;
             this.web = web;
         }
 
@@ -64,11 +60,29 @@
 
         public override void Start()
         {
-            Interlocked.CompareExchange(ref this.startedIf1, 1, 0);
+            Interlocked.CompareExchange(
+                ref this.startedIf1, 
+                1, 
+                0);
 
             base.Start();
 
-            this.startInternal();
+            var w = this.web;
+            HomeNavUi hnUi = null;
+            StatisticsUi statsUi = null;
+            w.Run<Navigator>(n =>
+            {
+                hnUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
+                statsUi = n.GetUi<StatisticsPresenter, StatisticsUi>();
+            });
+
+            w.Run<StartHandler>(handler =>
+            {
+                handler.Handle(
+                    this.ui,
+                    hnUi,
+                    statsUi);
+            });
         }
 
         public override void Stop()
@@ -76,285 +90,136 @@
             Interlocked.CompareExchange(ref this.startedIf1, 0, 1);
         }
 
-        private void startInternal()
-        {
-            var w = this.web;
-            w.Run<UiReaderWriter, Navigator>((rw, n) =>
-            {
-                var homeNavUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
-                rw.Write(
-                    homeNavUi,
-                    () =>
-                    {
-                        homeNavUi.ActiveKeyLabel = "Timestamps";
-                    });
-            });
-
-            var showCurrent = Interlocked.Read(ref this.currentIf0) == 0;
-            DateTime start = DateTime.Today, end = DateTime.Today;
-            if (showCurrent)
-            {
-                w.Run<DateCalculator>(
-                    calc =>
-                    {
-                        start = calc.StartOfWeek();
-                        end = calc.EndOfWeek().AddDays(1);
-                    });
-                goto findAndSetTimesInRange;
-            }
-
-            w.Run<Navigator, UiReaderWriter>((n, rw) =>
-            {
-                var statsUi = n.GetUi<StatisticsPresenter, StatisticsUi>();
-                start = rw.Read(
-                    statsUi,
-                    () => statsUi.StartDate);
-                end = rw.Read(
-                        statsUi,
-                        () => statsUi.EndDate)
-                    .AddDays(1);
-            });
-
-            findAndSetTimesInRange:
-            w.Run<
-                TimestampReader,
-                Lotter,
-                EnumerableSplitter,
-                UiReaderWriter>(
-                (reader, lotter, splitter, rw) =>
-                {
-                    var allTimes = reader.ReadAll();
-                    var timesInRange = new LinkedList<DateTime>();
-                    foreach (var time in allTimes)
-                    {
-                        if (time < start)
-                        {
-                            continue;
-                        }
-
-                        if (time > end)
-                        {
-                            continue;
-                        }
-
-                        timesInRange.AddLast(time);
-                    }
-
-                    if (timesInRange.Count % 2 == 1)
-                    {
-                        if (allTimes.Count % 2 == 1)
-                        {
-                            goto afterCheckClockedIn;
-                            // clocked in currently, do nothing
-                        }
-
-                        
-                        if (isInTime(EnumerableHelpers.First(timesInRange)))
-                        {
-                            // clocked in at end of week
-                            timesInRange.AddLast(end.Date);
-                            goto afterCheckClockedIn;
-                        }
-
-                        // clocked out now but was clocked in at start of week
-                        timesInRange.AddFirst(start.Date);
-                    }
-
-                    afterCheckClockedIn:
-                    var splitTimesThisWeek = splitter.Split(
-                        timesInRange,
-                        2);
-                    var inTimes = splitTimesThisWeek[0];
-                    var uiTimesIn = lotter.Materialize(
-                        EnumerableHelpers.Select(
-                            inTimes,
-                            this.formatTimestamp));
-                    rw.Write(
-                        this.ui,
-                        () => { this.ui.InTimes = uiTimesIn; });
-
-                    var outTimes = splitTimesThisWeek[1];
-                    var uiTimesOut = lotter.Materialize(
-                        EnumerableHelpers.Select(
-                            outTimes,
-                            this.formatTimestamp));
-
-                    rw.Write(
-                        this.ui,
-                        () => { this.ui.OutTimes = uiTimesOut; });
-
-                    w.Run<EnumerableSplicer>(
-                        splicer =>
-                        {
-                            var splicedTimes = splicer.Splice(
-                                        new[]
-                                        {
-                                            inTimes,
-                                            outTimes
-                                        });
-                            byte indexer = 0;
-                            DateTime 
-                                currentInTime = default(DateTime), 
-                                currentOutTime = default(DateTime);
-                            ICollection<TimeSpan> durations = new LinkedList<TimeSpan>();
-                            foreach (var splicedTime in splicedTimes)
-                            {
-                                if (indexer == 0)
-                                {
-                                    // in time
-                                    currentInTime = splicedTime;
-                                    ++indexer;
-                                    continue;
-                                }
-
-                                if (indexer == 1)
-                                {
-                                    // out time
-                                    currentOutTime = splicedTime;
-                                    durations.Add(currentOutTime - currentInTime);
-                                    indexer = 0;
-                                    continue;
-                                }
-                            }
-
-                            var lot = lotter.Materialize(
-                                EnumerableHelpers.Select(
-                                    splicedTimes,
-                                    this.formatTimestamp));
-                            ICollection<string> newInOutTimes = new LinkedList<string>();
-                            if (Interlocked.Read(ref this.showDurationsIf1) == 1)
-                            {
-                                w.Run<TimeSpanViewer>(v =>
-                                {
-                                    indexer = 0;
-                                    var e = durations.GetEnumerator();
-                                    foreach (var item in lot)
-                                    {
-                                        if (indexer % 2 == 1)
-                                        {
-                                            if (!e.MoveNext())
-                                            {
-                                                break;
-                                            }
-
-                                            newInOutTimes.Add(
-                                                item
-                                                + ' '
-                                                + '('
-                                                + v.ReadableString(e.Current)
-                                                + ')');
-                                            ++indexer;
-                                            continue;
-                                        }
-
-                                        newInOutTimes.Add(item);
-                                        ++indexer;
-                                    }
-                                });
-
-                                lot = lotter.Materialize(newInOutTimes);
-                            }
-
-                            rw.Write(
-                                this.ui,
-                                () =>
-                                {
-                                    this.ui.SetSplicedInOutTimes(lot);
-                                });
-                        });
-                });
-        }
-
-        private bool isInTime(DateTime timestamp)
-        {
-            var w = this.web;
-            var inTime = false;
-            w.Run<TimestampReader>(reader =>
-            {
-                long indexer = 0;
-                foreach(var ts in reader.ReadAll())
-                {
-                    if (timestamp == ts)
-                    {
-                        inTime = indexer % 2 == 0;
-                        break;
-                    }
-
-                    ++indexer;
-                }
-            });
-
-            return inTime;
-        }
-
         private void homeUi_InKeyTapped()
         {
-            if (Interlocked.Read(ref this.startedIf1) == 1)
+            if (Interlocked.Read(ref this.startedIf1) != 1)
             {
-                this.startInternal();
+                return;
             }
+
+            var w = this.web;
+            HomeNavUi hnUi = null;
+            StatisticsUi statsUi = null;
+            w.Run<Navigator>(n =>
+            {
+                hnUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
+                statsUi = n.GetUi<StatisticsPresenter, StatisticsUi>();
+            });
+
+            w.Run<HomeUiInKeyTappedHandler>(handler =>
+            {
+                handler.Handle(
+                    this.ui,
+                    hnUi,
+                    statsUi);
+            });
         }
 
         private void homeUi_OutKeyTapped()
         {
-            if (Interlocked.Read(ref this.startedIf1) == 1)
+            if (Interlocked.Read(ref this.startedIf1) != 1)
             {
-                this.startInternal();
+                return;
             }
+
+            var w = this.web;
+            HomeNavUi hnUi = null;
+            StatisticsUi statsUi = null;
+            w.Run<Navigator>(n =>
+            {
+                hnUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
+                statsUi = n.GetUi<StatisticsPresenter, StatisticsUi>();
+            });
+
+            w.Run<HomeUiOutKeyTappedHandler>(handler =>
+            {
+                handler.Handle(
+                    this.ui,
+                    hnUi,
+                    statsUi);
+            });
         }
 
         private void ui_CurrentKeyTapped()
         {
-            Interlocked.CompareExchange(ref this.currentIf0, 0, 1);
-            if (Interlocked.Read(ref this.startedIf1) == 1)
+            if (Interlocked.Read(ref this.startedIf1) != 1)
             {
-                this.startInternal();
-            }            
+                return;
+            }
+
+            var w = this.web;
+            HomeNavUi hnUi = null;
+            StatisticsUi statsUi = null;
+            w.Run<Navigator>(n =>
+            {
+                hnUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
+                statsUi = n.GetUi<StatisticsPresenter, StatisticsUi>();
+            });
+
+            w.Run<CurrentKeyTappedHandler>(handler =>
+            {
+                handler.Handle(
+                    this.ui,
+                    hnUi,
+                    statsUi);
+            });
         }
 
         private void ui_StatisticsRangeKeyTapped()
         {
-            Interlocked.CompareExchange(ref this.currentIf0, 1, 0);
-            if (Interlocked.Read(ref this.startedIf1) == 1)
+            if (Interlocked.Read(ref this.startedIf1) != 1)
             {
-                this.startInternal();
+                return;
             }
+
+            var w = this.web;
+            HomeNavUi hnUi = null;
+            StatisticsUi statsUi = null;
+            w.Run<Navigator>(n =>
+            {
+                hnUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
+                statsUi = n.GetUi<StatisticsPresenter, StatisticsUi>();
+            });
+
+            w.Run<StatisticsRangeKeyTappedHandler>(handler =>
+            {
+                handler.Handle(
+                    this.ui,
+                    hnUi,
+                    statsUi);
+            });
         }
 
         private void ui_ShowDurationChanged(bool shouldShow)
         {
-            long oldValue = Interlocked.Read(
-                ref this.showDurationsIf1);
-            long newValue = shouldShow
-                ? 1
-                : 0;
-            Interlocked.CompareExchange(
-                ref this.showDurationsIf1, 
-                newValue, 
-                oldValue);
-            this.startInternal();
-        }
-
-        private string formatTimestamp(DateTime timeStamp)
-        {
-            var w = this.web;
-            string s = null;
-            w.Run<GlobalSettingsHolder>(settings =>
+            if (Interlocked.Read(ref this.startedIf1) != 1)
             {
-                s = timeStamp.ToString(
-                    settings.TimestampFormat);
+                return;
+            }
+
+            var w = this.web;
+            HomeNavUi hnUi = null;
+            StatisticsUi statsUi = null;
+            w.Run<Navigator>(n =>
+            {
+                hnUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
+                statsUi = n.GetUi<StatisticsPresenter, StatisticsUi>();
             });
 
-            return s;
+            w.Run<ShowDurationsChangedHandler>(handler =>
+            {
+                handler.Handle(
+                    this.ui,
+                    hnUi,
+                    statsUi,
+                    shouldShow);
+            });
         }
 
         private long 
             setupIf1, 
-            startedIf1,
-            currentIf0,
-            showDurationsIf1;
+            startedIf1;
         private readonly TimestampsUi ui;
-        private readonly ShellUi shell;
         private readonly MethodWeb web;
     }
 }

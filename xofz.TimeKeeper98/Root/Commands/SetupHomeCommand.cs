@@ -6,6 +6,7 @@
     using xofz.Framework.Transformation;
     using xofz.Root;
     using xofz.TimeKeeper98.Framework;
+    using xofz.TimeKeeper98.Framework.Home;
     using xofz.TimeKeeper98.Presentation;
     using xofz.TimeKeeper98.UI;
     using xofz.UI;
@@ -64,6 +65,16 @@
             w.RegisterDependency(
                 new VersionReader(
                     Assembly.GetExecutingAssembly()));
+            w.RegisterDependency(
+                new InKeyTappedHandler(w));
+            w.RegisterDependency(
+                new OutKeyTappedHandler(w));
+            w.RegisterDependency(
+                new TimerHandler(w));
+            w.RegisterDependency(
+                new StartHandler(w));
+            w.RegisterDependency(
+                new SetupHandler(w));
         }
 
         private readonly HomeUi ui;

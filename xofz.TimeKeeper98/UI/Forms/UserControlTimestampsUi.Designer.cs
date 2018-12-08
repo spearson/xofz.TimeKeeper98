@@ -102,7 +102,7 @@
             // timesSplicedListBox
             // 
             this.timesSplicedListBox.BackColor = System.Drawing.SystemColors.Control;
-            this.timesSplicedListBox.ColumnWidth = 190;
+            this.timesSplicedListBox.ColumnWidth = 245;
             this.timesSplicedListBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timesSplicedListBox.FormattingEnabled = true;
             this.timesSplicedListBox.ItemHeight = 14;

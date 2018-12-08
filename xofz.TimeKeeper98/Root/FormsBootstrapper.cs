@@ -26,7 +26,7 @@
             this.executor = executor;
         }
 
-        public virtual Form MainForm => this.mainForm;
+        public virtual Form Shell => this.mainForm;
 
         public virtual void Bootstrap()
         {
@@ -118,13 +118,13 @@
                 });
         }
 
-        private void setMainForm(FormMainUi mainForm)
+        protected virtual void setMainForm(FormMainUi mainForm)
         {
             this.mainForm = mainForm;
         }
 
         protected long bootstrappedIf1;
         protected FormMainUi mainForm;
-        private readonly CommandExecutor executor;
+        protected readonly CommandExecutor executor;
     }
 }

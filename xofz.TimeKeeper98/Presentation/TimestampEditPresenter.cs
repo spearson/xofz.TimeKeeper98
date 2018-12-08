@@ -1,4 +1,6 @@
-﻿namespace xofz.TimeKeeper98.Presentation
+﻿using xofz.TimeKeeper98.Framework.TimestampEdit;
+
+namespace xofz.TimeKeeper98.Presentation
 {
     using System;
     using System.Collections.Generic;
@@ -30,13 +32,9 @@
             }
 
             var w = this.web;
-            w.Run<GlobalSettingsHolder, UiReaderWriter>(
-                (settings, rw) =>
+            w.Run<SetupHandler>(handler =>
             {
-                var format = settings.TimestampFormat;
-                rw.Write(
-                    this.ui,
-                    () => this.ui.TimestampFormat = format);
+                handler.Handle(this.ui);
             });
 
             w.Run<EventSubscriber>(subscriber =>
@@ -59,136 +57,79 @@
             base.Start();
 
             var w = this.web;
-            w.Run<TimestampReader, UiReaderWriter>((reader, rw) =>
+            HomeNavUi hnUi = null;
+            HomeUi homeUi = null;
+            w.Run<Navigator>(n =>
             {
-                var lastTimestamp = new LinkedList<DateTime>(reader.Read())
-                    .Last
-                    .Value;
-                rw.Write(
+                hnUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
+                homeUi = n.GetUi<HomePresenter, HomeUi>();
+            });
+
+            w.Run<StartHandler>(handler =>
+            {
+                handler.Handle(
                     this.ui,
-                    () => this.ui.EditedTimestamp = lastTimestamp);
-            });
-
-            w.Run<Navigator, UiReaderWriter>((n, rw) =>
-            {
-                var hnUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
-                this.setOldActiveKeyLabel(
-                    rw.Read(
-                        hnUi,
-                        () => hnUi.ActiveKeyLabel));
-                rw.Write(
                     hnUi,
-                    () => hnUi.ActiveKeyLabel = null);
-                var homeUi = n.GetUi<HomePresenter, HomeUi>();
-                rw.Write(
-                    homeUi,
-                    () => homeUi.Editing = true);
+                    homeUi);
             });
-        }
-
-        private void setOldActiveKeyLabel(string oldActiveKeyLabel)
-        {
-            this.oldActiveKeyLabel = oldActiveKeyLabel;
         }
 
         public override void Stop()
         {
             var w = this.web;
-            w.Run<Navigator, UiReaderWriter>((n, rw) =>
+            HomeUi homeUi = null;
+            w.Run<Navigator>(n =>
             {
-                var homeUi = n.GetUi<HomePresenter, HomeUi>();
-                rw.Write(
-                    homeUi,
-                    () => homeUi.Editing = false);
+                homeUi = n.GetUi<HomePresenter, HomeUi>();
+            });
+
+            w.Run<StopHandler>(handler =>
+            {
+                handler.Handle(homeUi);
             });
         }
 
         private void ui_SaveKeyTapped()
         {
             var w = this.web;
-            
-            w.Run<TimestampReader, UiReaderWriter>((reader, rw) =>
+
+            Do presentTimestamps = null;
+            Do presentStatistics = null;
+            w.Run<Navigator>(n =>
             {
-                var timestamp = rw.Read(
+                presentTimestamps = n.Present<TimestampsPresenter>;
+                presentStatistics = n.Present<StatisticsPresenter>;
+            });
+
+            w.Run<SaveKeyTappedHandler>(handler =>
+            {
+                handler.Handle(
                     this.ui,
-                    () => this.ui.EditedTimestamp);
-                var allTimes = new LinkedList<DateTime>(reader.Read());
-                if (allTimes.Count < 2)
-                {
-                    goto checkNow;
-                }
-
-                var previousTimestamp = allTimes
-                    .Last
-                    ?.Previous
-                    ?.Value;
-                if (timestamp < previousTimestamp)
-                {
-                    w.Run<Messenger>(m =>
-                    {
-                        rw.Write(
-                            m.Subscriber,
-                            () => m.GiveError(
-                                "Time must be after previous timestamp."));
-                    });
-
-                    return;
-                }
-
-                checkNow:
-                if (timestamp > DateTime.Now)
-                {
-                    w.Run<Messenger>(m =>
-                    {
-                        rw.Write(
-                            m.Subscriber,
-                            () => m.GiveError(
-                                "Time must be before present time."));
-                    });
-
-                    return;
-                }
-
-                w.Run<TimestampWriter>(writer =>
-                {
-                    writer.EditLastTimestamp(timestamp);
-                });
-
-                w.Run<Navigator>(n =>
-                {
-                    switch (this.oldActiveKeyLabel)
-                    {
-                        case "Timestamps":
-                            n.Present<TimestampsPresenter>();
-                            break;
-                        case "Statistics":
-                            n.Present<StatisticsPresenter>();
-                            break;
-                    }
-                });
+                    presentTimestamps,
+                    presentStatistics);
             });
         }
 
         private void ui_CancelKeyTapped()
         {
             var w = this.web;
-            w.Run<Navigator>(n =>
-            {
-                var navUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
-                switch (this.oldActiveKeyLabel)
+            Do presentTimestamps = null;
+            Do presentStatistics = null;
+            w.Run<Navigator>(
+                n =>
                 {
-                    case "Timestamps":
-                        n.Present<TimestampsPresenter>();
-                        break;
-                    case "Statistics":
-                        n.Present<StatisticsPresenter>();
-                        break;
-                }
+                    presentTimestamps = n.Present<TimestampsPresenter>;
+                    presentStatistics = n.Present<StatisticsPresenter>;
+                });
+            w.Run<CancelKeyTappedHandler>(handler =>
+            {
+                handler.Handle(
+                    presentTimestamps,
+                    presentStatistics);
             });
         }
 
         private long setupIf1;
-        private volatile string oldActiveKeyLabel;
         private readonly TimestampEditUi ui;
         private readonly ShellUi shell;
         private readonly MethodWeb web;

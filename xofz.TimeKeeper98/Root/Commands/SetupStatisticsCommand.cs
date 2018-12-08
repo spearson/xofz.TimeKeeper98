@@ -1,4 +1,6 @@
-﻿namespace xofz.TimeKeeper98.Root.Commands
+﻿using xofz.TimeKeeper98.Framework.Statistics;
+
+namespace xofz.TimeKeeper98.Root.Commands
 {
     using xofz.Framework;
     using xofz.Framework.Transformation;
@@ -35,6 +37,22 @@
             w.RegisterDependency(
                 new xofz.Framework.Timer(),
                 "StatisticsTimer");
+            w.RegisterDependency(
+                new SetupHandler(w));
+            w.RegisterDependency(
+                new StartHandler(w));
+            w.RegisterDependency(
+                new StopHandler(w));
+            w.RegisterDependency(
+                new CurrentWeekKeyTappedHandler(w));
+            w.RegisterDependency(
+                new PreviousWeekKeyTappedHandler(w));
+            w.RegisterDependency(
+                new NextWeekKeyTappedHandler(w));
+            w.RegisterDependency(
+                new DateChangedHandler(w));
+            w.RegisterDependency(
+                new TimerHandler(w));
         }
 
         private readonly StatisticsUi ui;

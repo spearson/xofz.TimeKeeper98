@@ -17,7 +17,7 @@
             var bootstrapper = new FormsBootstrapper();
             bootstrapper.Bootstrap();
 
-            Application.Run(bootstrapper.MainForm);
+            Application.Run(bootstrapper.Shell);
         }
 
         private static Assembly loadEmbeddedAssembly(string name)

@@ -90,12 +90,12 @@
                 if (isInTime)
                 {
                     tslb.Items.Add(
-                        inOutTime + " ---- IN");
+                        inOutTime + " IN");
                     goto switchTimeType;
                 }
 
                 tslb.Items.Add(
-                    inOutTime + " ---- OUT");
+                    inOutTime + " OUT");
 
                 switchTimeType:
                 isInTime = !isInTime;

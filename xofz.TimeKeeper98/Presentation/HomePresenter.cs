@@ -3,7 +3,7 @@
     using System.Threading;
     using xofz.Framework;
     using xofz.Presentation;
-    using xofz.TimeKeeper98.Framework;
+    using xofz.TimeKeeper98.Framework.Home;
     using xofz.TimeKeeper98.UI;
     using xofz.UI;
 
@@ -27,28 +27,6 @@
             }
 
             var w = this.web;
-            var calc = w.Run<StatisticsCalculator>();
-            var currentlyIn = calc.ClockedIn();
-            var editKeyEnabled = false;
-            w.Run<TimestampReader>(reader =>
-            {
-                foreach (var timestamp in reader.Read())
-                {
-                    editKeyEnabled = true;
-                    break;
-                }
-            });
-
-            w.Run<UiReaderWriter>(rw =>
-            {
-                rw.Write(this.ui, () =>
-                {
-                    this.ui.InKeyVisible = !currentlyIn;
-                    this.ui.OutKeyVisible = currentlyIn;
-                    this.ui.EditKeyEnabled = editKeyEnabled;
-                });
-            });
-
             w.Run<EventSubscriber>(subscriber =>
             {
                 subscriber.Subscribe(
@@ -73,17 +51,9 @@
                     "HomeTimer");
             });
 
-            w.Run<VersionReader, UiReaderWriter>((vr, rw) =>
+            w.Run<SetupHandler>(handler =>
             {
-                var appVersion = vr.Read();
-                var coreVersion = vr.ReadCoreVersion();
-                rw.Write(
-                    this.ui,
-                    () =>
-                    {
-                        this.ui.Version = appVersion;
-                        this.ui.CoreVersion = coreVersion;
-                    });
+                handler.Handle(this.ui);
             });
 
             w.Run<Navigator>(n => n.RegisterPresenter(this));
@@ -91,64 +61,30 @@
 
         public override void Start()
         {
-            base.Start();
-
             var w = this.web;
-            w.Run<xofz.Framework.Timer>(t =>
-                {
-                    w.Run<xofz.Framework.EventRaiser>(er =>
-                    {
-                        er.Raise(
-                            t,
-                            nameof(t.Elapsed));
-                    });
-                    
-                    t.Start(1000);
-                },
-                "HomeTimer");
+
+            base.Start();
+            w.Run<StartHandler>(handler =>
+            {
+                handler.Handle();
+            });
         }
 
         private void ui_InKeyTapped()
         {
             var w = this.web;
-            var writer = w.Run<TimestampWriter>();
-            if (!writer.Write())
+            w.Run<InKeyTappedHandler>(handler =>
             {
-                return;
-            }
-
-            w.Run<UiReaderWriter>(rw =>
-            {
-                rw.WriteSync(
-                    this.ui,
-                    () =>
-                    {
-                        this.ui.InKeyVisible = false;
-                        this.ui.OutKeyVisible = true;
-                        this.ui.EditKeyEnabled = true;
-                    });
-            });            
+                handler.Handle(this.ui);
+            });
         }
 
         private void ui_OutKeyTapped()
         {
             var w = this.web;
-            var writer = w.Run<TimestampWriter>();
-            if (!writer.Write())
+            w.Run<OutKeyTappedHandler>(handler =>
             {
-                return;
-            }
-
-            w.Run<UiReaderWriter>(rw =>
-            {
-                rw.WriteSync(
-                    this.ui,
-                    () =>
-                    {
-                        this.ui.InKeyVisible = true;
-                        this.ui.OutKeyVisible = false;
-                        this.ui.EditKeyEnabled = true;
-                    });
+                handler.Handle(this.ui);
             });
         }
 
@@ -164,20 +100,9 @@
         private void timer_Elapsed()
         {
             var w = this.web;
-            w.Run<UiReaderWriter, StatisticsCalculator, TimeSpanViewer>(
-                (rw, calc, viewer) =>
+            w.Run<TimerHandler>(handler =>
             {
-                var timeThisWeek = calc.TimeWorkedThisWeek();
-                var timeToday = calc.TimeWorkedToday();
-                var thisWeekString = viewer.ReadableString(timeThisWeek);
-                var todayString = viewer.ReadableString(timeToday);
-                rw.Write(
-                    this.ui,
-                    () =>
-                    {
-                        this.ui.TimeWorkedThisWeek = thisWeekString;
-                        this.ui.TimeWorkedToday = todayString;
-                    });
+                handler.Handle(this.ui);
             });
         }
 
