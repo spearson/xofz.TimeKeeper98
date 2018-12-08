@@ -74,6 +74,7 @@
     <Compile Include="Framework\Timestamps\HomeUiInKeyTappedHandler.cs" />
     <Compile Include="Framework\Timestamps\HomeUiOutKeyTappedHandler.cs" />
     <Compile Include="Framework\Timestamps\SettingsHolder.cs" />
+    <Compile Include="Framework\Timestamps\SetupHandler.cs" />
     <Compile Include="Framework\Timestamps\ShowDurationsChangedHandler.cs" />
     <Compile Include="Framework\Timestamps\StartHandler.cs" />
     <Compile Include="Framework\Timestamps\StatisticsRangeKeyTappedHandler.cs" />

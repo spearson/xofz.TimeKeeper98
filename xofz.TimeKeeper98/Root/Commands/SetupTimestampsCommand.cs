@@ -38,6 +38,8 @@
             w.RegisterDependency(
                 new EnumerableSplicer());
             w.RegisterDependency(
+                new SetupHandler(w));
+            w.RegisterDependency(
                 new StartHandler(w));
             w.RegisterDependency(
                 new SettingsHolder());

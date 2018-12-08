@@ -27,6 +27,11 @@
             }
 
             var w = this.web;
+            w.Run<SetupHandler>(handler =>
+            {
+                handler.Handle();
+            });
+
             w.Run<EventSubscriber>(sub =>
             {
                 sub.Subscribe(
