@@ -48,7 +48,7 @@
                 });
 
             UiMessagePumper pumper = new FormsUiMessagePumper();
-            while (!finished.WaitOne(0))
+            while (!finished.WaitOne(0, false))
             {
                 pumper.Pump();
             }
