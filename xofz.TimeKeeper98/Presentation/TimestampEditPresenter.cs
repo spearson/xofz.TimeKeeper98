@@ -20,7 +20,6 @@ namespace xofz.TimeKeeper98.Presentation
             : base(ui, shell)
         {
             this.ui = ui;
-            this.shell = shell;
             this.web = web;
         }
 
@@ -131,7 +130,6 @@ namespace xofz.TimeKeeper98.Presentation
 
         private long setupIf1;
         private readonly TimestampEditUi ui;
-        private readonly ShellUi shell;
         private readonly MethodWeb web;
     }
 }

@@ -191,8 +191,8 @@
             Interlocked.CompareExchange(ref this.needToTrapIf1, 1, 0);
         }
 
-        private long firstReadIf0, needToTrapIf1, readingIf1;
-        private readonly MethodWeb web;
-        private readonly string mainDirectory;
+        protected long firstReadIf0, needToTrapIf1, readingIf1;
+        protected readonly MethodWeb web;
+        protected readonly string mainDirectory;
     }
 }

@@ -26,7 +26,7 @@
             return this.TimeWorked(beginning, end);
         }
 
-        public TimeSpan TimeWorkedToday()
+        public virtual TimeSpan TimeWorkedToday()
         {
             var today = DateTime.Today;
             var beginning = today;
@@ -184,13 +184,13 @@
             return maxTimeWorked;
         }
 
-        private ICollection<DateTime> allTimes()
+        protected virtual ICollection<DateTime> allTimes()
         {
             var w = this.web;
             var reader = w.Run<TimestampReader>();
             return reader.ReadAll();
         }
 
-        private readonly MethodWeb web;
+        protected readonly MethodWeb web;
     }
 }

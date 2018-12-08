@@ -172,14 +172,16 @@
                                 EnumerableHelpers.Select(
                                     splicedTimes,
                                     this.formatTimestamp));
-                            ICollection<string> newInOutTimes = new LinkedList<string>();
+                            
                             var showDurations = false;
                             w.Run<SettingsHolder>(settings =>
                             {
                                 showDurations = settings.ShowDurations;
                             });
+
                             if (showDurations)
                             {
+                                ICollection<string> newInOutTimes = new LinkedList<string>();
                                 var closedLot = lot;
                                 w.Run<TimeSpanViewer>(v =>
                                 {
@@ -258,8 +260,7 @@
 
             return s;
         }
-
-
+        
         protected readonly MethodWeb web;
     }
 }
