@@ -6,6 +6,7 @@
     using xofz.Root;
     using xofz.UI;
     using xofz.TimeKeeper98.Framework;
+    using xofz.Framework.Logging.Logs;
 
     public class SetupMethodWebCommand : Command
     {
@@ -50,6 +51,9 @@
                 {
                     TimestampFormat = "MM/dd hh:mm:ss tt"
                 });
+            w.RegisterDependency(
+                new TextFileLog("Exceptions.log"),
+                "Exceptions");
         }
 
         protected MethodWeb web;

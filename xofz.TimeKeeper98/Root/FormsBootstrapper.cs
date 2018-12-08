@@ -1,8 +1,10 @@
 ﻿namespace xofz.TimeKeeper98.Root
 {
+    using System;
     using System.Threading;
     using System.Windows.Forms;
     using xofz.Framework;
+    using xofz.Framework.Logging;
     using xofz.Presentation;
     using xofz.Root;
     using xofz.Root.Commands;
@@ -62,8 +64,17 @@
             e.Execute(new SetupMethodWebCommand(
                 () => new MethodWeb(),
                 fm));
-
             var w = e.Get<SetupMethodWebCommand>().Web;
+            w.Run<EventSubscriber>(sub =>
+            {
+                var cd = AppDomain.CurrentDomain;
+                UnhandledExceptionEventHandler handler = this.handleException;
+                sub.Subscribe(
+                    cd,
+                    nameof(cd.UnhandledException),
+                    handler);
+            });
+
             HomeUi homeUi = null;
             HomeNavUi homeNavUi = null;
             StatisticsUi statsUi = null;
@@ -121,6 +132,18 @@
         protected virtual void setMainForm(FormMainUi mainForm)
         {
             this.mainForm = mainForm;
+        }
+
+        protected virtual void handleException(
+            object sender, 
+            UnhandledExceptionEventArgs e)
+        {
+            var w = this.executor.Get<SetupMethodWebCommand>().Web;
+            w.Run<LogEditor>(le =>
+                {
+                    LogHelpers.AddEntry(le, e);
+                },
+                "Exceptions");
         }
 
         protected long bootstrappedIf1;

@@ -2,7 +2,6 @@
 {
     using System;
     using System.Reflection;
-    using System.Threading;
     using System.Windows.Forms;
 
     internal static class EntryPoint
