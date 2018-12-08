@@ -1,9 +1,8 @@
-﻿using xofz.UI;
-
-namespace xofz.TimeKeeper98.Framework.TimestampEdit
+﻿namespace xofz.TimeKeeper98.Framework.TimestampEdit
 {
     using xofz.Framework;
     using xofz.TimeKeeper98.UI;
+    using xofz.UI;
 
     public class SetupHandler
     {

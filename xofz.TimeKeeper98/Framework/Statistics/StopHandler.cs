@@ -1,7 +1,7 @@
-﻿using xofz.Framework;
-
-namespace xofz.TimeKeeper98.Framework.Statistics
+﻿namespace xofz.TimeKeeper98.Framework.Statistics
 {
+    using xofz.Framework;
+
     public class StopHandler
     {
         public StopHandler(

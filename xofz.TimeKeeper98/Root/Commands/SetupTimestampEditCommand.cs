@@ -47,8 +47,8 @@
                 new CancelKeyTappedHandler(w));
         }
 
-        private readonly TimestampEditUi ui;
-        private readonly ShellUi shell;
-        private readonly MethodWeb web;
+        protected readonly TimestampEditUi ui;
+        protected readonly ShellUi shell;
+        protected readonly MethodWeb web;
     }
 }

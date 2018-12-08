@@ -1,10 +1,8 @@
-﻿using xofz.TimeKeeper98.Framework.Statistics;
-
-namespace xofz.TimeKeeper98.Root.Commands
+﻿namespace xofz.TimeKeeper98.Root.Commands
 {
     using xofz.Framework;
-    using xofz.Framework.Transformation;
     using xofz.Root;
+    using xofz.TimeKeeper98.Framework.Statistics;
     using xofz.TimeKeeper98.Presentation;
     using xofz.TimeKeeper98.UI;
     using xofz.UI;
@@ -55,8 +53,8 @@ namespace xofz.TimeKeeper98.Root.Commands
                 new TimerHandler(w));
         }
 
-        private readonly StatisticsUi ui;
-        private readonly ShellUi shell;
-        private readonly MethodWeb web;
+        protected readonly StatisticsUi ui;
+        protected readonly ShellUi shell;
+        protected readonly MethodWeb web;
     }
 }

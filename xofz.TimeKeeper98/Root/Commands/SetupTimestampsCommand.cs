@@ -55,8 +55,8 @@
                 new ShowDurationsChangedHandler(w));
         }
 
-        private readonly TimestampsUi ui;
-        private readonly ShellUi shell;
-        private readonly MethodWeb web;
+        protected readonly TimestampsUi ui;
+        protected readonly ShellUi shell;
+        protected readonly MethodWeb web;
     }
 }

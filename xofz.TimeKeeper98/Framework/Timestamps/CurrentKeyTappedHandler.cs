@@ -24,7 +24,10 @@
 
             w.Run<StartHandler>(handler =>
             {
-                handler.Handle(ui, homeNavUi, statsUi);
+                handler.Handle(
+                    ui, 
+                    homeNavUi, 
+                    statsUi);
             });
         }
 

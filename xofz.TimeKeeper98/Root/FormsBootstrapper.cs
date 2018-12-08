@@ -94,6 +94,7 @@
                         editUi = new UserControlTimestampEditUi();
                     });
             });
+
             e
                 .Execute(new SetupHomeCommand(
                     homeUi,

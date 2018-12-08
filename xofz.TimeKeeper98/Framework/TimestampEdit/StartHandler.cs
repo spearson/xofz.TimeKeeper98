@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using xofz.UI;
-
-namespace xofz.TimeKeeper98.Framework.TimestampEdit
+﻿namespace xofz.TimeKeeper98.Framework.TimestampEdit
 {
+    using System;
+    using System.Collections.Generic;
     using xofz.Framework;
+    using xofz.UI;
     using xofz.TimeKeeper98.UI;
 
     public class StartHandler

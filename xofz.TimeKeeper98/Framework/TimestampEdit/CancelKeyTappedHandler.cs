@@ -1,7 +1,7 @@
-﻿using xofz.Framework;
-
-namespace xofz.TimeKeeper98.Framework.TimestampEdit
+﻿namespace xofz.TimeKeeper98.Framework.TimestampEdit
 {
+    using xofz.Framework;
+
     public class CancelKeyTappedHandler
     {
         public CancelKeyTappedHandler(

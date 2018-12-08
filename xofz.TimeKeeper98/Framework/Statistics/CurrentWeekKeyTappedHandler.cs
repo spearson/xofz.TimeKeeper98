@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using xofz.Framework;
-using xofz.TimeKeeper98.UI;
-using xofz.UI;
-
-namespace xofz.TimeKeeper98.Framework.Statistics
+﻿namespace xofz.TimeKeeper98.Framework.Statistics
 {
+    using xofz.Framework;
+    using xofz.TimeKeeper98.UI;
+    using xofz.UI;
+
     public class CurrentWeekKeyTappedHandler
     {
         public CurrentWeekKeyTappedHandler(

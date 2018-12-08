@@ -77,10 +77,10 @@
                 new SetupHandler(w));
         }
 
-        private readonly HomeUi ui;
-        private readonly HomeNavUi navUi;
-        private readonly ShellUi mainShell;
-        private readonly ShellUi navShell;
-        private readonly MethodWeb web;
+        protected readonly HomeUi ui;
+        protected readonly HomeNavUi navUi;
+        protected readonly ShellUi mainShell;
+        protected readonly ShellUi navShell;
+        protected readonly MethodWeb web;
     }
 }
