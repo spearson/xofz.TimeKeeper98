@@ -1,10 +1,9 @@
-﻿using xofz.TimeKeeper98.Framework.Statistics;
-
-namespace xofz.TimeKeeper98.Presentation
+﻿namespace xofz.TimeKeeper98.Presentation
 {
     using System.Threading;
     using xofz.Framework;
     using xofz.Presentation;
+    using xofz.TimeKeeper98.Framework.Statistics;
     using xofz.TimeKeeper98.UI;
     using xofz.UI;
 
