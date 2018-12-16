@@ -8,6 +8,7 @@
     using xofz.Presentation;
     using xofz.Root;
     using xofz.Root.Commands;
+    using xofz.TimeKeeper98.Framework;
     using xofz.TimeKeeper98.Presentation;
     using xofz.TimeKeeper98.Root.Commands;
     using xofz.TimeKeeper98.UI;
@@ -118,8 +119,13 @@
                     s,
                     w))
                 .Execute(new SetupShutdownCommand(
-                    s,
                     w));
+
+            // update to single-file format
+            w.Run<FileTimestampManager>(manager =>
+            {
+                manager.ConvertToSingleFile();
+            });
 
             w.Run<Navigator>(
                 n =>

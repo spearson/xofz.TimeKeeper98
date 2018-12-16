@@ -53,7 +53,7 @@
             w.RegisterDependency(
                 new EnumerableTrapper<DateTime>());
             w.RegisterDependency(
-                new TimestampManager(
+                new FileTimestampManager(
                     w));
             w.RegisterDependency(
                 new xofz.Framework.Timer(),

@@ -68,7 +68,7 @@
     <Compile Include="Framework\TimestampEdit\SetupHandler.cs" />
     <Compile Include="Framework\TimestampEdit\StartHandler.cs" />
     <Compile Include="Framework\TimestampEdit\StopHandler.cs" />
-    <Compile Include="Framework\TimestampManager.cs" />
+    <Compile Include="Framework\FileTimestampManager.cs" />
     <Compile Include="Framework\TimestampReader.cs" />
     <Compile Include="Framework\Timestamps\CurrentKeyTappedHandler.cs" />
     <Compile Include="Framework\Timestamps\HomeUiInKeyTappedHandler.cs" />

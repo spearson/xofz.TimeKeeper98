@@ -7,12 +7,85 @@
     using xofz.Framework;
     using xofz.Framework.Transformation;
 
-    public class TimestampManager : TimestampReader, TimestampWriter
+    public class FileTimestampManager 
+        : TimestampReader, TimestampWriter
     {
-        public TimestampManager(MethodWeb web)
+        public FileTimestampManager(MethodWeb web)
         {
             this.web = web;
-            this.mainDirectory = "Data";
+            this.mainDirectory = @"Data";
+        }
+
+        public const string DataFileName = @"AllData";
+
+        public virtual bool ConvertToSingleFile()
+        {
+            var md = this.mainDirectory;
+            try
+            {
+                if (!Directory.Exists(md))
+                {
+                    Directory.CreateDirectory(md);
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+
+            try
+            {
+                var files = Directory.GetFiles(md);
+                if (files.Length == 1 && 
+                    files[0].Contains(DataFileName))
+                {
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+
+            ICollection<string> times = new LinkedList<string>();
+            try
+            {
+                foreach (var file in Directory.GetFiles(md))
+                {
+                    foreach (var line in File.ReadAllLines(file))
+                    {
+                        times.Add(line);
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+
+            try
+            {
+                File.WriteAllLines(
+                    Path.Combine(md, DataFileName),
+                    EnumerableHelpers.ToArray(
+                        times));
+                foreach (var file in Directory.GetFiles(md))
+                {
+                    if (file.Contains(DataFileName))
+                    {
+                        continue;
+                    }
+
+                    File.Delete(file);
+                }
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
 
         IEnumerable<DateTime> TimestampReader.Read()
@@ -109,39 +182,41 @@
                 catch
                 {
                     return false;
-                }                
-            }
-
-            var w = this.web;
-            var now = DateTime.Now;
-            var calc = w.Run<DateCalculator>();
-            var startOfWeek = calc.StartOfWeek();
-            var fileName = startOfWeek.Year
-                           + startOfWeek.Month.ToString().PadLeft(2, '0')
-                           + startOfWeek.Day.ToString().PadLeft(2, '0');
-            var times = new LinkedList<string>();
-            var filePath = Path.Combine(md, fileName);
-            if (File.Exists(filePath))
-            {
-                foreach(var time in File.ReadAllLines(filePath))
-                {
-                    times.AddLast(time);
                 }
             }
 
-            times.AddLast(now.Ticks.ToString());
-            var serializableTimes = new string[times.Count];
-            times.CopyTo(serializableTimes, 0);
+            var now = DateTime.Now;
+            var filePath = Path.Combine(md, DataFileName);
+            var newText = Environment.NewLine + now.Ticks;
             try
             {
-                File.WriteAllLines(filePath, serializableTimes);
+                if (File.Exists(filePath))
+                {
+                    File.AppendAllText(
+                        filePath,
+                        newText);
+                    goto succeeded;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+
+            try
+            {
+                File.WriteAllText(filePath, now.Ticks.ToString());
             }
             catch
             {
                 return false;
             }
             
-            Interlocked.CompareExchange(ref this.needToTrapIf1, 1, 0);
+            succeeded:
+            Interlocked.CompareExchange(
+                ref this.needToTrapIf1, 
+                1, 
+                0);
             return true;
         }
 
@@ -188,7 +263,10 @@
                 return;
             }
             
-            Interlocked.CompareExchange(ref this.needToTrapIf1, 1, 0);
+            Interlocked.CompareExchange(
+                ref this.needToTrapIf1, 
+                1, 
+                0);
         }
 
         protected long firstReadIf0, needToTrapIf1, readingIf1;
