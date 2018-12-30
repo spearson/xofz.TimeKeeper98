@@ -84,17 +84,20 @@
                         timesInRange.AddLast(time);
                     }
 
-                    if (timesInRange.Count % 2 == 1)
+                    var firstIn = this.isInTime(
+                        EnumerableHelpers.First(
+                            timesInRange));
+                    var inNow = allTimes.Count % 2 == 1;
+                    var oddTimesInRange = timesInRange.Count % 2 == 1;
+                    if (oddTimesInRange)
                     {
-                        if (allTimes.Count % 2 == 1)
+                        if (inNow && firstIn)
                         {
                             goto afterCheckClockedIn;
                             // clocked in currently, do nothing
                         }
 
-
-                        if (this.isInTime(
-                            EnumerableHelpers.First(timesInRange)))
+                        if (firstIn)
                         {
                             // clocked in at end of week
                             timesInRange.AddLast(end.Date);
@@ -102,6 +105,12 @@
                         }
 
                         // clocked out now but was clocked in at start of week
+                        timesInRange.AddFirst(start.Date);
+                        goto afterCheckClockedIn;
+                    }
+
+                    if (inNow && !firstIn)
+                    {
                         timesInRange.AddFirst(start.Date);
                     }
 
