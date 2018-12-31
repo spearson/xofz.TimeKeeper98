@@ -84,9 +84,18 @@
                         timesInRange.AddLast(time);
                     }
 
-                    var firstIn = this.isInTime(
-                        EnumerableHelpers.First(
+                    bool firstIn;
+                    if (timesInRange.Count < 1)
+                    {
+                        firstIn = false;
+                        goto checkAdd;
+                    }
+
+                    firstIn = this.isInTime(
+                        EnumerableHelpers.FirstOrDefault(
                             timesInRange));
+
+                    checkAdd:
                     var inNow = allTimes.Count % 2 == 1;
                     var oddTimesInRange = timesInRange.Count % 2 == 1;
                     if (oddTimesInRange)
