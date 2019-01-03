@@ -19,13 +19,13 @@
                 UiReaderWriter,
                 StatisticsCalculator,
                 TimeSpanViewer>(
-            (rw, calc, viewer) =>
+            (uiRW, calc, viewer) =>
             {
                 var timeThisWeek = calc.TimeWorkedThisWeek();
                 var timeToday = calc.TimeWorkedToday();
                 var thisWeekString = viewer.ReadableString(timeThisWeek);
                 var todayString = viewer.ReadableString(timeToday);
-                rw.Write(
+                uiRW.Write(
                     ui,
                     () =>
                     {

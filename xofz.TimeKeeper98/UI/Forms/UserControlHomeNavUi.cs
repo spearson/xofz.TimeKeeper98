@@ -107,6 +107,6 @@
                 tkt.Invoke());
         }
 
-        private readonly Lot<Button> navKeys;
+        protected readonly Lot<Button> navKeys;
     }
 }

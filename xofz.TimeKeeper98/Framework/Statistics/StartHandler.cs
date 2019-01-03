@@ -16,9 +16,9 @@
             HomeNavUi hnUi)
         {
             var w = this.web;
-            w.Run<UiReaderWriter>(rw =>
+            w.Run<UiReaderWriter>(uiRW =>
             {
-                rw.Write(
+                uiRW.Write(
                     hnUi,
                     () => hnUi.ActiveKeyLabel = @"Statistics");
             });
@@ -31,6 +31,7 @@
                             t,
                             nameof(t.Elapsed));
                     });
+
                     t.Start(1000);
                 },
                 "StatisticsTimer");

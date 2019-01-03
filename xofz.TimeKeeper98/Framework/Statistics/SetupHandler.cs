@@ -16,11 +16,12 @@
             StatisticsUi ui)
         {
             var w = this.web;
-            w.Run<DateCalculator, UiReaderWriter>((calc, rw) =>
+            w.Run<DateCalculator, UiReaderWriter>(
+                (calc, uiRW) =>
             {
                 var startOfWeek = calc.StartOfWeek();
                 var endOfWeek = calc.Friday();
-                rw.WriteSync(
+                uiRW.WriteSync(
                     ui,
                     () =>
                     {

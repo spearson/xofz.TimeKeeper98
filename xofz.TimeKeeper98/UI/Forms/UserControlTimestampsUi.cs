@@ -142,6 +142,6 @@
                 o => sdc.Invoke(shouldShow));
         }
 
-        private readonly Lotter lotter;
+        protected readonly Lotter lotter;
     }
 }

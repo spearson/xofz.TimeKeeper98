@@ -20,12 +20,12 @@
                 UiReaderWriter,
                 StatisticsCalculator,
                 TimeSpanViewer>(
-                (rw, calc, viewer) =>
+                (uiRW, calc, viewer) =>
                 {
-                    var start = rw.Read(
+                    var start = uiRW.Read(
                         ui,
                         () => ui.StartDate);
-                    var end = rw.Read(
+                    var end = uiRW.Read(
                         ui,
                         () => ui.EndDate).AddDays(1);
 
@@ -38,7 +38,7 @@
                     var maxDaily = viewer.ReadableString(
                         calc.MaxDailyTimeWorked(start, end));
 
-                    rw.Write(
+                    uiRW.Write(
                         ui,
                         () =>
                         {

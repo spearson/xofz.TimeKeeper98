@@ -21,10 +21,10 @@
                     switch (sh.LastVisitedKeyLabel)
                     {
                         case @"Timestamps":
-                            presentTimestamps();
+                            presentTimestamps?.Invoke();
                             break;
                         case @"Statistics":
-                            presentStatistics();
+                            presentStatistics?.Invoke();
                             break;
                     }
                 });

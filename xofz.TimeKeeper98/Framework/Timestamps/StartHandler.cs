@@ -21,13 +21,13 @@
             StatisticsUi statsUi)
         {
             var w = this.web;
-            w.Run<UiReaderWriter>((rw) =>
+            w.Run<UiReaderWriter>(uiRW =>
             {
-                rw.Write(
+                uiRW.Write(
                     homeNavUi,
                     () =>
                     {
-                        homeNavUi.ActiveKeyLabel = "Timestamps";
+                        homeNavUi.ActiveKeyLabel = @"Timestamps";
                     });
             });
 
@@ -48,12 +48,12 @@
                 goto findAndSetTimesInRange;
             }
 
-            w.Run<UiReaderWriter>(rw =>
+            w.Run<UiReaderWriter>(uiRW =>
             {
-                start = rw.Read(
+                start = uiRW.Read(
                     statsUi,
                     () => statsUi.StartDate);
-                end = rw.Read(
+                end = uiRW.Read(
                         statsUi,
                         () => statsUi.EndDate)
                     .AddDays(1);
@@ -65,7 +65,7 @@
                 Lotter,
                 EnumerableSplitter,
                 UiReaderWriter>(
-                (reader, lotter, splitter, rw) =>
+                (reader, lotter, splitter, uiRW) =>
                 {
                     var allTimes = reader.ReadAll();
                     var timesInRange = new LinkedList<DateTime>();
@@ -118,7 +118,7 @@
                         goto afterCheckClockedIn;
                     }
 
-                    if (inNow && !firstIn)
+                    if (inNow && !firstIn && timesInRange.Count > 0)
                     {
                         timesInRange.AddFirst(start.Date);
                     }
@@ -132,7 +132,7 @@
                         EnumerableHelpers.Select(
                             inTimes,
                             this.formatTimestamp));
-                    rw.Write(
+                    uiRW.Write(
                         ui,
                         () =>
                         {
@@ -145,7 +145,7 @@
                             outTimes,
                             this.formatTimestamp));
 
-                    rw.Write(
+                    uiRW.Write(
                         ui,
                         () =>
                         {
@@ -234,7 +234,7 @@
                                 lot = lotter.Materialize(newInOutTimes);
                             }
 
-                            rw.Write(
+                            uiRW.Write(
                                 ui,
                                 () =>
                                 {
@@ -269,14 +269,14 @@
         protected virtual string formatTimestamp(DateTime timeStamp)
         {
             var w = this.web;
-            string s = null;
+            string formattedTimestamp = null;
             w.Run<GlobalSettingsHolder>(settings =>
             {
-                s = timeStamp.ToString(
+                formattedTimestamp = timeStamp.ToString(
                     settings.TimestampFormat);
             });
 
-            return s;
+            return formattedTimestamp;
         }
         
         protected readonly MethodWeb web;

@@ -22,6 +22,7 @@
         public override void Execute()
         {
             this.registerDependencies();
+
             new StatisticsPresenter(
                     this.ui,
                     this.shell,

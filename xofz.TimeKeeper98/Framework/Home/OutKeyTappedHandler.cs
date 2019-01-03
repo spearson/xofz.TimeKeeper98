@@ -17,9 +17,9 @@
         {
             var w = this.web;
             w.Run<UiReaderWriter, TimestampWriter>(
-                (rw, writer) =>
+                (uiRW, writer) =>
             {
-                rw.WriteSync(
+                uiRW.WriteSync(
                     ui,
                     () =>
                     {
@@ -28,7 +28,7 @@
 
                 if (!writer.Write())
                 {
-                    rw.WriteSync(
+                    uiRW.Write(
                         ui,
                         () =>
                         {
@@ -37,7 +37,7 @@
                     return;
                 }
 
-                rw.WriteSync(
+                uiRW.Write(
                     ui,
                     () =>
                     {

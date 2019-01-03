@@ -15,39 +15,42 @@
             HomeUi ui)
         {
             var w = this.web;
-            
-            w.Run<
-                StatisticsCalculator,
-                TimestampReader,
-                UiReaderWriter>(
-                (calc, reader, rw) =>
-            {
-                var currentlyIn = calc.ClockedIn();
-                var editKeyEnabled = false;
-                foreach (var timestamp in reader.Read())
-                {
-                    editKeyEnabled = true;
-                    break;
-                }
 
-                rw.Write(ui, () =>
-                {
-                    ui.InKeyVisible = !currentlyIn;
-                    ui.OutKeyVisible = currentlyIn;
-                    ui.EditKeyEnabled = editKeyEnabled;
-                });
-            });
-
-            w.Run<VersionReader, UiReaderWriter>((vr, rw) =>
+            w.Run<UiReaderWriter>(uiRW =>
             {
-                var appVersion = vr.Read();
-                var coreVersion = vr.ReadCoreVersion();
-                rw.Write(
-                    ui,
-                    () =>
+                w.Run<
+                    StatisticsCalculator,
+                    TimestampReader>(
+                    (calc, reader) =>
                     {
-                        ui.Version = appVersion;
-                        ui.CoreVersion = coreVersion;
+                        var currentlyIn = calc.ClockedIn();
+                        var editKeyEnabled = false;
+                        foreach (var timestamp in reader.Read())
+                        {
+                            editKeyEnabled = true;
+                            break;
+                        }
+
+                        uiRW.Write(ui, () =>
+                        {
+                            ui.InKeyVisible = !currentlyIn;
+                            ui.OutKeyVisible = currentlyIn;
+                            ui.EditKeyEnabled = editKeyEnabled;
+                        });
+                    });
+
+                w.Run<VersionReader>(
+                    vr =>
+                    {
+                        var appVersion = vr.Read();
+                        var coreVersion = vr.ReadCoreVersion();
+                        uiRW.Write(
+                            ui,
+                            () =>
+                            {
+                                ui.Version = appVersion;
+                                ui.CoreVersion = coreVersion;
+                            });
                     });
             });
         }

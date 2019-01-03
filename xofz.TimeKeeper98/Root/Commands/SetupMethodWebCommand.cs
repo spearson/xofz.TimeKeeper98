@@ -18,11 +18,12 @@
             this.messenger = messenger;
         }
 
-        public virtual MethodWeb Web => this.web;
+        public virtual MethodWeb W => this.web;
 
         public override void Execute()
         {
             this.setWeb(this.createWeb());
+
             this.registerDependencies();
         }
 

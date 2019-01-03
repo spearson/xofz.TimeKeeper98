@@ -17,10 +17,10 @@
         {
             var w = this.web;
             w.Run<GlobalSettingsHolder, UiReaderWriter>(
-                (settings, rw) =>
+                (settings, uiRW) =>
                 {
                     var format = settings.TimestampFormat;
-                    rw.Write(
+                    uiRW.Write(
                         ui,
                         () => ui.TimestampFormat = format);
                 });

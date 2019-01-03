@@ -9,7 +9,7 @@
         [STAThread]
         private static void Main()
         {
-            AppDomain.CurrentDomain.AssemblyResolve += (sender, e) => loadEmbeddedAssembly(e.Name);
+            AppDomain.CurrentDomain.AssemblyResolve += currentDomain_AssemblyResolve;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -19,16 +19,18 @@
             Application.Run(bootstrapper.Shell);
         }
 
-        private static Assembly loadEmbeddedAssembly(string name)
+        private static Assembly currentDomain_AssemblyResolve(
+            object sender, 
+            ResolveEventArgs e)
         {
-            var assemblyName = new AssemblyName(name);
-            if (name.EndsWith("Retargetable=Yes"))
+            var assemblyName = new AssemblyName(e.Name);
+            if (e.Name.EndsWith(@"Retargetable=Yes"))
             {
                 return Assembly.Load(assemblyName);
             }
 
             var container = Assembly.GetExecutingAssembly();
-            var path = assemblyName.Name + ".dll";
+            var path = assemblyName.Name + @".dll";
 
             using (var stream = container.GetManifestResourceStream(path))
             {

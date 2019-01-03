@@ -187,8 +187,9 @@
         protected virtual ICollection<DateTime> allTimes()
         {
             var w = this.web;
-            var reader = w.Run<TimestampReader>();
-            return reader.ReadAll();
+            return w.Run<TimestampReader>()
+                       ?.ReadAll() 
+                   ?? new LinkedList<DateTime>();
         }
 
         protected readonly MethodWeb web;

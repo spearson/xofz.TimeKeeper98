@@ -92,7 +92,10 @@
 
         public override void Stop()
         {
-            Interlocked.CompareExchange(ref this.startedIf1, 0, 1);
+            Interlocked.CompareExchange(
+                ref this.startedIf1, 
+                0, 
+                1);
         }
 
         private void homeUi_InKeyTapped()

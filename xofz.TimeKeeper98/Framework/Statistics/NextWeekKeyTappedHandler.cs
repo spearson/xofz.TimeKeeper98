@@ -16,18 +16,18 @@
             StatisticsUi ui)
         {
             var w = this.web;
-            w.Run<UiReaderWriter>(rw =>
+            w.Run<UiReaderWriter>(uiRW =>
             {
-                var currentStart = rw.Read(
+                var currentStart = uiRW.Read(
                     ui,
                     () => ui.StartDate);
-                var currentEnd = rw.Read(
+                var currentEnd = uiRW.Read(
                     ui,
                     () => ui.EndDate);
                 var newStart = currentStart.AddDays(7);
                 var newEnd = currentEnd.AddDays(7);
 
-                rw.Write(ui, () =>
+                uiRW.Write(ui, () =>
                 {
                     ui.StartDate = newStart;
                     ui.EndDate = newEnd;

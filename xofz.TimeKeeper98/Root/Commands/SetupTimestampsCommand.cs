@@ -23,6 +23,7 @@
         public override void Execute()
         {
             this.registerDependencies();
+
             new TimestampsPresenter(
                     this.ui,
                     this.shell,

@@ -131,8 +131,9 @@
             }
 
             var w = this.web;
-            var trapper = w.Run<EnumerableTrapper<DateTime>>();
-            return trapper.TrappedCollection;
+            return w.Run<EnumerableTrapper<DateTime>>()
+                       ?.TrappedCollection
+                   ?? new LinkedList<DateTime>();
         }
 
         protected virtual ICollection<DateTime> readAllTimestamps()
@@ -185,16 +186,16 @@
                 }
             }
 
-            var now = DateTime.Now;
+            var tickCount = DateTime.Now.Ticks;
             var filePath = Path.Combine(md, DataFileName);
-            var newText = Environment.NewLine + now.Ticks;
+
             try
             {
                 if (File.Exists(filePath))
                 {
                     File.AppendAllText(
                         filePath,
-                        newText);
+                        Environment.NewLine + tickCount);
                     goto succeeded;
                 }
             }
@@ -205,7 +206,7 @@
 
             try
             {
-                File.WriteAllText(filePath, now.Ticks.ToString());
+                File.WriteAllText(filePath, tickCount.ToString());
             }
             catch
             {
@@ -231,7 +232,7 @@
             var orderedPaths = EnumerableHelpers.OrderByDescending(
                 Directory.GetFiles(md), 
                 s => s);
-            if (orderedPaths.Count == 0)
+            if (orderedPaths.Count < 1)
             {
                 return;
             }
@@ -247,7 +248,7 @@
                 return;
             }        
             
-            if (times.Length == 0)
+            if (times.Length < 1)
             {
                 return;
             }

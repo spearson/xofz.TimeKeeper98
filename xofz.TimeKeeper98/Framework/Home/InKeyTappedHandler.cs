@@ -18,20 +18,20 @@
         {
             var w = this.web;
             w.Run<UiReaderWriter, TimestampWriter>(
-                (rw, writer) =>
+                (uiRW, writer) =>
             {
-                rw.WriteSync(
+                uiRW.WriteSync(
                     ui,
                     () => ui.InKeyVisible = false);
                 if (!writer.Write())
                 {
-                    rw.WriteSync(
+                    uiRW.Write(
                         ui,
                         () => ui.InKeyVisible = true);
                     return;
                 }
 
-                rw.WriteSync(
+                uiRW.Write(
                     ui,
                     () =>
                     {

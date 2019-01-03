@@ -10,7 +10,7 @@
     {
         public UserControlTimestampEditUi()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         public event Do SaveKeyTapped;

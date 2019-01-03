@@ -20,37 +20,38 @@
             HomeUi homeUi)
         {
             var w = this.web;
-            w.Run<TimestampReader, UiReaderWriter>(
-                (reader, rw) =>
-                {
-                    var ll = new LinkedList<DateTime>(reader.Read());
-                    if (ll.Count < 1)
-                    {
-                        return;
-                    }
-
-                    var lastTimestamp = ll
-                        .Last
-                        .Value;
-                    rw.Write(
-                        ui,
-                        () => ui.EditedTimestamp = lastTimestamp);
-            });
-
-            w.Run<UiReaderWriter, SettingsHolder>(
-                (rw, sh) =>
-                {
-                    sh.LastVisitedKeyLabel = rw.Read(
-                        hnUi,
-                        () => hnUi.ActiveKeyLabel);
-                    rw.Write(
-                        hnUi,
-                        () => hnUi.ActiveKeyLabel = null);
-                });
-
-            w.Run<UiReaderWriter>(rw =>
+            w.Run<UiReaderWriter>(uiRW =>
             {
-                rw.Write(
+                w.Run<TimestampReader>(reader =>
+                    {
+                        var allColl = reader.ReadAll();
+
+                        var ll = allColl as LinkedList<DateTime>
+                                 ?? new LinkedList<DateTime>(allColl);
+                        if (ll.Count < 1)
+                        {
+                            return;
+                        }
+
+                        var lastTimestamp = ll
+                            .Last
+                            .Value;
+                        uiRW.Write(
+                            ui,
+                            () => ui.EditedTimestamp = lastTimestamp);
+                    });
+
+                w.Run<SettingsHolder>(settings =>
+                    {
+                        settings.LastVisitedKeyLabel = uiRW.Read(
+                            hnUi,
+                            () => hnUi.ActiveKeyLabel);
+                        uiRW.Write(
+                            hnUi,
+                            () => hnUi.ActiveKeyLabel = null);
+                    });
+
+                uiRW.Write(
                     homeUi,
                     () => homeUi.Editing = true);
             });

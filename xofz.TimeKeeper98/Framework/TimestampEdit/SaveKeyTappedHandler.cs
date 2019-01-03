@@ -21,13 +21,14 @@
         {
             var w = this.web;
             w.Run<TimestampReader, UiReaderWriter>(
-                (reader, rw) =>
+                (reader, uiRW) =>
                 {
-                    var newTimestamp = rw.Read(
+                    var newTimestamp = uiRW.Read(
                         ui,
                         () => ui.EditedTimestamp);
-                    var allTimestamps = new LinkedList<DateTime>(
-                        reader.Read());
+                    var allColl = reader.ReadAll();
+                    var allTimestamps = allColl as LinkedList<DateTime>
+                                        ?? new LinkedList<DateTime>(allColl);
                     if (allTimestamps.Count < 2)
                     {
                         goto checkNow;
@@ -41,7 +42,7 @@
                     {
                         w.Run<Messenger>(m =>
                         {
-                            rw.Write(
+                            uiRW.Write(
                                 m.Subscriber,
                                 () => m.GiveError(
                                     "Time must be after previous timestamp."));
@@ -55,7 +56,7 @@
                     {
                         w.Run<Messenger>(m =>
                         {
-                            rw.Write(
+                            uiRW.Write(
                                 m.Subscriber,
                                 () => m.GiveError(
                                     "Time must be before present time."));
@@ -74,10 +75,10 @@
                         switch (sh.LastVisitedKeyLabel)
                         {
                             case "Timestamps":
-                                presentTimestamps();
+                                presentTimestamps?.Invoke();
                                 break;
                             case "Statistics":
-                                presentStatistics();
+                                presentStatistics?.Invoke();
                                 break;
                         }
                     });

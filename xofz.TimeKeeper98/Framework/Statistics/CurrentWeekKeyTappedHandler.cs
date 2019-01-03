@@ -17,11 +17,11 @@
         {
             var w = this.web;
             w.Run<DateCalculator, UiReaderWriter>(
-                (calc, rw) =>
+                (calc, uiRW) =>
                 {
                     var start = calc.StartOfWeek();
                     var end = calc.Friday();
-                    rw.Write(
+                    uiRW.Write(
                         ui,
                         () =>
                         {

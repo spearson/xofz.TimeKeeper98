@@ -15,7 +15,7 @@
             var w = this.web;
             w.Run<xofz.Framework.Timer>(t =>
                 {
-                    w.Run<xofz.Framework.EventRaiser>(er =>
+                    w.Run<EventRaiser>(er =>
                     {
                         er.Raise(
                             t,

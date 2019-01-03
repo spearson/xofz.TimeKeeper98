@@ -58,14 +58,14 @@
         protected virtual void onBootstrap()
         {
             var s = this.mainForm;
-            Messenger fm = new FormsMessenger();
-            fm.Subscriber = s;
+            Messenger m = new FormsMessenger();
+            m.Subscriber = s;
 
             var e = this.executor;
             e.Execute(new SetupMethodWebCommand(
                 () => new MethodWeb(),
-                fm));
-            var w = e.Get<SetupMethodWebCommand>().Web;
+                m));
+            var w = e.Get<SetupMethodWebCommand>().W;
             w.Run<EventSubscriber>(sub =>
             {
                 var cd = AppDomain.CurrentDomain;
@@ -82,9 +82,9 @@
             TimestampsUi timestampsUi = null;
             TimestampEditUi editUi = null;
             w.Run<UiReaderWriter, Lotter>(
-                (rw, lotter) =>
+                (uiRW, lotter) =>
             {
-                rw.WriteSync(
+                uiRW.WriteSync(
                     s,
                     () =>
                     {
@@ -145,7 +145,7 @@
             object sender, 
             UnhandledExceptionEventArgs e)
         {
-            var w = this.executor.Get<SetupMethodWebCommand>().Web;
+            var w = this.executor.Get<SetupMethodWebCommand>().W;
             w.Run<LogEditor>(le =>
                 {
                     LogHelpers.AddEntry(le, e);
