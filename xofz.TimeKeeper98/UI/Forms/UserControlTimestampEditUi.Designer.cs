@@ -43,7 +43,7 @@
             this.dateTimePicker.Margin = new System.Windows.Forms.Padding(0);
             this.dateTimePicker.MinimumSize = new System.Drawing.Size(240, 0);
             this.dateTimePicker.Name = "dateTimePicker";
-            this.dateTimePicker.Size = new System.Drawing.Size(240, 30);
+            this.dateTimePicker.Size = new System.Drawing.Size(311, 30);
             this.dateTimePicker.TabIndex = 0;
             // 
             // saveKey
@@ -54,7 +54,7 @@
             this.saveKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.saveKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveKey.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveKey.Location = new System.Drawing.Point(288, 3);
+            this.saveKey.Location = new System.Drawing.Point(380, 3);
             this.saveKey.Margin = new System.Windows.Forms.Padding(0);
             this.saveKey.Name = "saveKey";
             this.saveKey.Size = new System.Drawing.Size(70, 36);
@@ -71,7 +71,7 @@
             this.cancelKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.cancelKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelKey.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelKey.Location = new System.Drawing.Point(382, 3);
+            this.cancelKey.Location = new System.Drawing.Point(474, 3);
             this.cancelKey.Margin = new System.Windows.Forms.Padding(0);
             this.cancelKey.Name = "cancelKey";
             this.cancelKey.Size = new System.Drawing.Size(94, 36);
