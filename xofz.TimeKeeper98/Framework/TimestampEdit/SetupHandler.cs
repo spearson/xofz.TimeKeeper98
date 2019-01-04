@@ -19,7 +19,7 @@
             w.Run<GlobalSettingsHolder, UiReaderWriter>(
                 (settings, uiRW) =>
                 {
-                    var format = settings.TimestampFormat;
+                    var format = settings.EditTimestampFormat;
                     uiRW.Write(
                         ui,
                         () => ui.TimestampFormat = format);

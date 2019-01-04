@@ -50,7 +50,8 @@
             w.RegisterDependency(
                 new GlobalSettingsHolder
                 {
-                    TimestampFormat = "MM/dd/yyyy hh:mm:ss tt"
+                    TimestampFormat = @"MM/dd hh:mm:ss tt",
+                    EditTimestampFormat = @"MM/dd/yyyy hh:mm:ss tt"
                 });
             w.RegisterDependency(
                 new TextFileLog("Exceptions.log"),
