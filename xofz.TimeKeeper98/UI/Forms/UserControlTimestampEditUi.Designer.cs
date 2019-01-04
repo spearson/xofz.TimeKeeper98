@@ -53,11 +53,11 @@
             this.saveKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
             this.saveKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.saveKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.saveKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveKey.Location = new System.Drawing.Point(290, 0);
+            this.saveKey.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveKey.Location = new System.Drawing.Point(288, 3);
             this.saveKey.Margin = new System.Windows.Forms.Padding(0);
             this.saveKey.Name = "saveKey";
-            this.saveKey.Size = new System.Drawing.Size(77, 37);
+            this.saveKey.Size = new System.Drawing.Size(70, 36);
             this.saveKey.TabIndex = 1;
             this.saveKey.Text = "Save";
             this.saveKey.UseVisualStyleBackColor = true;
@@ -70,11 +70,11 @@
             this.cancelKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
             this.cancelKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.cancelKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cancelKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelKey.Location = new System.Drawing.Point(384, 0);
+            this.cancelKey.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelKey.Location = new System.Drawing.Point(382, 3);
             this.cancelKey.Margin = new System.Windows.Forms.Padding(0);
             this.cancelKey.Name = "cancelKey";
-            this.cancelKey.Size = new System.Drawing.Size(97, 37);
+            this.cancelKey.Size = new System.Drawing.Size(94, 36);
             this.cancelKey.TabIndex = 2;
             this.cancelKey.Text = "Cancel";
             this.cancelKey.UseVisualStyleBackColor = true;
@@ -100,7 +100,7 @@
             this.Controls.Add(this.dateTimePicker);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "UserControlTimestampEditUi";
-            this.Size = new System.Drawing.Size(784, 298);
+            this.Size = new System.Drawing.Size(884, 345);
             this.ResumeLayout(false);
             this.PerformLayout();
 

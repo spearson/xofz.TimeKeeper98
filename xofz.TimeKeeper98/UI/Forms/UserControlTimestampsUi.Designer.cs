@@ -49,7 +49,7 @@
             this.timesInTextBox.Name = "timesInTextBox";
             this.timesInTextBox.ReadOnly = true;
             this.timesInTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.timesInTextBox.Size = new System.Drawing.Size(180, 230);
+            this.timesInTextBox.Size = new System.Drawing.Size(180, 277);
             this.timesInTextBox.TabIndex = 0;
             this.timesInTextBox.TabStop = false;
             // 
@@ -84,7 +84,7 @@
             this.timesOutTextBox.Name = "timesOutTextBox";
             this.timesOutTextBox.ReadOnly = true;
             this.timesOutTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.timesOutTextBox.Size = new System.Drawing.Size(180, 230);
+            this.timesOutTextBox.Size = new System.Drawing.Size(180, 277);
             this.timesOutTextBox.TabIndex = 2;
             this.timesOutTextBox.TabStop = false;
             // 
@@ -102,16 +102,17 @@
             // timesSplicedListBox
             // 
             this.timesSplicedListBox.BackColor = System.Drawing.SystemColors.Control;
-            this.timesSplicedListBox.ColumnWidth = 245;
+            this.timesSplicedListBox.ColumnWidth = 250;
             this.timesSplicedListBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timesSplicedListBox.FormattingEnabled = true;
             this.timesSplicedListBox.ItemHeight = 14;
-            this.timesSplicedListBox.Location = new System.Drawing.Point(363, 68);
+            this.timesSplicedListBox.Location = new System.Drawing.Point(360, 68);
+            this.timesSplicedListBox.Margin = new System.Windows.Forms.Padding(0);
             this.timesSplicedListBox.MultiColumn = true;
             this.timesSplicedListBox.Name = "timesSplicedListBox";
             this.timesSplicedListBox.ScrollAlwaysVisible = true;
             this.timesSplicedListBox.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.timesSplicedListBox.Size = new System.Drawing.Size(418, 214);
+            this.timesSplicedListBox.Size = new System.Drawing.Size(524, 270);
             this.timesSplicedListBox.TabIndex = 5;
             this.timesSplicedListBox.TabStop = false;
             // 
@@ -131,13 +132,14 @@
             this.currentKey.Appearance = System.Windows.Forms.Appearance.Button;
             this.currentKey.AutoSize = true;
             this.currentKey.Checked = true;
+            this.currentKey.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ControlDark;
             this.currentKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
-            this.currentKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.currentKey.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ControlDark;
             this.currentKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.currentKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.currentKey.Location = new System.Drawing.Point(159, 3);
+            this.currentKey.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentKey.Location = new System.Drawing.Point(159, 5);
             this.currentKey.Name = "currentKey";
-            this.currentKey.Size = new System.Drawing.Size(81, 32);
+            this.currentKey.Size = new System.Drawing.Size(76, 30);
             this.currentKey.TabIndex = 0;
             this.currentKey.TabStop = true;
             this.currentKey.Text = "Current";
@@ -148,13 +150,14 @@
             // 
             this.statisticsRangeKey.Appearance = System.Windows.Forms.Appearance.Button;
             this.statisticsRangeKey.AutoSize = true;
+            this.statisticsRangeKey.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ControlDark;
             this.statisticsRangeKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
-            this.statisticsRangeKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.statisticsRangeKey.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ControlDark;
             this.statisticsRangeKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.statisticsRangeKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statisticsRangeKey.Location = new System.Drawing.Point(246, 3);
+            this.statisticsRangeKey.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statisticsRangeKey.Location = new System.Drawing.Point(241, 5);
             this.statisticsRangeKey.Name = "statisticsRangeKey";
-            this.statisticsRangeKey.Size = new System.Drawing.Size(154, 32);
+            this.statisticsRangeKey.Size = new System.Drawing.Size(148, 30);
             this.statisticsRangeKey.TabIndex = 1;
             this.statisticsRangeKey.Text = "Statistics Range";
             this.statisticsRangeKey.UseVisualStyleBackColor = true;
@@ -162,10 +165,10 @@
             // showDurationsCheckBox
             // 
             this.showDurationsCheckBox.AutoSize = true;
-            this.showDurationsCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.showDurationsCheckBox.Location = new System.Drawing.Point(406, 9);
+            this.showDurationsCheckBox.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showDurationsCheckBox.Location = new System.Drawing.Point(420, 10);
             this.showDurationsCheckBox.Name = "showDurationsCheckBox";
-            this.showDurationsCheckBox.Size = new System.Drawing.Size(147, 22);
+            this.showDurationsCheckBox.Size = new System.Drawing.Size(139, 22);
             this.showDurationsCheckBox.TabIndex = 7;
             this.showDurationsCheckBox.Text = "Show Durations";
             this.showDurationsCheckBox.UseVisualStyleBackColor = true;
@@ -186,7 +189,7 @@
             this.Controls.Add(this.timesInTextBox);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "UserControlTimestampsUi";
-            this.Size = new System.Drawing.Size(784, 298);
+            this.Size = new System.Drawing.Size(884, 345);
             this.ResumeLayout(false);
             this.PerformLayout();
 

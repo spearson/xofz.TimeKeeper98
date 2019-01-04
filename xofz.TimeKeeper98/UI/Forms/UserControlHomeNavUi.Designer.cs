@@ -37,21 +37,24 @@
             // 
             // tableLayoutPanel
             // 
-            this.tableLayoutPanel.ColumnCount = 4;
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 196F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 196F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 196F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 196F));
-            this.tableLayoutPanel.Controls.Add(this.exitKey, 3, 0);
+            this.tableLayoutPanel.ColumnCount = 5;
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 177F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 177F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 177F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 177F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 176F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel.Controls.Add(this.exitKey, 4, 0);
             this.tableLayoutPanel.Controls.Add(this.statisticsKey, 1, 0);
             this.tableLayoutPanel.Controls.Add(this.timestampsKey, 0, 0);
-            this.tableLayoutPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
             this.tableLayoutPanel.RowCount = 1;
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(784, 50);
+            this.tableLayoutPanel.Size = new System.Drawing.Size(884, 50);
             this.tableLayoutPanel.TabIndex = 0;
             // 
             // exitKey
@@ -62,10 +65,10 @@
             this.exitKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
             this.exitKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.exitKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.exitKey.Location = new System.Drawing.Point(588, 0);
+            this.exitKey.Location = new System.Drawing.Point(708, 0);
             this.exitKey.Margin = new System.Windows.Forms.Padding(0);
             this.exitKey.Name = "exitKey";
-            this.exitKey.Size = new System.Drawing.Size(196, 50);
+            this.exitKey.Size = new System.Drawing.Size(176, 50);
             this.exitKey.TabIndex = 2;
             this.exitKey.Text = "Exit";
             this.exitKey.UseVisualStyleBackColor = true;
@@ -79,10 +82,10 @@
             this.statisticsKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
             this.statisticsKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.statisticsKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.statisticsKey.Location = new System.Drawing.Point(196, 0);
+            this.statisticsKey.Location = new System.Drawing.Point(177, 0);
             this.statisticsKey.Margin = new System.Windows.Forms.Padding(0);
             this.statisticsKey.Name = "statisticsKey";
-            this.statisticsKey.Size = new System.Drawing.Size(196, 50);
+            this.statisticsKey.Size = new System.Drawing.Size(177, 50);
             this.statisticsKey.TabIndex = 1;
             this.statisticsKey.Text = "Statistics";
             this.statisticsKey.UseVisualStyleBackColor = true;
@@ -99,7 +102,7 @@
             this.timestampsKey.Location = new System.Drawing.Point(0, 0);
             this.timestampsKey.Margin = new System.Windows.Forms.Padding(0);
             this.timestampsKey.Name = "timestampsKey";
-            this.timestampsKey.Size = new System.Drawing.Size(196, 50);
+            this.timestampsKey.Size = new System.Drawing.Size(177, 50);
             this.timestampsKey.TabIndex = 0;
             this.timestampsKey.Text = "Timestamps";
             this.timestampsKey.UseVisualStyleBackColor = true;
@@ -109,8 +112,9 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.tableLayoutPanel);
+            this.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "UserControlHomeNavUi";
-            this.Size = new System.Drawing.Size(784, 50);
+            this.Size = new System.Drawing.Size(884, 50);
             this.tableLayoutPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 

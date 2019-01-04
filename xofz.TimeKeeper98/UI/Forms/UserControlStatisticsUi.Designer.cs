@@ -84,7 +84,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Location = new System.Drawing.Point(0, 2);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(118, 29);
@@ -175,11 +175,11 @@
             this.previousWeekKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
             this.previousWeekKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.previousWeekKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.previousWeekKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.previousWeekKey.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.previousWeekKey.Location = new System.Drawing.Point(0, 247);
             this.previousWeekKey.Margin = new System.Windows.Forms.Padding(0);
             this.previousWeekKey.Name = "previousWeekKey";
-            this.previousWeekKey.Size = new System.Drawing.Size(129, 28);
+            this.previousWeekKey.Size = new System.Drawing.Size(148, 30);
             this.previousWeekKey.TabIndex = 2;
             this.previousWeekKey.Text = "<< Previous Week";
             this.previousWeekKey.UseVisualStyleBackColor = true;
@@ -192,11 +192,11 @@
             this.nextWeekKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
             this.nextWeekKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.nextWeekKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.nextWeekKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nextWeekKey.Location = new System.Drawing.Point(357, 247);
+            this.nextWeekKey.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nextWeekKey.Location = new System.Drawing.Point(344, 247);
             this.nextWeekKey.Margin = new System.Windows.Forms.Padding(0);
             this.nextWeekKey.Name = "nextWeekKey";
-            this.nextWeekKey.Size = new System.Drawing.Size(103, 28);
+            this.nextWeekKey.Size = new System.Drawing.Size(116, 30);
             this.nextWeekKey.TabIndex = 4;
             this.nextWeekKey.Text = "Next Week >>";
             this.nextWeekKey.UseVisualStyleBackColor = true;
@@ -209,11 +209,11 @@
             this.currentWeekKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
             this.currentWeekKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.currentWeekKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.currentWeekKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.currentWeekKey.Location = new System.Drawing.Point(192, 247);
+            this.currentWeekKey.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentWeekKey.Location = new System.Drawing.Point(188, 247);
             this.currentWeekKey.Margin = new System.Windows.Forms.Padding(0);
             this.currentWeekKey.Name = "currentWeekKey";
-            this.currentWeekKey.Size = new System.Drawing.Size(101, 28);
+            this.currentWeekKey.Size = new System.Drawing.Size(116, 30);
             this.currentWeekKey.TabIndex = 3;
             this.currentWeekKey.Text = "Current Week";
             this.currentWeekKey.UseVisualStyleBackColor = true;
@@ -221,8 +221,7 @@
             // 
             // UserControlStatisticsUi
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.currentWeekKey);
             this.Controls.Add(this.nextWeekKey);
             this.Controls.Add(this.previousWeekKey);
@@ -240,7 +239,7 @@
             this.Controls.Add(this.endDatePicker);
             this.Controls.Add(this.startDatePicker);
             this.Name = "UserControlStatisticsUi";
-            this.Size = new System.Drawing.Size(784, 298);
+            this.Size = new System.Drawing.Size(884, 345);
             this.ResumeLayout(false);
             this.PerformLayout();
 
