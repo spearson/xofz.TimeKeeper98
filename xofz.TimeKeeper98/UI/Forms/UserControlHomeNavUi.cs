@@ -18,6 +18,7 @@
                 {
                     this.timestampsKey,
                     this.statisticsKey,
+                    this.dailyKey,
                     this.exitKey
                 });
         }
@@ -30,6 +31,8 @@
         public event Do StatisticsKeyTapped;
 
         public event Do TimestampsKeyTapped;
+
+        public event Do DailyKeyTapped;
 
         public event Do ExitKeyTapped;
 
@@ -105,6 +108,18 @@
 
             ThreadPool.QueueUserWorkItem(o =>
                 tkt.Invoke());
+        }
+
+        private void dailyKey_Click(object sender, EventArgs e)
+        {
+            var dkt = this.DailyKeyTapped;
+            if (dkt == null)
+            {
+                return;
+            }
+
+            ThreadPool.QueueUserWorkItem(o =>
+                dkt.Invoke());
         }
 
         protected readonly Lot<Button> navKeys;

@@ -90,10 +90,12 @@
 
             Do presentTimestamps = null;
             Do presentStatistics = null;
+            Do presentDaily = null;
             w.Run<Navigator>(n =>
             {
                 presentTimestamps = n.Present<TimestampsPresenter>;
                 presentStatistics = n.Present<StatisticsPresenter>;
+                presentDaily = n.Present<DailyPresenter>;
             });
 
             w.Run<SaveKeyTappedHandler>(handler =>
@@ -101,7 +103,8 @@
                 handler.Handle(
                     this.ui,
                     presentTimestamps,
-                    presentStatistics);
+                    presentStatistics,
+                    presentDaily);
             });
         }
 
@@ -110,17 +113,20 @@
             var w = this.web;
             Do presentTimestamps = null;
             Do presentStatistics = null;
+            Do presentDaily = null;
             w.Run<Navigator>(
                 n =>
                 {
                     presentTimestamps = n.Present<TimestampsPresenter>;
                     presentStatistics = n.Present<StatisticsPresenter>;
+                    presentDaily = n.Present<DailyPresenter>;
                 });
             w.Run<CancelKeyTappedHandler>(handler =>
             {
                 handler.Handle(
                     presentTimestamps,
-                    presentStatistics);
+                    presentStatistics,
+                    presentDaily);
             });
         }
 

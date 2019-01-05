@@ -81,6 +81,7 @@
             StatisticsUi statsUi = null;
             TimestampsUi timestampsUi = null;
             TimestampEditUi editUi = null;
+            DailyUi dailyUi = null;
             w.Run<UiReaderWriter, Lotter>(
                 (uiRW, lotter) =>
             {
@@ -93,6 +94,7 @@
                         statsUi = new UserControlStatisticsUi();
                         timestampsUi = new UserControlTimestampsUi(lotter);
                         editUi = new UserControlTimestampEditUi();
+                        dailyUi = new UserControlDailyUi(lotter);
                     });
             });
 
@@ -109,6 +111,10 @@
                     w))
                 .Execute(new SetupTimestampsCommand(
                     timestampsUi,
+                    homeUi,
+                    w))
+                .Execute(new SetupDailyCommand(
+                    dailyUi,
                     homeUi,
                     w))
                 .Execute(new SetupTimestampEditCommand(

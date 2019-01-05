@@ -8,6 +8,8 @@
 
         event Do TimestampsKeyTapped;
 
+        event Do DailyKeyTapped;
+
         event Do ExitKeyTapped;
 
         string ActiveKeyLabel { get; set; }

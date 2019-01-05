@@ -38,6 +38,10 @@
                     this.ui_TimestampsKeyTapped);
                 subscriber.Subscribe(
                     this.ui,
+                    nameof(this.ui.DailyKeyTapped),
+                    this.ui_DailyKeyTapped);
+                subscriber.Subscribe(
+                    this.ui,
                     nameof(this.ui.ExitKeyTapped),
                     this.ui_ExitKeyTapped);
             });
@@ -55,6 +59,12 @@
         {
             var w = this.web;
             w.Run<Navigator>(n => n.Present<TimestampsPresenter>());
+        }
+
+        private void ui_DailyKeyTapped()
+        {
+            var w = this.web;
+            w.Run<Navigator>(n => n.Present<DailyPresenter>());
         }
 
         private void ui_ExitKeyTapped()

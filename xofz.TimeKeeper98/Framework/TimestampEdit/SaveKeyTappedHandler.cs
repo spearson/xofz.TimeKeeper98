@@ -17,7 +17,8 @@
         public virtual void Handle(
             TimestampEditUi ui,
             Do presentTimestamps,
-            Do presentStatistics)
+            Do presentStatistics,
+            Do presentDaily)
         {
             var w = this.web;
             w.Run<TimestampReader, UiReaderWriter>(
@@ -79,6 +80,9 @@
                                 break;
                             case "Statistics":
                                 presentStatistics?.Invoke();
+                                break;
+                            case "Daily Info":
+                                presentDaily?.Invoke();
                                 break;
                         }
                     });

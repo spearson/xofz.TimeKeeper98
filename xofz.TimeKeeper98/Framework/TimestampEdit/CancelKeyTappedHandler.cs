@@ -12,7 +12,8 @@
 
         public virtual void Handle(
             Do presentTimestamps,
-            Do presentStatistics)
+            Do presentStatistics,
+            Do presentDaily)
         {
             var w = this.web;
             w.Run<SettingsHolder>(
@@ -25,6 +26,9 @@
                             break;
                         case @"Statistics":
                             presentStatistics?.Invoke();
+                            break;
+                        case @"Daily Info":
+                            presentDaily?.Invoke();
                             break;
                     }
                 });
