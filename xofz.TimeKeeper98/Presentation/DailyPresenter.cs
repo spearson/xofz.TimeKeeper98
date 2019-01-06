@@ -76,6 +76,14 @@
             Interlocked.CompareExchange(ref this.startedIf1, 1, 0);
         }
 
+        public override void Stop()
+        {
+            Interlocked.CompareExchange(
+                ref this.startedIf1, 
+                0, 
+                1);
+        }
+
         private void ui_CurrentKeyTapped()
         {
             var w = this.web;

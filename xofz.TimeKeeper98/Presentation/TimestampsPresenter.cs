@@ -65,11 +65,6 @@
 
         public override void Start()
         {
-            Interlocked.CompareExchange(
-                ref this.startedIf1, 
-                1, 
-                0);
-
             base.Start();
 
             var w = this.web;
@@ -88,6 +83,11 @@
                     hnUi,
                     statsUi);
             });
+
+            Interlocked.CompareExchange(
+                ref this.startedIf1,
+                1,
+                0);
         }
 
         public override void Stop()
