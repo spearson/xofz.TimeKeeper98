@@ -45,6 +45,8 @@
                 new SaveKeyTappedHandler(w));
             w.RegisterDependency(
                 new CancelKeyTappedHandler(w));
+            w.RegisterDependency(
+                new SaveCurrentKeyTappedHandler(w));
         }
 
         protected readonly TimestampEditUi ui;

@@ -9,6 +9,8 @@
 
         event Do CancelKeyTapped;
 
+        event Do SaveCurrentKeyTapped;
+
         string TimestampFormat { get; set; }
 
         DateTime EditedTimestamp { get; set; }

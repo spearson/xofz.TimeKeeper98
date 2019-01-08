@@ -32,6 +32,7 @@
             this.saveKey = new System.Windows.Forms.Button();
             this.cancelKey = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.saveCurrentKey = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // dateTimePicker
@@ -91,9 +92,27 @@
             this.label1.TabIndex = 13;
             this.label1.Text = "Note: edited timestamp must be before current time and after previous timestamp";
             // 
+            // saveCurrentKey
+            // 
+            this.saveCurrentKey.AutoSize = true;
+            this.saveCurrentKey.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.saveCurrentKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.saveCurrentKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.saveCurrentKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveCurrentKey.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveCurrentKey.Location = new System.Drawing.Point(642, 3);
+            this.saveCurrentKey.Margin = new System.Windows.Forms.Padding(0);
+            this.saveCurrentKey.Name = "saveCurrentKey";
+            this.saveCurrentKey.Size = new System.Drawing.Size(166, 36);
+            this.saveCurrentKey.TabIndex = 14;
+            this.saveCurrentKey.Text = "Save Current";
+            this.saveCurrentKey.UseVisualStyleBackColor = true;
+            this.saveCurrentKey.Click += new System.EventHandler(this.saveCurrentKey_Click);
+            // 
             // UserControlTimestampEditUi
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.saveCurrentKey);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cancelKey);
             this.Controls.Add(this.saveKey);
@@ -112,5 +131,6 @@
         private System.Windows.Forms.Button saveKey;
         private System.Windows.Forms.Button cancelKey;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button saveCurrentKey;
     }
 }

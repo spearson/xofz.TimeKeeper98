@@ -69,6 +69,7 @@
     <Compile Include="Framework\Statistics\TimerHandler.cs" />
     <Compile Include="Framework\TimeSpanViewer.cs" />
     <Compile Include="Framework\TimestampEdit\CancelKeyTappedHandler.cs" />
+    <Compile Include="Framework\TimestampEdit\SaveCurrentKeyTappedHandler.cs" />
     <Compile Include="Framework\TimestampEdit\SaveKeyTappedHandler.cs" />
     <Compile Include="Framework\TimestampEdit\SettingsHolder.cs" />
     <Compile Include="Framework\TimestampEdit\SetupHandler.cs" />

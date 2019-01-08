@@ -13,9 +13,11 @@
             this.InitializeComponent();
         }
 
-        public event Do SaveKeyTapped;
+        public virtual event Do SaveKeyTapped;
 
-        public event Do CancelKeyTapped;
+        public virtual event Do CancelKeyTapped;
+
+        public virtual event Do SaveCurrentKeyTapped;
 
         string TimestampEditUi.TimestampFormat
         {
@@ -53,6 +55,18 @@
 
             ThreadPool.QueueUserWorkItem(
                 o => ckt.Invoke());
+        }
+
+        private void saveCurrentKey_Click(object sender, EventArgs e)
+        {
+            var sckt = this.SaveCurrentKeyTapped;
+            if (sckt == null)
+            {
+                return;
+            }
+
+            ThreadPool.QueueUserWorkItem(
+                o => sckt.Invoke());
         }
     }
 }

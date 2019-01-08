@@ -42,6 +42,10 @@
                     this.ui,
                     nameof(this.ui.CancelKeyTapped),
                     this.ui_CancelKeyTapped);
+                subscriber.Subscribe(
+                    this.ui,
+                    nameof(this.ui.SaveCurrentKeyTapped),
+                    this.ui_SaveCurrentKeyTapped);
             });
 
             w.Run<Navigator>(n => n.RegisterPresenter(this));
@@ -102,6 +106,30 @@
             {
                 handler.Handle(
                     this.ui,
+                    presentTimestamps,
+                    presentStatistics,
+                    presentDaily);
+            });
+        }
+
+        private void ui_SaveCurrentKeyTapped()
+        {
+            var w = this.web;
+
+            Do presentTimestamps = null;
+            Do presentStatistics = null;
+            Do presentDaily = null;
+            w.Run<Navigator>(n =>
+            {
+                presentTimestamps = n.Present<TimestampsPresenter>;
+                presentStatistics = n.Present<StatisticsPresenter>;
+                presentDaily = n.Present<DailyPresenter>;
+            });
+
+            w.Run<SaveCurrentKeyTappedHandler>(handler =>
+            {
+                handler.Handle(
+                    ui,
                     presentTimestamps,
                     presentStatistics,
                     presentDaily);
