@@ -50,8 +50,7 @@
             this.timesInTextBox.ReadOnly = true;
             this.timesInTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.timesInTextBox.Size = new System.Drawing.Size(180, 277);
-            this.timesInTextBox.TabIndex = 0;
-            this.timesInTextBox.TabStop = false;
+            this.timesInTextBox.TabIndex = 3;
             // 
             // label1
             // 
@@ -85,8 +84,7 @@
             this.timesOutTextBox.ReadOnly = true;
             this.timesOutTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.timesOutTextBox.Size = new System.Drawing.Size(180, 277);
-            this.timesOutTextBox.TabIndex = 2;
-            this.timesOutTextBox.TabStop = false;
+            this.timesOutTextBox.TabIndex = 4;
             // 
             // label3
             // 
@@ -114,7 +112,6 @@
             this.timesSplicedListBox.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.timesSplicedListBox.Size = new System.Drawing.Size(524, 270);
             this.timesSplicedListBox.TabIndex = 5;
-            this.timesSplicedListBox.TabStop = false;
             // 
             // label4
             // 
@@ -169,7 +166,7 @@
             this.showDurationsCheckBox.Location = new System.Drawing.Point(420, 10);
             this.showDurationsCheckBox.Name = "showDurationsCheckBox";
             this.showDurationsCheckBox.Size = new System.Drawing.Size(139, 22);
-            this.showDurationsCheckBox.TabIndex = 7;
+            this.showDurationsCheckBox.TabIndex = 2;
             this.showDurationsCheckBox.Text = "Show Durations";
             this.showDurationsCheckBox.UseVisualStyleBackColor = true;
             this.showDurationsCheckBox.CheckedChanged += new System.EventHandler(this.showDurationsCheckBox_CheckedChanged);

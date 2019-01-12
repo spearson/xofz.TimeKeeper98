@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.dailyKey = new System.Windows.Forms.Button();
             this.exitKey = new System.Windows.Forms.Button();
             this.statisticsKey = new System.Windows.Forms.Button();
             this.timestampsKey = new System.Windows.Forms.Button();
-            this.dailyKey = new System.Windows.Forms.Button();
             this.tableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,6 +59,23 @@
             this.tableLayoutPanel.Size = new System.Drawing.Size(884, 50);
             this.tableLayoutPanel.TabIndex = 0;
             // 
+            // dailyKey
+            // 
+            this.dailyKey.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dailyKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.dailyKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.dailyKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dailyKey.Location = new System.Drawing.Point(354, 0);
+            this.dailyKey.Margin = new System.Windows.Forms.Padding(0);
+            this.dailyKey.Name = "dailyKey";
+            this.dailyKey.Size = new System.Drawing.Size(177, 50);
+            this.dailyKey.TabIndex = 2;
+            this.dailyKey.Text = "Daily Info";
+            this.dailyKey.UseVisualStyleBackColor = true;
+            this.dailyKey.Click += new System.EventHandler(this.dailyKey_Click);
+            // 
             // exitKey
             // 
             this.exitKey.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -71,7 +88,7 @@
             this.exitKey.Margin = new System.Windows.Forms.Padding(0);
             this.exitKey.Name = "exitKey";
             this.exitKey.Size = new System.Drawing.Size(176, 50);
-            this.exitKey.TabIndex = 2;
+            this.exitKey.TabIndex = 4;
             this.exitKey.Text = "Exit";
             this.exitKey.UseVisualStyleBackColor = true;
             this.exitKey.Click += new System.EventHandler(this.exitKey_Click);
@@ -109,23 +126,6 @@
             this.timestampsKey.Text = "Timestamps";
             this.timestampsKey.UseVisualStyleBackColor = true;
             this.timestampsKey.Click += new System.EventHandler(this.timestampsKey_Click);
-            // 
-            // dailyKey
-            // 
-            this.dailyKey.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dailyKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
-            this.dailyKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.dailyKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dailyKey.Location = new System.Drawing.Point(354, 0);
-            this.dailyKey.Margin = new System.Windows.Forms.Padding(0);
-            this.dailyKey.Name = "dailyKey";
-            this.dailyKey.Size = new System.Drawing.Size(177, 50);
-            this.dailyKey.TabIndex = 3;
-            this.dailyKey.Text = "Daily Info";
-            this.dailyKey.UseVisualStyleBackColor = true;
-            this.dailyKey.Click += new System.EventHandler(this.dailyKey_Click);
             // 
             // UserControlHomeNavUi
             // 

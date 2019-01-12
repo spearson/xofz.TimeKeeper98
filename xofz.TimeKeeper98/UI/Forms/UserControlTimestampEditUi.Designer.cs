@@ -85,11 +85,11 @@
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label1.Location = new System.Drawing.Point(-3, 46);
+            this.label1.Location = new System.Drawing.Point(0, 39);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(403, 58);
-            this.label1.TabIndex = 13;
+            this.label1.TabIndex = 99;
             this.label1.Text = "Note: edited timestamp must be before current time and after previous timestamp";
             // 
             // saveCurrentKey
@@ -104,7 +104,7 @@
             this.saveCurrentKey.Margin = new System.Windows.Forms.Padding(0);
             this.saveCurrentKey.Name = "saveCurrentKey";
             this.saveCurrentKey.Size = new System.Drawing.Size(166, 36);
-            this.saveCurrentKey.TabIndex = 14;
+            this.saveCurrentKey.TabIndex = 3;
             this.saveCurrentKey.Text = "Save Current";
             this.saveCurrentKey.UseVisualStyleBackColor = true;
             this.saveCurrentKey.Click += new System.EventHandler(this.saveCurrentKey_Click);
