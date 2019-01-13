@@ -49,6 +49,7 @@
             this.statisticsRangeKey.TabIndex = 8;
             this.statisticsRangeKey.Text = "Statistics Range";
             this.statisticsRangeKey.UseVisualStyleBackColor = true;
+            this.statisticsRangeKey.Click += new System.EventHandler(this.statisticsRangeKey_Click);
             // 
             // currentKey
             // 
@@ -67,7 +68,7 @@
             this.currentKey.TabStop = true;
             this.currentKey.Text = "Current";
             this.currentKey.UseVisualStyleBackColor = true;
-            this.currentKey.CheckedChanged += new System.EventHandler(this.currentKey_CheckedChanged);
+            this.currentKey.Click += new System.EventHandler(this.currentKey_Click);
             // 
             // label4
             // 

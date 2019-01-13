@@ -58,18 +58,22 @@
             object sender,
             EventArgs e)
         {
-            if (this.currentKey.Checked)
-            {
-                var ckt = this.CurrentKeyTapped;
-                if (ckt == null)
-                {
-                    return;
-                }
 
-                ThreadPool.QueueUserWorkItem(o => ckt.Invoke());
+        }
+
+        private void currentKey_Click(object sender, EventArgs e)
+        {
+            var ckt = this.CurrentKeyTapped;
+            if (ckt == null)
+            {
                 return;
             }
 
+            ThreadPool.QueueUserWorkItem(o => ckt.Invoke());
+        }
+
+        private void statisticsRangeKey_Click(object sender, EventArgs e)
+        {
             var srkt = this.StatisticsRangeKeyTapped;
             if (srkt == null)
             {
