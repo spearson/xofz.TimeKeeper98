@@ -12,7 +12,7 @@
         {
             this.lotter = lotter;
 
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private UserControlDailyUi()
@@ -52,13 +52,6 @@
                         Environment.NewLine + datum);
                 }
             }
-        }
-
-        private void currentKey_CheckedChanged(
-            object sender,
-            EventArgs e)
-        {
-
         }
 
         private void currentKey_Click(object sender, EventArgs e)
