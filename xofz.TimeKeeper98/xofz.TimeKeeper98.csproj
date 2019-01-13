@@ -51,7 +51,9 @@
     <Compile Include="Framework\Daily\SetupHandler.cs" />
     <Compile Include="Framework\Daily\StartHandler.cs" />
     <Compile Include="Framework\Daily\StatisticsRangeKeyTappedHandler.cs" />
+    <Compile Include="Framework\FileDataWatcher.cs" />
     <Compile Include="Framework\DateCalculator.cs" />
+    <Compile Include="Framework\FieldHolder.cs" />
     <Compile Include="Framework\GlobalSettingsHolder.cs" />
     <Compile Include="Framework\Home\InKeyTappedHandler.cs" />
     <Compile Include="Framework\Home\OutKeyTappedHandler.cs" />

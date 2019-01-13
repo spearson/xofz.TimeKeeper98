@@ -47,12 +47,33 @@
                 });
             });
 
-            w.Run<SetupHandler>(handler =>
-            {
-                handler.Handle();
-            });
+            w.Run<SetupHandler>(handler => { handler.Handle(); });
 
-            w.Run<Navigator>(n => n.RegisterPresenter(this));
+            w.Run<Navigator>(nav =>
+            {
+                Do refreshDaily = () =>
+                {
+                    if (Interlocked.Read(ref this.startedIf1) != 1)
+                    {
+                        return;
+                    }
+
+                    var statsUi =
+                        nav.GetUi<StatisticsPresenter, StatisticsUi>();
+                    var hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
+
+                    w.Run<StartHandler>(handler =>
+                        handler.Handle(
+                            this.ui,
+                            statsUi,
+                            hnUi));
+                };
+
+                w.RegisterDependency(
+                    refreshDaily,
+                    @"RefreshDaily");
+                nav.RegisterPresenter(this);
+            });
         }
 
         public override void Start()

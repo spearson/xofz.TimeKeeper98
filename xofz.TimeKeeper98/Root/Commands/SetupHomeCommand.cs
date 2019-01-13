@@ -43,6 +43,10 @@
                     this.mainShell,
                     w)
                 .Setup();
+
+            new FileDataWatcher(
+                    w)
+                .Setup();
         }
 
         protected virtual void registerDependencies()
@@ -55,6 +59,8 @@
             w.RegisterDependency(
                 new FileTimestampManager(
                     w));
+            w.RegisterDependency(
+                new FieldHolder());
             w.RegisterDependency(
                 new xofz.Framework.Timer(),
                 "HomeTimer");

@@ -56,7 +56,21 @@
                 handler.Handle(this.ui);
             });
 
-            w.Run<Navigator>(n => n.RegisterPresenter(this));
+            w.Run<Navigator>(nav =>
+            {
+                Do refreshHome = () =>
+                {
+                    w.Run<TimerHandler>(handler =>
+                    {
+                        handler.Handle(this.ui);
+                    });
+                };
+                w.RegisterDependency(
+                    refreshHome,
+                    @"RefreshHome");
+
+                nav.RegisterPresenter(this);
+            });
         }
 
         public override void Start()

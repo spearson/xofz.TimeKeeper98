@@ -13,8 +13,10 @@
         public FileTimestampManager(MethodWeb web)
         {
             this.web = web;
-            this.mainDirectory = @"Data";
+            this.mainDirectory = DataDirectory;
         }
+
+        public const string DataDirectory = @"Data";
 
         public const string DataFileName = @"AllData";
 
@@ -99,22 +101,33 @@
             var w = this.web;
             var trapper = w.Run<EnumerableTrapper<DateTime>>();
             var firstRead = false;
-            if (Interlocked.CompareExchange(ref this.firstReadIf0, 1, 0) == 0)
+            if (Interlocked.CompareExchange(
+                    ref this.firstReadIf0, 
+                    1, 
+                    0) == 0)
             {
                 firstRead = true;
                 trapper.TrapNow(this.readAllTimestamps());
             }
 
-            if (Interlocked.CompareExchange(ref this.needToTrapIf1, 0, 1) == 1)
+            w.Run<FieldHolder>(holder =>
             {
-                if (!firstRead)
+                if (Interlocked.CompareExchange(
+                        ref holder.needToTrapIf1, 
+                        0, 
+                        1) == 1)
                 {
-                    trapper.TrapNow(this.readAllTimestamps());
-                }                
-            }
+                    if (!firstRead)
+                    {
+                        trapper.TrapNow(this.readAllTimestamps());
+                    }
+                }
+            });
 
             Interlocked.CompareExchange(
-                ref this.readingIf1, 0, 1);
+                ref this.readingIf1, 
+                0, 
+                1);
             var tc = trapper.TrappedCollection;
             foreach (var timestamp in tc)
             {
@@ -173,6 +186,7 @@
 
         bool TimestampWriter.Write()
         {
+            var w = this.web;
             var md = this.mainDirectory;
             if (!Directory.Exists(md))
             {
@@ -214,15 +228,20 @@
             }
             
             succeeded:
-            Interlocked.CompareExchange(
-                ref this.needToTrapIf1, 
-                1, 
-                0);
+            w.Run<FieldHolder>(holder =>
+            {
+                Interlocked.CompareExchange(
+                    ref holder.needToTrapIf1,
+                    1,
+                    0);
+            });
+            
             return true;
         }
 
         void TimestampWriter.EditLastTimestamp(DateTime newTimestamp)
         {
+            var w = this.web;
             var md = this.mainDirectory;
             if (!Directory.Exists(md))
             {
@@ -263,14 +282,18 @@
             {
                 return;
             }
-            
-            Interlocked.CompareExchange(
-                ref this.needToTrapIf1, 
-                1, 
-                0);
+
+            w.Run<FieldHolder>(holder =>
+            {
+                Interlocked.CompareExchange(
+                    ref holder.needToTrapIf1,
+                    1,
+                    0);
+            });
+
         }
 
-        protected long firstReadIf0, needToTrapIf1, readingIf1;
+        protected long firstReadIf0, readingIf1;
         protected readonly MethodWeb web;
         protected readonly string mainDirectory;
     }

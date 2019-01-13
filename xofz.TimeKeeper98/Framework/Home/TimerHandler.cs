@@ -25,12 +25,15 @@
                 var timeToday = calc.TimeWorkedToday();
                 var thisWeekString = viewer.ReadableString(timeThisWeek);
                 var todayString = viewer.ReadableString(timeToday);
+                var inKeyVisible = !calc.ClockedIn();
                 uiRW.Write(
                     ui,
                     () =>
                     {
                         ui.TimeWorkedThisWeek = thisWeekString;
                         ui.TimeWorkedToday = todayString;
+                        ui.InKeyVisible = inKeyVisible;
+                        ui.OutKeyVisible = !inKeyVisible;
                     });
             });
         }

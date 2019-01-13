@@ -60,7 +60,34 @@
                 });
             });
 
-            w.Run<Navigator>(n => n.RegisterPresenter(this));
+            w.Run<Navigator>(nav =>
+            {
+                Do refreshTimestamps = () =>
+                {
+                    if (Interlocked.Read(ref this.startedIf1) != 1)
+                    {
+                        return;
+                    }
+
+                    var statsUi =
+                        nav.GetUi<StatisticsPresenter, StatisticsUi>();
+                    var hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
+
+                    w.Run<StartHandler>(handler =>
+                    {
+                        handler.Handle(
+                            this.ui,
+                            hnUi,
+                            statsUi);
+                    });
+                };
+                
+                w.RegisterDependency(
+                    refreshTimestamps,
+                    "RefreshTimestamps");
+
+                nav.RegisterPresenter(this);
+            });
         }
 
         public override void Start()
