@@ -27,7 +27,7 @@
                     homeNavUi,
                     () =>
                     {
-                        homeNavUi.ActiveKeyLabel = @"Timestamps";
+                        homeNavUi.ActiveKeyLabel = NavKeyLabels.Timestamps;
                     });
             });
 

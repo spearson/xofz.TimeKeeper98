@@ -20,7 +20,10 @@
 
         public void Setup()
         {
-            if (Interlocked.CompareExchange(ref this.setupIf1, 1, 0) == 1)
+            if (Interlocked.CompareExchange(
+                    ref this.setupIf1, 
+                    1, 
+                    0) == 1)
             {
                 return;
             }
@@ -46,31 +49,31 @@
                     this.ui_ExitKeyTapped);
             });
 
-            w.Run<Navigator>(n => n.RegisterPresenter(this));
+            w.Run<Navigator>(nav => nav.RegisterPresenter(this));
         }
 
         private void ui_StatisticsKeyTapped()
         {
             var w = this.web;
-            w.Run<Navigator>(n => n.Present<StatisticsPresenter>());
+            w.Run<Navigator>(nav => nav.Present<StatisticsPresenter>());
         }
 
         private void ui_TimestampsKeyTapped()
         {
             var w = this.web;
-            w.Run<Navigator>(n => n.Present<TimestampsPresenter>());
+            w.Run<Navigator>(nav => nav.Present<TimestampsPresenter>());
         }
 
         private void ui_DailyKeyTapped()
         {
             var w = this.web;
-            w.Run<Navigator>(n => n.Present<DailyPresenter>());
+            w.Run<Navigator>(nav => nav.Present<DailyPresenter>());
         }
 
         private void ui_ExitKeyTapped()
         {
             var w = this.web;
-            w.Run<Navigator>(n => n.Present<ShutdownPresenter>());
+            w.Run<Navigator>(nav => nav.Present<ShutdownPresenter>());
         }
 
         private long setupIf1;

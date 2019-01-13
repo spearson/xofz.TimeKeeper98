@@ -8,7 +8,7 @@
         {
             return (long)timeSpan.TotalHours + "h "
                    + timeSpan.Minutes + "m "
-                   + timeSpan.Seconds + "s";
+                   + timeSpan.Seconds + 's';
         }
     }
 }

@@ -3,6 +3,7 @@
     using System.Threading;
     using xofz.Framework;
     using xofz.Presentation;
+    using xofz.TimeKeeper98.Framework;
     using xofz.TimeKeeper98.Framework.Home;
     using xofz.TimeKeeper98.UI;
     using xofz.UI;
@@ -48,7 +49,7 @@
                             nameof(t.Elapsed),
                             this.timer_Elapsed);
                     },
-                    "HomeTimer");
+                    TimerNames.Home);
             });
 
             w.Run<SetupHandler>(handler =>
@@ -67,7 +68,7 @@
                 };
                 w.RegisterDependency(
                     refreshHome,
-                    @"RefreshHome");
+                    MethodNames.RefreshHome);
 
                 nav.RegisterPresenter(this);
             });
@@ -80,7 +81,7 @@
             base.Start();
             w.Run<StartHandler>(handler =>
             {
-                handler.Handle();
+                handler.Handle(this.ui);
             });
         }
 

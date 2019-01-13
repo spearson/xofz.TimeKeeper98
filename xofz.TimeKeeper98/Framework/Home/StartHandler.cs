@@ -1,6 +1,7 @@
 ﻿namespace xofz.TimeKeeper98.Framework.Home
 {
     using xofz.Framework;
+    using xofz.TimeKeeper98.UI;
 
     public class StartHandler
     {
@@ -10,21 +11,19 @@
             this.web = web;
         }
 
-        public virtual void Handle()
+        public virtual void Handle(
+            HomeUi ui)
         {
             var w = this.web;
+            w.Run<TimerHandler>(handler =>
+            {
+                handler.Handle(ui);
+            });
             w.Run<xofz.Framework.Timer>(t =>
                 {
-                    w.Run<EventRaiser>(er =>
-                    {
-                        er.Raise(
-                            t,
-                            nameof(t.Elapsed));
-                    });
-
                     t.Start(1000);
                 },
-                "HomeTimer");
+                TimerNames.Home);
         }
 
         protected readonly MethodWeb web;

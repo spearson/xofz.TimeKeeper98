@@ -20,7 +20,8 @@
             {
                 uiRW.Write(
                     hnUi,
-                    () => hnUi.ActiveKeyLabel = @"Statistics");
+                    () => hnUi.ActiveKeyLabel = 
+                        NavKeyLabels.Statistics);
             });
 
             w.Run<xofz.Framework.Timer>(t =>
@@ -34,7 +35,7 @@
 
                     t.Start(1000);
                 },
-                "StatisticsTimer");
+                TimerNames.Statistics);
         }
 
         protected readonly MethodWeb web;

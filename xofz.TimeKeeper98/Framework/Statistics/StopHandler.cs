@@ -17,7 +17,7 @@
                 {
                     t.Stop();
                 },
-                @"StatisticsTimer");
+                TimerNames.Statistics);
         }
 
         protected readonly MethodWeb web;

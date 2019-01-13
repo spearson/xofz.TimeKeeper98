@@ -26,7 +26,7 @@
                     homeNavUi,
                     () =>
                     {
-                        homeNavUi.ActiveKeyLabel = @"Daily Info";
+                        homeNavUi.ActiveKeyLabel = NavKeyLabels.Daily;
                     });
             });
             var showCurrent = true;

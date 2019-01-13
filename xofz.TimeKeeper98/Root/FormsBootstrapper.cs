@@ -133,6 +133,11 @@
                 manager.ConvertToSingleFile();
             });
 
+            w.Run<DataWatcher>(watcher =>
+            {
+                watcher.Start();
+            });
+
             w.Run<Navigator>(
                 n =>
                 {
@@ -156,7 +161,7 @@
                 {
                     LogHelpers.AddEntry(le, e);
                 },
-                "Exceptions");
+                LogNames.Exceptions);
         }
 
         protected long bootstrappedIf1;

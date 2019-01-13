@@ -1,10 +1,11 @@
-﻿namespace xofz.TimeKeeper98.Framework
+﻿namespace xofz.TimeKeeper98.Framework.DataWatchers
 {
     using System.IO;
     using System.Threading;
     using xofz.Framework;
 
-    public class FileDataWatcher
+    public class FileDataWatcher 
+        : DataWatcher
     {
         public FileDataWatcher(
             MethodWeb web)
@@ -35,9 +36,17 @@
                         watcher,
                         nameof(watcher.Changed),
                         handler);
-                    watcher.EnableRaisingEvents = true;
                 });
             w.RegisterDependency(this);
+        }
+
+        void DataWatcher.Start()
+        {
+            var w = this.web;
+            w.Run<FileSystemWatcher>(watcher =>
+            {
+                watcher.EnableRaisingEvents = true;
+            });
         }
 
         protected virtual void fileWatcher_Changed(
@@ -56,17 +65,17 @@
                 {
                     refreshHome.Invoke();
                 },
-                @"RefreshHome");
+                MethodNames.RefreshHome);
             w.Run<Do>(refreshTimestamps =>
                 {
                     refreshTimestamps.Invoke();
                 },
-                @"RefreshTimestamps");
+                MethodNames.RefreshTimestamps);
             w.Run<Do>(refreshDaily =>
                 {
                     refreshDaily.Invoke();
                 },
-                @"RefreshDaily");
+                MethodNames.RefreshDaily);
         }
 
         protected long setupIf1;

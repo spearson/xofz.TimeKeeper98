@@ -1,6 +1,7 @@
 ﻿namespace xofz.TimeKeeper98.Framework.TimestampEdit
 {
     using xofz.Framework;
+    using xofz.TimeKeeper98.UI;
 
     public class CancelKeyTappedHandler
     {
@@ -21,13 +22,13 @@
                 {
                     switch (sh.LastVisitedKeyLabel)
                     {
-                        case @"Timestamps":
+                        case NavKeyLabels.Timestamps:
                             presentTimestamps?.Invoke();
                             break;
-                        case @"Statistics":
+                        case NavKeyLabels.Statistics:
                             presentStatistics?.Invoke();
                             break;
-                        case @"Daily Info":
+                        case NavKeyLabels.Daily:
                             presentDaily?.Invoke();
                             break;
                     }

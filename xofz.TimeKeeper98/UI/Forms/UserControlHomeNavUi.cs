@@ -13,14 +13,22 @@
         {
             this.InitializeComponent();
 
+            var tk = this.timestampsKey;
+            var sk = this.statisticsKey;
+            var dk = this.dailyKey;
+            var ek = this.exitKey;
             this.navKeys = lotter.Materialize(
                 new[]
                 {
-                    this.timestampsKey,
-                    this.statisticsKey,
-                    this.dailyKey,
-                    this.exitKey
+                    tk,
+                    sk,
+                    dk,
+                    ek
                 });
+            tk.Text = NavKeyLabels.Timestamps;
+            sk.Text = NavKeyLabels.Statistics;
+            dk.Text = NavKeyLabels.Daily;
+            ek.Text = NavKeyLabels.Exit;
         }
 
         private UserControlHomeNavUi()

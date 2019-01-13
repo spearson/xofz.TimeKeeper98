@@ -3,6 +3,7 @@
     using System.Threading;
     using xofz.Framework;
     using xofz.Presentation;
+    using xofz.TimeKeeper98.Framework;
     using xofz.TimeKeeper98.Framework.Timestamps;
     using xofz.TimeKeeper98.UI;
     using xofz.UI;
@@ -21,7 +22,10 @@
 
         public void Setup()
         {
-            if (Interlocked.CompareExchange(ref this.setupIf1, 1, 0) == 1)
+            if (Interlocked.CompareExchange(
+                    ref this.setupIf1,
+                    1,
+                    0) == 1)
             {
                 return;
             }
@@ -81,10 +85,10 @@
                             statsUi);
                     });
                 };
-                
+
                 w.RegisterDependency(
                     refreshTimestamps,
-                    "RefreshTimestamps");
+                    MethodNames.RefreshTimestamps);
 
                 nav.RegisterPresenter(this);
             });
@@ -97,10 +101,10 @@
             var w = this.web;
             HomeNavUi hnUi = null;
             StatisticsUi statsUi = null;
-            w.Run<Navigator>(n =>
+            w.Run<Navigator>(nav =>
             {
-                hnUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
-                statsUi = n.GetUi<StatisticsPresenter, StatisticsUi>();
+                hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
+                statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
             });
 
             w.Run<StartHandler>(handler =>
@@ -135,10 +139,10 @@
             var w = this.web;
             HomeNavUi hnUi = null;
             StatisticsUi statsUi = null;
-            w.Run<Navigator>(n =>
+            w.Run<Navigator>(nav =>
             {
-                hnUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
-                statsUi = n.GetUi<StatisticsPresenter, StatisticsUi>();
+                hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
+                statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
             });
 
             w.Run<HomeUiInKeyTappedHandler>(handler =>
@@ -160,10 +164,10 @@
             var w = this.web;
             HomeNavUi hnUi = null;
             StatisticsUi statsUi = null;
-            w.Run<Navigator>(n =>
+            w.Run<Navigator>(nav =>
             {
-                hnUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
-                statsUi = n.GetUi<StatisticsPresenter, StatisticsUi>();
+                hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
+                statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
             });
 
             w.Run<HomeUiOutKeyTappedHandler>(handler =>
@@ -185,10 +189,10 @@
             var w = this.web;
             HomeNavUi hnUi = null;
             StatisticsUi statsUi = null;
-            w.Run<Navigator>(n =>
+            w.Run<Navigator>(nav =>
             {
-                hnUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
-                statsUi = n.GetUi<StatisticsPresenter, StatisticsUi>();
+                hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
+                statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
             });
 
             w.Run<CurrentKeyTappedHandler>(handler =>
@@ -210,10 +214,10 @@
             var w = this.web;
             HomeNavUi hnUi = null;
             StatisticsUi statsUi = null;
-            w.Run<Navigator>(n =>
+            w.Run<Navigator>(nav =>
             {
-                hnUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
-                statsUi = n.GetUi<StatisticsPresenter, StatisticsUi>();
+                hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
+                statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
             });
 
             w.Run<StatisticsRangeKeyTappedHandler>(handler =>
@@ -235,10 +239,10 @@
             var w = this.web;
             HomeNavUi hnUi = null;
             StatisticsUi statsUi = null;
-            w.Run<Navigator>(n =>
+            w.Run<Navigator>(nav =>
             {
-                hnUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
-                statsUi = n.GetUi<StatisticsPresenter, StatisticsUi>();
+                hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
+                statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
             });
 
             w.Run<ShowDurationsChangedHandler>(handler =>

@@ -21,7 +21,10 @@
 
         public void Setup()
         {
-            if (Interlocked.CompareExchange(ref this.setupIf1, 1, 0) == 1)
+            if (Interlocked.CompareExchange(
+                    ref this.setupIf1, 
+                    1, 
+                    0) == 1)
             {
                 return;
             }
@@ -48,7 +51,7 @@
                     this.ui_SaveCurrentKeyTapped);
             });
 
-            w.Run<Navigator>(n => n.RegisterPresenter(this));
+            w.Run<Navigator>(nav => nav.RegisterPresenter(this));
         }
 
         public override void Start()
@@ -58,10 +61,10 @@
             var w = this.web;
             HomeNavUi hnUi = null;
             HomeUi homeUi = null;
-            w.Run<Navigator>(n =>
+            w.Run<Navigator>(nav =>
             {
-                hnUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
-                homeUi = n.GetUi<HomePresenter, HomeUi>();
+                hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
+                homeUi = nav.GetUi<HomePresenter, HomeUi>();
             });
 
             w.Run<StartHandler>(handler =>
@@ -77,9 +80,9 @@
         {
             var w = this.web;
             HomeUi homeUi = null;
-            w.Run<Navigator>(n =>
+            w.Run<Navigator>(nav =>
             {
-                homeUi = n.GetUi<HomePresenter, HomeUi>();
+                homeUi = nav.GetUi<HomePresenter, HomeUi>();
             });
 
             w.Run<StopHandler>(handler =>
@@ -95,11 +98,11 @@
             Do presentTimestamps = null;
             Do presentStatistics = null;
             Do presentDaily = null;
-            w.Run<Navigator>(n =>
+            w.Run<Navigator>(nav =>
             {
-                presentTimestamps = n.Present<TimestampsPresenter>;
-                presentStatistics = n.Present<StatisticsPresenter>;
-                presentDaily = n.Present<DailyPresenter>;
+                presentTimestamps = nav.Present<TimestampsPresenter>;
+                presentStatistics = nav.Present<StatisticsPresenter>;
+                presentDaily = nav.Present<DailyPresenter>;
             });
 
             w.Run<SaveKeyTappedHandler>(handler =>
@@ -119,11 +122,11 @@
             Do presentTimestamps = null;
             Do presentStatistics = null;
             Do presentDaily = null;
-            w.Run<Navigator>(n =>
+            w.Run<Navigator>(nav =>
             {
-                presentTimestamps = n.Present<TimestampsPresenter>;
-                presentStatistics = n.Present<StatisticsPresenter>;
-                presentDaily = n.Present<DailyPresenter>;
+                presentTimestamps = nav.Present<TimestampsPresenter>;
+                presentStatistics = nav.Present<StatisticsPresenter>;
+                presentDaily = nav.Present<DailyPresenter>;
             });
 
             w.Run<SaveCurrentKeyTappedHandler>(handler =>
@@ -143,11 +146,11 @@
             Do presentStatistics = null;
             Do presentDaily = null;
             w.Run<Navigator>(
-                n =>
+                nav =>
                 {
-                    presentTimestamps = n.Present<TimestampsPresenter>;
-                    presentStatistics = n.Present<StatisticsPresenter>;
-                    presentDaily = n.Present<DailyPresenter>;
+                    presentTimestamps = nav.Present<TimestampsPresenter>;
+                    presentStatistics = nav.Present<StatisticsPresenter>;
+                    presentDaily = nav.Present<DailyPresenter>;
                 });
             w.Run<CancelKeyTappedHandler>(handler =>
             {

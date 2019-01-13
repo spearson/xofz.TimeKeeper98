@@ -3,6 +3,7 @@
     using System.Threading;
     using xofz.Framework;
     using xofz.Presentation;
+    using xofz.TimeKeeper98.Framework;
     using xofz.TimeKeeper98.Framework.Daily;
     using xofz.TimeKeeper98.UI;
     using xofz.UI;
@@ -21,7 +22,10 @@
 
         public void Setup()
         {
-            if (Interlocked.CompareExchange(ref this.setupIf1, 1, 0) == 1)
+            if (Interlocked.CompareExchange(
+                    ref this.setupIf1, 
+                    1, 
+                    0) == 1)
             {
                 return;
             }
@@ -37,9 +41,9 @@
                     this.ui,
                     nameof(this.ui.StatisticsRangeKeyTapped),
                     this.ui_StatisticsRangeKeyTapped);
-                w.Run<Navigator>(n =>
+                w.Run<Navigator>(nav =>
                 {
-                    var homeUi = n.GetUi<HomePresenter, HomeUi>();
+                    var homeUi = nav.GetUi<HomePresenter, HomeUi>();
                     sub.Subscribe(
                         homeUi,
                         nameof(homeUi.OutKeyTapped),
@@ -71,7 +75,7 @@
 
                 w.RegisterDependency(
                     refreshDaily,
-                    @"RefreshDaily");
+                    MethodNames.RefreshDaily);
                 nav.RegisterPresenter(this);
             });
         }
@@ -94,7 +98,10 @@
                     this.ui,
                     statsUi,
                     hnUi));
-            Interlocked.CompareExchange(ref this.startedIf1, 1, 0);
+            Interlocked.CompareExchange(
+                ref this.startedIf1, 
+                1, 
+                0);
         }
 
         public override void Stop()
@@ -110,10 +117,10 @@
             var w = this.web;
             StatisticsUi statsUi = null;
             HomeNavUi hnUi = null;
-            w.Run<Navigator>(n =>
+            w.Run<Navigator>(nav =>
             {
-                statsUi = n.GetUi<StatisticsPresenter, StatisticsUi>();
-                hnUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
+                statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
+                hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
             });
 
             w.Run<CurrentKeyTappedHandler>(handler =>
@@ -130,10 +137,10 @@
             var w = this.web;
             StatisticsUi statsUi = null;
             HomeNavUi hnUi = null;
-            w.Run<Navigator>(n =>
+            w.Run<Navigator>(nav =>
             {
-                statsUi = n.GetUi<StatisticsPresenter, StatisticsUi>();
-                hnUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
+                statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
+                hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
             });
 
             w.Run<StatisticsRangeKeyTappedHandler>(handler =>
@@ -155,10 +162,10 @@
             var w = this.web;
             StatisticsUi statsUi = null;
             HomeNavUi hnUi = null;
-            w.Run<Navigator>(n =>
+            w.Run<Navigator>(nav =>
             {
-                statsUi = n.GetUi<StatisticsPresenter, StatisticsUi>();
-                hnUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
+                statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
+                hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
             });
 
             w.Run<HomeUiOutKeyTappedHandler>(handler =>

@@ -6,6 +6,7 @@
     using xofz.Framework.Transformation;
     using xofz.Root;
     using xofz.TimeKeeper98.Framework;
+    using xofz.TimeKeeper98.Framework.DataWatchers;
     using xofz.TimeKeeper98.Framework.Home;
     using xofz.TimeKeeper98.Presentation;
     using xofz.TimeKeeper98.UI;
@@ -63,7 +64,7 @@
                 new FieldHolder());
             w.RegisterDependency(
                 new xofz.Framework.Timer(),
-                "HomeTimer");
+                TimerNames.Home);
             w.RegisterDependency(
                 new TimeSpanViewer());
             w.RegisterDependency(

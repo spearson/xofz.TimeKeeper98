@@ -3,6 +3,7 @@
     using System.Threading;
     using xofz.Framework;
     using xofz.Presentation;
+    using xofz.TimeKeeper98.Framework;
     using xofz.TimeKeeper98.Framework.Statistics;
     using xofz.TimeKeeper98.UI;
     using xofz.UI;
@@ -21,7 +22,10 @@
 
         public void Setup()
         {
-            if (Interlocked.CompareExchange(ref this.setupIf1, 1, 0) == 1)
+            if (Interlocked.CompareExchange(
+                    ref this.setupIf1, 
+                    1, 
+                    0) == 1)
             {
                 return;
             }
@@ -57,10 +61,10 @@
                             nameof(t.Elapsed),
                             this.timer_Elapsed);
                     },
-                    "StatisticsTimer");
+                    TimerNames.Statistics);
             });
 
-            w.Run<Navigator>(n => n.RegisterPresenter(this));
+            w.Run<Navigator>(nav => nav.RegisterPresenter(this));
         }
 
         public override void Start()
@@ -70,9 +74,9 @@
             base.Start();
 
             HomeNavUi hnUi = null;
-            w.Run<Navigator>(n =>
+            w.Run<Navigator>(nav =>
             {
-                hnUi = n.GetUi<HomeNavPresenter, HomeNavUi>();
+                hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
             });
 
             w.Run<StartHandler>(handler =>

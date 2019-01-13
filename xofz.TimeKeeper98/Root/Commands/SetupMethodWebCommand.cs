@@ -55,7 +55,7 @@
                 });
             w.RegisterDependency(
                 new TextFileLog("Exceptions.log"),
-                "Exceptions");
+                LogNames.Exceptions);
         }
 
         protected MethodWeb web;

@@ -46,7 +46,7 @@
                             uiRW.Write(
                                 m.Subscriber,
                                 () => m.GiveError(
-                                    "Time must be after previous timestamp."));
+                                    ErrorMessages.TooEarly));
                         });
 
                         return;
@@ -60,7 +60,7 @@
                             uiRW.Write(
                                 m.Subscriber,
                                 () => m.GiveError(
-                                    "Time must be before present time."));
+                                    ErrorMessages.TooLate));
                         });
 
                         return;
@@ -75,13 +75,13 @@
                     {
                         switch (sh.LastVisitedKeyLabel)
                         {
-                            case "Timestamps":
+                            case NavKeyLabels.Timestamps:
                                 presentTimestamps?.Invoke();
                                 break;
-                            case "Statistics":
+                            case NavKeyLabels.Statistics:
                                 presentStatistics?.Invoke();
                                 break;
-                            case "Daily Info":
+                            case NavKeyLabels.Daily:
                                 presentDaily?.Invoke();
                                 break;
                         }

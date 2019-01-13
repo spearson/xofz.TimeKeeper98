@@ -2,6 +2,7 @@
 {
     using xofz.Framework;
     using xofz.Root;
+    using xofz.TimeKeeper98.Framework;
     using xofz.TimeKeeper98.Framework.Statistics;
     using xofz.TimeKeeper98.Presentation;
     using xofz.TimeKeeper98.UI;
@@ -35,7 +36,7 @@
             var w = this.web;
             w.RegisterDependency(
                 new xofz.Framework.Timer(),
-                "StatisticsTimer");
+                TimerNames.Statistics);
             w.RegisterDependency(
                 new SetupHandler(w));
             w.RegisterDependency(
