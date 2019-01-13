@@ -9,6 +9,7 @@
     using xofz.Root;
     using xofz.Root.Commands;
     using xofz.TimeKeeper98.Framework;
+    using xofz.TimeKeeper98.Framework.SettingsProviders;
     using xofz.TimeKeeper98.Presentation;
     using xofz.TimeKeeper98.Root.Commands;
     using xofz.TimeKeeper98.UI;
@@ -64,7 +65,8 @@
             var e = this.executor;
             e.Execute(new SetupMethodWebCommand(
                 () => new MethodWeb(),
-                m));
+                m,
+                new AppConfigSettingsProvider()));
             var w = e.Get<SetupMethodWebCommand>().W;
             w.Run<EventSubscriber>(sub =>
             {
@@ -75,6 +77,7 @@
                     nameof(cd.UnhandledException),
                     handler);
             });
+            w.RegisterDependency(s);
 
             HomeUi homeUi = null;
             HomeNavUi homeNavUi = null;

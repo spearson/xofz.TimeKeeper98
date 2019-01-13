@@ -52,6 +52,18 @@
                                 ui.CoreVersion = coreVersion;
                             });
                     });
+
+                w.Run<TitleUi, GlobalSettingsHolder>(
+                    (shell, settings) =>
+                    {
+                        var title = settings.TitleText;
+                        uiRW.Write(
+                            shell,
+                            () =>
+                            {
+                                shell.Title = title;
+                            });
+                    });
             });
         }
 

@@ -62,6 +62,8 @@
     <Compile Include="Framework\Home\StartHandler.cs" />
     <Compile Include="Framework\Home\TimerHandler.cs" />
     <Compile Include="Framework\MethodNames.cs" />
+    <Compile Include="Framework\SettingsProvider.cs" />
+    <Compile Include="Framework\SettingsProviders\AppConfigSettingsProvider.cs" />
     <Compile Include="Framework\TimerNames.cs" />
     <Compile Include="Framework\TimestampEdit\ErrorMessages.cs" />
     <Compile Include="Root\LogNames.cs" />
@@ -163,6 +165,7 @@
     <Compile Include="UI\StatisticsUi.cs" />
     <Compile Include="UI\TimestampEditUi.cs" />
     <Compile Include="UI\TimestampsUi.cs" />
+    <Compile Include="UI\TitleUi.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

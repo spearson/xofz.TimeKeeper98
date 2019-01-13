@@ -12,10 +12,12 @@
     {
         public SetupMethodWebCommand(
             Gen<MethodWeb> createWeb,
-            Messenger messenger)
+            Messenger messenger,
+            SettingsProvider settingsProvider)
         {
             this.createWeb = createWeb;
             this.messenger = messenger;
+            this.settingsProvider = settingsProvider;
         }
 
         public virtual MethodWeb W => this.web;
@@ -35,6 +37,7 @@
         protected virtual void registerDependencies()
         {
             var w = this.web;
+            var sp = this.settingsProvider;
             w.RegisterDependency(
                 new UiReaderWriter());
             w.RegisterDependency(
@@ -48,11 +51,9 @@
             w.RegisterDependency(
                 new EventSubscriber());
             w.RegisterDependency(
-                new GlobalSettingsHolder
-                {
-                    TimestampFormat = @"MM/dd hh:mm:ss tt",
-                    EditTimestampFormat = @"MM/dd/yyyy hh:mm:ss tt"
-                });
+                sp);
+            w.RegisterDependency(
+                sp.Provide());
             w.RegisterDependency(
                 new TextFileLog("Exceptions.log"),
                 LogNames.Exceptions);
@@ -61,5 +62,6 @@
         protected MethodWeb web;
         protected readonly Gen<MethodWeb> createWeb;
         protected readonly Messenger messenger;
+        protected readonly SettingsProvider settingsProvider;
     }
 }

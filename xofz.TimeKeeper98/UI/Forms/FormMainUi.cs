@@ -6,7 +6,8 @@
     using xofz.UI;
     using xofz.UI.Forms;
 
-    public partial class FormMainUi : FormUi, MainUi, ShellUi
+    public partial class FormMainUi 
+        : FormUi, MainUi, ShellUi, TitleUi
     {
         public FormMainUi()
         {
@@ -29,6 +30,13 @@
                 this.screenPanel);
         }
 
+        string TitleUi.Title
+        {
+            get => this.Text;
+
+            set => this.Text = value;
+        }
+
         private void this_FormClosing(
             object sender, 
             FormClosingEventArgs e)
@@ -43,5 +51,7 @@
 
             ThreadPool.QueueUserWorkItem(o => sr.Invoke());
         }
+
+        
     }
 }
