@@ -102,31 +102,6 @@
             }
         }
 
-        private void currentKey_CheckedChanged(
-            object sender, 
-            EventArgs e)
-        {
-            if (this.currentKey.Checked)
-            {
-                var ckt = this.CurrentKeyTapped;
-                if (ckt == null)
-                {
-                    return;
-                }
-
-                ThreadPool.QueueUserWorkItem(o => ckt.Invoke());
-                return;
-            }
-
-            var srkt = this.StatisticsRangeKeyTapped;
-            if (srkt == null)
-            {
-                return;
-            }
-
-            ThreadPool.QueueUserWorkItem(o => srkt.Invoke());
-        }
-
         private void showDurationsCheckBox_CheckedChanged(
             object sender, 
             EventArgs e)
@@ -140,6 +115,28 @@
             var shouldShow = this.showDurationsCheckBox.Checked;
             ThreadPool.QueueUserWorkItem(
                 o => sdc.Invoke(shouldShow));
+        }
+
+        private void statisticsRangeKey_Click(object sender, EventArgs e)
+        {
+            var srkt = this.StatisticsRangeKeyTapped;
+            if (srkt == null)
+            {
+                return;
+            }
+
+            ThreadPool.QueueUserWorkItem(o => srkt.Invoke());
+        }
+
+        private void currentKey_Click(object sender, EventArgs e)
+        {
+            var ckt = this.CurrentKeyTapped;
+            if (ckt == null)
+            {
+                return;
+            }
+
+            ThreadPool.QueueUserWorkItem(o => ckt.Invoke());
         }
 
         protected readonly Lotter lotter;
