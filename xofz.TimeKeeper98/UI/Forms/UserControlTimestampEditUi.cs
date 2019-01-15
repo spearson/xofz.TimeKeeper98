@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading;
+    using System.Windows.Forms;
     using xofz.UI.Forms;
     using xofz.TimeKeeper98.UI;    
 
@@ -67,6 +68,24 @@
 
             ThreadPool.QueueUserWorkItem(
                 o => sckt.Invoke());
+        }
+
+        private void dateTimePicker_KeyPress(
+            object sender, 
+            KeyPressEventArgs e)
+        {
+            if ((Keys) e.KeyChar != Keys.Enter)
+            {
+                return;
+            }
+
+            var skt = this.SaveKeyTapped;
+            if (skt == null)
+            {
+                return;
+            }
+
+            ThreadPool.QueueUserWorkItem(o => skt.Invoke());
         }
     }
 }

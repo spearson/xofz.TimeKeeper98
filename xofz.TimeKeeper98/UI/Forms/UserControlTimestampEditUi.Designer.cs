@@ -46,6 +46,7 @@
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(311, 30);
             this.dateTimePicker.TabIndex = 0;
+            this.dateTimePicker.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dateTimePicker_KeyPress);
             // 
             // saveKey
             // 
