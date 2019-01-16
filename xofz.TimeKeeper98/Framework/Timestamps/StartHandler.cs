@@ -102,8 +102,14 @@
                     {
                         if (inNow && firstIn)
                         {
-                            goto afterCheckClockedIn;
+                            if (DateTime.Now > end.AddDays(1))
+                            {
+                                // was clocked in at end of range
+                                timesInRange.AddLast(end);
+                            }
+
                             // clocked in currently, do nothing
+                            goto afterCheckClockedIn;
                         }
 
                         if (firstIn)

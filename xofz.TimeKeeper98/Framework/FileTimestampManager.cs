@@ -181,6 +181,10 @@
                 }
             }
 
+            collection = EnumerableHelpers.OrderBy(
+                collection,
+                timestamp => timestamp);
+
             return collection;
         }
 
@@ -207,9 +211,22 @@
             {
                 if (File.Exists(filePath))
                 {
-                    File.AppendAllText(
-                        filePath,
-                        Environment.NewLine + tickCount);
+                    ICollection<string> allTimes = new LinkedList<string>(
+                        File.ReadAllLines(filePath));
+                    allTimes = EnumerableHelpers.OrderBy(
+                        allTimes,
+                        s => s,
+                        StringComparer.InvariantCulture);
+                    if (allTimes.Count < 1)
+                    {
+                        goto writeNewFile;
+                    }
+
+                    allTimes.Add(tickCount.ToString());
+                    var array = EnumerableHelpers.ToArray(
+                        allTimes);
+                    File.WriteAllLines(filePath, array);
+
                     goto succeeded;
                 }
             }
@@ -218,6 +235,7 @@
                 return false;
             }
 
+            writeNewFile:
             try
             {
                 File.WriteAllText(filePath, tickCount.ToString());
@@ -271,6 +289,12 @@
             {
                 return;
             }
+
+            times = EnumerableHelpers.ToArray(
+                EnumerableHelpers.OrderBy(
+                    times,
+                    ts => ts,
+                    StringComparer.InvariantCulture));
 
             times[times.Length - 1]
                 = newTimestamp.Ticks.ToString();
