@@ -16,16 +16,16 @@
             HomeUi ui)
         {
             var w = this.web;
-            w.Run<UiReaderWriter, TimestampWriter>(
-                (uiRW, writer) =>
+            w.Run<
+                UiReaderWriter, 
+                TimestampWriter,
+                DataWatcher>(
+                (uiRW, writer, watcher) =>
             {
                 uiRW.WriteSync(
                     ui,
-                    () =>
-                    {
-                        ui.OutKeyVisible = false;
-                    });
-
+                    () => ui.OutKeyVisible = false);
+                watcher.Stop();
                 if (!writer.Write())
                 {
                     uiRW.Write(
@@ -34,6 +34,7 @@
                         {
                             ui.OutKeyVisible = true;
                         });
+                    watcher.Start();;
                     return;
                 }
 
@@ -44,6 +45,7 @@
                         ui.InKeyVisible = true;
                         ui.EditKeyEnabled = true;
                     });
+                watcher.Start();
             });
         }
 

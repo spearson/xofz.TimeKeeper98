@@ -66,9 +66,12 @@
                         return;
                     }
 
-                    w.Run<TimestampWriter>(writer =>
+                    w.Run<DataWatcher, TimestampWriter>(
+                        (watcher, writer) =>
                     {
+                        watcher.Stop();
                         writer.EditLastTimestamp(newTimestamp);
+                        watcher.Start();
                     });
 
                     w.Run<SettingsHolder>(sh =>

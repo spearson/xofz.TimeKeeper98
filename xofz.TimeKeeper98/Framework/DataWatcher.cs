@@ -3,5 +3,7 @@
     public interface DataWatcher
     {
         void Start();
+
+        void Stop();
     }
 }

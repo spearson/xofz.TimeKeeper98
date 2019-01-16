@@ -63,6 +63,15 @@
             });
         }
 
+        void DataWatcher.Stop()
+        {
+            var w = this.web;
+            w.Run<FileSystemWatcher>(watcher =>
+            {
+                watcher.EnableRaisingEvents = false;
+            });
+        }
+
         protected virtual void fileWatcher_ChangedCreatedOrDeleted(
             object sender, 
             FileSystemEventArgs e)

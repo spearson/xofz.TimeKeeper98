@@ -17,17 +17,22 @@
             HomeUi ui)
         {
             var w = this.web;
-            w.Run<UiReaderWriter, TimestampWriter>(
-                (uiRW, writer) =>
+            w.Run<
+                UiReaderWriter, 
+                TimestampWriter,
+                DataWatcher>(
+                (uiRW, writer, watcher) =>
             {
                 uiRW.WriteSync(
                     ui,
                     () => ui.InKeyVisible = false);
+                watcher.Stop();
                 if (!writer.Write())
                 {
                     uiRW.Write(
                         ui,
                         () => ui.InKeyVisible = true);
+                    watcher.Start();
                     return;
                 }
 
@@ -38,6 +43,7 @@
                         ui.OutKeyVisible = true;
                         ui.EditKeyEnabled = true;
                     });
+                watcher.Start();
             });
         }
 
