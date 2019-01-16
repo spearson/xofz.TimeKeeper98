@@ -31,11 +31,25 @@
                 (watcher, sub) =>
                 {
                     FileSystemEventHandler handler
-                        = this.fileWatcher_Changed;
+                        = this.fileWatcher_ChangedCreatedOrDeleted;
+                    RenamedEventHandler handler2
+                        = this.fileWatcher_Renamed;
                     sub.Subscribe(
                         watcher,
                         nameof(watcher.Changed),
                         handler);
+                    sub.Subscribe(
+                        watcher,
+                        nameof(watcher.Created),
+                        handler);
+                    sub.Subscribe(
+                        watcher,
+                        nameof(watcher.Deleted),
+                        handler);
+                    sub.Subscribe(
+                        watcher,
+                        nameof(watcher.Renamed),
+                        handler2);
                 });
             w.RegisterDependency(this);
         }
@@ -49,9 +63,21 @@
             });
         }
 
-        protected virtual void fileWatcher_Changed(
+        protected virtual void fileWatcher_ChangedCreatedOrDeleted(
             object sender, 
             FileSystemEventArgs e)
+        {
+            this.pingApp();
+        }
+
+        protected virtual void fileWatcher_Renamed(
+            object sender,
+            RenamedEventArgs e)
+        {
+            this.pingApp();
+        }
+
+        protected virtual void pingApp()
         {
             var w = this.web;
             w.Run<FieldHolder>(holder =>

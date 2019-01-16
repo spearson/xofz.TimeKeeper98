@@ -18,18 +18,26 @@
             w.Run<
                 UiReaderWriter,
                 StatisticsCalculator,
-                TimeSpanViewer>(
-            (uiRW, calc, viewer) =>
+                TimeSpanViewer,
+                TimestampReader>(
+            (uiRW, calc, viewer, reader) =>
             {
                 var timeThisWeek = calc.TimeWorkedThisWeek();
                 var timeToday = calc.TimeWorkedToday();
                 var thisWeekString = viewer.ReadableString(timeThisWeek);
                 var todayString = viewer.ReadableString(timeToday);
                 var inKeyVisible = !calc.ClockedIn();
+                var editKeyEnabled = false;
+                foreach (var timestamp in reader.Read())
+                {
+                    editKeyEnabled = true;
+                }
+
                 uiRW.Write(
                     ui,
                     () =>
                     {
+                        ui.EditKeyEnabled = editKeyEnabled;
                         ui.TimeWorkedThisWeek = thisWeekString;
                         ui.TimeWorkedToday = todayString;
                         ui.InKeyVisible = inKeyVisible;
