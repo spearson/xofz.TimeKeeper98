@@ -16,6 +16,16 @@
             HomeUi ui)
         {
             var w = this.web;
+            w.Run<xofz.Framework.Timer>(t =>
+                {
+                    t.Stop();
+                    w.Run<LatchHolder>(timerLatch =>
+                        {
+                            timerLatch.Latch.WaitOne();
+                        }
+                        , DependencyNames.Latch);
+                },
+                DependencyNames.Timer);
             w.Run<
                 UiReaderWriter, 
                 TimestampWriter,
@@ -46,6 +56,10 @@
                         ui.EditKeyEnabled = true;
                     });
                 watcher.Start();
+            });
+            w.Run<StartHandler>(handler =>
+            {
+                handler.Handle(ui);
             });
         }
 

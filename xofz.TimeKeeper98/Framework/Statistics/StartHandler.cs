@@ -35,7 +35,7 @@
 
                     t.Start(1000);
                 },
-                TimerNames.Statistics);
+                DependencyNames.Timer);
         }
 
         protected readonly MethodWeb web;

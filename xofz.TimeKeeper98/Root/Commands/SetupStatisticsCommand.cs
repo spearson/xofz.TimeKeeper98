@@ -36,7 +36,7 @@
             var w = this.web;
             w.RegisterDependency(
                 new xofz.Framework.Timer(),
-                TimerNames.Statistics);
+                DependencyNames.Timer);
             w.RegisterDependency(
                 new SetupHandler(w));
             w.RegisterDependency(

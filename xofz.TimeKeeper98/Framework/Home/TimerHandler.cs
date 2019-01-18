@@ -15,6 +15,11 @@
             HomeUi ui)
         {
             var w = this.web;
+            w.Run<LatchHolder>(timerLatch =>
+                {
+                    timerLatch.Latch.Reset();
+                },
+                DependencyNames.Latch);
             w.Run<
                 UiReaderWriter,
                 StatisticsCalculator,
@@ -44,6 +49,12 @@
                         ui.OutKeyVisible = !inKeyVisible;
                     });
             });
+
+            w.Run<LatchHolder>(timerLatch =>
+                {
+                    timerLatch.Latch.Set();
+                },
+                DependencyNames.Latch);
         }
 
         protected readonly MethodWeb web;

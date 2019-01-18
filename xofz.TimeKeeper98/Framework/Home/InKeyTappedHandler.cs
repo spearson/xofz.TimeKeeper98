@@ -17,6 +17,16 @@
             HomeUi ui)
         {
             var w = this.web;
+            w.Run<xofz.Framework.Timer>(t =>
+                {
+                    t.Stop();
+                    w.Run<LatchHolder>(timerLatch =>
+                        {
+                            timerLatch.Latch.WaitOne();
+                        }
+                        , DependencyNames.Latch);
+                },
+                DependencyNames.Timer);
             w.Run<
                 UiReaderWriter, 
                 TimestampWriter,
@@ -31,7 +41,10 @@
                 {
                     uiRW.Write(
                         ui,
-                        () => ui.InKeyVisible = true);
+                        () =>
+                        {
+                            ui.InKeyVisible = true;
+                        });
                     watcher.Start();
                     return;
                 }
@@ -44,6 +57,10 @@
                         ui.EditKeyEnabled = true;
                     });
                 watcher.Start();
+            });
+            w.Run<StartHandler>(handler =>
+            {
+                handler.Handle(ui);
             });
         }
 

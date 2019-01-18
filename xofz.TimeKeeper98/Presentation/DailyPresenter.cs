@@ -51,7 +51,10 @@
                 });
             });
 
-            w.Run<SetupHandler>(handler => { handler.Handle(); });
+            w.Run<SetupHandler>(handler =>
+            {
+                handler.Handle();
+            });
 
             w.Run<Navigator>(nav =>
             {

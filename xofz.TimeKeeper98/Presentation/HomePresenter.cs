@@ -52,7 +52,7 @@
                             nameof(t.Elapsed),
                             this.timer_Elapsed);
                     },
-                    TimerNames.Home);
+                    DependencyNames.Timer);
             });
 
             w.Run<SetupHandler>(handler =>

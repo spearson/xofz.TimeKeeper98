@@ -2,6 +2,7 @@
 {
     using System;
     using System.Reflection;
+    using System.Threading;
     using xofz.Framework;
     using xofz.Framework.Transformation;
     using xofz.Root;
@@ -64,7 +65,7 @@
                 new FieldHolder());
             w.RegisterDependency(
                 new xofz.Framework.Timer(),
-                TimerNames.Home);
+                DependencyNames.Timer);
             w.RegisterDependency(
                 new TimeSpanViewer());
             w.RegisterDependency(
@@ -82,6 +83,12 @@
                 new StartHandler(w));
             w.RegisterDependency(
                 new SetupHandler(w));
+            w.RegisterDependency(
+                new LatchHolder
+                {
+                    Latch = new ManualResetEvent(true)
+                },
+                DependencyNames.Latch);
         }
 
         protected readonly HomeUi ui;

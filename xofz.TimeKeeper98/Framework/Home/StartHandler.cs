@@ -23,7 +23,7 @@
                 {
                     t.Start(1000);
                 },
-                TimerNames.Home);
+                DependencyNames.Timer);
         }
 
         protected readonly MethodWeb web;

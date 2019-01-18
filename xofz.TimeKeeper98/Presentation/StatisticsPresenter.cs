@@ -61,7 +61,7 @@
                             nameof(t.Elapsed),
                             this.timer_Elapsed);
                     },
-                    TimerNames.Statistics);
+                    DependencyNames.Timer);
             });
 
             w.Run<Navigator>(nav => nav.RegisterPresenter(this));
