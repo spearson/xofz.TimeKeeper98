@@ -37,25 +37,7 @@
                     ui,
                     () => ui.InKeyVisible = false);
                 watcher.Stop();
-                if (!writer.Write())
-                {
-                    uiRW.Write(
-                        ui,
-                        () =>
-                        {
-                            ui.InKeyVisible = true;
-                        });
-                    watcher.Start();
-                    return;
-                }
-
-                uiRW.Write(
-                    ui,
-                    () =>
-                    {
-                        ui.OutKeyVisible = true;
-                        ui.EditKeyEnabled = true;
-                    });
+                writer.Write();
                 watcher.Start();
             });
             w.Run<StartHandler>(handler =>
