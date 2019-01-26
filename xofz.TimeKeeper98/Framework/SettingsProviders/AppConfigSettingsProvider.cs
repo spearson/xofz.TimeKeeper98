@@ -11,7 +11,8 @@
             {
                 TimestampFormat = @"MM/dd hh:mm:ss tt",
                 EditTimestampFormat = @"MM/dd/yyyy hh:mm:ss tt",
-                TitleText = Settings.Default.TitleText
+                TitleText = Settings.Default.TitleText,
+                Prompt = Settings.Default.Prompt
             };
         }
     }

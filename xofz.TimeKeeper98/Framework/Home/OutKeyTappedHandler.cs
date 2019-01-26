@@ -16,6 +16,28 @@
             HomeUi ui)
         {
             var w = this.web;
+
+            var accepted = true;
+            w.Run<GlobalSettingsHolder>(settings =>
+            {
+                if (settings.Prompt)
+                {
+                    w.Run<UiReaderWriter, Messenger>((uiRW, m) =>
+                    {
+                        accepted = uiRW.Read(
+                                       m.Subscriber,
+                                       () => m.Question(
+                                           @"Really clock out?")) ==
+                                   Response.Yes;
+                    });
+                }
+            });
+
+            if (!accepted)
+            {
+                return;
+            }
+
             w.Run<xofz.Framework.Timer>(t =>
                 {
                     t.Stop();
@@ -26,6 +48,7 @@
                         , DependencyNames.Latch);
                 },
                 DependencyNames.Timer);
+
             w.Run<
                 UiReaderWriter, 
                 TimestampWriter,
@@ -39,6 +62,7 @@
                 writer.Write();
                 watcher.Start();
             });
+
             w.Run<StartHandler>(handler =>
             {
                 handler.Handle(ui);
