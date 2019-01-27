@@ -59,7 +59,14 @@
             var w = this.web;
             w.Run<FileSystemWatcher>(watcher =>
             {
-                watcher.EnableRaisingEvents = true;
+                try
+                {
+                    watcher.EnableRaisingEvents = true;
+                }
+                catch
+                {
+                    // oh no!! windows 98!
+                }
             });
         }
 
