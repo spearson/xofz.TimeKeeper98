@@ -65,6 +65,7 @@
     <Compile Include="Framework\MethodNames.cs" />
     <Compile Include="Framework\SettingsProvider.cs" />
     <Compile Include="Framework\SettingsProviders\AppConfigSettingsProvider.cs" />
+    <Compile Include="Framework\SettingsProviders\Constants.cs" />
     <Compile Include="Framework\Statistics\DependencyNames.cs" />
     <Compile Include="Framework\TimestampEdit\ErrorMessages.cs" />
     <Compile Include="Root\LogNames.cs" />

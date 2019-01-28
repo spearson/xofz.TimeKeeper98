@@ -1,0 +1,29 @@
+﻿namespace xofz.TimeKeeper98.Framework.SettingsProviders
+{
+    public class Constants
+    {
+        public const string DefaultSettings =
+            @"<?xml version=""1.0"" encoding=""utf-8""?>
+<configuration>
+    <configSections>
+        <sectionGroup name=""applicationSettings"" type=""System.Configuration.ApplicationSettingsGroup, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"" >
+            <section name=""xofz.TimeKeeper98.Properties.Settings"" type=""System.Configuration.ClientSettingsSection, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"" requirePermission=""false"" />
+        </sectionGroup>
+    </configSections>
+    <startup>
+        <supportedRuntime version=""v2.0.50727"" />
+    </startup>
+    <applicationSettings>
+        <xofz.TimeKeeper98.Properties.Settings>
+            <setting name=""TitleText"" serializeAs=""String"">
+                <value>x(z) TimeKeeper98</value>
+            </setting>
+            <setting name=""Prompt"" serializeAs=""String"">
+                <value>True</value>
+            </setting>
+        </xofz.TimeKeeper98.Properties.Settings>
+    </applicationSettings>
+</configuration>
+";
+    }
+}
