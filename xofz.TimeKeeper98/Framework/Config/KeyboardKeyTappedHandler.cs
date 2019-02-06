@@ -16,7 +16,17 @@
             ConfigUi ui)
         {
             var w = this.web;
-            w.Run<KeyboardLoader>(loader => loader.Load());
+            w.Run<KeyboardLoader>(loader =>
+            {
+                try
+                {
+                    loader.Load();
+                }
+                catch
+                {
+                    // oh noes!! windows 98!
+                }
+            });
             w.Run<UiReaderWriter>(uiRW =>
             {
                 uiRW.Write(

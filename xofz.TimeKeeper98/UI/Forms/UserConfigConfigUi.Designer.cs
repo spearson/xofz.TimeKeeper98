@@ -54,7 +54,7 @@
             // 
             this.showSecondsCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
             this.showSecondsCheckBox.AutoSize = true;
-            this.showSecondsCheckBox.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.showSecondsCheckBox.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ControlDark;
             this.showSecondsCheckBox.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
             this.showSecondsCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.showSecondsCheckBox.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -70,7 +70,7 @@
             // 
             this.promptCheckBox.Appearance = System.Windows.Forms.Appearance.Button;
             this.promptCheckBox.AutoSize = true;
-            this.promptCheckBox.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.promptCheckBox.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ControlDark;
             this.promptCheckBox.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
             this.promptCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.promptCheckBox.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
