@@ -12,9 +12,7 @@
         }
 
         public virtual void Handle(
-            DailyUi ui,
-            StatisticsUi statsUi,
-            HomeNavUi homeNavUi)
+            DailyUi ui)
         {
             var w = this.web;
             w.Run<SettingsHolder>(settings =>
@@ -24,7 +22,7 @@
 
             w.Run<StartHandler>(handler =>
             {
-                handler.Handle(ui, statsUi, homeNavUi);
+                handler.Handle(ui);
             });
         }
 

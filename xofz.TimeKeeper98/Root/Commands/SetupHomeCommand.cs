@@ -17,15 +17,11 @@
     {
         public SetupHomeCommand(
             HomeUi ui,
-            HomeNavUi navUi,
-            ShellUi mainShell,
-            ShellUi navShell,
+            ShellUi shell,
             MethodWeb web)
         {
             this.ui = ui;
-            this.navUi = navUi;
-            this.mainShell = mainShell;
-            this.navShell = navShell;
+            this.shell = shell;
             this.web = web;
         }
 
@@ -34,15 +30,9 @@
             this.registerDependencies();
 
             var w = this.web;
-            new HomeNavPresenter(
-                    this.navUi,
-                    this.navShell,
-                    w)
-                .Setup();
-
             new HomePresenter(
                     this.ui,
-                    this.mainShell,
+                    this.shell,
                     w)
                 .Setup();
 
@@ -92,9 +82,7 @@
         }
 
         protected readonly HomeUi ui;
-        protected readonly HomeNavUi navUi;
-        protected readonly ShellUi mainShell;
-        protected readonly ShellUi navShell;
+        protected readonly ShellUi shell;
         protected readonly MethodWeb web;
     }
 }

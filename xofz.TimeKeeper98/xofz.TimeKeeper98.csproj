@@ -39,7 +39,7 @@
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="xofz.Core98, Version=1.2.30.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="xofz.Core98, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>H:\Dropbox\Libraries\xofz.Core98\xofz.Core98.dll</HintPath>
     </Reference>
@@ -56,6 +56,10 @@
     <Compile Include="Framework\DateCalculator.cs" />
     <Compile Include="Framework\FieldHolder.cs" />
     <Compile Include="Framework\GlobalSettingsHolder.cs" />
+    <Compile Include="Framework\HomeNav\DailyKeyTappedHandler.cs" />
+    <Compile Include="Framework\HomeNav\ExitKeyTappedHandler.cs" />
+    <Compile Include="Framework\HomeNav\StatisticsKeyTappedHandler.cs" />
+    <Compile Include="Framework\HomeNav\TimestampsKeyTappedHandler.cs" />
     <Compile Include="Framework\Home\DependencyNames.cs" />
     <Compile Include="Framework\Home\InKeyTappedHandler.cs" />
     <Compile Include="Framework\Home\OutKeyTappedHandler.cs" />
@@ -63,11 +67,16 @@
     <Compile Include="Framework\Home\StartHandler.cs" />
     <Compile Include="Framework\Home\TimerHandler.cs" />
     <Compile Include="Framework\MethodNames.cs" />
+    <Compile Include="Framework\NavLogicReader.cs" />
     <Compile Include="Framework\SettingsProvider.cs" />
     <Compile Include="Framework\SettingsProviders\AppConfigSettingsProvider.cs" />
     <Compile Include="Framework\SettingsProviders\Constants.cs" />
     <Compile Include="Framework\Statistics\DependencyNames.cs" />
     <Compile Include="Framework\TimestampEdit\ErrorMessages.cs" />
+    <Compile Include="Framework\UiReader.cs" />
+    <Compile Include="Presentation\NavigatorNavLogicReader.cs" />
+    <Compile Include="Presentation\NavigatorUiReader.cs" />
+    <Compile Include="Root\Commands\SetupHomeNavCommand.cs" />
     <Compile Include="Root\LogNames.cs" />
     <Compile Include="UI\NavKeyLabels.cs" />
     <Compile Include="Framework\StatisticsCalculator.cs" />

@@ -95,23 +95,9 @@
         {
             var w = this.web;
 
-            Do presentTimestamps = null;
-            Do presentStatistics = null;
-            Do presentDaily = null;
-            w.Run<Navigator>(nav =>
-            {
-                presentTimestamps = nav.Present<TimestampsPresenter>;
-                presentStatistics = nav.Present<StatisticsPresenter>;
-                presentDaily = nav.Present<DailyPresenter>;
-            });
-
             w.Run<SaveKeyTappedHandler>(handler =>
             {
-                handler.Handle(
-                    this.ui,
-                    presentTimestamps,
-                    presentStatistics,
-                    presentDaily);
+                handler.Handle(this.ui);
             });
         }
 
@@ -119,45 +105,18 @@
         {
             var w = this.web;
 
-            Do presentTimestamps = null;
-            Do presentStatistics = null;
-            Do presentDaily = null;
-            w.Run<Navigator>(nav =>
-            {
-                presentTimestamps = nav.Present<TimestampsPresenter>;
-                presentStatistics = nav.Present<StatisticsPresenter>;
-                presentDaily = nav.Present<DailyPresenter>;
-            });
-
             w.Run<SaveCurrentKeyTappedHandler>(handler =>
             {
-                handler.Handle(
-                    ui,
-                    presentTimestamps,
-                    presentStatistics,
-                    presentDaily);
+                handler.Handle(this.ui);
             });
         }
 
         private void ui_CancelKeyTapped()
         {
             var w = this.web;
-            Do presentTimestamps = null;
-            Do presentStatistics = null;
-            Do presentDaily = null;
-            w.Run<Navigator>(
-                nav =>
-                {
-                    presentTimestamps = nav.Present<TimestampsPresenter>;
-                    presentStatistics = nav.Present<StatisticsPresenter>;
-                    presentDaily = nav.Present<DailyPresenter>;
-                });
             w.Run<CancelKeyTappedHandler>(handler =>
             {
-                handler.Handle(
-                    presentTimestamps,
-                    presentStatistics,
-                    presentDaily);
+                handler.Handle();
             });
         }
 

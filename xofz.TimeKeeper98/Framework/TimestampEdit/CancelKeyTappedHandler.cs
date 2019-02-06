@@ -11,25 +11,28 @@
             this.web = web;
         }
 
-        public virtual void Handle(
-            Do presentTimestamps,
-            Do presentStatistics,
-            Do presentDaily)
+        public virtual void Handle()
         {
             var w = this.web;
-            w.Run<SettingsHolder>(
-                sh =>
+            w.Run<SettingsHolder, NavLogicReader>(
+                (settings, navReader) =>
                 {
-                    switch (sh.LastVisitedKeyLabel)
+                    switch (settings.LastVisitedKeyLabel)
                     {
                         case NavKeyLabels.Timestamps:
-                            presentTimestamps?.Invoke();
+                            navReader.ReadTimestamps(
+                                out var navToTimestamps);
+                            navToTimestamps?.Invoke();
                             break;
                         case NavKeyLabels.Statistics:
-                            presentStatistics?.Invoke();
+                            navReader.ReadStatistics(
+                                out var navToStats);
+                            navToStats?.Invoke();
                             break;
                         case NavKeyLabels.Daily:
-                            presentDaily?.Invoke();
+                            navReader.ReadDaily(
+                                out var navToDaily);
+                            navToDaily?.Invoke();
                             break;
                     }
                 });

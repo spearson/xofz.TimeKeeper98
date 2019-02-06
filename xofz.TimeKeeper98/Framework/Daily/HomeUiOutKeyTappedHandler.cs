@@ -11,17 +11,12 @@
             this.web = web;
         }
 
-        public virtual void Handle(
-            DailyUi ui,
-            StatisticsUi statsUi,
-            HomeNavUi homeNavUi)
+        public virtual void Handle(DailyUi ui)
         {
             var w = this.web;
             w.Run<StartHandler>(handler =>
                 handler.Handle(
-                    ui,
-                    statsUi,
-                    homeNavUi));
+                    ui));
         }
 
         protected readonly MethodWeb web;

@@ -11,11 +11,13 @@
     public class SetupMethodWebCommand : Command
     {
         public SetupMethodWebCommand(
-            Gen<MethodWeb> createWeb,
+            MethodWeb web,
+            Navigator navigator,
             Messenger messenger,
             SettingsProvider settingsProvider)
         {
-            this.createWeb = createWeb;
+            this.web = web;
+            this.navigator = navigator;
             this.messenger = messenger;
             this.settingsProvider = settingsProvider;
         }
@@ -24,14 +26,7 @@
 
         public override void Execute()
         {
-            this.setWeb(this.createWeb());
-
             this.registerDependencies();
-        }
-
-        protected virtual void setWeb(MethodWeb web)
-        {
-            this.web = web;
         }
 
         protected virtual void registerDependencies()
@@ -41,9 +36,9 @@
             w.RegisterDependency(
                 new UiReaderWriter());
             w.RegisterDependency(
-                this.messenger);
+                this.navigator);
             w.RegisterDependency(
-                new Navigator(w));
+                this.messenger);
             w.RegisterDependency(
                 new EventRaiser());
             w.RegisterDependency(
@@ -59,8 +54,8 @@
                 LogNames.Exceptions);
         }
 
-        protected MethodWeb web;
-        protected readonly Gen<MethodWeb> createWeb;
+        protected readonly MethodWeb web;
+        protected readonly Navigator navigator;
         protected readonly Messenger messenger;
         protected readonly SettingsProvider settingsProvider;
     }

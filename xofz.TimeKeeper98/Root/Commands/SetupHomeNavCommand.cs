@@ -1,30 +1,32 @@
 ﻿namespace xofz.TimeKeeper98.Root.Commands
 {
     using xofz.Framework;
-    using xofz.Framework.Transformation;
     using xofz.Root;
-    using xofz.TimeKeeper98.Framework.Timestamps;
+    using xofz.TimeKeeper98.Framework;
+    using xofz.TimeKeeper98.Framework.HomeNav;
     using xofz.TimeKeeper98.Presentation;
     using xofz.TimeKeeper98.UI;
     using xofz.UI;
 
-    public class SetupTimestampsCommand : Command
+    public class SetupHomeNavCommand
+        : Command
     {
-        public SetupTimestampsCommand(
-            TimestampsUi ui,
+        public SetupHomeNavCommand(
+            HomeNavUi ui,
             ShellUi shell,
+            NavLogicReader navReader,
             MethodWeb web)
         {
             this.ui = ui;
             this.shell = shell;
+            this.navReader = navReader;
             this.web = web;
         }
 
         public override void Execute()
         {
             this.registerDependencies();
-
-            new TimestampsPresenter(
+            new HomeNavPresenter(
                     this.ui,
                     this.shell,
                     this.web)
@@ -35,29 +37,20 @@
         {
             var w = this.web;
             w.RegisterDependency(
-                new EnumerableSplitter());
+                this.navReader);
             w.RegisterDependency(
-                new EnumerableSplicer());
+                new StatisticsKeyTappedHandler(w));
             w.RegisterDependency(
-                new SetupHandler(w));
+                new TimestampsKeyTappedHandler(w));
             w.RegisterDependency(
-                new StartHandler(w));
+                new DailyKeyTappedHandler(w));
             w.RegisterDependency(
-                new SettingsHolder());
-            w.RegisterDependency(
-                new HomeUiInKeyTappedHandler(w));
-            w.RegisterDependency(
-                new HomeUiOutKeyTappedHandler(w));
-            w.RegisterDependency(
-                new CurrentKeyTappedHandler(w));
-            w.RegisterDependency(
-                new StatisticsRangeKeyTappedHandler(w));
-            w.RegisterDependency(
-                new ShowDurationsChangedHandler(w));
+                new ExitKeyTappedHandler(w));
         }
 
-        protected readonly TimestampsUi ui;
+        protected readonly HomeNavUi ui;
         protected readonly ShellUi shell;
+        protected readonly NavLogicReader navReader;
         protected readonly MethodWeb web;
     }
 }

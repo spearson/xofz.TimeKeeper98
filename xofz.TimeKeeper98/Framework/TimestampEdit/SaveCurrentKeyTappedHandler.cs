@@ -14,10 +14,7 @@
         }
 
         public virtual void Handle(
-            TimestampEditUi ui,
-            Do presentTimestamps,
-            Do presentStatistics,
-            Do presentDaily)
+            TimestampEditUi ui)
         {
             var w = this.web;
             w.Run<UiReaderWriter>(uiRW =>
@@ -30,11 +27,7 @@
 
             w.Run<SaveKeyTappedHandler>(handler =>
             {
-                handler.Handle(
-                    ui,
-                    presentTimestamps,
-                    presentStatistics,
-                    presentDaily);
+                handler.Handle(ui);
             });
         }
 

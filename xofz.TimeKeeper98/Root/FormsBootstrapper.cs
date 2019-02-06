@@ -63,11 +63,12 @@
             m.Subscriber = s;
 
             var e = this.executor;
+            var w = new ThreadSafeMethodWeb();
             e.Execute(new SetupMethodWebCommand(
-                () => new MethodWeb(),
+                w, 
+                new ThreadSafeNavigator(w), 
                 m,
                 new AppConfigSettingsProvider()));
-            var w = e.Get<SetupMethodWebCommand>().W;
             w.Run<EventSubscriber>(sub =>
             {
                 var cd = AppDomain.CurrentDomain;
@@ -101,34 +102,78 @@
                     });
             });
 
-            e
-                .Execute(new SetupHomeCommand(
-                    homeUi,
-                    homeNavUi,
-                    s,
-                    s.NavUi,
-                    w))
-                .Execute(new SetupStatisticsCommand(
-                    statsUi,
-                    homeUi,
-                    w))
-                .Execute(new SetupTimestampsCommand(
-                    timestampsUi,
-                    homeUi,
-                    w))
-                .Execute(new SetupDailyCommand(
-                    dailyUi,
-                    homeUi,
-                    w))
-                .Execute(new SetupTimestampEditCommand(
-                    editUi,
-                    homeUi,
-                    w))
-                .Execute(new SetupMainCommand(
-                    s,
-                    w))
-                .Execute(new SetupShutdownCommand(
-                    w));
+            var homeFinished = new ManualResetEvent(false);
+            var homeNavFinished = new ManualResetEvent(false);
+            var timestampsFinished = new ManualResetEvent(false);
+
+            ThreadPool.QueueUserWorkItem(
+                o =>
+                {
+                    e.Execute(
+                        new SetupHomeCommand(
+                            homeUi,
+                            s,
+                            w));
+                    homeFinished.Set();
+                });
+
+            ThreadPool.QueueUserWorkItem(
+                o =>
+                {
+                    e.Execute(
+                        new SetupHomeNavCommand(
+                            homeNavUi,
+                            s.NavUi,
+                            new NavigatorNavLogicReader(w),
+                            w));
+                    homeNavFinished.Set();
+                });
+
+            ThreadPool.QueueUserWorkItem(
+                o => e.Execute(
+                    new SetupStatisticsCommand(
+                        statsUi,
+                        homeUi,
+                        w)));
+
+            ThreadPool.QueueUserWorkItem(
+                o => e.Execute(
+                    new SetupTimestampEditCommand(
+                        editUi,
+                        homeUi,
+                        w)));
+
+            ThreadPool.QueueUserWorkItem(
+                o => e.Execute(
+                    new SetupMainCommand(
+                        s,
+                        w)));
+
+            ThreadPool.QueueUserWorkItem(
+                o => e.Execute(
+                    new SetupShutdownCommand(
+                        w)));
+
+            homeFinished.WaitOne();
+
+            ThreadPool.QueueUserWorkItem(
+                o =>
+                {
+                    e.Execute(
+                        new SetupTimestampsCommand(
+                            timestampsUi,
+                            homeUi,
+                            w));
+                    timestampsFinished.Set();
+                });
+
+            ThreadPool.QueueUserWorkItem(
+                o => e.Execute(
+                    new SetupDailyCommand(
+                        dailyUi,
+                        homeUi,
+                        new NavigatorUiReader(w), 
+                        w)));
 
             // update to single-file format
             w.Run<FileTimestampManager>(manager =>
@@ -145,7 +190,11 @@
                 n =>
                 {
                     n.Present<HomePresenter>();
+
+                    homeNavFinished.WaitOne();
                     n.PresentFluidly<HomeNavPresenter>();
+
+                    timestampsFinished.WaitOne();
                     n.PresentFluidly<TimestampsPresenter>();
                 });
         }

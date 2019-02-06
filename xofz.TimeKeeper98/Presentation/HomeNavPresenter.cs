@@ -3,6 +3,7 @@
     using System.Threading;
     using xofz.Framework;
     using xofz.Presentation;
+    using xofz.TimeKeeper98.Framework.HomeNav;
     using xofz.TimeKeeper98.UI;
     using xofz.UI;
 
@@ -55,25 +56,29 @@
         private void ui_StatisticsKeyTapped()
         {
             var w = this.web;
-            w.Run<Navigator>(nav => nav.Present<StatisticsPresenter>());
+            w.Run<StatisticsKeyTappedHandler>(
+                handler => handler.Handle());
         }
 
         private void ui_TimestampsKeyTapped()
         {
             var w = this.web;
-            w.Run<Navigator>(nav => nav.Present<TimestampsPresenter>());
+            w.Run<TimestampsKeyTappedHandler>(
+                handler => handler.Handle());
         }
 
         private void ui_DailyKeyTapped()
         {
             var w = this.web;
-            w.Run<Navigator>(nav => nav.Present<DailyPresenter>());
+            w.Run<DailyKeyTappedHandler>(
+                handler => handler.Handle());
         }
 
         private void ui_ExitKeyTapped()
         {
             var w = this.web;
-            w.Run<Navigator>(nav => nav.Present<ShutdownPresenter>());
+            w.Run<ExitKeyTappedHandler>(
+                handler => handler.Handle());
         }
 
         private long setupIf1;

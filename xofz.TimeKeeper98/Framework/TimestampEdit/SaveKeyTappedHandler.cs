@@ -15,13 +15,12 @@
         }
 
         public virtual void Handle(
-            TimestampEditUi ui,
-            Do presentTimestamps,
-            Do presentStatistics,
-            Do presentDaily)
+            TimestampEditUi ui)
         {
             var w = this.web;
-            w.Run<TimestampReader, UiReaderWriter>(
+            w.Run<
+                TimestampReader, 
+                UiReaderWriter>(
                 (reader, uiRW) =>
                 {
                     var newTimestamp = uiRW.Read(
@@ -74,18 +73,25 @@
                         watcher.Start();
                     });
 
-                    w.Run<SettingsHolder>(sh =>
+                    w.Run<SettingsHolder, NavLogicReader>(
+                        (settings, navReader) =>
                     {
-                        switch (sh.LastVisitedKeyLabel)
+                        switch (settings.LastVisitedKeyLabel)
                         {
                             case NavKeyLabels.Timestamps:
-                                presentTimestamps?.Invoke();
+                                navReader.ReadTimestamps(
+                                    out var navToTimestamps);
+                                navToTimestamps?.Invoke();
                                 break;
                             case NavKeyLabels.Statistics:
-                                presentStatistics?.Invoke();
+                                navReader.ReadStatistics(
+                                    out var navToStats);
+                                navToStats?.Invoke();
                                 break;
                             case NavKeyLabels.Daily:
-                                presentDaily?.Invoke();
+                                navReader.ReadDaily(
+                                    out var navToDaily);
+                                navToDaily?.Invoke();
                                 break;
                         }
                     });

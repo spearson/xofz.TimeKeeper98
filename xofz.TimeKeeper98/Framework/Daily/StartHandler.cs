@@ -15,13 +15,13 @@
         }
 
         public virtual void Handle(
-            DailyUi ui,
-            StatisticsUi statsUi,
-            HomeNavUi homeNavUi)
+            DailyUi ui)
         {
             var w = this.web;
+            var reader = w.Run<UiReader>();
             w.Run<UiReaderWriter>(uiRW =>
             {
+                reader.ReadHomeNav(out var homeNavUi);
                 uiRW.Write(
                     homeNavUi,
                     () =>
@@ -35,6 +35,7 @@
                 showCurrent = settings.ShowCurrent;
             });
 
+            reader.ReadStatistics(out var statsUi);
             var ll = new LinkedListLot<string>();
             w.Run<
                 StatisticsCalculator, 
