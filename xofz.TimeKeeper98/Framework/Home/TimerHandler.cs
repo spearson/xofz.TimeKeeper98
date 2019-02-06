@@ -1,6 +1,7 @@
 ﻿namespace xofz.TimeKeeper98.Framework.Home
 {
     using xofz.Framework;
+    using xofz.TimeKeeper98.Framework.TimeSpanViewers;
     using xofz.UI;
     using xofz.TimeKeeper98.UI;
 
@@ -23,7 +24,7 @@
             w.Run<
                 UiReaderWriter,
                 StatisticsCalculator,
-                TimeSpanViewer,
+                PaddedTimeSpanViewer,
                 TimestampReader>(
             (uiRW, calc, viewer, reader) =>
             {

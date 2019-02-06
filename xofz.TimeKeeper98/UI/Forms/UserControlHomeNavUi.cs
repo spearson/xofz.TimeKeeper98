@@ -17,18 +17,22 @@
             var sk = this.statisticsKey;
             var dk = this.dailyKey;
             var ek = this.exitKey;
+            var ck = this.configKey;
             this.navKeys = lotter.Materialize(
                 new[]
                 {
                     tk,
                     sk,
                     dk,
+                    ck,
                     ek
                 });
             tk.Text = NavKeyLabels.Timestamps;
             sk.Text = NavKeyLabels.Statistics;
             dk.Text = NavKeyLabels.Daily;
+            ck.Text = NavKeyLabels.Config;
             ek.Text = NavKeyLabels.Exit;
+            
         }
 
         private UserControlHomeNavUi()
@@ -41,6 +45,8 @@
         public event Do TimestampsKeyTapped;
 
         public event Do DailyKeyTapped;
+
+        public event Do ConfigKeyTapped;
 
         public event Do ExitKeyTapped;
 
@@ -83,29 +89,6 @@
             }
         }
 
-        private void statisticsKey_Click(object sender, EventArgs e)
-        {
-            var skt = this.StatisticsKeyTapped;
-            if (skt == null)
-            {
-                return;
-            }
-
-            ThreadPool.QueueUserWorkItem(o =>
-                skt.Invoke());
-        }
-
-        private void exitKey_Click(object sender, EventArgs e)
-        {
-            var ekt = this.ExitKeyTapped;
-            if (ekt == null)
-            {
-                return;
-            }
-            ThreadPool.QueueUserWorkItem(o =>
-                ekt.Invoke());
-        }
-
         private void timestampsKey_Click(object sender, EventArgs e)
         {
             var tkt = this.TimestampsKeyTapped;
@@ -118,6 +101,18 @@
                 tkt.Invoke());
         }
 
+        private void statisticsKey_Click(object sender, EventArgs e)
+        {
+            var skt = this.StatisticsKeyTapped;
+            if (skt == null)
+            {
+                return;
+            }
+
+            ThreadPool.QueueUserWorkItem(o =>
+                skt.Invoke());
+        }
+
         private void dailyKey_Click(object sender, EventArgs e)
         {
             var dkt = this.DailyKeyTapped;
@@ -128,6 +123,29 @@
 
             ThreadPool.QueueUserWorkItem(o =>
                 dkt.Invoke());
+        }
+
+        private void configKey_Click(object sender, EventArgs e)
+        {
+            var ckt = this.ConfigKeyTapped;
+            if (ckt == null)
+            {
+                return;
+            }
+
+            ThreadPool.QueueUserWorkItem(o =>
+                ckt.Invoke());
+        }
+
+        private void exitKey_Click(object sender, EventArgs e)
+        {
+            var ekt = this.ExitKeyTapped;
+            if (ekt == null)
+            {
+                return;
+            }
+            ThreadPool.QueueUserWorkItem(o =>
+                ekt.Invoke());
         }
 
         protected readonly Lot<Button> navKeys;

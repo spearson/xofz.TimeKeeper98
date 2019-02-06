@@ -39,11 +39,13 @@
             w.RegisterDependency(
                 this.navReader);
             w.RegisterDependency(
-                new StatisticsKeyTappedHandler(w));
-            w.RegisterDependency(
                 new TimestampsKeyTappedHandler(w));
             w.RegisterDependency(
+                new StatisticsKeyTappedHandler(w));
+            w.RegisterDependency(
                 new DailyKeyTappedHandler(w));
+            w.RegisterDependency(
+                new ConfigKeyTappedHandler(w));
             w.RegisterDependency(
                 new ExitKeyTappedHandler(w));
         }

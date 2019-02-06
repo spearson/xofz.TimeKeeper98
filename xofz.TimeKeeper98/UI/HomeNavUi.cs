@@ -10,6 +10,8 @@
 
         event Do DailyKeyTapped;
 
+        event Do ConfigKeyTapped;
+
         event Do ExitKeyTapped;
 
         string ActiveKeyLabel { get; set; }

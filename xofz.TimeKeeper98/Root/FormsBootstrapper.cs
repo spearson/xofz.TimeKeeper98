@@ -9,6 +9,7 @@
     using xofz.Root;
     using xofz.Root.Commands;
     using xofz.TimeKeeper98.Framework;
+    using xofz.TimeKeeper98.Framework.ConfigSavers;
     using xofz.TimeKeeper98.Framework.SettingsProviders;
     using xofz.TimeKeeper98.Presentation;
     using xofz.TimeKeeper98.Root.Commands;
@@ -68,6 +69,7 @@
                 w, 
                 new ThreadSafeNavigator(w), 
                 m,
+                new AppConfigConfigSaver(w), 
                 new AppConfigSettingsProvider()));
             w.Run<EventSubscriber>(sub =>
             {
@@ -86,6 +88,7 @@
             TimestampsUi timestampsUi = null;
             TimestampEditUi editUi = null;
             DailyUi dailyUi = null;
+            ConfigUi configUi = null;
             w.Run<UiReaderWriter, Lotter>(
                 (uiRW, lotter) =>
             {
@@ -99,12 +102,14 @@
                         timestampsUi = new UserControlTimestampsUi(lotter);
                         editUi = new UserControlTimestampEditUi();
                         dailyUi = new UserControlDailyUi(lotter);
+                        configUi = new UserConfigConfigUi();
                     });
             });
 
             var homeFinished = new ManualResetEvent(false);
             var homeNavFinished = new ManualResetEvent(false);
             var timestampsFinished = new ManualResetEvent(false);
+            var dailyFinished = new ManualResetEvent(false);
 
             ThreadPool.QueueUserWorkItem(
                 o =>
@@ -168,12 +173,16 @@
                 });
 
             ThreadPool.QueueUserWorkItem(
-                o => e.Execute(
-                    new SetupDailyCommand(
-                        dailyUi,
-                        homeUi,
-                        new NavigatorUiReader(w), 
-                        w)));
+                o =>
+                {
+                    e.Execute(
+                        new SetupDailyCommand(
+                            dailyUi,
+                            homeUi,
+                            new NavigatorUiReader(w),
+                            w));
+                    dailyFinished.Set();
+                });
 
             // update to single-file format
             w.Run<FileTimestampManager>(manager =>
@@ -186,6 +195,7 @@
                 watcher.Start();
             });
 
+
             w.Run<Navigator>(
                 n =>
                 {
@@ -197,6 +207,16 @@
                     timestampsFinished.WaitOne();
                     n.PresentFluidly<TimestampsPresenter>();
                 });
+
+            dailyFinished.WaitOne();
+            ThreadPool.QueueUserWorkItem(o =>
+            {
+                e.Execute(
+                    new SetupConfigCommand(
+                        configUi,
+                        homeUi,
+                        w));
+            });
         }
 
         protected virtual void setMainForm(FormMainUi mainForm)

@@ -45,6 +45,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Framework\ConfigSaver.cs" />
+    <Compile Include="Framework\ConfigSavers\AppConfigConfigSaver.cs" />
+    <Compile Include="Framework\Config\DefaultTitleTextKeyTappedHandler.cs" />
+    <Compile Include="Framework\Config\KeyboardKeyTappedHandler.cs" />
+    <Compile Include="Framework\Config\PromptSelectedHandler.cs" />
+    <Compile Include="Framework\Config\PromptUnselectedHandler.cs" />
+    <Compile Include="Framework\Config\ResetTitleTextKeyTappedHandler.cs" />
+    <Compile Include="Framework\Config\SaveTitleTextKeyTappedHandler.cs" />
+    <Compile Include="Framework\Config\SetupHandler.cs" />
+    <Compile Include="Framework\Config\ShowSecondsSelectedHandler.cs" />
+    <Compile Include="Framework\Config\ShowSecondsUnselectedHandler.cs" />
+    <Compile Include="Framework\Config\StartHandler.cs" />
     <Compile Include="Framework\Daily\CurrentKeyTappedHandler.cs" />
     <Compile Include="Framework\Daily\HomeUiOutKeyTappedHandler.cs" />
     <Compile Include="Framework\Daily\SettingsHolder.cs" />
@@ -56,6 +68,7 @@
     <Compile Include="Framework\DateCalculator.cs" />
     <Compile Include="Framework\FieldHolder.cs" />
     <Compile Include="Framework\GlobalSettingsHolder.cs" />
+    <Compile Include="Framework\HomeNav\ConfigKeyTappedHandler.cs" />
     <Compile Include="Framework\HomeNav\DailyKeyTappedHandler.cs" />
     <Compile Include="Framework\HomeNav\ExitKeyTappedHandler.cs" />
     <Compile Include="Framework\HomeNav\StatisticsKeyTappedHandler.cs" />
@@ -72,12 +85,24 @@
     <Compile Include="Framework\SettingsProviders\AppConfigSettingsProvider.cs" />
     <Compile Include="Framework\SettingsProviders\Constants.cs" />
     <Compile Include="Framework\Statistics\DependencyNames.cs" />
+    <Compile Include="Framework\TimeSpanViewers\MinutesTimeSpanViewer.cs" />
+    <Compile Include="Framework\PaddedTimeSpanViewers\PaddedMinutesTimeSpanViewer.cs" />
+    <Compile Include="Framework\PaddedTimeSpanViewer.cs" />
     <Compile Include="Framework\TimestampEdit\ErrorMessages.cs" />
     <Compile Include="Framework\UiReader.cs" />
+    <Compile Include="Presentation\ConfigPresenter.cs" />
     <Compile Include="Presentation\NavigatorNavLogicReader.cs" />
     <Compile Include="Presentation\NavigatorUiReader.cs" />
+    <Compile Include="Root\Commands\SetupConfigCommand.cs" />
     <Compile Include="Root\Commands\SetupHomeNavCommand.cs" />
     <Compile Include="Root\LogNames.cs" />
+    <Compile Include="UI\ConfigUi.cs" />
+    <Compile Include="UI\Forms\UserConfigConfigUi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\UserConfigConfigUi.Designer.cs">
+      <DependentUpon>UserConfigConfigUi.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\NavKeyLabels.cs" />
     <Compile Include="Framework\StatisticsCalculator.cs" />
     <Compile Include="Framework\Statistics\CurrentWeekKeyTappedHandler.cs" />
@@ -177,6 +202,7 @@
     <Compile Include="UI\TimestampEditUi.cs" />
     <Compile Include="UI\TimestampsUi.cs" />
     <Compile Include="UI\TitleUi.cs" />
+    <Compile Include="UI\UiConstants.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -189,6 +215,9 @@
     </Compile>
     <EmbeddedResource Include="UI\Forms\FormMainUi.resx">
       <DependentUpon>FormMainUi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\UserConfigConfigUi.resx">
+      <DependentUpon>UserConfigConfigUi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\UserControlDailyUi.resx">
       <DependentUpon>UserControlDailyUi.cs</DependentUpon>

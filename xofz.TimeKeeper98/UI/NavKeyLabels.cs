@@ -8,6 +8,8 @@
 
         public const string Daily = @"Daily Info";
 
+        public const string Config = @"Config";
+
         public const string Exit = @"Exit";
     }
 }

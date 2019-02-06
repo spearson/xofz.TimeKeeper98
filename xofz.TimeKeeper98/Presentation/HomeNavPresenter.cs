@@ -46,6 +46,10 @@
                     this.ui_DailyKeyTapped);
                 subscriber.Subscribe(
                     this.ui,
+                    nameof(this.ui.ConfigKeyTapped),
+                    this.ui_ConfigKeyTapped);
+                subscriber.Subscribe(
+                    this.ui,
                     nameof(this.ui.ExitKeyTapped),
                     this.ui_ExitKeyTapped);
             });
@@ -71,6 +75,13 @@
         {
             var w = this.web;
             w.Run<DailyKeyTappedHandler>(
+                handler => handler.Handle());
+        }
+
+        private void ui_ConfigKeyTapped()
+        {
+            var w = this.web;
+            w.Run<ConfigKeyTappedHandler>(
                 handler => handler.Handle());
         }
 

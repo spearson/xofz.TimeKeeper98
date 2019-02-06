@@ -40,5 +40,14 @@ namespace xofz.TimeKeeper98.Properties {
                 return ((bool)(this["Prompt"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowSeconds {
+            get {
+                return ((bool)(this["ShowSeconds"]));
+            }
+        }
     }
 }

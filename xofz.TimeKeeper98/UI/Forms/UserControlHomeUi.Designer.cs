@@ -38,12 +38,15 @@
             this.coreVersionLabel = new System.Windows.Forms.Label();
             this.versionLabel = new System.Windows.Forms.Label();
             this.editKey = new System.Windows.Forms.Button();
+            this.timeWorkedContainer = new System.Windows.Forms.GroupBox();
+            this.timeWorkedContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // inKey
             // 
             this.inKey.AutoSize = true;
             this.inKey.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.inKey.BackColor = System.Drawing.Color.LightGreen;
             this.inKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
             this.inKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.inKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -54,13 +57,14 @@
             this.inKey.Size = new System.Drawing.Size(244, 68);
             this.inKey.TabIndex = 0;
             this.inKey.Text = "Clock In";
-            this.inKey.UseVisualStyleBackColor = true;
+            this.inKey.UseVisualStyleBackColor = false;
             this.inKey.Click += new System.EventHandler(this.inKey_Click);
             // 
             // outKey
             // 
             this.outKey.AutoSize = true;
             this.outKey.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.outKey.BackColor = System.Drawing.Color.MistyRose;
             this.outKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
             this.outKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.outKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -71,28 +75,30 @@
             this.outKey.Size = new System.Drawing.Size(270, 68);
             this.outKey.TabIndex = 1;
             this.outKey.Text = "Clock Out";
-            this.outKey.UseVisualStyleBackColor = true;
+            this.outKey.UseVisualStyleBackColor = false;
             this.outKey.Click += new System.EventHandler(this.outKey_Click);
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(692, 0);
+            this.label2.Location = new System.Drawing.Point(10, 16);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 20);
-            this.label2.TabIndex = 3;
+            this.label2.TabIndex = 99;
             this.label2.Text = "This Week:";
             // 
             // timeThisWeekLabel
             // 
-            this.timeThisWeekLabel.AutoSize = true;
+            this.timeThisWeekLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.timeThisWeekLabel.Font = new System.Drawing.Font("Consolas", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeThisWeekLabel.Location = new System.Drawing.Point(690, 20);
+            this.timeThisWeekLabel.Location = new System.Drawing.Point(8, 36);
             this.timeThisWeekLabel.Name = "timeThisWeekLabel";
-            this.timeThisWeekLabel.Size = new System.Drawing.Size(191, 34);
-            this.timeThisWeekLabel.TabIndex = 4;
-            this.timeThisWeekLabel.Text = "00h 00m 00s";
+            this.timeThisWeekLabel.Size = new System.Drawing.Size(207, 34);
+            this.timeThisWeekLabel.TabIndex = 99;
+            this.timeThisWeekLabel.Text = "000h 00m 00s";
+            this.timeThisWeekLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // screenPanel
             // 
@@ -105,22 +111,24 @@
             // 
             // timeTodayLabel
             // 
-            this.timeTodayLabel.AutoSize = true;
+            this.timeTodayLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.timeTodayLabel.Font = new System.Drawing.Font("Consolas", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeTodayLabel.Location = new System.Drawing.Point(690, 74);
+            this.timeTodayLabel.Location = new System.Drawing.Point(8, 92);
             this.timeTodayLabel.Name = "timeTodayLabel";
-            this.timeTodayLabel.Size = new System.Drawing.Size(191, 34);
-            this.timeTodayLabel.TabIndex = 7;
-            this.timeTodayLabel.Text = "00h 00m 00s";
+            this.timeTodayLabel.Size = new System.Drawing.Size(207, 34);
+            this.timeTodayLabel.TabIndex = 99;
+            this.timeTodayLabel.Text = "000h 00m 00s";
+            this.timeTodayLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label4
             // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(692, 54);
+            this.label4.Location = new System.Drawing.Point(10, 72);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 20);
-            this.label4.TabIndex = 6;
+            this.label4.TabIndex = 99;
             this.label4.Text = "Today:";
             // 
             // coreVersionLabel
@@ -164,22 +172,34 @@
             this.editKey.UseVisualStyleBackColor = true;
             this.editKey.Click += new System.EventHandler(this.editKey_Click);
             // 
+            // timeWorkedContainer
+            // 
+            this.timeWorkedContainer.Controls.Add(this.label2);
+            this.timeWorkedContainer.Controls.Add(this.timeThisWeekLabel);
+            this.timeWorkedContainer.Controls.Add(this.label4);
+            this.timeWorkedContainer.Controls.Add(this.timeTodayLabel);
+            this.timeWorkedContainer.Location = new System.Drawing.Point(666, 0);
+            this.timeWorkedContainer.Margin = new System.Windows.Forms.Padding(0);
+            this.timeWorkedContainer.Name = "timeWorkedContainer";
+            this.timeWorkedContainer.Size = new System.Drawing.Size(218, 130);
+            this.timeWorkedContainer.TabIndex = 100;
+            this.timeWorkedContainer.TabStop = false;
+            // 
             // UserControlHomeUi
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.timeWorkedContainer);
             this.Controls.Add(this.editKey);
             this.Controls.Add(this.versionLabel);
             this.Controls.Add(this.coreVersionLabel);
-            this.Controls.Add(this.timeTodayLabel);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.screenPanel);
-            this.Controls.Add(this.timeThisWeekLabel);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.outKey);
             this.Controls.Add(this.inKey);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "UserControlHomeUi";
             this.Size = new System.Drawing.Size(884, 511);
+            this.timeWorkedContainer.ResumeLayout(false);
+            this.timeWorkedContainer.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -196,5 +216,6 @@
         private System.Windows.Forms.Label coreVersionLabel;
         private System.Windows.Forms.Label versionLabel;
         private System.Windows.Forms.Button editKey;
+        private System.Windows.Forms.GroupBox timeWorkedContainer;
     }
 }

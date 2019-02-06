@@ -93,6 +93,11 @@
                                     out var navToDaily);
                                 navToDaily?.Invoke();
                                 break;
+                            case NavKeyLabels.Config:
+                                navReader.ReadConfig(
+                                    out var navToConfig);
+                                navToConfig?.Invoke();
+                                break;
                         }
                     });
                 });

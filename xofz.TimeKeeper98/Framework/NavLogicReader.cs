@@ -2,14 +2,17 @@
 {
     public interface NavLogicReader
     {
-        void ReadStatistics(
-            out Do presentStatistics);
-
         void ReadTimestamps(
             out Do presentTimestamps);
 
+        void ReadStatistics(
+            out Do presentStatistics);
+
         void ReadDaily(
             out Do presentDaily);
+
+        void ReadConfig(
+            out Do presentConfig);
 
         void ReadExit(
             out Do exit);

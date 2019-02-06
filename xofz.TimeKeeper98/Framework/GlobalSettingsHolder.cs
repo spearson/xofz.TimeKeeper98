@@ -9,5 +9,7 @@
         public virtual string TitleText { get; set; }
 
         public virtual bool Prompt { get; set; }
+
+        public virtual bool ShowSeconds { get; set; }
     }
 }

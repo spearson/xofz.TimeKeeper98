@@ -14,11 +14,13 @@
             MethodWeb web,
             Navigator navigator,
             Messenger messenger,
+            ConfigSaver configSaver,
             SettingsProvider settingsProvider)
         {
             this.web = web;
             this.navigator = navigator;
             this.messenger = messenger;
+            this.configSaver = configSaver;
             this.settingsProvider = settingsProvider;
         }
 
@@ -50,6 +52,8 @@
             w.RegisterDependency(
                 sp.Provide());
             w.RegisterDependency(
+                this.configSaver);
+            w.RegisterDependency(
                 new TextFileLog("Exceptions.log"),
                 LogNames.Exceptions);
         }
@@ -57,6 +61,7 @@
         protected readonly MethodWeb web;
         protected readonly Navigator navigator;
         protected readonly Messenger messenger;
+        protected readonly ConfigSaver configSaver;
         protected readonly SettingsProvider settingsProvider;
     }
 }

@@ -13,13 +13,6 @@
             this.web = web;
         }
 
-        void NavLogicReader.ReadStatistics(
-            out Do presentStatistics)
-        {
-            var nav = this.web.Run<Navigator>();
-            presentStatistics = nav.Present<StatisticsPresenter>;
-        }
-
         void NavLogicReader.ReadTimestamps(
             out Do presentTimestamps)
         {
@@ -27,11 +20,24 @@
             presentTimestamps = nav.Present<TimestampsPresenter>;
         }
 
+        void NavLogicReader.ReadStatistics(
+            out Do presentStatistics)
+        {
+            var nav = this.web.Run<Navigator>();
+            presentStatistics = nav.Present<StatisticsPresenter>;
+        }
+
         void NavLogicReader.ReadDaily(
             out Do presentDaily)
         {
             var nav = this.web.Run<Navigator>();
             presentDaily = nav.Present<DailyPresenter>;
+        }
+
+        void NavLogicReader.ReadConfig(out Do presentConfig)
+        {
+            var nav = this.web.Run<Navigator>();
+            presentConfig = nav.Present<ConfigPresenter>;
         }
 
         void NavLogicReader.ReadExit(
