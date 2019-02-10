@@ -64,10 +64,10 @@
             m.Subscriber = s;
 
             var e = this.executor;
-            var w = new ThreadSafeMethodWeb();
+            var w = new MethodWebV2();
             e.Execute(new SetupMethodWebCommand(
                 w, 
-                new ThreadSafeNavigator(w), 
+                new NavigatorV2(w), 
                 m,
                 new AppConfigConfigSaver(w), 
                 new AppConfigSettingsProvider()));
