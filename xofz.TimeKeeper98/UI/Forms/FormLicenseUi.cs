@@ -34,6 +34,7 @@
                 return;
             }
 
+            this.Location = s.Location;
             this.Show(s);
         }
 
