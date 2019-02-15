@@ -57,6 +57,8 @@
     <Compile Include="Framework\Config\ShowSecondsSelectedHandler.cs" />
     <Compile Include="Framework\Config\ShowSecondsUnselectedHandler.cs" />
     <Compile Include="Framework\Config\StartHandler.cs" />
+    <Compile Include="Framework\Config\PublishKeyTappedHandler.cs" />
+    <Compile Include="Framework\Core98Publisher.cs" />
     <Compile Include="Framework\Daily\CurrentKeyTappedHandler.cs" />
     <Compile Include="Framework\Daily\HomeUiOutKeyTappedHandler.cs" />
     <Compile Include="Framework\Daily\SettingsHolder.cs" />
@@ -79,6 +81,8 @@
     <Compile Include="Framework\Home\SetupHandler.cs" />
     <Compile Include="Framework\Home\StartHandler.cs" />
     <Compile Include="Framework\Home\TimerHandler.cs" />
+    <Compile Include="Framework\License\AcceptKeyTappedHandler.cs" />
+    <Compile Include="Framework\License\RejectKeyTappedHandler.cs" />
     <Compile Include="Framework\MethodNames.cs" />
     <Compile Include="Framework\NavLogicReader.cs" />
     <Compile Include="Framework\SettingsProvider.cs" />
@@ -91,18 +95,27 @@
     <Compile Include="Framework\TimestampEdit\ErrorMessages.cs" />
     <Compile Include="Framework\UiReader.cs" />
     <Compile Include="Presentation\ConfigPresenter.cs" />
+    <Compile Include="Presentation\LicensePresenter.cs" />
     <Compile Include="Presentation\NavigatorNavLogicReader.cs" />
     <Compile Include="Presentation\NavigatorUiReader.cs" />
     <Compile Include="Root\Commands\SetupConfigCommand.cs" />
     <Compile Include="Root\Commands\SetupHomeNavCommand.cs" />
+    <Compile Include="Root\Commands\SetupLicenseCommand.cs" />
     <Compile Include="Root\LogNames.cs" />
     <Compile Include="UI\ConfigUi.cs" />
+    <Compile Include="UI\Forms\FormLicenseUi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\FormLicenseUi.Designer.cs">
+      <DependentUpon>FormLicenseUi.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\UserConfigConfigUi.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\Forms\UserConfigConfigUi.Designer.cs">
       <DependentUpon>UserConfigConfigUi.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\LicenseUi.cs" />
     <Compile Include="UI\NavKeyLabels.cs" />
     <Compile Include="Framework\StatisticsCalculator.cs" />
     <Compile Include="Framework\Statistics\CurrentWeekKeyTappedHandler.cs" />
@@ -213,6 +226,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UI\Forms\FormLicenseUi.resx">
+      <DependentUpon>FormLicenseUi.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\FormMainUi.resx">
       <DependentUpon>FormMainUi.cs</DependentUpon>
     </EmbeddedResource>
@@ -261,6 +277,9 @@
   <Target Name="AfterResolveReferences">
     <ItemGroup>
       <EmbeddedResource Include="@(ReferenceCopyLocalPaths)" Condition="'%(ReferenceCopyLocalPaths.Extension)' == '.dll'">
+        <LogicalName>%(ReferenceCopyLocalPaths.DestinationSubDirectory)%(ReferenceCopyLocalPaths.Filename)%(ReferenceCopyLocalPaths.Extension)</LogicalName>
+      </EmbeddedResource>
+      <EmbeddedResource Include="@(ReferenceCopyLocalPaths)" Condition="'%(ReferenceCopyLocalPaths.Extension)' == '.pdb'">
         <LogicalName>%(ReferenceCopyLocalPaths.DestinationSubDirectory)%(ReferenceCopyLocalPaths.Filename)%(ReferenceCopyLocalPaths.Extension)</LogicalName>
       </EmbeddedResource>
     </ItemGroup>

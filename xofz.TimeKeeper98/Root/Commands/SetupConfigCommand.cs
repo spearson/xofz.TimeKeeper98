@@ -2,6 +2,7 @@
 {
     using xofz.Framework;
     using xofz.Root;
+    using xofz.TimeKeeper98.Framework;
     using xofz.TimeKeeper98.Framework.Config;
     using xofz.TimeKeeper98.Presentation;
     using xofz.TimeKeeper98.UI;
@@ -54,6 +55,10 @@
                 new KeyboardLoader());
             w.RegisterDependency(
                 new KeyboardKeyTappedHandler(w));
+            w.RegisterDependency(
+                new PublishKeyTappedHandler(w));
+            w.RegisterDependency(
+                new Core98Publisher(w));
         }
 
         protected readonly ConfigUi ui;

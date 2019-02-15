@@ -89,6 +89,7 @@
             TimestampEditUi editUi = null;
             DailyUi dailyUi = null;
             ConfigUi configUi = null;
+            LicenseUi licenseUi = null;
             w.Run<UiReaderWriter, Lotter>(
                 (uiRW, lotter) =>
             {
@@ -103,6 +104,7 @@
                         editUi = new UserControlTimestampEditUi();
                         dailyUi = new UserControlDailyUi(lotter);
                         configUi = new UserConfigConfigUi();
+                        licenseUi = new FormLicenseUi(s);
                     });
             });
 
@@ -157,6 +159,12 @@
             ThreadPool.QueueUserWorkItem(
                 o => e.Execute(
                     new SetupShutdownCommand(
+                        w)));
+
+            ThreadPool.QueueUserWorkItem(
+                o => e.Execute(
+                    new SetupLicenseCommand(
+                        licenseUi,
                         w)));
 
             homeFinished.WaitOne();

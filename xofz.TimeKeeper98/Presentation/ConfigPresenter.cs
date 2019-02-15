@@ -70,6 +70,10 @@
                     this.ui,
                     nameof(this.ui.ShowSecondsUnselected),
                     this.ui_ShowSecondsUnselected);
+                sub.Subscribe(
+                    this.ui,
+                    nameof(this.ui.PublishKeyTapped),
+                    this.ui_PublishKeyTapped);
             });
 
             w.Run<Navigator>(nav => nav.RegisterPresenter(this));
@@ -150,6 +154,15 @@
         {
             var w = this.web;
             w.Run<ShowSecondsUnselectedHandler>(handler =>
+            {
+                handler.Handle();
+            });
+        }
+
+        private void ui_PublishKeyTapped()
+        {
+            var w = this.web;
+            w.Run<PublishKeyTappedHandler>(handler =>
             {
                 handler.Handle();
             });

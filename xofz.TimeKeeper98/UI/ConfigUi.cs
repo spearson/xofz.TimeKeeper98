@@ -20,6 +20,8 @@
 
         event Do ShowSecondsUnselected;
 
+        event Do PublishKeyTapped;
+
         bool PromptChecked { get; set; }
 
         bool ShowSecondsChecked { get; set; }

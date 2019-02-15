@@ -15,6 +15,8 @@
 
         public virtual event Do ShowSecondsUnselected;
 
+        public virtual event Do PublishKeyTapped;
+
         public virtual event Do PromptSelected;
 
         public virtual event Do PromptUnselected;
@@ -144,6 +146,17 @@
             }
 
             ThreadPool.QueueUserWorkItem(o => kkt.Invoke());
+        }
+
+        private void publishKey_Click(object sender, System.EventArgs e)
+        {
+            var pkt = this.PublishKeyTapped;
+            if (pkt == null)
+            {
+                return;
+            }
+
+            ThreadPool.QueueUserWorkItem(o => pkt.Invoke());
         }
     }
 }

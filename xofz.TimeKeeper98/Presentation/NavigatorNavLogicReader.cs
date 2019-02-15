@@ -40,6 +40,12 @@
             presentConfig = nav.Present<ConfigPresenter>;
         }
 
+        void NavLogicReader.ReadLicense(out Do presentLicense)
+        {
+            var nav = this.web.Run<Navigator>();
+            presentLicense = nav.Present<LicensePresenter>;
+        }
+
         void NavLogicReader.ReadExit(
             out Do exit)
         {

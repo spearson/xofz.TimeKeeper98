@@ -37,6 +37,10 @@
             this.saveTitleTextKey = new System.Windows.Forms.Button();
             this.defaultTitleTextKeyTapped = new System.Windows.Forms.Button();
             this.keyboardKey = new System.Windows.Forms.Button();
+            this.publishKey = new System.Windows.Forms.Button();
+            this.core98GroupBox = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.core98GroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -164,9 +168,48 @@
             this.keyboardKey.UseVisualStyleBackColor = true;
             this.keyboardKey.Click += new System.EventHandler(this.keyboardKey_Click);
             // 
+            // publishKey
+            // 
+            this.publishKey.AutoSize = true;
+            this.publishKey.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.publishKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.publishKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.publishKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.publishKey.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.publishKey.Location = new System.Drawing.Point(9, 88);
+            this.publishKey.Name = "publishKey";
+            this.publishKey.Size = new System.Drawing.Size(92, 34);
+            this.publishKey.TabIndex = 100;
+            this.publishKey.Text = "Publish";
+            this.publishKey.UseVisualStyleBackColor = true;
+            this.publishKey.Click += new System.EventHandler(this.publishKey_Click);
+            // 
+            // core98GroupBox
+            // 
+            this.core98GroupBox.Controls.Add(this.label3);
+            this.core98GroupBox.Controls.Add(this.publishKey);
+            this.core98GroupBox.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.core98GroupBox.Location = new System.Drawing.Point(503, 165);
+            this.core98GroupBox.Name = "core98GroupBox";
+            this.core98GroupBox.Size = new System.Drawing.Size(303, 160);
+            this.core98GroupBox.TabIndex = 101;
+            this.core98GroupBox.TabStop = false;
+            this.core98GroupBox.Text = "xofz.Core98";
+            // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(6, 28);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(255, 57);
+            this.label3.TabIndex = 101;
+            this.label3.Text = "Library and PDB may be published to current program directory after accepting lic" +
+    "ense";
+            // 
             // UserConfigConfigUi
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.core98GroupBox);
             this.Controls.Add(this.keyboardKey);
             this.Controls.Add(this.defaultTitleTextKeyTapped);
             this.Controls.Add(this.saveTitleTextKey);
@@ -178,6 +221,8 @@
             this.Controls.Add(this.label1);
             this.Name = "UserConfigConfigUi";
             this.Size = new System.Drawing.Size(884, 345);
+            this.core98GroupBox.ResumeLayout(false);
+            this.core98GroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -194,5 +239,8 @@
         private System.Windows.Forms.Button saveTitleTextKey;
         private System.Windows.Forms.Button defaultTitleTextKeyTapped;
         private System.Windows.Forms.Button keyboardKey;
+        private System.Windows.Forms.Button publishKey;
+        private System.Windows.Forms.GroupBox core98GroupBox;
+        private System.Windows.Forms.Label label3;
     }
 }

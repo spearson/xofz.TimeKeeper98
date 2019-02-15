@@ -14,6 +14,9 @@
         void ReadConfig(
             out Do presentConfig);
 
+        void ReadLicense(
+            out Do presentLicense);
+
         void ReadExit(
             out Do exit);
     }
