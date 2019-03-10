@@ -17,6 +17,12 @@
             out Do presentTimestamps)
         {
             var nav = this.web.Run<Navigator>();
+            if (nav == null)
+            {
+                presentTimestamps = null;
+                return;
+            }
+
             presentTimestamps = nav.Present<TimestampsPresenter>;
         }
 
@@ -24,6 +30,12 @@
             out Do presentStatistics)
         {
             var nav = this.web.Run<Navigator>();
+            if (nav == null)
+            {
+                presentStatistics = null;
+                return;
+            }
+
             presentStatistics = nav.Present<StatisticsPresenter>;
         }
 
@@ -31,18 +43,37 @@
             out Do presentDaily)
         {
             var nav = this.web.Run<Navigator>();
+            if (nav == null)
+            {
+                presentDaily = null;
+                return;
+            }
             presentDaily = nav.Present<DailyPresenter>;
         }
 
-        void NavLogicReader.ReadConfig(out Do presentConfig)
+        void NavLogicReader.ReadConfig(
+            out Do presentConfig)
         {
             var nav = this.web.Run<Navigator>();
+            if (nav == null)
+            {
+                presentConfig = null;
+                return;
+            }
+
             presentConfig = nav.Present<ConfigPresenter>;
         }
 
-        void NavLogicReader.ReadLicense(out Do presentLicense)
+        void NavLogicReader.ReadLicense(
+            out Do presentLicense)
         {
             var nav = this.web.Run<Navigator>();
+            if (nav == null)
+            {
+                presentLicense = null;
+                return;
+            }
+
             presentLicense = nav.Present<LicensePresenter>;
         }
 
@@ -50,6 +81,12 @@
             out Do exit)
         {
             var nav = this.web.Run<Navigator>();
+            if (nav == null)
+            {
+                exit = null;
+                return;
+            }
+
             exit = nav.Present<ShutdownPresenter>;
         }
 

@@ -82,7 +82,6 @@
             base.Start();
 
             var w = this.web;
-
             w.Run<StartHandler>(handler =>
                 handler.Handle(
                     this.ui));
@@ -103,7 +102,6 @@
         private void ui_CurrentKeyTapped()
         {
             var w = this.web;
-
             w.Run<CurrentKeyTappedHandler>(handler =>
             {
                 handler.Handle(
@@ -114,7 +112,6 @@
         private void ui_StatisticsRangeKeyTapped()
         {
             var w = this.web;
-
             w.Run<StatisticsRangeKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
@@ -129,7 +126,6 @@
             }
 
             var w = this.web;
-
             w.Run<HomeUiOutKeyTappedHandler>(handler =>
             {
                 handler.Handle(

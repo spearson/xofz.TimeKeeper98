@@ -84,7 +84,10 @@
             base.Start();
 
             var w = this.web;
-            w.Run<StartHandler>(handler => handler.Handle());
+            w.Run<StartHandler>(handler =>
+            {
+                handler.Handle();
+            });
         }
 
         private void ui_PromptSelected()

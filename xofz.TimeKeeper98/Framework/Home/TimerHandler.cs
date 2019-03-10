@@ -1,7 +1,6 @@
 ﻿namespace xofz.TimeKeeper98.Framework.Home
 {
     using xofz.Framework;
-    using xofz.TimeKeeper98.Framework.TimeSpanViewers;
     using xofz.UI;
     using xofz.TimeKeeper98.UI;
 
@@ -32,11 +31,12 @@
                 var timeToday = calc.TimeWorkedToday();
                 var thisWeekString = viewer.ReadableString(timeThisWeek);
                 var todayString = viewer.ReadableString(timeToday);
-                var inKeyVisible = !calc.ClockedIn();
+                var outKeyVisible = calc.ClockedIn();
                 var editKeyEnabled = false;
                 foreach (var timestamp in reader.Read())
                 {
                     editKeyEnabled = true;
+                    break;
                 }
 
                 uiRW.Write(
@@ -46,8 +46,8 @@
                         ui.EditKeyEnabled = editKeyEnabled;
                         ui.TimeWorkedThisWeek = thisWeekString;
                         ui.TimeWorkedToday = todayString;
-                        ui.InKeyVisible = inKeyVisible;
-                        ui.OutKeyVisible = !inKeyVisible;
+                        ui.InKeyVisible = !outKeyVisible;
+                        ui.OutKeyVisible = outKeyVisible;
                     });
             });
 

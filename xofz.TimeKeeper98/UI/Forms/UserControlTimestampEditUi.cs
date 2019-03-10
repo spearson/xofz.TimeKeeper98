@@ -85,7 +85,8 @@
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => skt.Invoke());
+            ThreadPool.QueueUserWorkItem(
+                o => skt.Invoke());
         }
     }
 }

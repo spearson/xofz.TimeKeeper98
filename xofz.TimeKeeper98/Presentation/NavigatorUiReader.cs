@@ -13,15 +13,29 @@
             this.web = web;
         }
 
-        void UiReader.ReadHomeNav(out HomeNavUi ui)
+        void UiReader.ReadHomeNav(
+            out HomeNavUi ui)
         {
             var nav = this.web.Run<Navigator>();
+            if (nav == null)
+            {
+                ui = null;
+                return;
+            }
+
             ui = nav.GetUi<HomeNavPresenter, HomeNavUi>();
         }
 
-        void UiReader.ReadStatistics(out StatisticsUi ui)
+        void UiReader.ReadStatistics(
+            out StatisticsUi ui)
         {
             var nav = this.web.Run<Navigator>();
+            if (nav == null)
+            {
+                ui = null;
+                return;
+            }
+
             ui = nav.GetUi<StatisticsPresenter, StatisticsUi>();
         }
 

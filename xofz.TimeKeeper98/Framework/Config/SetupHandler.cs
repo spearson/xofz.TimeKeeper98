@@ -27,12 +27,17 @@
                     });
 
                     w.Run<PromptSelectedHandler>(
-                        handler => handler.Handle(ui));
+                        handler =>
+                        {
+                            handler.Handle(ui);
+                        });
                     return;
                 }
 
                 w.Run<PromptUnselectedHandler>(handler =>
-                    handler.Handle(ui));
+                {
+                    handler.Handle(ui);
+                });
             });
 
             w.Run<ResetTitleTextKeyTappedHandler>(handler =>
@@ -53,12 +58,18 @@
                     });
 
                     w.Run<ShowSecondsSelectedHandler>(
-                        handler => handler.Handle());
+                        handler =>
+                        {
+                            handler.Handle();
+                        });
                     return;
                 }
 
-                w.Run<ShowSecondsUnselectedHandler>(handler =>
-                    handler.Handle());
+                w.Run<ShowSecondsUnselectedHandler>(
+                    handler =>
+                {
+                    handler.Handle();
+                });
             });
         }
 
