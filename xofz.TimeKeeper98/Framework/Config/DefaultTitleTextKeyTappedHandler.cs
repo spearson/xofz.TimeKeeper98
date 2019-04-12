@@ -27,9 +27,12 @@
 
                     w.Run<TitleUi>(shell =>
                     {
-                        uiRW.WriteSync(
+                        uiRW.Write(
                             shell,
-                            () => shell.Title = titleText);
+                            () =>
+                            {
+                                shell.Title = titleText;
+                            });
                     });
                 });
         }

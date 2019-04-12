@@ -15,7 +15,8 @@
             var w = this.web;
             w.Run<NavLogicReader>(reader =>
             {
-                reader.ReadLicense(out var presentLicense);
+                reader.ReadLicense(
+                    out var presentLicense);
                 presentLicense?.Invoke();
             });
         }

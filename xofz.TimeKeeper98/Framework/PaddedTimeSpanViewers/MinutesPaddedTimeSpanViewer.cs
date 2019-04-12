@@ -2,12 +2,12 @@
 {
     using System;
 
-    public class PaddedMinutesTimeSpanViewer : PaddedTimeSpanViewer
+    public class MinutesPaddedTimeSpanViewer : PaddedTimeSpanViewer
     {
         public override string ReadableString(TimeSpan timeSpan)
         {
             return ((long)timeSpan.TotalHours).ToString().PadLeft(3)
-                   + "h "
+                   + @"h "
                    + timeSpan.Minutes.ToString().PadLeft(2)
                    + 'm';
         }

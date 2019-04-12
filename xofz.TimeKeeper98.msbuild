@@ -33,6 +33,7 @@
       Guid="084c471d-35ef-46d1-b6a3-3d79091feaa8"
       AssemblyVersion="$(Version)"
       AssemblyFileVersion="$(Version)"
+      CLSCompliant="true"
     />
   </Target>
 

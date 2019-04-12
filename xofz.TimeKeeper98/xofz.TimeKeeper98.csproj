@@ -90,7 +90,7 @@
     <Compile Include="Framework\SettingsProviders\Constants.cs" />
     <Compile Include="Framework\Statistics\DependencyNames.cs" />
     <Compile Include="Framework\TimeSpanViewers\MinutesTimeSpanViewer.cs" />
-    <Compile Include="Framework\PaddedTimeSpanViewers\PaddedMinutesTimeSpanViewer.cs" />
+    <Compile Include="Framework\PaddedTimeSpanViewers\MinutesPaddedTimeSpanViewer.cs" />
     <Compile Include="Framework\PaddedTimeSpanViewer.cs" />
     <Compile Include="Framework\TimestampEdit\ErrorMessages.cs" />
     <Compile Include="Framework\UiReader.cs" />

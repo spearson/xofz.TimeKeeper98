@@ -19,7 +19,11 @@
             {
                 settings.Prompt = false;
             });
-            w.Run<ConfigSaver>(saver => { saver.Save(); });
+
+            w.Run<ConfigSaver>(saver =>
+            {
+                saver.Save();
+            });
         }
 
         protected readonly MethodWeb web;

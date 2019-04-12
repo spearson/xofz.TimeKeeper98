@@ -16,7 +16,7 @@
         {
             var w = this.web;
             w.Unregister<PaddedTimeSpanViewer>();
-            w.RegisterDependency(new PaddedMinutesTimeSpanViewer());
+            w.RegisterDependency(new MinutesPaddedTimeSpanViewer());
             w.Unregister<TimeSpanViewer>();
             w.RegisterDependency(
                 new MinutesTimeSpanViewer());

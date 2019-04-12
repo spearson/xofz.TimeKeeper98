@@ -61,7 +61,7 @@
             w.RegisterDependency(
                 new MinutesTimeSpanViewer());
             w.RegisterDependency(
-                new PaddedMinutesTimeSpanViewer());
+                new MinutesPaddedTimeSpanViewer());
             w.RegisterDependency(
                 new StatisticsCalculator(w));
             w.RegisterDependency(

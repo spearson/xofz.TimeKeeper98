@@ -203,7 +203,6 @@
                 watcher.Start();
             });
 
-
             w.Run<Navigator>(
                 n =>
                 {
