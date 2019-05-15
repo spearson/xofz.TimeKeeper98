@@ -15,6 +15,7 @@
     <WorkingFolder>$(teamcity_build_workingDir)</WorkingFolder>
     <ZipFolder>$(ProjectName)-v$(Version)</ZipFolder>
     <DeployFolder>H:\Dropbox\xofz.Apps\TimeKeeper98</DeployFolder>
+    <DeployFolder2>H:\OneDrive\xofz.Apps\TimeKeeper98</DeployFolder2>
   </PropertyGroup>
 
 
@@ -89,16 +90,24 @@
     DependsOnTargets="Zip">
     <MakeDir
       Directories="$(DeployFolder)"
-      Condition="!Exists('$(DeployFolder)')"
+      Condition="!Exists('$(DeployFolder)')"    
+    />
+    <MakeDir
+      Directories="$(DeployFolder2)"
+      Condition="!Exists('$(DeployFolder2)')"
     />
     <ItemGroup>
       <FilesToDeploy
         Include="$(ProjectName)-v$(Version).zip"
       />
     </ItemGroup>
-    <MV
+    <Copy
       SourceFiles="@(FilesToDeploy)"
       DestinationFolder="$(DeployFolder)"
+    />
+    <Copy
+      SourceFiles="@(FilesToDeploy)"
+      DestinationFolder="$(DeployFolder2)"
     />
   </Target>
 </Project>
