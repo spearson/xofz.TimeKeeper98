@@ -8,15 +8,15 @@
     public sealed class NavigatorUiReader : UiReader
     {
         public NavigatorUiReader(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         void UiReader.ReadHomeNav(
             out HomeNavUi ui)
         {
-            var nav = this.web.Run<Navigator>();
+            var nav = this.runner.Run<Navigator>();
             if (nav == null)
             {
                 ui = null;
@@ -29,7 +29,7 @@
         void UiReader.ReadStatistics(
             out StatisticsUi ui)
         {
-            var nav = this.web.Run<Navigator>();
+            var nav = this.runner.Run<Navigator>();
             if (nav == null)
             {
                 ui = null;
@@ -39,6 +39,6 @@
             ui = nav.GetUi<StatisticsPresenter, StatisticsUi>();
         }
 
-        private readonly MethodWeb web;
+        private readonly MethodRunner runner;
     }
 }

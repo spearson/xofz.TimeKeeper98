@@ -5,15 +5,15 @@
     public class TimestampsKeyTappedHandler
     {
         public TimestampsKeyTappedHandler(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual void Handle()
         {
-            var w = this.web;
-            w.Run<NavLogicReader>(reader =>
+            var r = this.runner;
+            r.Run<NavLogicReader>(reader =>
             {
                 reader.ReadTimestamps(
                     out var navToTimestamps);
@@ -21,6 +21,6 @@
             });
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

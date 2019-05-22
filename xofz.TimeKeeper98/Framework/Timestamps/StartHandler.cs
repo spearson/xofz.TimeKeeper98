@@ -10,9 +10,9 @@
     public class StartHandler
     {
         public StartHandler(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual void Handle(
@@ -20,8 +20,8 @@
             HomeNavUi homeNavUi,
             StatisticsUi statsUi)
         {
-            var w = this.web;
-            w.Run<UiReaderWriter>(uiRW =>
+            var r = this.runner;
+            r.Run<UiReaderWriter>(uiRW =>
             {
                 uiRW.Write(
                     homeNavUi,
@@ -32,14 +32,14 @@
             });
 
             var showCurrent = true;
-            w.Run<SettingsHolder>(settings =>
+            r.Run<SettingsHolder>(settings =>
             {
                 showCurrent = settings.ShowCurrent;
             });
             DateTime start = DateTime.Today, end = start.AddDays(1);
             if (showCurrent)
             {
-                w.Run<DateCalculator>(
+                r.Run<DateCalculator>(
                     calc =>
                     {
                         start = calc.StartOfWeek();
@@ -48,7 +48,7 @@
                 goto findAndSetTimesInRange;
             }
 
-            w.Run<UiReaderWriter>(uiRW =>
+            r.Run<UiReaderWriter>(uiRW =>
             {
                 start = uiRW.Read(
                     statsUi,
@@ -60,7 +60,7 @@
             });
 
             findAndSetTimesInRange:
-            w.Run<
+            r.Run<
                 TimestampReader,
                 Lotter,
                 EnumerableSplitter,
@@ -158,7 +158,7 @@
                             ui.OutTimes = uiTimesOut;
                         });
 
-                    w.Run<EnumerableSplicer>(
+                    r.Run<EnumerableSplicer>(
                         splicer =>
                         {
                             var splicedTimes = splicer.Splice(
@@ -198,7 +198,7 @@
                                     this.formatTimestamp));
                             
                             var showDurations = false;
-                            w.Run<SettingsHolder>(settings =>
+                            r.Run<SettingsHolder>(settings =>
                             {
                                 showDurations = settings.ShowDurations;
                             });
@@ -207,7 +207,7 @@
                             {
                                 ICollection<string> newInOutTimes = new LinkedList<string>();
                                 var closedLot = lot;
-                                w.Run<TimeSpanViewer>(v =>
+                                r.Run<TimeSpanViewer>(v =>
                                 {
                                     indexer = 0;
                                     var e = durations.GetEnumerator();
@@ -252,9 +252,9 @@
 
         protected virtual bool isInTime(DateTime timestamp)
         {
-            var w = this.web;
+            var r = this.runner;
             var inTime = false;
-            w.Run<TimestampReader>(reader =>
+            r.Run<TimestampReader>(reader =>
             {
                 long indexer = 0;
                 foreach (var ts in reader.Read())
@@ -274,9 +274,9 @@
 
         protected virtual string formatTimestamp(DateTime timeStamp)
         {
-            var w = this.web;
+            var r = this.runner;
             string formattedTimestamp = null;
-            w.Run<GlobalSettingsHolder>(settings =>
+            r.Run<GlobalSettingsHolder>(settings =>
             {
                 formattedTimestamp = timeStamp.ToString(
                     settings.TimestampFormat);
@@ -285,6 +285,6 @@
             return formattedTimestamp;
         }
         
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

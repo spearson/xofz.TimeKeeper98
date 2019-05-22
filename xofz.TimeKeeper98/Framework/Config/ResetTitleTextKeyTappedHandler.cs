@@ -7,15 +7,16 @@
     public class ResetTitleTextKeyTappedHandler
     {
         public ResetTitleTextKeyTappedHandler(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
-        public virtual void Handle(ConfigUi ui)
+        public virtual void Handle(
+            ConfigUi ui)
         {
-            var w = this.web;
-            w.Run<GlobalSettingsHolder, UiReaderWriter>(
+            var r = this.runner;
+            r.Run<GlobalSettingsHolder, UiReaderWriter>(
                 (settings, uiRW) =>
                 {
                     var titleText = settings.TitleText;
@@ -25,6 +26,6 @@
                 });
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

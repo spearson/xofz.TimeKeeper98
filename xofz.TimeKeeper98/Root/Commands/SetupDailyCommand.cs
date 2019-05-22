@@ -35,7 +35,8 @@
         protected virtual void registerDependencies()
         {
             var w = this.web;
-            w.RegisterDependency(this.uiReader);
+            w.RegisterDependency(
+                this.uiReader);
             w.RegisterDependency(
                 new SettingsHolder());
             w.RegisterDependency(

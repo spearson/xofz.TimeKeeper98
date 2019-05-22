@@ -6,9 +6,9 @@
     public class HomeUiInKeyTappedHandler
     {
         public HomeUiInKeyTappedHandler(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual void Handle(
@@ -16,8 +16,8 @@
             HomeNavUi homeNavUi,
             StatisticsUi statsUi)
         {
-            var w = this.web;
-            w.Run<StartHandler>(handler =>
+            var r = this.runner;
+            r.Run<StartHandler>(handler =>
             {
                 handler.Handle(
                     ui,
@@ -26,6 +26,6 @@
             });
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

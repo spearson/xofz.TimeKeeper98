@@ -10,9 +10,10 @@
     public class FileTimestampManager 
         : TimestampReader, TimestampWriter
     {
-        public FileTimestampManager(MethodWeb web)
+        public FileTimestampManager(
+            MethodWeb runner)
         {
-            this.web = web;
+            this.runner = runner;
             this.mainDirectory = DataDirectory;
         }
 
@@ -98,8 +99,8 @@
                 Thread.Sleep(0);
             }
 
-            var w = this.web;
-            var trapper = w.Run<EnumerableTrapper<DateTime>>();
+            var r = this.runner;
+            var trapper = r.Run<EnumerableTrapper<DateTime>>();
             var firstRead = false;
             if (Interlocked.CompareExchange(
                     ref this.firstReadIf0, 
@@ -110,7 +111,7 @@
                 trapper.TrapNow(this.readAllTimestamps());
             }
 
-            w.Run<FieldHolder>(holder =>
+            r.Run<FieldHolder>(holder =>
             {
                 if (Interlocked.CompareExchange(
                         ref holder.needToTrapIf1, 
@@ -143,8 +144,8 @@
                 break;
             }
 
-            var w = this.web;
-            return w.Run<EnumerableTrapper<DateTime>>()
+            var r = this.runner;
+            return r.Run<EnumerableTrapper<DateTime>>()
                        ?.TrappedCollection
                    ?? new LinkedList<DateTime>();
         }
@@ -190,18 +191,19 @@
 
         bool TimestampWriter.Write()
         {
-            var w = this.web;
+            var r = this.runner;
             var md = this.mainDirectory;
-            if (!Directory.Exists(md))
+
+            try
             {
-                try
+                if (!Directory.Exists(md))
                 {
                     Directory.CreateDirectory(md);
                 }
-                catch
-                {
-                    return false;
-                }
+            }
+            catch
+            {
+                return false;
             }
 
             var tickCount = DateTime.Now.Ticks;
@@ -246,7 +248,7 @@
             }
             
             succeeded:
-            w.Run<FieldHolder>(holder =>
+            r.Run<FieldHolder>(holder =>
             {
                 Interlocked.CompareExchange(
                     ref holder.needToTrapIf1,
@@ -259,15 +261,26 @@
 
         void TimestampWriter.EditLastTimestamp(DateTime newTimestamp)
         {
-            var w = this.web;
+            var r = this.runner;
             var md = this.mainDirectory;
-            if (!Directory.Exists(md))
+            string[] filesInDir;
+            try
+            {
+                if (!Directory.Exists(md))
+                {
+                    return;
+                }
+
+                filesInDir = Directory.GetFiles(md);
+            }
+            catch
             {
                 return;
             }
 
+
             var orderedPaths = EnumerableHelpers.OrderByDescending(
-                Directory.GetFiles(md), 
+                filesInDir,
                 s => s);
             if (orderedPaths.Count < 1)
             {
@@ -307,7 +320,7 @@
                 return;
             }
 
-            w.Run<FieldHolder>(holder =>
+            r.Run<FieldHolder>(holder =>
             {
                 Interlocked.CompareExchange(
                     ref holder.needToTrapIf1,
@@ -318,7 +331,7 @@
         }
 
         protected long firstReadIf0, readingIf1;
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
         protected readonly string mainDirectory;
     }
 }

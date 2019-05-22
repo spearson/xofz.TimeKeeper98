@@ -6,26 +6,25 @@
     public class PromptSelectedHandler
     {
         public PromptSelectedHandler(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual void Handle(
             ConfigUi ui)
         {
-            var w = this.web;
-            w.Run<GlobalSettingsHolder>(settings =>
+            var r = this.runner;
+            r.Run<GlobalSettingsHolder>(settings =>
             {
                 settings.Prompt = true;
             });
-
-            w.Run<ConfigSaver>(saver =>
+            r.Run<ConfigSaver>(saver =>
             {
                 saver.Save();
             });
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

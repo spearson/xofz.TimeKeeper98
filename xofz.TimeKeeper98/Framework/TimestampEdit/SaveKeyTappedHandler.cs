@@ -9,16 +9,16 @@
     public class SaveKeyTappedHandler
     {
         public SaveKeyTappedHandler(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual void Handle(
             TimestampEditUi ui)
         {
-            var w = this.web;
-            w.Run<
+            var r = this.runner;
+            r.Run<
                 TimestampReader, 
                 UiReaderWriter>(
                 (reader, uiRW) =>
@@ -40,7 +40,7 @@
                         ?.Value;
                     if (newTimestamp < previousTimestamp)
                     {
-                        w.Run<Messenger>(m =>
+                        r.Run<Messenger>(m =>
                         {
                             uiRW.Write(
                                 m.Subscriber,
@@ -54,7 +54,7 @@
                     checkNow:
                     if (newTimestamp > DateTime.Now)
                     {
-                        w.Run<Messenger>(m =>
+                        r.Run<Messenger>(m =>
                         {
                             uiRW.Write(
                                 m.Subscriber,
@@ -65,7 +65,7 @@
                         return;
                     }
 
-                    w.Run<DataWatcher, TimestampWriter>(
+                    r.Run<DataWatcher, TimestampWriter>(
                         (watcher, writer) =>
                     {
                         watcher.Stop();
@@ -73,7 +73,7 @@
                         watcher.Start();
                     });
 
-                    w.Run<SettingsHolder, NavLogicReader>(
+                    r.Run<SettingsHolder, NavLogicReader>(
                         (settings, navReader) =>
                     {
                         switch (settings.LastVisitedKeyLabel)
@@ -103,6 +103,6 @@
                 });
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

@@ -6,9 +6,10 @@
 
     public class StatisticsCalculator
     {
-        public StatisticsCalculator(MethodWeb web)
+        public StatisticsCalculator(
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual bool ClockedIn()
@@ -18,8 +19,8 @@
 
         public virtual TimeSpan TimeWorkedThisWeek()
         {
-            var w = this.web;
-            var calc = w.Run<DateCalculator>();
+            var r = this.runner;
+            var calc = r.Run<DateCalculator>();
             var beginning = calc.StartOfWeek();
             var end = calc.EndOfWeek().AddDays(1);
 
@@ -186,12 +187,12 @@
 
         protected virtual ICollection<DateTime> allTimes()
         {
-            var w = this.web;
-            return w.Run<TimestampReader>()
+            var r = this.runner;
+            return r.Run<TimestampReader>()
                        ?.ReadAll() 
                    ?? new LinkedList<DateTime>();
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

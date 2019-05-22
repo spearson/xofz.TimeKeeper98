@@ -3,7 +3,6 @@
     using System.Threading;
     using xofz.Framework;
     using xofz.Presentation;
-    using xofz.TimeKeeper98.Framework;
     using xofz.TimeKeeper98.Framework.Statistics;
     using xofz.TimeKeeper98.UI;
     using xofz.UI;
@@ -13,11 +12,11 @@
         public StatisticsPresenter(
             StatisticsUi ui,
             ShellUi shell,
-            MethodWeb web)
+            MethodRunner runner)
             : base(ui, shell)
         {
             this.ui = ui;
-            this.web = web;
+            this.runner = runner;
         }
 
         public void Setup()
@@ -30,13 +29,12 @@
                 return;
             }
 
-            var w = this.web;
-            w.Run<SetupHandler>(handler =>
+            var r = this.runner;
+            r.Run<SetupHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
-
-            w.Run<EventSubscriber>(subscriber =>
+            r.Run<EventSubscriber>(subscriber =>
             {
                 subscriber.Subscribe(
                     this.ui,
@@ -54,7 +52,7 @@
                     this.ui,
                     nameof(this.ui.NextWeekKeyTapped),
                     this.ui_NextWeekKeyTapped);
-                w.Run<xofz.Framework.Timer>(t =>
+                r.Run<xofz.Framework.Timer>(t =>
                     {
                         subscriber.Subscribe(
                             t,
@@ -64,22 +62,23 @@
                     DependencyNames.Timer);
             });
 
-            w.Run<Navigator>(nav => nav.RegisterPresenter(this));
+            r.Run<Navigator>(nav =>
+                nav.RegisterPresenter(this));
         }
 
         public override void Start()
         {
-            var w = this.web;
+            var r = this.runner;
 
             base.Start();
 
             HomeNavUi hnUi = null;
-            w.Run<Navigator>(nav =>
+            r.Run<Navigator>(nav =>
             {
                 hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
             });
 
-            w.Run<StartHandler>(handler =>
+            r.Run<StartHandler>(handler =>
             {
                 handler.Handle(hnUi);
             });
@@ -87,8 +86,8 @@
 
         public override void Stop()
         {
-            var w = this.web;
-            w.Run<StopHandler>(handler =>
+            var r = this.runner;
+            r.Run<StopHandler>(handler =>
             {
                 handler.Handle();
             });
@@ -96,8 +95,8 @@
 
         private void ui_CurrentWeekKeyTapped()
         {
-            var w = this.web;
-            w.Run<CurrentWeekKeyTappedHandler>(handler =>
+            var r = this.runner;
+            r.Run<CurrentWeekKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -105,8 +104,8 @@
 
         private void ui_PreviousWeekKeyTapped()
         {
-            var w = this.web;
-            w.Run<PreviousWeekKeyTappedHandler>(handler =>
+            var r = this.runner;
+            r.Run<PreviousWeekKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -114,8 +113,8 @@
 
         private void ui_NextWeekKeyTapped()
         {
-            var w = this.web;
-            w.Run<NextWeekKeyTappedHandler>(handler =>
+            var r = this.runner;
+            r.Run<NextWeekKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -123,8 +122,8 @@
 
         private void ui_DateChanged()
         {
-            var w = this.web;
-            w.Run<DateChangedHandler>(handler =>
+            var r = this.runner;
+            r.Run<DateChangedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -132,8 +131,8 @@
 
         private void timer_Elapsed()
         {
-            var w = this.web;
-            w.Run<TimerHandler>(handler =>
+            var r = this.runner;
+            r.Run<TimerHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -141,6 +140,6 @@
 
         private long setupIf1;
         private readonly StatisticsUi ui;
-        private readonly MethodWeb web;
+        private readonly MethodRunner runner;
     }
 }

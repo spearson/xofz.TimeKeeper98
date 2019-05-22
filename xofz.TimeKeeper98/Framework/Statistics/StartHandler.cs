@@ -7,26 +7,25 @@
     public class StartHandler
     {
         public StartHandler(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual void Handle(
             HomeNavUi hnUi)
         {
-            var w = this.web;
-            w.Run<UiReaderWriter>(uiRW =>
+            var r = this.runner;
+            r.Run<UiReaderWriter>(uiRW =>
             {
                 uiRW.Write(
                     hnUi,
                     () => hnUi.ActiveKeyLabel = 
                         NavKeyLabels.Statistics);
             });
-
-            w.Run<xofz.Framework.Timer>(t =>
+            r.Run<xofz.Framework.Timer>(t =>
                 {
-                    w.Run<EventRaiser>(er =>
+                    r.Run<EventRaiser>(er =>
                     {
                         er.Raise(
                             t,
@@ -38,6 +37,6 @@
                 DependencyNames.Timer);
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

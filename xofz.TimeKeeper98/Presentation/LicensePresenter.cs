@@ -11,22 +11,25 @@
     {
         public LicensePresenter(
             LicenseUi ui,
-            MethodWeb web) 
+            MethodRunner runner) 
             : base(ui)
         {
             this.ui = ui;
-            this.web = web;
+            this.runner = runner;
         }
 
         public void Setup()
         {
-            if (Interlocked.CompareExchange(ref this.setupIf1, 1, 0) == 1)
+            if (Interlocked.CompareExchange(
+                    ref this.setupIf1, 
+                    1, 
+                    0) == 1)
             {
                 return;
             }
 
-            var w = this.web;
-            w.Run<EventSubscriber>(sub =>
+            var r = this.runner;
+            r.Run<EventSubscriber>(sub =>
             {
                 sub.Subscribe(
                     this.ui,
@@ -38,13 +41,14 @@
                     this.ui_RejectKeyTapped);
             });
 
-            w.Run<Navigator>(nav => nav.RegisterPresenter(this));
+            r.Run<Navigator>(nav => 
+                nav.RegisterPresenter(this));
         }
 
         private void ui_AcceptKeyTapped()
         {
-            var w = this.web;
-            w.Run<AcceptKeyTappedHandler>(handler =>
+            var r = this.runner;
+            r.Run<AcceptKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -52,8 +56,8 @@
 
         private void ui_RejectKeyTapped()
         {
-            var w = this.web;
-            w.Run<RejectKeyTappedHandler>(handler =>
+            var r = this.runner;
+            r.Run<RejectKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -61,6 +65,6 @@
 
         private long setupIf1;
         private readonly LicenseUi ui;
-        private readonly MethodWeb web;
+        private readonly MethodRunner runner;
     }
 }

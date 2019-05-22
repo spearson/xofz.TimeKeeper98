@@ -7,22 +7,22 @@
     public class OutKeyTappedHandler
     {
         public OutKeyTappedHandler(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual void Handle(
             HomeUi ui)
         {
-            var w = this.web;
+            var r = this.runner;
 
             var accepted = true;
-            w.Run<GlobalSettingsHolder>(settings =>
+            r.Run<GlobalSettingsHolder>(settings =>
             {
                 if (settings.Prompt)
                 {
-                    w.Run<UiReaderWriter, Messenger>((uiRW, m) =>
+                    r.Run<UiReaderWriter, Messenger>((uiRW, m) =>
                     {
                         accepted = uiRW.Read(
                                        m.Subscriber,
@@ -38,10 +38,10 @@
                 return;
             }
 
-            w.Run<xofz.Framework.Timer>(t =>
+            r.Run<xofz.Framework.Timer>(t =>
                 {
                     t.Stop();
-                    w.Run<LatchHolder>(timerLatch =>
+                    r.Run<LatchHolder>(timerLatch =>
                         {
                             timerLatch.Latch.WaitOne();
                         }
@@ -49,7 +49,7 @@
                 },
                 DependencyNames.Timer);
 
-            w.Run<
+            r.Run<
                 UiReaderWriter, 
                 TimestampWriter,
                 DataWatcher>(
@@ -63,12 +63,12 @@
                 watcher.Start();
             });
 
-            w.Run<StartHandler>(handler =>
+            r.Run<StartHandler>(handler =>
             {
                 handler.Handle(ui);
             });
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

@@ -8,9 +8,9 @@
     public class Core98Publisher
     {
         public Core98Publisher(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual bool Publish()
@@ -52,6 +52,6 @@
             }
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

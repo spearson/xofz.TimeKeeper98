@@ -9,9 +9,9 @@
     public class StartHandler
     {
         public StartHandler(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual void Handle(
@@ -19,10 +19,10 @@
             HomeNavUi hnUi,
             HomeUi homeUi)
         {
-            var w = this.web;
-            w.Run<UiReaderWriter>(uiRW =>
+            var r = this.runner;
+            r.Run<UiReaderWriter>(uiRW =>
             {
-                w.Run<TimestampReader>(reader =>
+                r.Run<TimestampReader>(reader =>
                     {
                         var allColl = reader.ReadAll();
 
@@ -38,25 +38,34 @@
                             .Value;
                         uiRW.Write(
                             ui,
-                            () => ui.EditedTimestamp = lastTimestamp);
+                            () =>
+                            {
+                                ui.EditedTimestamp = lastTimestamp;
+                            });
                     });
 
-                w.Run<SettingsHolder>(settings =>
+                r.Run<SettingsHolder>(settings =>
                     {
                         settings.LastVisitedKeyLabel = uiRW.Read(
                             hnUi,
                             () => hnUi.ActiveKeyLabel);
                         uiRW.Write(
                             hnUi,
-                            () => hnUi.ActiveKeyLabel = null);
+                            () =>
+                            {
+                                hnUi.ActiveKeyLabel = null;
+                            });
                     });
 
                 uiRW.Write(
                     homeUi,
-                    () => homeUi.Editing = true);
+                    () =>
+                    {
+                        homeUi.Editing = true;
+                    });
             });
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

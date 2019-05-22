@@ -6,9 +6,9 @@
     public class ShowDurationsChangedHandler
     {
         public ShowDurationsChangedHandler(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual void Handle(
@@ -17,13 +17,12 @@
             StatisticsUi statsUi,
             bool shouldShow)
         {
-            var w = this.web;
-            w.Run<SettingsHolder>(settings =>
+            var r = this.runner;
+            r.Run<SettingsHolder>(settings =>
             {
                 settings.ShowDurations = shouldShow;
             });
-
-            w.Run<StartHandler>(handler =>
+            r.Run<StartHandler>(handler =>
             {
                 handler.Handle(
                     ui,
@@ -32,6 +31,6 @@
             });
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

@@ -7,14 +7,14 @@
     public sealed class AppConfigConfigSaver : ConfigSaver
     {
         public AppConfigConfigSaver(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         void ConfigSaver.Save()
         {
-            var w = this.web;
+            var w = this.runner;
             w.Run<GlobalSettingsHolder>(settings =>
             {
                 var sb = new StringBuilder();
@@ -54,7 +54,7 @@
                         nameof(xofz)
                         + '.'
                         + nameof(TimeKeeper98) +
-                        ".exe.config",
+                        @".exe.config",
                         sb.ToString());
                 }
                 catch
@@ -64,6 +64,6 @@
             });
         }
 
-        private readonly MethodWeb web;
+        private readonly MethodRunner runner;
     }
 }

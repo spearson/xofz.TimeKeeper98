@@ -7,16 +7,16 @@
     public class PreviousWeekKeyTappedHandler
     {
         public PreviousWeekKeyTappedHandler(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual void Handle(
             StatisticsUi ui)
         {
-            var w = this.web;
-            w.Run<UiReaderWriter>(uiRW =>
+            var r = this.runner;
+            r.Run<UiReaderWriter>(uiRW =>
             {
                 var currentStart = uiRW.Read(
                     ui,
@@ -35,6 +35,6 @@
             });
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

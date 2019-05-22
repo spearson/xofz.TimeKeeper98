@@ -6,26 +6,26 @@
     public class StartHandler
     {
         public StartHandler(
-            MethodWeb web)
+            MethodWeb runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual void Handle(
             HomeUi ui)
         {
-            var w = this.web;
-            w.Run<TimerHandler>(handler =>
+            var r = this.runner;
+            r.Run<TimerHandler>(handler =>
             {
                 handler.Handle(ui);
             });
-            w.Run<xofz.Framework.Timer>(t =>
+            r.Run<xofz.Framework.Timer>(t =>
                 {
                     t.Start(1000);
                 },
                 DependencyNames.Timer);
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

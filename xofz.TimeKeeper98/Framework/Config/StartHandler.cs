@@ -7,15 +7,15 @@
     public class StartHandler
     {
         public StartHandler(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual void Handle()
         {
-            var w = this.web;
-            w.Run<UiReader, UiReaderWriter>((reader, uiRW) =>
+            var r = this.runner;
+            r.Run<UiReader, UiReaderWriter>((reader, uiRW) =>
             {
                 reader.ReadHomeNav(out var homeNavUi);
                 uiRW.Write(
@@ -27,6 +27,6 @@
             });
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

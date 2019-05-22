@@ -7,21 +7,20 @@
     public class AcceptKeyTappedHandler
     {
         public AcceptKeyTappedHandler(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual void Handle(
             LicenseUi ui)
         {
-            var w = this.web;
-            w.Run<Core98Publisher>(pub =>
+            var r = this.runner;
+            r.Run<Core98Publisher>(pub =>
             {
                 pub.Publish();
             });
-
-            w.Run<UiReaderWriter>(uiRW =>
+            r.Run<UiReaderWriter>(uiRW =>
             {
                 uiRW.Write(
                     ui,
@@ -29,6 +28,6 @@
             });
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

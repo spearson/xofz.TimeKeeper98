@@ -9,17 +9,17 @@
     public class StartHandler
     {
         public StartHandler(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual void Handle(
             DailyUi ui)
         {
-            var w = this.web;
-            var reader = w.Run<UiReader>();
-            w.Run<UiReaderWriter>(uiRW =>
+            var r = this.runner;
+            var reader = r.Run<UiReader>();
+            r.Run<UiReaderWriter>(uiRW =>
             {
                 reader.ReadHomeNav(out var homeNavUi);
                 uiRW.Write(
@@ -30,14 +30,14 @@
                     });
             });
             var showCurrent = true;
-            w.Run<SettingsHolder>(settings =>
+            r.Run<SettingsHolder>(settings =>
             {
                 showCurrent = settings.ShowCurrent;
             });
 
             reader.ReadStatistics(out var statsUi);
             var ll = new LinkedListLot<string>();
-            w.Run<
+            r.Run<
                 StatisticsCalculator, 
                 DateCalculator,
                 UiReaderWriter,
@@ -68,7 +68,7 @@
                     ll.AddLast(
                         currentDay.Date.ToString(
                             @"yyyy/MM/dd ddd")
-                        + " ---- "
+                        + @" ---- "
                         + viewer.ReadableString(
                             statsCalc.TimeWorked(
                                 today,
@@ -77,14 +77,17 @@
                 }
             });
 
-            w.Run<UiReaderWriter>(uiRW =>
+            r.Run<UiReaderWriter>(uiRW =>
             {
                 uiRW.Write(
                     ui,
-                    () => ui.Info = ll);
+                    () =>
+                    {
+                        ui.Info = ll;
+                    });
             });
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

@@ -7,16 +7,16 @@
     public class KeyboardKeyTappedHandler
     {
         public KeyboardKeyTappedHandler(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual void Handle(
             ConfigUi ui)
         {
-            var w = this.web;
-            w.Run<KeyboardLoader>(loader =>
+            var r = this.runner;
+            r.Run<KeyboardLoader>(loader =>
             {
                 try
                 {
@@ -27,7 +27,7 @@
                     // oh noes!! windows 98!
                 }
             });
-            w.Run<UiReaderWriter>(uiRW =>
+            r.Run<UiReaderWriter>(uiRW =>
             {
                 uiRW.Write(
                     ui,
@@ -35,6 +35,6 @@
             });
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

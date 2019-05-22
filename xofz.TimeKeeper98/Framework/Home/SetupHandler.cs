@@ -6,19 +6,19 @@
 
     public class SetupHandler
     {
-        public SetupHandler(MethodWeb web)
+        public SetupHandler(
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual void Handle(
             HomeUi ui)
         {
-            var w = this.web;
-
-            w.Run<UiReaderWriter>(uiRW =>
+            var r = this.runner;
+            r.Run<UiReaderWriter>(uiRW =>
             {
-                w.Run<
+                r.Run<
                     StatisticsCalculator,
                     TimestampReader>(
                     (calc, reader) =>
@@ -39,7 +39,7 @@
                         });
                     });
 
-                w.Run<VersionReader>(
+                r.Run<VersionReader>(
                     vr =>
                     {
                         var appVersion = vr.Read();
@@ -53,7 +53,7 @@
                             });
                     });
 
-                w.Run<TitleUi, GlobalSettingsHolder>(
+                r.Run<TitleUi, GlobalSettingsHolder>(
                     (shell, settings) =>
                     {
                         var title = settings.TitleText;
@@ -67,6 +67,6 @@
             });
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

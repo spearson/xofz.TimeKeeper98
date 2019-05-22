@@ -7,25 +7,31 @@
     public class DefaultTitleTextKeyTappedHandler
     {
         public DefaultTitleTextKeyTappedHandler(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
-        public virtual void Handle(ConfigUi ui)
+        public virtual void Handle(
+            ConfigUi ui)
         {
-            var w = this.web;
-            w.Run<GlobalSettingsHolder, UiReaderWriter>(
+            var r = this.runner;
+            r.Run<GlobalSettingsHolder, UiReaderWriter>(
                 (settings, uiRW) =>
                 {
                     var titleText = UiConstants.DefaultTitle;
                     uiRW.Write(
                         ui,
-                        () => ui.TitleText = titleText);
+                        () =>
+                        {
+                            ui.TitleText = titleText;
+                        });
                     settings.TitleText = titleText;
-                    w.Run<ConfigSaver>(saver => { saver.Save(); });
-
-                    w.Run<TitleUi>(shell =>
+                    r.Run<ConfigSaver>(saver =>
+                    {
+                        saver.Save();
+                    });
+                    r.Run<TitleUi>(shell =>
                     {
                         uiRW.Write(
                             shell,
@@ -37,6 +43,6 @@
                 });
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

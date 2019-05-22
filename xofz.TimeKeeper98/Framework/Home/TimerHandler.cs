@@ -6,21 +6,22 @@
 
     public class TimerHandler
     {
-        public TimerHandler(MethodWeb web)
+        public TimerHandler(
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual void Handle(
             HomeUi ui)
         {
-            var w = this.web;
-            w.Run<LatchHolder>(timerLatch =>
+            var r = this.runner;
+            r.Run<LatchHolder>(timerLatch =>
                 {
                     timerLatch.Latch.Reset();
                 },
                 DependencyNames.Latch);
-            w.Run<
+            r.Run<
                 UiReaderWriter,
                 StatisticsCalculator,
                 PaddedTimeSpanViewer,
@@ -51,13 +52,13 @@
                     });
             });
 
-            w.Run<LatchHolder>(timerLatch =>
+            r.Run<LatchHolder>(timerLatch =>
                 {
                     timerLatch.Latch.Set();
                 },
                 DependencyNames.Latch);
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

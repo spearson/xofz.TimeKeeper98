@@ -5,15 +5,15 @@
     public class ConfigKeyTappedHandler
     {
         public ConfigKeyTappedHandler(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual void Handle()
         {
-            var w = this.web;
-            w.Run<NavLogicReader>(reader =>
+            var r = this.runner;
+            r.Run<NavLogicReader>(reader =>
             {
                 reader.ReadConfig(
                     out var present);
@@ -21,6 +21,6 @@
             });
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

@@ -13,7 +13,7 @@
         public SetupConfigCommand(
             ConfigUi ui,
             ShellUi shell,
-            ThreadSafeMethodWeb web)
+            MethodWebV2 web)
         {
             this.ui = ui;
             this.shell = shell;
@@ -63,6 +63,6 @@
 
         protected readonly ConfigUi ui;
         protected readonly ShellUi shell;
-        protected readonly ThreadSafeMethodWeb web;
+        protected readonly MethodWebV2 web;
     }
 }

@@ -8,29 +8,31 @@
     public class SaveCurrentKeyTappedHandler
     {
         public SaveCurrentKeyTappedHandler(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual void Handle(
             TimestampEditUi ui)
         {
-            var w = this.web;
-            w.Run<UiReaderWriter>(uiRW =>
+            var r = this.runner;
+            r.Run<UiReaderWriter>(uiRW =>
             {
                 var currentTime = DateTime.Now;
                 uiRW.WriteSync(
                     ui,
-                    () => ui.EditedTimestamp = currentTime);
+                    () =>
+                    {
+                        ui.EditedTimestamp = currentTime;
+                    });
             });
-
-            w.Run<SaveKeyTappedHandler>(handler =>
+            r.Run<SaveKeyTappedHandler>(handler =>
             {
                 handler.Handle(ui);
             });
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

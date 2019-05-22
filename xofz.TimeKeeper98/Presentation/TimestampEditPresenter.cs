@@ -12,11 +12,11 @@
         public TimestampEditPresenter(
             TimestampEditUi ui,
             ShellUi shell,
-            MethodWeb web)
+            MethodRunner runner)
             : base(ui, shell)
         {
             this.ui = ui;
-            this.web = web;
+            this.runner = runner;
         }
 
         public void Setup()
@@ -29,13 +29,13 @@
                 return;
             }
 
-            var w = this.web;
-            w.Run<SetupHandler>(handler =>
+            var r = this.runner;
+            r.Run<SetupHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
 
-            w.Run<EventSubscriber>(subscriber =>
+            r.Run<EventSubscriber>(subscriber =>
             {
                 subscriber.Subscribe(
                     this.ui,
@@ -51,23 +51,24 @@
                     this.ui_SaveCurrentKeyTapped);
             });
 
-            w.Run<Navigator>(nav => nav.RegisterPresenter(this));
+            r.Run<Navigator>(nav => 
+                nav.RegisterPresenter(this));
         }
 
         public override void Start()
         {
             base.Start();
 
-            var w = this.web;
+            var r = this.runner;
             HomeNavUi hnUi = null;
             HomeUi homeUi = null;
-            w.Run<Navigator>(nav =>
+            r.Run<Navigator>(nav =>
             {
                 hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
                 homeUi = nav.GetUi<HomePresenter, HomeUi>();
             });
 
-            w.Run<StartHandler>(handler =>
+            r.Run<StartHandler>(handler =>
             {
                 handler.Handle(
                     this.ui,
@@ -78,14 +79,14 @@
 
         public override void Stop()
         {
-            var w = this.web;
+            var r = this.runner;
             HomeUi homeUi = null;
-            w.Run<Navigator>(nav =>
+            r.Run<Navigator>(nav =>
             {
                 homeUi = nav.GetUi<HomePresenter, HomeUi>();
             });
 
-            w.Run<StopHandler>(handler =>
+            r.Run<StopHandler>(handler =>
             {
                 handler.Handle(homeUi);
             });
@@ -93,9 +94,8 @@
 
         private void ui_SaveKeyTapped()
         {
-            var w = this.web;
-
-            w.Run<SaveKeyTappedHandler>(handler =>
+            var r = this.runner;
+            r.Run<SaveKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -103,9 +103,8 @@
 
         private void ui_SaveCurrentKeyTapped()
         {
-            var w = this.web;
-
-            w.Run<SaveCurrentKeyTappedHandler>(handler =>
+            var r = this.runner;
+            r.Run<SaveCurrentKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -113,8 +112,8 @@
 
         private void ui_CancelKeyTapped()
         {
-            var w = this.web;
-            w.Run<CancelKeyTappedHandler>(handler =>
+            var r = this.runner;
+            r.Run<CancelKeyTappedHandler>(handler =>
             {
                 handler.Handle();
             });
@@ -122,6 +121,6 @@
 
         private long setupIf1;
         private readonly TimestampEditUi ui;
-        private readonly MethodWeb web;
+        private readonly MethodRunner runner;
     }
 }

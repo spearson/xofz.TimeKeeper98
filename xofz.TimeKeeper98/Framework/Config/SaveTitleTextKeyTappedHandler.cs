@@ -7,26 +7,27 @@
     public class SaveTitleTextKeyTappedHandler
     {
         public SaveTitleTextKeyTappedHandler(
-            MethodWeb web)
+            MethodWeb runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
-        public virtual void Handle(ConfigUi ui)
+        public virtual void Handle(
+            ConfigUi ui)
         {
-            var w = this.web;
-            w.Run<GlobalSettingsHolder, UiReaderWriter>(
+            var r = this.runner;
+            r.Run<GlobalSettingsHolder, UiReaderWriter>(
                 (settings, uiRW) =>
                 {
                     var tt = uiRW.Read(
                         ui,
                         () => ui.TitleText);
                     settings.TitleText = tt;
-                    w.Run<ConfigSaver>(saver =>
+                    r.Run<ConfigSaver>(saver =>
                     {
                         saver.Save();
                     });
-                    w.Run<TitleUi>(shell =>
+                    r.Run<TitleUi>(shell =>
                     {
                         uiRW.WriteSync(
                             shell,
@@ -35,6 +36,6 @@
                 });
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

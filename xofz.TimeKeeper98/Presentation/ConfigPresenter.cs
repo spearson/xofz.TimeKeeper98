@@ -13,11 +13,11 @@
         public ConfigPresenter(
             ConfigUi ui, 
             ShellUi shell,
-            MethodWeb web) 
+            MethodRunner runner) 
             : base(ui, shell)
         {
             this.ui = ui;
-            this.web = web;
+            this.runner = runner;
         }
 
         public void Setup()
@@ -30,13 +30,13 @@
                 return;
             }
 
-            var w = this.web;
-            w.Run<SetupHandler>(handler =>
+            var r = this.runner;
+            r.Run<SetupHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
 
-            w.Run<EventSubscriber>(sub =>
+            r.Run<EventSubscriber>(sub =>
             {
                 sub.Subscribe(
                     this.ui,
@@ -76,15 +76,16 @@
                     this.ui_PublishKeyTapped);
             });
 
-            w.Run<Navigator>(nav => nav.RegisterPresenter(this));
+            r.Run<Navigator>(nav =>
+                nav.RegisterPresenter(this));
         }
 
         public override void Start()
         {
             base.Start();
 
-            var w = this.web;
-            w.Run<StartHandler>(handler =>
+            var r = this.runner;
+            r.Run<StartHandler>(handler =>
             {
                 handler.Handle();
             });
@@ -92,8 +93,8 @@
 
         private void ui_PromptSelected()
         {
-            var w = this.web;
-            w.Run<PromptSelectedHandler>(handler =>
+            var r = this.runner;
+            r.Run<PromptSelectedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -101,8 +102,8 @@
 
         private void ui_KeyboardKeyTapped()
         {
-            var w = this.web;
-            w.Run<KeyboardKeyTappedHandler>(handler =>
+            var r = this.runner;
+            r.Run<KeyboardKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -110,8 +111,8 @@
 
         private void ui_PromptUnselected()
         {
-            var w = this.web;
-            w.Run<PromptUnselectedHandler>(handler =>
+            var r = this.runner;
+            r.Run<PromptUnselectedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -119,8 +120,8 @@
 
         private void ui_SaveTitleTextKeyTapped()
         {
-            var w = this.web;
-            w.Run<SaveTitleTextKeyTappedHandler>(handler =>
+            var r = this.runner;
+            r.Run<SaveTitleTextKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -128,8 +129,8 @@
 
         private void ui_ResetTitleTextKeyTapped()
         {
-            var w = this.web;
-            w.Run<ResetTitleTextKeyTappedHandler>(handler =>
+            var r = this.runner;
+            r.Run<ResetTitleTextKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -137,8 +138,8 @@
 
         private void ui_DefaultTitleTextKeyTapped()
         {
-            var w = this.web;
-            w.Run<DefaultTitleTextKeyTappedHandler>(handler =>
+            var r = this.runner;
+            r.Run<DefaultTitleTextKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -146,8 +147,8 @@
 
         private void ui_ShowSecondsSelected()
         {
-            var w = this.web;
-            w.Run<ShowSecondsSelectedHandler>(handler =>
+            var r = this.runner;
+            r.Run<ShowSecondsSelectedHandler>(handler =>
             {
                 handler.Handle();
             });
@@ -155,8 +156,8 @@
 
         private void ui_ShowSecondsUnselected()
         {
-            var w = this.web;
-            w.Run<ShowSecondsUnselectedHandler>(handler =>
+            var r = this.runner;
+            r.Run<ShowSecondsUnselectedHandler>(handler =>
             {
                 handler.Handle();
             });
@@ -164,8 +165,8 @@
 
         private void ui_PublishKeyTapped()
         {
-            var w = this.web;
-            w.Run<PublishKeyTappedHandler>(handler =>
+            var r = this.runner;
+            r.Run<PublishKeyTappedHandler>(handler =>
             {
                 handler.Handle();
             });
@@ -173,6 +174,6 @@
 
         private long setupIf1;
         private readonly ConfigUi ui;
-        private readonly MethodWeb web;
+        private readonly MethodRunner runner;
     }
 }

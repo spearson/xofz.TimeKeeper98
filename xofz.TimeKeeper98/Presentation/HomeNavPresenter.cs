@@ -12,11 +12,11 @@
         public HomeNavPresenter(
             HomeNavUi ui,
             ShellUi shell,
-            MethodWeb web)
+            MethodRunner runner)
             : base(ui, shell)
         {
             this.ui = ui;
-            this.web = web;
+            this.runner = runner;
         }
 
         public void Setup()
@@ -29,8 +29,8 @@
                 return;
             }
 
-            var w = this.web;
-            w.Run<EventSubscriber>(subscriber =>
+            var r = this.runner;
+            r.Run<EventSubscriber>(subscriber =>
             {
                 subscriber.Subscribe(
                     this.ui,
@@ -54,46 +54,62 @@
                     this.ui_ExitKeyTapped);
             });
 
-            w.Run<Navigator>(nav => nav.RegisterPresenter(this));
+            r.Run<Navigator>(nav => 
+                nav.RegisterPresenter(this));
         }
 
         private void ui_StatisticsKeyTapped()
         {
-            var w = this.web;
-            w.Run<StatisticsKeyTappedHandler>(
-                handler => handler.Handle());
+            var r = this.runner;
+            r.Run<StatisticsKeyTappedHandler>(
+                handler =>
+                {
+                    handler.Handle();
+                });
         }
 
         private void ui_TimestampsKeyTapped()
         {
-            var w = this.web;
-            w.Run<TimestampsKeyTappedHandler>(
-                handler => handler.Handle());
+            var r = this.runner;
+            r.Run<TimestampsKeyTappedHandler>(
+                handler =>
+                {
+                    handler.Handle();
+                });
         }
 
         private void ui_DailyKeyTapped()
         {
-            var w = this.web;
-            w.Run<DailyKeyTappedHandler>(
-                handler => handler.Handle());
+            var r = this.runner;
+            r.Run<DailyKeyTappedHandler>(
+                handler =>
+                {
+                    handler.Handle();
+                });
         }
 
         private void ui_ConfigKeyTapped()
         {
-            var w = this.web;
-            w.Run<ConfigKeyTappedHandler>(
-                handler => handler.Handle());
+            var r = this.runner;
+            r.Run<ConfigKeyTappedHandler>(
+                handler =>
+                {
+                    handler.Handle();
+                });
         }
 
         private void ui_ExitKeyTapped()
         {
-            var w = this.web;
-            w.Run<ExitKeyTappedHandler>(
-                handler => handler.Handle());
+            var r = this.runner;
+            r.Run<ExitKeyTappedHandler>(
+                handler =>
+                {
+                    handler.Handle();
+                });
         }
 
         private long setupIf1;
         private readonly HomeNavUi ui;
-        private readonly MethodWeb web;
+        private readonly MethodRunner runner;
     }
 }

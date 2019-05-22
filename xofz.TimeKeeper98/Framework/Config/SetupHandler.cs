@@ -6,27 +6,32 @@
 
     public class SetupHandler
     {
-        public SetupHandler(MethodWeb web)
+        public SetupHandler(
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
-        public virtual void Handle(ConfigUi ui)
+        public virtual void Handle(
+            ConfigUi ui)
         {
-            var w = this.web;
-            w.Run<GlobalSettingsHolder>(settings =>
+            var r = this.runner;
+            r.Run<GlobalSettingsHolder>(settings =>
             {
                 var p = settings.Prompt;
                 if (p)
                 {
-                    w.Run<UiReaderWriter>(uiRW =>
+                    r.Run<UiReaderWriter>(uiRW =>
                     {
                         uiRW.WriteSync(
                             ui,
-                            () => ui.PromptChecked = true);
+                            () =>
+                            {
+                                ui.PromptChecked = true;
+                            });
                     });
 
-                    w.Run<PromptSelectedHandler>(
+                    r.Run<PromptSelectedHandler>(
                         handler =>
                         {
                             handler.Handle(ui);
@@ -34,30 +39,30 @@
                     return;
                 }
 
-                w.Run<PromptUnselectedHandler>(handler =>
+                r.Run<PromptUnselectedHandler>(handler =>
                 {
                     handler.Handle(ui);
                 });
             });
 
-            w.Run<ResetTitleTextKeyTappedHandler>(handler =>
+            r.Run<ResetTitleTextKeyTappedHandler>(handler =>
             {
                 handler.Handle(ui);
             });
 
-            w.Run<GlobalSettingsHolder>(settings =>
+            r.Run<GlobalSettingsHolder>(settings =>
             {
                 var ss = settings.ShowSeconds;
                 if (ss)
                 {
-                    w.Run<UiReaderWriter>(uiRW =>
+                    r.Run<UiReaderWriter>(uiRW =>
                     {
                         uiRW.WriteSync(
                             ui,
                             () => ui.ShowSecondsChecked = true);
                     });
 
-                    w.Run<ShowSecondsSelectedHandler>(
+                    r.Run<ShowSecondsSelectedHandler>(
                         handler =>
                         {
                             handler.Handle();
@@ -65,7 +70,7 @@
                     return;
                 }
 
-                w.Run<ShowSecondsUnselectedHandler>(
+                r.Run<ShowSecondsUnselectedHandler>(
                     handler =>
                 {
                     handler.Handle();
@@ -73,6 +78,6 @@
             });
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

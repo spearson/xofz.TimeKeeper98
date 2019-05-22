@@ -7,7 +7,7 @@
     public class ShowSecondsUnselectedHandler
     {
         public ShowSecondsUnselectedHandler(
-            ThreadSafeMethodWeb web)
+            MethodWebV2 web)
         {
             this.web = web;
         }
@@ -37,6 +37,6 @@
                 MethodNames.RefreshDaily);
         }
 
-        protected readonly ThreadSafeMethodWeb web;
+        protected readonly MethodWebV2 web;
     }
 }

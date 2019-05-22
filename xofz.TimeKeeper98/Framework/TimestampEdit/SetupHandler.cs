@@ -7,25 +7,28 @@
     public class SetupHandler
     {
         public SetupHandler(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual void Handle(
             TimestampEditUi ui)
         {
-            var w = this.web;
-            w.Run<GlobalSettingsHolder, UiReaderWriter>(
+            var r = this.runner;
+            r.Run<GlobalSettingsHolder, UiReaderWriter>(
                 (settings, uiRW) =>
                 {
                     var format = settings.EditTimestampFormat;
                     uiRW.Write(
                         ui,
-                        () => ui.TimestampFormat = format);
+                        () =>
+                        {
+                            ui.TimestampFormat = format;
+                        });
                 });
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

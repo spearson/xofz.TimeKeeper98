@@ -6,26 +6,26 @@
     public class CurrentKeyTappedHandler
     {
         public CurrentKeyTappedHandler(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual void Handle(
             DailyUi ui)
         {
-            var w = this.web;
-            w.Run<SettingsHolder>(settings =>
+            var r = this.runner;
+            r.Run<SettingsHolder>(settings =>
             {
                 settings.ShowCurrent = true;
             });
 
-            w.Run<StartHandler>(handler =>
+            r.Run<StartHandler>(handler =>
             {
                 handler.Handle(ui);
             });
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

@@ -6,19 +6,22 @@
     public class HomeUiOutKeyTappedHandler
     {
         public HomeUiOutKeyTappedHandler(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
-        public virtual void Handle(DailyUi ui)
+        public virtual void Handle(
+            DailyUi ui)
         {
-            var w = this.web;
-            w.Run<StartHandler>(handler =>
+            var r = this.runner;
+            r.Run<StartHandler>(handler =>
+            {
                 handler.Handle(
-                    ui));
+                    ui);
+            });
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

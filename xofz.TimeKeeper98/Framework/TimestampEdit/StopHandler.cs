@@ -7,23 +7,26 @@
     public class StopHandler
     {
         public StopHandler(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual void Handle(
             HomeUi homeUi)
         {
-            var w = this.web;
+            var w = this.runner;
             w.Run<UiReaderWriter>(uiRW =>
             {
                 uiRW.Write(
                     homeUi,
-                    () => homeUi.Editing = false);
+                    () =>
+                    {
+                        homeUi.Editing = false;
+                    });
             });
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

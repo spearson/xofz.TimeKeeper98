@@ -6,15 +6,15 @@
     public class CancelKeyTappedHandler
     {
         public CancelKeyTappedHandler(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual void Handle()
         {
-            var w = this.web;
-            w.Run<SettingsHolder, NavLogicReader>(
+            var r = this.runner;
+            r.Run<SettingsHolder, NavLogicReader>(
                 (settings, navReader) =>
                 {
                     switch (settings.LastVisitedKeyLabel)
@@ -43,6 +43,6 @@
                 });
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }

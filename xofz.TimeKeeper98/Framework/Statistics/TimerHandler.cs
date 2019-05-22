@@ -7,16 +7,16 @@
     public class TimerHandler
     {
         public TimerHandler(
-            MethodWeb web)
+            MethodRunner runner)
         {
-            this.web = web;
+            this.runner = runner;
         }
 
         public virtual void Handle(
             StatisticsUi ui)
         {
-            var w = this.web;
-            w.Run<
+            var r = this.runner;
+            r.Run<
                 UiReaderWriter,
                 StatisticsCalculator,
                 TimeSpanViewer>(
@@ -50,6 +50,6 @@
                 });
         }
 
-        protected readonly MethodWeb web;
+        protected readonly MethodRunner runner;
     }
 }
