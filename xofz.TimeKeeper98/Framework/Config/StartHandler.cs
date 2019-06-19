@@ -37,8 +37,9 @@
                         statsUi,
                         () => statsUi.StartDate);
                     var end = uiRW.Read(
-                        statsUi,
-                        () => statsUi.EndDate);
+                            statsUi,
+                            () => statsUi.EndDate)
+                        .AddDays(1);
                     var startOfWeek = dateCalc.StartOfWeek();
                     var endOfWeek = dateCalc.EndOfWeek();
                     long countThisWeek = 0;
