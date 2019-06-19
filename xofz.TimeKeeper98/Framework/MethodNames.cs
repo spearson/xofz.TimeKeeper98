@@ -7,5 +7,7 @@
         public const string RefreshHome = @"RefreshHome";
 
         public const string RefreshTimestamps = @"RefreshTimestamps";
+
+        public const string RefreshConfig = @"RefreshConfig";
     }
 }

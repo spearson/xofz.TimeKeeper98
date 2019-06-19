@@ -48,6 +48,8 @@
     <Compile Include="Framework\ConfigSaver.cs" />
     <Compile Include="Framework\ConfigSavers\AppConfigConfigSaver.cs" />
     <Compile Include="Framework\Config\DefaultTitleTextKeyTappedHandler.cs" />
+    <Compile Include="Framework\Config\HomeUiInKeyTappedHandler.cs" />
+    <Compile Include="Framework\Config\HomeUiOutKeyTappedHandler.cs" />
     <Compile Include="Framework\Config\KeyboardKeyTappedHandler.cs" />
     <Compile Include="Framework\Config\PromptSelectedHandler.cs" />
     <Compile Include="Framework\Config\PromptUnselectedHandler.cs" />

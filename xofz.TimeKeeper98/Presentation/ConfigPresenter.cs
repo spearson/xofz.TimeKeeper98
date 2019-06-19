@@ -74,6 +74,18 @@
                     this.ui,
                     nameof(this.ui.PublishKeyTapped),
                     this.ui_PublishKeyTapped);
+                r.Run<Navigator>(n =>
+                {
+                    var homeUi = n.GetUi<HomePresenter, HomeUi>();
+                    sub.Subscribe(
+                        homeUi,
+                        nameof(homeUi.InKeyTapped),
+                        this.homeUi_InKeyTapped);
+                    sub.Subscribe(
+                        homeUi,
+                        nameof(homeUi.OutKeyTapped),
+                        this.homeUi_OutKeyTapped);
+                });
             });
 
             r.Run<Navigator>(nav =>
@@ -87,7 +99,7 @@
             var r = this.runner;
             r.Run<StartHandler>(handler =>
             {
-                handler.Handle();
+                handler.Handle(this.ui);
             });
         }
 
@@ -169,6 +181,26 @@
             r.Run<PublishKeyTappedHandler>(handler =>
             {
                 handler.Handle();
+            });
+        }
+
+        private void homeUi_InKeyTapped()
+        {
+            var r = this.runner;
+            r.Run<HomeUiInKeyTappedHandler>(handler =>
+            {
+                handler.Handle(
+                    this.ui);
+            });
+        }
+
+        private void homeUi_OutKeyTapped()
+        {
+            var r = this.runner;
+            r.Run<HomeUiOutKeyTappedHandler>(handler =>
+            {
+                handler.Handle(
+                    this.ui);
             });
         }
 

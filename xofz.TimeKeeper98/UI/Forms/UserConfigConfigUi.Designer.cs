@@ -40,7 +40,15 @@
             this.publishKey = new System.Windows.Forms.Button();
             this.core98GroupBox = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.totalTimeStampCountLabel = new System.Windows.Forms.Label();
+            this.timestampCountGroupBox = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.thisWeekTimestampCountLabel = new System.Windows.Forms.Label();
+            this.statisticsRangeTimestampCountLabel = new System.Windows.Forms.Label();
             this.core98GroupBox.SuspendLayout();
+            this.timestampCountGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -188,7 +196,7 @@
             // 
             this.core98GroupBox.Controls.Add(this.label3);
             this.core98GroupBox.Controls.Add(this.publishKey);
-            this.core98GroupBox.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.core98GroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.core98GroupBox.Location = new System.Drawing.Point(503, 165);
             this.core98GroupBox.Name = "core98GroupBox";
             this.core98GroupBox.Size = new System.Drawing.Size(303, 160);
@@ -206,9 +214,86 @@
             this.label3.Text = "Library and PDB may be published to current program directory after accepting lic" +
     "ense";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(72, 43);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(42, 16);
+            this.label4.TabIndex = 102;
+            this.label4.Text = "Total:";
+            // 
+            // totalTimeStampCountLabel
+            // 
+            this.totalTimeStampCountLabel.AutoSize = true;
+            this.totalTimeStampCountLabel.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalTimeStampCountLabel.Location = new System.Drawing.Point(120, 34);
+            this.totalTimeStampCountLabel.Name = "totalTimeStampCountLabel";
+            this.totalTimeStampCountLabel.Size = new System.Drawing.Size(103, 28);
+            this.totalTimeStampCountLabel.TabIndex = 103;
+            this.totalTimeStampCountLabel.Text = "0000000";
+            // 
+            // timestampCountGroupBox
+            // 
+            this.timestampCountGroupBox.Controls.Add(this.statisticsRangeTimestampCountLabel);
+            this.timestampCountGroupBox.Controls.Add(this.thisWeekTimestampCountLabel);
+            this.timestampCountGroupBox.Controls.Add(this.label6);
+            this.timestampCountGroupBox.Controls.Add(this.label5);
+            this.timestampCountGroupBox.Controls.Add(this.totalTimeStampCountLabel);
+            this.timestampCountGroupBox.Controls.Add(this.label4);
+            this.timestampCountGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timestampCountGroupBox.Location = new System.Drawing.Point(263, 165);
+            this.timestampCountGroupBox.Name = "timestampCountGroupBox";
+            this.timestampCountGroupBox.Size = new System.Drawing.Size(234, 160);
+            this.timestampCountGroupBox.TabIndex = 104;
+            this.timestampCountGroupBox.TabStop = false;
+            this.timestampCountGroupBox.Text = "Timestamp Count";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(42, 88);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(72, 16);
+            this.label5.TabIndex = 104;
+            this.label5.Text = "This week:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(6, 132);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(108, 16);
+            this.label6.TabIndex = 105;
+            this.label6.Text = "Statistics Range:";
+            // 
+            // thisWeekTimestampCountLabel
+            // 
+            this.thisWeekTimestampCountLabel.AutoSize = true;
+            this.thisWeekTimestampCountLabel.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.thisWeekTimestampCountLabel.Location = new System.Drawing.Point(120, 79);
+            this.thisWeekTimestampCountLabel.Name = "thisWeekTimestampCountLabel";
+            this.thisWeekTimestampCountLabel.Size = new System.Drawing.Size(103, 28);
+            this.thisWeekTimestampCountLabel.TabIndex = 106;
+            this.thisWeekTimestampCountLabel.Text = "0000000";
+            // 
+            // statisticsRangeTimestampCountLabel
+            // 
+            this.statisticsRangeTimestampCountLabel.AutoSize = true;
+            this.statisticsRangeTimestampCountLabel.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statisticsRangeTimestampCountLabel.Location = new System.Drawing.Point(120, 123);
+            this.statisticsRangeTimestampCountLabel.Name = "statisticsRangeTimestampCountLabel";
+            this.statisticsRangeTimestampCountLabel.Size = new System.Drawing.Size(103, 28);
+            this.statisticsRangeTimestampCountLabel.TabIndex = 107;
+            this.statisticsRangeTimestampCountLabel.Text = "0000000";
+            // 
             // UserConfigConfigUi
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.timestampCountGroupBox);
             this.Controls.Add(this.core98GroupBox);
             this.Controls.Add(this.keyboardKey);
             this.Controls.Add(this.defaultTitleTextKeyTapped);
@@ -223,6 +308,8 @@
             this.Size = new System.Drawing.Size(884, 345);
             this.core98GroupBox.ResumeLayout(false);
             this.core98GroupBox.PerformLayout();
+            this.timestampCountGroupBox.ResumeLayout(false);
+            this.timestampCountGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -242,5 +329,12 @@
         private System.Windows.Forms.Button publishKey;
         private System.Windows.Forms.GroupBox core98GroupBox;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label totalTimeStampCountLabel;
+        private System.Windows.Forms.GroupBox timestampCountGroupBox;
+        private System.Windows.Forms.Label statisticsRangeTimestampCountLabel;
+        private System.Windows.Forms.Label thisWeekTimestampCountLabel;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
     }
 }

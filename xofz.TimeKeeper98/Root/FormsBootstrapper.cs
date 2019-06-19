@@ -226,7 +226,8 @@
             });
         }
 
-        protected virtual void setMainForm(FormMainUi mainForm)
+        protected virtual void setMainForm(
+            FormMainUi mainForm)
         {
             this.mainForm = mainForm;
         }

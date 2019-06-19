@@ -1,6 +1,7 @@
 ﻿namespace xofz.TimeKeeper98.Root.Commands
 {
     using xofz.Framework;
+    using xofz.Presentation;
     using xofz.Root;
     using xofz.TimeKeeper98.Framework;
     using xofz.TimeKeeper98.Framework.Config;
@@ -59,6 +60,19 @@
                 new PublishKeyTappedHandler(w));
             w.RegisterDependency(
                 new Core98Publisher(w));
+            w.RegisterDependency(
+                new HomeUiInKeyTappedHandler(w));
+            w.RegisterDependency(
+                new HomeUiOutKeyTappedHandler(w));
+            w.RegisterDependency((Do) (() =>
+                {
+                    w.Run<Navigator, StartHandler>((nav, handler) =>
+                    {
+                        handler.Handle(
+                            nav.GetUi<ConfigPresenter, ConfigUi>());
+                    });
+                }),
+                MethodNames.RefreshConfig);
         }
 
         protected readonly ConfigUi ui;

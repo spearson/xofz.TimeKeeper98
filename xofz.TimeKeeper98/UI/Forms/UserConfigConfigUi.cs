@@ -50,6 +50,27 @@
             set => this.titleTextTextBox.Text = value;
         }
 
+        string ConfigUi.TotalTimestampCount
+        {
+            get => this.totalTimeStampCountLabel.Text;
+
+            set => this.totalTimeStampCountLabel.Text = value;
+        }
+
+        string ConfigUi.InRangeTimestampCount
+        {
+            get => this.statisticsRangeTimestampCountLabel.Text;
+
+            set => this.statisticsRangeTimestampCountLabel.Text = value;
+        }
+
+        string ConfigUi.ThisWeekTimestampCount
+        {
+            get => this.thisWeekTimestampCountLabel.Text;
+
+            set => this.thisWeekTimestampCountLabel.Text = value;
+        }
+
         void ConfigUi.FocusTitleTextTextBox()
         {
             this.titleTextTextBox.Focus();

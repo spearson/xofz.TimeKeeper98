@@ -118,6 +118,11 @@
                     refreshDaily.Invoke();
                 },
                 MethodNames.RefreshDaily);
+            w.Run<Do>(refreshConfig =>
+                {
+                    refreshConfig.Invoke();
+                },
+                MethodNames.RefreshConfig);
         }
 
         protected long setupIf1;

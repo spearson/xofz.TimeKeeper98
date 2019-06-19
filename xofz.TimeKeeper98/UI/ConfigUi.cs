@@ -28,6 +28,12 @@
 
         string TitleText { get; set; }
 
+        string TotalTimestampCount { get; set; }
+
+        string InRangeTimestampCount { get; set; }
+
+        string ThisWeekTimestampCount { get; set; }
+
         void FocusTitleTextTextBox();
     }
 }
