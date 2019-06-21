@@ -10,14 +10,6 @@
 
         event Do EditKeyTapped;
 
-        bool InKeyVisible { get; set; }
-
-        bool OutKeyVisible { get; set; }
-
-        bool EditKeyEnabled { get; set; }
-
-        bool Editing { get; set; }
-
         string TimeWorkedThisWeek { get; set; }
 
         string TimeWorkedToday { get; set; }
@@ -25,5 +17,13 @@
         string Version { get; set; }
 
         string CoreVersion { get; set; }
+
+        bool InKeyVisible { get; set; }
+
+        bool OutKeyVisible { get; set; }
+
+        bool EditKeyEnabled { get; set; }
+
+        bool Editing { get; set; }
     }
 }
