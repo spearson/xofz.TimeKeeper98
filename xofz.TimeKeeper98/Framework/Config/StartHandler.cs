@@ -41,7 +41,9 @@
                             () => statsUi.EndDate)
                         .AddDays(1);
                     var startOfWeek = dateCalc.StartOfWeek();
-                    var endOfWeek = dateCalc.EndOfWeek();
+                    var endOfWeek = dateCalc
+                        .EndOfWeek()
+                        .AddDays(1);
                     long countThisWeek = 0;
                     long countInRange = 0;
                     long totalCount = allTimestamps.Count;
