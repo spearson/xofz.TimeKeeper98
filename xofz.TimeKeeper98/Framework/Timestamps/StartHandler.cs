@@ -250,7 +250,8 @@
                 });
         }
 
-        protected virtual bool isInTime(DateTime timestamp)
+        protected virtual bool isInTime(
+            DateTime timestamp)
         {
             var r = this.runner;
             var inTime = false;
@@ -272,7 +273,8 @@
             return inTime;
         }
 
-        protected virtual string formatTimestamp(DateTime timeStamp)
+        protected virtual string formatTimestamp(
+            DateTime timeStamp)
         {
             var r = this.runner;
             string formattedTimestamp = null;

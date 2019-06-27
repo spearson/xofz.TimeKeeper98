@@ -2,6 +2,8 @@
 {
     using xofz.Framework;
 
+
+
     public class ShowSecondsSelectedHandler
     {
         public ShowSecondsSelectedHandler(
@@ -21,17 +23,28 @@
             w.Run<GlobalSettingsHolder>(settings =>
             {
                 settings.ShowSeconds = true;
+                w.Run<ConfigSaver>(saver =>
+                {
+                    saver.Save();
+                });
             });
-            w.Run<ConfigSaver>(saver => { saver.Save(); });
-            w.Run<Do, Do, Do>(
-                (refreshHome, refreshTimestamps, refreshDaily) =>
+            w.Run<Do>(
+                refreshHome =>
                 {
                     refreshHome?.Invoke();
+                },
+                MethodNames.RefreshHome);
+            w.Run<Do>(
+                refreshTimestamps =>
+                {
                     refreshTimestamps?.Invoke();
+                },
+                MethodNames.RefreshTimestamps);
+            w.Run<Do>(
+                refreshDaily =>
+                {
                     refreshDaily?.Invoke();
                 },
-                MethodNames.RefreshHome,
-                MethodNames.RefreshTimestamps,
                 MethodNames.RefreshDaily);
         }
 

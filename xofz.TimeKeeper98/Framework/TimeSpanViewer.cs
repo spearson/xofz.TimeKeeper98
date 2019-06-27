@@ -6,8 +6,8 @@
     {
         public virtual string ReadableString(TimeSpan timeSpan)
         {
-            return (long)timeSpan.TotalHours + "h "
-                   + timeSpan.Minutes + "m "
+            return (long)timeSpan.TotalHours + @"h "
+                   + timeSpan.Minutes + @"m "
                    + timeSpan.Seconds + 's';
         }
     }

@@ -31,7 +31,10 @@
                     {
                         uiRW.WriteSync(
                             shell,
-                            () => shell.Title = tt);
+                            () =>
+                            {
+                                shell.Title = tt;
+                            });
                     });
                 });
         }

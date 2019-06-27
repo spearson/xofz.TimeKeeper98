@@ -27,11 +27,13 @@
                 var newStart = currentStart.AddDays(-7);
                 var newEnd = currentEnd.AddDays(-7);
 
-                uiRW.Write(ui, () =>
-                {
-                    ui.StartDate = newStart;
-                    ui.EndDate = newEnd;
-                });
+                uiRW.Write(
+                    ui,
+                    () =>
+                    {
+                        ui.StartDate = newStart;
+                        ui.EndDate = newEnd;
+                    });
             });
         }
 

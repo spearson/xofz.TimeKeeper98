@@ -59,7 +59,10 @@
                     {
                         uiRW.WriteSync(
                             ui,
-                            () => ui.ShowSecondsChecked = true);
+                            () =>
+                            {
+                                ui.ShowSecondsChecked = true;
+                            });
                     });
 
                     r.Run<ShowSecondsSelectedHandler>(

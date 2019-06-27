@@ -20,8 +20,11 @@
             {
                 uiRW.Write(
                     hnUi,
-                    () => hnUi.ActiveKeyLabel = 
-                        NavKeyLabels.Statistics);
+                    () =>
+                    {
+                        hnUi.ActiveKeyLabel =
+                            NavKeyLabels.Statistics;
+                    });
             });
             r.Run<xofz.Framework.Timer>(t =>
                 {

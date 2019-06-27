@@ -57,7 +57,10 @@
             {
                 uiRW.WriteSync(
                     ui,
-                    () => ui.OutKeyVisible = false);
+                    () =>
+                    {
+                        ui.OutKeyVisible = false;
+                    });
                 watcher.Stop();
                 writer.Write();
                 watcher.Start();

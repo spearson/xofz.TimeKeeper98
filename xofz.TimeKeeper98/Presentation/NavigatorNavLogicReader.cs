@@ -48,6 +48,7 @@
                 presentDaily = null;
                 return;
             }
+
             presentDaily = nav.Present<DailyPresenter>;
         }
 

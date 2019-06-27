@@ -44,8 +44,11 @@
                         {
                             uiRW.Write(
                                 m.Subscriber,
-                                () => m.GiveError(
-                                    ErrorMessages.TooEarly));
+                                () =>
+                                {
+                                    m.GiveError(
+                                        ErrorMessages.TooEarly);
+                                });
                         });
 
                         return;
@@ -58,8 +61,11 @@
                         {
                             uiRW.Write(
                                 m.Subscriber,
-                                () => m.GiveError(
-                                    ErrorMessages.TooLate));
+                                () =>
+                                {
+                                    m.GiveError(
+                                        ErrorMessages.TooLate);
+                                });
                         });
 
                         return;

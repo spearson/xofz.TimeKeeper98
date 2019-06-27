@@ -18,10 +18,10 @@
             r.Run<GlobalSettingsHolder>(settings =>
             {
                 settings.Prompt = true;
-            });
-            r.Run<ConfigSaver>(saver =>
-            {
-                saver.Save();
+                r.Run<ConfigSaver>(saver =>
+                {
+                    saver.Save();
+                });
             });
         }
 

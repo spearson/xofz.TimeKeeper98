@@ -101,6 +101,19 @@
             {
                 handler.Handle(this.ui);
             });
+
+            Interlocked.CompareExchange(
+                ref this.startedIf1, 
+                1, 
+                0);
+        }
+
+        public override void Stop()
+        {
+            Interlocked.CompareExchange(
+                ref this.startedIf1, 
+                0, 
+                1);
         }
 
         private void ui_PromptSelected()
@@ -186,6 +199,12 @@
 
         private void homeUi_InKeyTapped()
         {
+            if (Interlocked.Read(
+                    ref this.startedIf1) != 1)
+            {
+                return;
+            }
+
             var r = this.runner;
             r.Run<HomeUiInKeyTappedHandler>(handler =>
             {
@@ -196,6 +215,12 @@
 
         private void homeUi_OutKeyTapped()
         {
+            if (Interlocked.Read(
+                    ref this.startedIf1) != 1)
+            {
+                return;
+            }
+
             var r = this.runner;
             r.Run<HomeUiOutKeyTappedHandler>(handler =>
             {
@@ -204,7 +229,7 @@
             });
         }
 
-        private long setupIf1;
+        private long setupIf1, startedIf1;
         private readonly ConfigUi ui;
         private readonly MethodRunner runner;
     }

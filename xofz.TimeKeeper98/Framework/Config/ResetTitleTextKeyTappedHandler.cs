@@ -22,7 +22,10 @@
                     var titleText = settings.TitleText;
                     uiRW.Write(
                         ui,
-                        () => ui.TitleText = titleText);
+                        () =>
+                        {
+                            ui.TitleText = titleText;
+                        });
                 });
         }
 
