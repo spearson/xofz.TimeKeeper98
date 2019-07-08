@@ -39,6 +39,11 @@
                                 out var navToConfig);
                             navToConfig?.Invoke();
                             break;
+                        default:
+                            navReader.ReadTimestamps(
+                                out var defaultNav);
+                            defaultNav?.Invoke();
+                            break;
                     }
                 });
         }

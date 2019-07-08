@@ -17,7 +17,8 @@
             TimestampEditUi ui)
         {
             var r = this.runner;
-            r.Run<UiReaderWriter>(uiRW =>
+            r.Run<UiReaderWriter>(
+                uiRW =>
             {
                 var currentTime = DateTime.Now;
                 uiRW.WriteSync(
@@ -26,10 +27,11 @@
                     {
                         ui.EditedTimestamp = currentTime;
                     });
-            });
-            r.Run<SaveKeyTappedHandler>(handler =>
-            {
-                handler.Handle(ui);
+
+                r.Run<SaveKeyTappedHandler>(handler =>
+                {
+                    handler.Handle(ui);
+                });
             });
         }
 

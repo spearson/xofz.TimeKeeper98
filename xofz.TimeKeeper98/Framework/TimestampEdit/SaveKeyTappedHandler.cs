@@ -18,6 +18,23 @@
             TimestampEditUi ui)
         {
             var r = this.runner;
+            var accepted = true;
+            r.Run<UiReaderWriter, GlobalSettingsHolder, Messenger>(
+                (uiRW, settings, m) =>
+                {
+                    if (settings.Prompt)
+                    {
+                        var response = uiRW.Read(
+                            m.Subscriber,
+                            () => m.Question(@"Save edit?"));
+                        accepted = response == Response.Yes;
+                    }
+                });
+            if (!accepted)
+            {
+                return;
+            }
+
             r.Run<
                 TimestampReader, 
                 UiReaderWriter>(
@@ -103,6 +120,11 @@
                                 navReader.ReadConfig(
                                     out var navToConfig);
                                 navToConfig?.Invoke();
+                                break;
+                            default:
+                                navReader.ReadTimestamps(
+                                    out var defaultNav);
+                                defaultNav?.Invoke();
                                 break;
                         }
                     });
