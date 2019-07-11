@@ -22,12 +22,16 @@
                 new TimeSpanViewer());
             w.Run<GlobalSettingsHolder>(settings =>
             {
-                settings.ShowSeconds = true;
-                w.Run<ConfigSaver>(saver =>
+                if (!settings.ShowSeconds)
                 {
-                    saver.Save();
-                });
+                    settings.ShowSeconds = true;
+                    w.Run<ConfigSaver>(saver =>
+                    {
+                        saver.Save();
+                    });
+                }
             });
+
             w.Run<Do>(
                 refreshHome =>
                 {

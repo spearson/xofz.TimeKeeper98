@@ -12,7 +12,7 @@
             return new GlobalSettingsHolder
             {
                 TimestampFormat = @"MM/dd hh:mm:ss tt",
-                EditTimestampFormat = @"MM/dd/yyyy hh:mm:ss tt",
+                EditTimestampFormat = @"yyyy/MM/dd hh:mm:ss tt",
                 TitleText = Settings.Default.TitleText,
                 Prompt = Settings.Default.Prompt,
                 ShowSeconds = Settings.Default.ShowSeconds

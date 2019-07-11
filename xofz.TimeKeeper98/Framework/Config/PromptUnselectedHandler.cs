@@ -17,11 +17,14 @@
             var r = this.runner;
             r.Run<GlobalSettingsHolder>(settings =>
             {
-                settings.Prompt = false;
-                r.Run<ConfigSaver>(saver =>
+                if (settings.Prompt)
                 {
-                    saver.Save();
-                });
+                    settings.Prompt = false;
+                    r.Run<ConfigSaver>(saver =>
+                    {
+                        saver.Save();
+                    });
+                }
             });
         }
 
