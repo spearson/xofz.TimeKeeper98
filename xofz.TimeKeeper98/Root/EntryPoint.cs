@@ -23,8 +23,14 @@
             object sender, 
             ResolveEventArgs e)
         {
-            var assemblyName = new AssemblyName(e.Name);
-            if (e.Name.EndsWith(@"Retargetable=Yes"))
+            var name = e?.Name;
+            if (name == null)
+            {
+                return null;
+            }
+
+            var assemblyName = new AssemblyName(name);
+            if (name.EndsWith(@"Retargetable=Yes"))
             {
                 return Assembly.Load(assemblyName);
             }

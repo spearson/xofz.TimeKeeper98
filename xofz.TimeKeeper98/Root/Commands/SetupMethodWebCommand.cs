@@ -54,7 +54,7 @@
             w.RegisterDependency(
                 this.configSaver);
             w.RegisterDependency(
-                new TextFileLog("Exceptions.log"),
+                new TextFileLog(@"Exceptions.log"),
                 LogNames.Exceptions);
         }
 
