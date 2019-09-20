@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading;
+    using System.Windows.Forms;
     using xofz.Framework;
     using xofz.Framework.Logging;
     using xofz.Presentation;
@@ -209,7 +210,7 @@
             this.newReaderWriter = newReaderWriter;
         }
 
-        public virtual Ui Shell => this.mainShell;
+        public virtual object Shell => this.mainShell;
 
         public virtual void Bootstrap()
         {

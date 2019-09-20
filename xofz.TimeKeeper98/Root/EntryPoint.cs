@@ -16,13 +16,7 @@
             var bootstrapper = new Bootstrapper();
             bootstrapper.Bootstrap();
 
-            var shellForm = bootstrapper.Shell as Form;
-            if (shellForm == null)
-            {
-                return;
-            }
-
-            Application.Run(shellForm);
+            Application.Run(bootstrapper.Shell as Form);
         }
 
         private static Assembly currentDomain_AssemblyResolve(
