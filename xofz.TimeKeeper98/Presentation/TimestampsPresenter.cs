@@ -229,7 +229,8 @@
             });
         }
 
-        private void ui_ShowDurationChanged(bool shouldShow)
+        private void ui_ShowDurationChanged(
+            bool shouldShow)
         {
             if (Interlocked.Read(ref this.startedIf1) != 1)
             {

@@ -11,20 +11,18 @@
     public class SetupMethodWebCommand : Command
     {
         public SetupMethodWebCommand(
-            MethodWeb web,
-            Navigator navigator,
+            MethodWebV2 web,
             Messenger messenger,
-            ConfigSaver configSaver,
-            SettingsProvider settingsProvider)
+            Gen<MethodRunner, ConfigSaver> newConfigSaver,
+            Gen<MethodRunner, SettingsProvider> newSettingsProvider)
         {
             this.web = web;
-            this.navigator = navigator;
             this.messenger = messenger;
-            this.configSaver = configSaver;
-            this.settingsProvider = settingsProvider;
+            this.newConfigSaver = newConfigSaver;
+            this.newSettingsProvider = newSettingsProvider;
         }
 
-        public virtual MethodWeb W => this.web;
+        public virtual MethodWebV2 W => this.web;
 
         public override void Execute()
         {
@@ -34,11 +32,10 @@
         protected virtual void registerDependencies()
         {
             var w = this.web;
-            var sp = this.settingsProvider;
             w.RegisterDependency(
                 new UiReaderWriter());
             w.RegisterDependency(
-                this.navigator);
+                new NavigatorV2(w));
             w.RegisterDependency(
                 this.messenger);
             w.RegisterDependency(
@@ -48,20 +45,23 @@
             w.RegisterDependency(
                 new EventSubscriber());
             w.RegisterDependency(
-                sp);
+                this.newSettingsProvider?.Invoke(w));
+            w.Run<SettingsProvider>(provider =>
+            {
+                w.RegisterDependency(
+                    provider.Provide());
+            });
             w.RegisterDependency(
-                sp.Provide());
+                this.newConfigSaver?.Invoke(w));
+            var exceptionsLogName = LogNames.Exceptions;
             w.RegisterDependency(
-                this.configSaver);
-            w.RegisterDependency(
-                new TextFileLog(@"Exceptions.log"),
-                LogNames.Exceptions);
+                new TextFileLog(exceptionsLogName + @".log"),
+                exceptionsLogName);
         }
 
-        protected readonly MethodWeb web;
-        protected readonly Navigator navigator;
+        protected readonly MethodWebV2 web;
         protected readonly Messenger messenger;
-        protected readonly ConfigSaver configSaver;
-        protected readonly SettingsProvider settingsProvider;
+        protected readonly Gen<MethodRunner, ConfigSaver> newConfigSaver;
+        protected readonly Gen<MethodRunner, SettingsProvider> newSettingsProvider;
     }
 }

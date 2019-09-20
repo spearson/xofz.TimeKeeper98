@@ -8,10 +8,10 @@
     using xofz.Framework.Transformation;
 
     public class FileTimestampManager 
-        : TimestampReader, TimestampWriter
+        : TimestampReaderWriter
     {
         public FileTimestampManager(
-            MethodWeb runner)
+            MethodRunner runner)
         {
             this.runner = runner;
             this.mainDirectory = DataDirectory;
@@ -101,6 +101,11 @@
 
             var r = this.runner;
             var trapper = r.Run<EnumerableTrapper<DateTime>>();
+            if (trapper == null)
+            {
+                yield break;
+            }
+
             var firstRead = false;
             if (Interlocked.CompareExchange(
                     ref this.firstReadIf0, 
@@ -130,6 +135,11 @@
                 0, 
                 1);
             var tc = trapper.TrappedCollection;
+            if (tc == null)
+            {
+                yield break;
+            }
+
             foreach (var timestamp in tc)
             {
                 yield return timestamp;
@@ -154,10 +164,18 @@
         {
             ICollection<DateTime> collection = new LinkedList<DateTime>();
             var md = this.mainDirectory;
-            if (!Directory.Exists(md))
+            try
             {
-                Directory.CreateDirectory(md);
+                if (!Directory.Exists(md))
+                {
+                    Directory.CreateDirectory(md);
+                }
             }
+            catch
+            {
+                return collection;
+            }
+            
 
             foreach (var filePath in Directory.GetFiles(md))
             {

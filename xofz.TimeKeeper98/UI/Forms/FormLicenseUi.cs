@@ -8,7 +8,8 @@
     public partial class FormLicenseUi 
         : FormUi, LicenseUi
     {
-        public FormLicenseUi(Form shell)
+        public FormLicenseUi(
+            Form shell)
         {
             this.shell = shell;
             this.InitializeComponent();

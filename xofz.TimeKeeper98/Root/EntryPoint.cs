@@ -13,10 +13,16 @@
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var bootstrapper = new FormsBootstrapper();
+            var bootstrapper = new Bootstrapper();
             bootstrapper.Bootstrap();
 
-            Application.Run(bootstrapper.Shell);
+            var shellForm = bootstrapper.Shell as Form;
+            if (shellForm == null)
+            {
+                return;
+            }
+
+            Application.Run(shellForm);
         }
 
         private static Assembly currentDomain_AssemblyResolve(

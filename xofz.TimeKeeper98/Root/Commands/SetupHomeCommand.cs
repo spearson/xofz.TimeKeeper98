@@ -20,10 +20,12 @@
         public SetupHomeCommand(
             HomeUi ui,
             ShellUi shell,
+            Gen<MethodRunner, TimestampReaderWriter> newReaderWriter,
             MethodWeb web)
         {
             this.ui = ui;
             this.shell = shell;
+            this.newReaderWriter = newReaderWriter;
             this.web = web;
         }
 
@@ -51,8 +53,7 @@
             w.RegisterDependency(
                 new EnumerableTrapper<DateTime>());
             w.RegisterDependency(
-                new FileTimestampManager(
-                    w));
+                this.newReaderWriter?.Invoke(w));
             w.RegisterDependency(
                 new FieldHolder());
             w.RegisterDependency(
@@ -87,6 +88,7 @@
 
         protected readonly HomeUi ui;
         protected readonly ShellUi shell;
+        protected readonly Gen<MethodRunner, TimestampReaderWriter> newReaderWriter;
         protected readonly MethodWeb web;
     }
 }

@@ -4,16 +4,17 @@
     using System.Threading;
     using xofz.Framework;
 
-    public class FileDataWatcher 
+    public sealed class FileDataWatcher 
         : DataWatcher
     {
         public FileDataWatcher(
             MethodWeb web)
+            : base(web)
         {
             this.web = web;
         }
 
-        public virtual void Setup()
+        public void Setup()
         {
             if (Interlocked.CompareExchange(
                     ref this.setupIf1, 
@@ -54,7 +55,7 @@
             w.RegisterDependency(this);
         }
 
-        void DataWatcher.Start()
+        public override void Start()
         {
             var w = this.web;
             w.Run<FileSystemWatcher>(watcher =>
@@ -70,7 +71,7 @@
             });
         }
 
-        void DataWatcher.Stop()
+        public override void Stop()
         {
             var w = this.web;
             w.Run<FileSystemWatcher>(watcher =>
@@ -79,53 +80,21 @@
             });
         }
 
-        protected virtual void fileWatcher_ChangedCreatedOrDeleted(
+        private void fileWatcher_ChangedCreatedOrDeleted(
             object sender, 
             FileSystemEventArgs e)
         {
             this.pingApp();
         }
 
-        protected virtual void fileWatcher_Renamed(
+        private void fileWatcher_Renamed(
             object sender,
             RenamedEventArgs e)
         {
             this.pingApp();
         }
 
-        protected virtual void pingApp()
-        {
-            var w = this.web;
-            w.Run<FieldHolder>(holder =>
-            {
-                Interlocked.CompareExchange(
-                    ref holder.needToTrapIf1,
-                    1,
-                    0);
-            });
-            w.Run<Do>(refreshHome =>
-                {
-                    refreshHome.Invoke();
-                },
-                MethodNames.RefreshHome);
-            w.Run<Do>(refreshTimestamps =>
-                {
-                    refreshTimestamps.Invoke();
-                },
-                MethodNames.RefreshTimestamps);
-            w.Run<Do>(refreshDaily =>
-                {
-                    refreshDaily.Invoke();
-                },
-                MethodNames.RefreshDaily);
-            w.Run<Do>(refreshConfig =>
-                {
-                    refreshConfig.Invoke();
-                },
-                MethodNames.RefreshConfig);
-        }
-
-        protected long setupIf1;
-        protected readonly MethodWeb web;
+        private long setupIf1;
+        private readonly MethodWeb web;
     }
 }

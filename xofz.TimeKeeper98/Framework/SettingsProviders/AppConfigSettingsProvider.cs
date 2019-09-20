@@ -1,22 +1,55 @@
 ﻿namespace xofz.TimeKeeper98.Framework.SettingsProviders
 {
     using System.IO;
+    using xofz.Framework;
     using xofz.TimeKeeper98.Properties;
 
     public class AppConfigSettingsProvider
         : SettingsProvider
     {
+        public AppConfigSettingsProvider(
+            MethodRunner runner)
+        {
+            this.runner = runner;
+        }
+
         GlobalSettingsHolder SettingsProvider.Provide()
         {
             this.checkAndRecreate();
-            return new GlobalSettingsHolder
+
+            var settings = new GlobalSettingsHolder
             {
                 TimestampFormat = @"MM/dd hh:mm:ss tt",
-                EditTimestampFormat = @"yyyy/MM/dd hh:mm:ss tt",
-                TitleText = Settings.Default.TitleText,
-                Prompt = Settings.Default.Prompt,
-                ShowSeconds = Settings.Default.ShowSeconds
+                EditTimestampFormat = @"yyyy/MM/dd hh:mm:ss tt"
             };
+            try
+            {
+                settings.TitleText = Settings.Default.TitleText;
+            }
+            catch
+            {
+                settings.TitleText = @"x(z) TimeKeeper98";
+            }
+
+            try
+            {
+                settings.Prompt = Settings.Default.Prompt;
+            }
+            catch
+            {
+                settings.Prompt = true;
+            }
+
+            try
+            {
+                settings.ShowSeconds = Settings.Default.ShowSeconds;
+            }
+            catch
+            {
+                settings.ShowSeconds = false;
+            }
+
+            return settings;
         }
 
         protected virtual void checkAndRecreate()
@@ -39,5 +72,7 @@
                 // try again next time...
             }
         }
+
+        protected readonly MethodRunner runner;
     }
 }

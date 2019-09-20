@@ -95,6 +95,7 @@
     <Compile Include="Framework\PaddedTimeSpanViewers\MinutesPaddedTimeSpanViewer.cs" />
     <Compile Include="Framework\PaddedTimeSpanViewer.cs" />
     <Compile Include="Framework\TimestampEdit\ErrorMessages.cs" />
+    <Compile Include="Framework\TimestampReaderWriter.cs" />
     <Compile Include="Framework\UiReader.cs" />
     <Compile Include="Presentation\ConfigPresenter.cs" />
     <Compile Include="Presentation\LicensePresenter.cs" />
@@ -161,7 +162,7 @@
     <Compile Include="Root\Commands\SetupTimestampEditCommand.cs" />
     <Compile Include="Root\Commands\SetupTimestampsCommand.cs" />
     <Compile Include="Root\EntryPoint.cs" />
-    <Compile Include="Root\FormsBootstrapper.cs" />
+    <Compile Include="Root\Bootstrapper.cs" />
     <Compile Include="UI\DailyUi.cs" />
     <Compile Include="UI\Forms\FormMainUi.cs">
       <SubType>Form</SubType>
@@ -214,6 +215,7 @@
     <Compile Include="UI\HomeNavUi.cs" />
     <Compile Include="UI\HomeUi.cs" />
     <Compile Include="UI\StatisticsUi.cs" />
+    <Compile Include="UI\TimeKeeperShellUi.cs" />
     <Compile Include="UI\TimestampEditUi.cs" />
     <Compile Include="UI\TimestampsUi.cs" />
     <Compile Include="UI\TitleUi.cs" />

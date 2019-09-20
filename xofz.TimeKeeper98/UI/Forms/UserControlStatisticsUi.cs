@@ -62,7 +62,9 @@
             set => this.maxDailyLabel.Text = value;
         }
 
-        private void startDatePicker_DateChanged(object sender, DateRangeEventArgs e)
+        private void startDatePicker_DateChanged(
+            object sender, 
+            DateRangeEventArgs e)
         {
             var dc = this.DateChanged;
             if (dc == null)
@@ -70,10 +72,13 @@
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => dc.Invoke());
+            ThreadPool.QueueUserWorkItem(
+                o => dc.Invoke());
         }
 
-        private void endDatePicker_DateChanged(object sender, DateRangeEventArgs e)
+        private void endDatePicker_DateChanged(
+            object sender, 
+            DateRangeEventArgs e)
         {
             var dc = this.DateChanged;
             if (dc == null)
@@ -81,10 +86,13 @@
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => dc.Invoke());
+            ThreadPool.QueueUserWorkItem(
+                o => dc.Invoke());
         }
 
-        private void previousWeekKey_Click(object sender, EventArgs e)
+        private void previousWeekKey_Click(
+            object sender, 
+            EventArgs e)
         {
             var pwkt = this.PreviousWeekKeyTapped;
             if (pwkt == null)
@@ -92,10 +100,13 @@
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => pwkt.Invoke());
+            ThreadPool.QueueUserWorkItem(
+                o => pwkt.Invoke());
         }
 
-        private void nextWeekKey_Click(object sender, EventArgs e)
+        private void nextWeekKey_Click(
+            object sender, 
+            EventArgs e)
         {
             var nwkt = this.NextWeekKeyTapped;
             if (nwkt == null)
@@ -103,10 +114,13 @@
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => nwkt.Invoke());
+            ThreadPool.QueueUserWorkItem(
+                o => nwkt.Invoke());
         }
 
-        private void currentWeekKey_Click(object sender, EventArgs e)
+        private void currentWeekKey_Click(
+            object sender, 
+            EventArgs e)
         {
             var cwkt = this.CurrentWeekKeyTapped;
             if (cwkt == null)
@@ -114,7 +128,8 @@
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => cwkt.Invoke());
+            ThreadPool.QueueUserWorkItem(
+                o => cwkt.Invoke());
         }
     }
 }

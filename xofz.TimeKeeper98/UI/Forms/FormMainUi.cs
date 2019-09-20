@@ -7,7 +7,7 @@
     using xofz.UI.Forms;
 
     public partial class FormMainUi 
-        : FormUi, MainUi, ShellUi, TitleUi
+        : FormUi, MainUi, TimeKeeperShellUi, TitleUi
     {
         public FormMainUi()
         {
@@ -20,7 +20,7 @@
 
         public event Do ShutdownRequested;
 
-        public virtual ShellUi NavUi => this.navUi;
+        ShellUi TimeKeeperShellUi.NavUi => this.navUi;
 
         void ShellUi.SwitchUi(Ui newUi)
         {
@@ -37,7 +37,7 @@
             set => this.Text = value;
         }
 
-        private void this_FormClosing(
+        protected virtual void this_FormClosing(
             object sender, 
             FormClosingEventArgs e)
         {
@@ -49,7 +49,8 @@
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => sr.Invoke());
+            ThreadPool.QueueUserWorkItem(
+                o => sr.Invoke());
         }
 
         
