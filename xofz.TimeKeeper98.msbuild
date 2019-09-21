@@ -65,6 +65,9 @@
         Include="$(BuildDir)\$(ProjectName).exe"
       />
       <FilesToMove
+        Include="$(BuildDir)\$(ProjectName).pdb"
+      />
+      <FilesToMove
         Include="$(BuildDir)\$(ProjectName).exe.config"
       />
     </ItemGroup>
