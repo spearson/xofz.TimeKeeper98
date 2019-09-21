@@ -11,6 +11,10 @@
             this.runner = runner;
         }
 
+        public virtual void Setup()
+        {
+        }
+
         public abstract void Start();
 
         public abstract void Stop();

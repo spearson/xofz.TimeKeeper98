@@ -7,7 +7,6 @@
     using xofz.Framework.Transformation;
     using xofz.Root;
     using xofz.TimeKeeper98.Framework;
-    using xofz.TimeKeeper98.Framework.DataWatchers;
     using xofz.TimeKeeper98.Framework.Home;
     using xofz.TimeKeeper98.Framework.PaddedTimeSpanViewers;
     using xofz.TimeKeeper98.Framework.TimeSpanViewers;
@@ -21,11 +20,13 @@
             HomeUi ui,
             ShellUi shell,
             Gen<MethodRunner, TimestampReaderWriter> newReaderWriter,
+            Gen<MethodWeb, DataWatcher> newDataWatcher,
             MethodWeb web)
         {
             this.ui = ui;
             this.shell = shell;
             this.newReaderWriter = newReaderWriter;
+            this.newDataWatcher = newDataWatcher;
             this.web = web;
         }
 
@@ -40,9 +41,9 @@
                     w)
                 .Setup();
 
-            new FileDataWatcher(
-                    w)
-                .Setup();
+            this.newDataWatcher
+                ?.Invoke(w)
+                ?.Setup();
         }
 
         protected virtual void registerDependencies()
@@ -89,6 +90,7 @@
         protected readonly HomeUi ui;
         protected readonly ShellUi shell;
         protected readonly Gen<MethodRunner, TimestampReaderWriter> newReaderWriter;
+        protected readonly Gen<MethodWeb, DataWatcher> newDataWatcher;
         protected readonly MethodWeb web;
     }
 }

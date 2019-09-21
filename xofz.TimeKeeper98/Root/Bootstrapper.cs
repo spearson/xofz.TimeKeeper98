@@ -2,7 +2,6 @@
 {
     using System;
     using System.Threading;
-    using System.Windows.Forms;
     using xofz.Framework;
     using xofz.Framework.Logging;
     using xofz.Presentation;
@@ -10,6 +9,7 @@
     using xofz.Root.Commands;
     using xofz.TimeKeeper98.Framework;
     using xofz.TimeKeeper98.Framework.ConfigSavers;
+    using xofz.TimeKeeper98.Framework.DataWatchers;
     using xofz.TimeKeeper98.Framework.SettingsProviders;
     using xofz.TimeKeeper98.Presentation;
     using xofz.TimeKeeper98.Root.Commands;
@@ -42,7 +42,8 @@
                 shell => new FormLicenseUi(shell as FormUi),
                 runner => new AppConfigConfigSaver(runner),
                 runner => new AppConfigSettingsProvider(runner),
-                runner => new FileTimestampManager(runner))
+                runner => new FileTimestampManager(runner),
+                web => new FileDataWatcher(web))
         {
         }
 
@@ -69,7 +70,8 @@
                 newLicenseUi,
                 runner => new AppConfigConfigSaver(runner),
                 runner => new AppConfigSettingsProvider(runner),
-                runner => new FileTimestampManager(runner))
+                runner => new FileTimestampManager(runner),
+                web => new FileDataWatcher(web))
         {
         }
 
@@ -97,7 +99,8 @@
                 newLicenseUi,
                 runner => new AppConfigConfigSaver(runner),
                 runner => new AppConfigSettingsProvider(runner),
-                runner => new FileTimestampManager(runner))
+                runner => new FileTimestampManager(runner),
+                web => new FileDataWatcher(web))
         {
         }
 
@@ -117,7 +120,8 @@
                 shell => new FormLicenseUi(shell as FormUi),
                 newConfigSaver,
                 newSettingsProvider,
-                runner => new FileTimestampManager(runner))
+                runner => new FileTimestampManager(runner),
+                web => new FileDataWatcher(web))
         {
         }
 
@@ -138,13 +142,16 @@
                 shell => new FormLicenseUi(shell as FormUi),
                 newConfigSaver,
                 newSettingsProvider,
-                runner => new FileTimestampManager(runner))
+                runner => new FileTimestampManager(runner),
+                web => new FileDataWatcher(web))
         {
         }
 
         protected Bootstrapper(
-            Gen<MethodRunner, TimestampReaderWriter> newReaderWriter)
-            : this(new CommandExecutor(),
+            Gen<MethodRunner, TimestampReaderWriter> newReaderWriter,
+            Gen<MethodWeb, DataWatcher> newDataWatcher)
+            : this(
+                new CommandExecutor(),
                 () => new FormMainUi(),
                 () => new UserControlHomeUi(),
                 lotter => new UserControlHomeNavUi(lotter),
@@ -156,13 +163,15 @@
                 shell => new FormLicenseUi(shell as FormUi),
                 runner => new AppConfigConfigSaver(runner),
                 runner => new AppConfigSettingsProvider(runner),
-                newReaderWriter)
+                newReaderWriter,
+                newDataWatcher)
         {
         }
 
         protected Bootstrapper(
             CommandExecutor executor,
-            Gen<MethodRunner, TimestampReaderWriter> newReaderWriter)
+            Gen<MethodRunner, TimestampReaderWriter> newReaderWriter,
+            Gen<MethodWeb, DataWatcher> newDataWatcher)
             : this(
                 executor,
                 () => new FormMainUi(),
@@ -176,7 +185,8 @@
                 shell => new FormLicenseUi(shell as FormUi),
                 runner => new AppConfigConfigSaver(runner),
                 runner => new AppConfigSettingsProvider(runner),
-                newReaderWriter)
+                newReaderWriter,
+                newDataWatcher)
         {
         }
 
@@ -193,7 +203,8 @@
             Gen<Ui, LicenseUi> newLicenseUi,
             Gen<MethodRunner, ConfigSaver> newConfigSaver,
             Gen<MethodRunner, SettingsProvider> newSettingsProvider,
-            Gen<MethodRunner, TimestampReaderWriter> newReaderWriter)
+            Gen<MethodRunner, TimestampReaderWriter> newReaderWriter,
+            Gen<MethodWeb, DataWatcher> newDataWatcher)
         {
             this.executor = executor;
             this.newMainShell = newMainShell;
@@ -208,6 +219,7 @@
             this.newConfigSaver = newConfigSaver;
             this.newSettingsProvider = newSettingsProvider;
             this.newReaderWriter = newReaderWriter;
+            this.newDataWatcher = newDataWatcher;
         }
 
         public virtual object Shell => this.mainShell;
@@ -314,6 +326,7 @@
                             homeUi,
                             s,
                             this.newReaderWriter,
+                            this.newDataWatcher,
                             w));
                     homeFinished.Set();
                 });
@@ -453,5 +466,6 @@
         protected readonly Gen<MethodRunner, ConfigSaver> newConfigSaver;
         protected readonly Gen<MethodRunner, SettingsProvider> newSettingsProvider;
         protected readonly Gen<MethodRunner, TimestampReaderWriter> newReaderWriter;
+        protected readonly Gen<MethodWeb, DataWatcher> newDataWatcher;
     }
 }

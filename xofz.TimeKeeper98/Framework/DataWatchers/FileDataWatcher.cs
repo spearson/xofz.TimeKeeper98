@@ -14,7 +14,7 @@
             this.web = web;
         }
 
-        public void Setup()
+        public override void Setup()
         {
             if (Interlocked.CompareExchange(
                     ref this.setupIf1, 
