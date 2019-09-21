@@ -30,6 +30,7 @@
             CommandExecutor executor)
             : this(
                 executor,
+                new FormsUiMessagePumper(), 
                 () => new FormMainUi(),
                 () => new UserControlHomeUi(), 
                 lotter => new UserControlHomeNavUi(
@@ -48,6 +49,7 @@
         }
 
         protected Bootstrapper(
+            UiMessagePumper pumper,
             Gen<TimeKeeperShellUi> newMainShell,
             Gen<HomeUi> newHomeUi,
             Gen<Lotter, HomeNavUi> newHomeNavUi,
@@ -59,6 +61,7 @@
             Gen<Ui, LicenseUi> newLicenseUi)
             : this(
                 new CommandExecutor(),
+                pumper,
                 newMainShell,
                 newHomeUi,
                 newHomeNavUi,
@@ -77,6 +80,7 @@
 
         protected Bootstrapper(
             CommandExecutor executor,
+            UiMessagePumper pumper,
             Gen<TimeKeeperShellUi> newMainShell,
             Gen<HomeUi> newHomeUi,
             Gen<Lotter, HomeNavUi> newHomeNavUi,
@@ -88,6 +92,7 @@
             Gen<Ui, LicenseUi> newLicenseUi)
             : this(
                 executor,
+                pumper,
                 newMainShell,
                 newHomeUi,
                 newHomeNavUi,
@@ -109,6 +114,7 @@
             Gen<MethodRunner, SettingsProvider> newSettingsProvider)
             : this(
                 new CommandExecutor(),
+                new FormsUiMessagePumper(), 
                 () => new FormMainUi(),
                 () => new UserControlHomeUi(),
                 lotter => new UserControlHomeNavUi(lotter),
@@ -131,6 +137,7 @@
             Gen<MethodRunner, SettingsProvider> newSettingsProvider)
             : this(
                 executor,
+                new FormsUiMessagePumper(), 
                 () => new FormMainUi(),
                 () => new UserControlHomeUi(),
                 lotter => new UserControlHomeNavUi(lotter),
@@ -152,6 +159,7 @@
             Gen<MethodWeb, DataWatcher> newDataWatcher)
             : this(
                 new CommandExecutor(),
+                new FormsUiMessagePumper(), 
                 () => new FormMainUi(),
                 () => new UserControlHomeUi(),
                 lotter => new UserControlHomeNavUi(lotter),
@@ -174,6 +182,7 @@
             Gen<MethodWeb, DataWatcher> newDataWatcher)
             : this(
                 executor,
+                new FormsUiMessagePumper(),
                 () => new FormMainUi(),
                 () => new UserControlHomeUi(),
                 lotter => new UserControlHomeNavUi(lotter),
@@ -192,6 +201,7 @@
 
         protected Bootstrapper(
             CommandExecutor executor,
+            UiMessagePumper pumper,
             Gen<TimeKeeperShellUi> newMainShell,
             Gen<HomeUi> newHomeUi,
             Gen<Lotter, HomeNavUi> newHomeNavUi,
@@ -207,6 +217,7 @@
             Gen<MethodWeb, DataWatcher> newDataWatcher)
         {
             this.executor = executor;
+            this.pumper = pumper;
             this.newMainShell = newMainShell;
             this.newHomeUi = newHomeUi;
             this.newHomeNavUi = newHomeNavUi;
@@ -249,10 +260,10 @@
                     finished.Set();
                 });
 
-            UiMessagePumper pumper = new FormsUiMessagePumper();
+            var p = this.pumper;
             while (!finished.WaitOne(0, false))
             {
-                pumper.Pump();
+                p?.Pump();
             }
         }
 
@@ -454,6 +465,7 @@
         protected long bootstrappedIf1;
         protected TimeKeeperShellUi mainShell;
         protected readonly CommandExecutor executor;
+        protected readonly UiMessagePumper pumper;
         protected readonly Gen<TimeKeeperShellUi> newMainShell;
         protected readonly Gen<HomeUi> newHomeUi;
         protected readonly Gen<Lotter, HomeNavUi> newHomeNavUi;
