@@ -17,36 +17,49 @@
         {
             this.checkAndRecreate();
 
-            var settings = new GlobalSettingsHolder
-            {
-                TimestampFormat = @"MM/dd hh:mm:ss tt",
-                EditTimestampFormat = @"yyyy/MM/dd hh:mm:ss tt"
-            };
+            var settings = new GlobalSettingsHolder();
+            var appConfig = Settings.Default;
+
             try
             {
-                settings.TitleText = Settings.Default.TitleText;
+                settings.TitleText = appConfig.TitleText;
             }
             catch
             {
-                settings.TitleText = @"x(z) TimeKeeper98";
+                // swallow
             }
 
             try
             {
-                settings.Prompt = Settings.Default.Prompt;
+                settings.Prompt = appConfig.Prompt;
             }
             catch
             {
-                settings.Prompt = true;
+                // swallow
             }
 
             try
             {
-                settings.ShowSeconds = Settings.Default.ShowSeconds;
+                settings.ShowSeconds = appConfig.ShowSeconds;
             }
             catch
             {
-                settings.ShowSeconds = false;
+                // swallow
+            }
+
+            try
+            {
+                var interval = appConfig.TimerIntervalSeconds;
+                if (interval < 1)
+                {
+                    interval = 1;
+                }
+
+                settings.TimerIntervalSeconds = interval;
+            }
+            catch
+            {
+                // swallow
             }
 
             return settings;

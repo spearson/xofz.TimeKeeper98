@@ -72,6 +72,10 @@
                     this.ui_ShowSecondsUnselected);
                 sub.Subscribe(
                     this.ui,
+                    nameof(this.ui.SaveIntervalKeyTapped),
+                    this.ui_SaveIntervalKeyTapped);
+                sub.Subscribe(
+                    this.ui,
                     nameof(this.ui.PublishKeyTapped),
                     this.ui_PublishKeyTapped);
                 r.Run<Navigator>(n =>
@@ -185,6 +189,16 @@
             r.Run<ShowSecondsUnselectedHandler>(handler =>
             {
                 handler.Handle();
+            });
+        }
+
+        private void ui_SaveIntervalKeyTapped()
+        {
+            var r = this.runner;
+            r.Run<SaveIntervalKeyTappedHandler>(handler =>
+            {
+                handler.Handle(
+                    this.ui);
             });
         }
 

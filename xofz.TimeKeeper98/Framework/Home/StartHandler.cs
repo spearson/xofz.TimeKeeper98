@@ -6,7 +6,7 @@
     public class StartHandler
     {
         public StartHandler(
-            MethodWeb runner)
+            MethodRunner runner)
         {
             this.runner = runner;
         }
@@ -19,9 +19,16 @@
             {
                 handler.Handle(ui);
             });
-            r.Run<xofz.Framework.Timer>(t =>
+            r.Run<xofz.Framework.Timer, GlobalSettingsHolder>(
+                (t, settings) =>
                 {
-                    t.Start(1000);
+                    var interval = settings.TimerIntervalSeconds;
+                    if (interval < 1)
+                    {
+                        interval = 1;
+                    }
+                    t.Start(
+                        interval * 1000);
                 },
                 DependencyNames.Timer);
         }

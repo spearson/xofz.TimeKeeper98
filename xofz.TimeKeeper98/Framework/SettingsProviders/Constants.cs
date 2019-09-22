@@ -24,6 +24,9 @@
             <setting name=""ShowSeconds"" serializeAs=""String"">
                 <value>False</value>
             </setting>
+             <setting name=""TimerIntervalSeconds"" serializeAs=""String"">
+                <value>1</value>
+            </setting>
         </xofz.TimeKeeper98.Properties.Settings>
     </applicationSettings>
 </configuration>

@@ -43,6 +43,8 @@
             w.RegisterDependency(
                 new ShowSecondsUnselectedHandler(w));
             w.RegisterDependency(
+                new SaveIntervalKeyTappedHandler(w));
+            w.RegisterDependency(
                 new PromptSelectedHandler(w));
             w.RegisterDependency(
                 new PromptUnselectedHandler(w));

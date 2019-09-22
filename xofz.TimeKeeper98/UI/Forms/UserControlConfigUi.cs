@@ -1,12 +1,13 @@
 ﻿namespace xofz.TimeKeeper98.UI.Forms
 {
+    using System;
     using System.Threading;
     using xofz.UI.Forms;
 
-    public partial class UserConfigConfigUi 
+    public partial class UserControlConfigUi 
         : UserControlUi, ConfigUi
     {
-        public UserConfigConfigUi()
+        public UserControlConfigUi()
         {
             InitializeComponent();
         }
@@ -14,6 +15,8 @@
         public virtual event Do ShowSecondsSelected;
 
         public virtual event Do ShowSecondsUnselected;
+
+        public virtual event Do SaveIntervalKeyTapped;
 
         public virtual event Do PublishKeyTapped;
 
@@ -41,6 +44,18 @@
             get => this.showSecondsCheckBox.Checked;
 
             set => this.showSecondsCheckBox.Checked = value;
+        }
+
+        int ConfigUi.TimerIntervalSeconds
+        {
+            get => Convert
+                .ToInt32(
+                    Math
+                        .Round(
+                            this.timerIntervalPicker.Value,
+                            0));
+
+            set => this.timerIntervalPicker.Value = value;
         }
 
         string ConfigUi.TitleText
@@ -178,6 +193,18 @@
             }
 
             ThreadPool.QueueUserWorkItem(o => pkt.Invoke());
+        }
+
+        private void SaveIntervalKey_Click(object sender, EventArgs e)
+        {
+            var sikt = this.SaveIntervalKeyTapped;
+            if (sikt == null)
+            {
+                return;
+            }
+
+            ThreadPool.QueueUserWorkItem(
+                o => sikt.Invoke());
         }
     }
 }

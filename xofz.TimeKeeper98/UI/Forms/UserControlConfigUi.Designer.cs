@@ -1,6 +1,6 @@
 ﻿namespace xofz.TimeKeeper98.UI.Forms
 {
-    partial class UserConfigConfigUi
+    partial class UserControlConfigUi
     {
         /// <summary> 
         /// Required designer variable.
@@ -47,8 +47,12 @@
             this.thisWeekTimestampCountLabel = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.saveIntervalKey = new System.Windows.Forms.Button();
+            this.timerIntervalPicker = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
             this.core98GroupBox.SuspendLayout();
             this.timestampCountGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.timerIntervalPicker)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -290,9 +294,61 @@
             this.label5.TabIndex = 104;
             this.label5.Text = "This week:";
             // 
-            // UserConfigConfigUi
+            // saveIntervalKey
+            // 
+            this.saveIntervalKey.AutoSize = true;
+            this.saveIntervalKey.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.saveIntervalKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.saveIntervalKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.saveIntervalKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveIntervalKey.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveIntervalKey.Location = new System.Drawing.Point(129, 254);
+            this.saveIntervalKey.Name = "saveIntervalKey";
+            this.saveIntervalKey.Size = new System.Drawing.Size(62, 34);
+            this.saveIntervalKey.TabIndex = 105;
+            this.saveIntervalKey.Text = "Save";
+            this.saveIntervalKey.UseVisualStyleBackColor = true;
+            this.saveIntervalKey.Click += new System.EventHandler(this.SaveIntervalKey_Click);
+            // 
+            // timerIntervalPicker
+            // 
+            this.timerIntervalPicker.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timerIntervalPicker.Location = new System.Drawing.Point(3, 253);
+            this.timerIntervalPicker.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
+            this.timerIntervalPicker.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.timerIntervalPicker.Name = "timerIntervalPicker";
+            this.timerIntervalPicker.Size = new System.Drawing.Size(120, 36);
+            this.timerIntervalPicker.TabIndex = 106;
+            this.timerIntervalPicker.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(1, 230);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(200, 20);
+            this.label7.TabIndex = 107;
+            this.label7.Text = "Timer interval (seconds)";
+            // 
+            // UserControlConfigUi
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.timerIntervalPicker);
+            this.Controls.Add(this.saveIntervalKey);
             this.Controls.Add(this.timestampCountGroupBox);
             this.Controls.Add(this.core98GroupBox);
             this.Controls.Add(this.keyboardKey);
@@ -304,12 +360,13 @@
             this.Controls.Add(this.promptCheckBox);
             this.Controls.Add(this.showSecondsCheckBox);
             this.Controls.Add(this.label1);
-            this.Name = "UserConfigConfigUi";
+            this.Name = "UserControlConfigUi";
             this.Size = new System.Drawing.Size(884, 345);
             this.core98GroupBox.ResumeLayout(false);
             this.core98GroupBox.PerformLayout();
             this.timestampCountGroupBox.ResumeLayout(false);
             this.timestampCountGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.timerIntervalPicker)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -336,5 +393,8 @@
         private System.Windows.Forms.Label thisWeekTimestampCountLabel;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button saveIntervalKey;
+        private System.Windows.Forms.NumericUpDown timerIntervalPicker;
+        private System.Windows.Forms.Label label7;
     }
 }

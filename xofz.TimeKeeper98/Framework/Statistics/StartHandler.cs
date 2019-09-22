@@ -13,6 +13,7 @@
         }
 
         public virtual void Handle(
+            StatisticsUi ui,
             HomeNavUi hnUi)
         {
             var r = this.runner;
@@ -26,16 +27,22 @@
                             NavKeyLabels.Statistics;
                     });
             });
-            r.Run<xofz.Framework.Timer>(t =>
-                {
-                    r.Run<EventRaiser>(er =>
-                    {
-                        er.Raise(
-                            t,
-                            nameof(t.Elapsed));
-                    });
 
-                    t.Start(1000);
+            r.Run<TimerHandler>(handler =>
+            {
+                handler.Handle(
+                    ui);
+            });
+
+            r.Run<xofz.Framework.Timer, GlobalSettingsHolder>(
+                (t, settings) =>
+                {
+                    var interval = settings.TimerIntervalSeconds;
+                    if (interval < 1)
+                    {
+                        interval = 1;
+                    }
+                    t.Start(interval * 1000);
                 },
                 DependencyNames.Timer);
         }

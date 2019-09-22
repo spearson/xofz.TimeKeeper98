@@ -80,7 +80,7 @@
 
             r.Run<StartHandler>(handler =>
             {
-                handler.Handle(hnUi);
+                handler.Handle(this.ui, hnUi);
             });
         }
 

@@ -45,6 +45,11 @@
                 sb.Append(settings.ShowSeconds);
                 sb.Append("</value>\r\n");
                 sb.Append("            </setting>\r\n");
+                sb.Append("            <setting name=\"TimerIntervalSeconds\" serializeAs=\"String\">\r\n");
+                sb.Append("                <value>");
+                sb.Append(settings.TimerIntervalSeconds);
+                sb.Append("</value>\r\n");
+                sb.Append("            </setting>\r\n");
                 sb.Append("        </xofz.TimeKeeper98.Properties.Settings>\r\n" +
                     "    </applicationSettings>\r\n" +
                     "</configuration>\r\n");

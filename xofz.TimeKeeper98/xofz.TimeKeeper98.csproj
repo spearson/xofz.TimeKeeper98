@@ -54,6 +54,7 @@
     <Compile Include="Framework\Config\PromptSelectedHandler.cs" />
     <Compile Include="Framework\Config\PromptUnselectedHandler.cs" />
     <Compile Include="Framework\Config\ResetTitleTextKeyTappedHandler.cs" />
+    <Compile Include="Framework\Config\SaveIntervalKeyTappedHandler.cs" />
     <Compile Include="Framework\Config\SaveTitleTextKeyTappedHandler.cs" />
     <Compile Include="Framework\Config\SetupHandler.cs" />
     <Compile Include="Framework\Config\ShowSecondsSelectedHandler.cs" />
@@ -112,11 +113,11 @@
     <Compile Include="UI\Forms\FormLicenseUi.Designer.cs">
       <DependentUpon>FormLicenseUi.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\UserConfigConfigUi.cs">
+    <Compile Include="UI\Forms\UserControlConfigUi.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Forms\UserConfigConfigUi.Designer.cs">
-      <DependentUpon>UserConfigConfigUi.cs</DependentUpon>
+    <Compile Include="UI\Forms\UserControlConfigUi.Designer.cs">
+      <DependentUpon>UserControlConfigUi.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\LicenseUi.cs" />
     <Compile Include="UI\NavKeyLabels.cs" />
@@ -236,8 +237,8 @@
     <EmbeddedResource Include="UI\Forms\FormMainUi.resx">
       <DependentUpon>FormMainUi.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\UserConfigConfigUi.resx">
-      <DependentUpon>UserConfigConfigUi.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\UserControlConfigUi.resx">
+      <DependentUpon>UserControlConfigUi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\UserControlDailyUi.resx">
       <DependentUpon>UserControlDailyUi.cs</DependentUpon>

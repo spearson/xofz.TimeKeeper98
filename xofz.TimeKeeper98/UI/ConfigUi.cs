@@ -20,11 +20,15 @@
 
         event Do ShowSecondsUnselected;
 
+        event Do SaveIntervalKeyTapped;
+
         event Do PublishKeyTapped;
 
         bool PromptChecked { get; set; }
 
         bool ShowSecondsChecked { get; set; }
+
+        int TimerIntervalSeconds { get; set; }
 
         string TitleText { get; set; }
 

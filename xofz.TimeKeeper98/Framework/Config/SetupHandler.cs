@@ -45,6 +45,20 @@
                 });
             });
 
+            r.Run<GlobalSettingsHolder, UiReaderWriter>(
+                (settings, uiRW) =>
+                {
+                    var interval = settings
+                        .TimerIntervalSeconds;
+                    uiRW.Write(
+                        ui,
+                        () =>
+                        {
+                            ui.TimerIntervalSeconds = interval;
+                        });
+
+                });
+
             r.Run<ResetTitleTextKeyTappedHandler>(handler =>
             {
                 handler.Handle(ui);
