@@ -26,7 +26,7 @@
         {
         }
 
-        public Bootstrapper(
+        protected Bootstrapper(
             CommandExecutor executor)
             : this(
                 executor,
@@ -44,7 +44,8 @@
                 runner => new AppConfigConfigSaver(runner),
                 runner => new AppConfigSettingsProvider(runner),
                 runner => new FileTimestampManager(runner),
-                web => new FileDataWatcher(web))
+                web => new FileDataWatcher(web),
+                () => new FormsMessenger())
         {
         }
 
@@ -58,7 +59,8 @@
             Gen<TimestampEditUi> newEditUi,
             Gen<Lotter, DailyUi> newDailyUi,
             Gen<ConfigUi> newConfigUi,
-            Gen<Ui, LicenseUi> newLicenseUi)
+            Gen<Ui, LicenseUi> newLicenseUi,
+            Gen<Messenger> newMessenger = null)
             : this(
                 new CommandExecutor(),
                 pumper,
@@ -74,7 +76,8 @@
                 runner => new AppConfigConfigSaver(runner),
                 runner => new AppConfigSettingsProvider(runner),
                 runner => new FileTimestampManager(runner),
-                web => new FileDataWatcher(web))
+                web => new FileDataWatcher(web),
+                newMessenger)
         {
         }
 
@@ -89,7 +92,8 @@
             Gen<TimestampEditUi> newEditUi,
             Gen<Lotter, DailyUi> newDailyUi,
             Gen<ConfigUi> newConfigUi,
-            Gen<Ui, LicenseUi> newLicenseUi)
+            Gen<Ui, LicenseUi> newLicenseUi,
+            Gen<Messenger> newMessenger = null)
             : this(
                 executor,
                 pumper,
@@ -105,7 +109,8 @@
                 runner => new AppConfigConfigSaver(runner),
                 runner => new AppConfigSettingsProvider(runner),
                 runner => new FileTimestampManager(runner),
-                web => new FileDataWatcher(web))
+                web => new FileDataWatcher(web),
+                newMessenger)
         {
         }
 
@@ -127,7 +132,8 @@
                 newConfigSaver,
                 newSettingsProvider,
                 runner => new FileTimestampManager(runner),
-                web => new FileDataWatcher(web))
+                web => new FileDataWatcher(web),
+                () => new FormsMessenger())
         {
         }
 
@@ -150,7 +156,8 @@
                 newConfigSaver,
                 newSettingsProvider,
                 runner => new FileTimestampManager(runner),
-                web => new FileDataWatcher(web))
+                web => new FileDataWatcher(web),
+                () => new FormsMessenger())
         {
         }
 
@@ -172,7 +179,8 @@
                 runner => new AppConfigConfigSaver(runner),
                 runner => new AppConfigSettingsProvider(runner),
                 newReaderWriter,
-                newDataWatcher)
+                newDataWatcher,
+                () => new FormsMessenger())
         {
         }
 
@@ -195,7 +203,8 @@
                 runner => new AppConfigConfigSaver(runner),
                 runner => new AppConfigSettingsProvider(runner),
                 newReaderWriter,
-                newDataWatcher)
+                newDataWatcher,
+                () => new FormsMessenger())
         {
         }
 
@@ -214,7 +223,8 @@
             Gen<MethodRunner, ConfigSaver> newConfigSaver,
             Gen<MethodRunner, SettingsProvider> newSettingsProvider,
             Gen<MethodRunner, TimestampReaderWriter> newReaderWriter,
-            Gen<MethodWeb, DataWatcher> newDataWatcher)
+            Gen<MethodWeb, DataWatcher> newDataWatcher,
+            Gen<Messenger> newMessenger)
         {
             this.executor = executor;
             this.pumper = pumper;
@@ -231,6 +241,7 @@
             this.newSettingsProvider = newSettingsProvider;
             this.newReaderWriter = newReaderWriter;
             this.newDataWatcher = newDataWatcher;
+            this.newMessenger = newMessenger;
         }
 
         public virtual object Shell => this.mainShell;
@@ -270,8 +281,11 @@
         protected virtual void onBootstrap()
         {
             var s = this.mainShell;
-            Messenger m = new FormsMessenger();
-            m.Subscriber = s;
+            var m = this.newMessenger?.Invoke();
+            if (m != null)
+            {
+                m.Subscriber = s;
+            }
 
             var e = this.executor;
             e.Execute(new SetupMethodWebCommand(
@@ -355,35 +369,50 @@
                 });
 
             ThreadPool.QueueUserWorkItem(
-                o => e.Execute(
-                    new SetupStatisticsCommand(
-                        statsUi,
-                        homeUi,
-                        w)));
+                o =>
+                {
+                    e.Execute(
+                        new SetupStatisticsCommand(
+                            statsUi,
+                            homeUi,
+                            w));
+                });
 
             ThreadPool.QueueUserWorkItem(
-                o => e.Execute(
-                    new SetupTimestampEditCommand(
-                        editUi,
-                        homeUi,
-                        w)));
+                o =>
+                {
+                    e.Execute(
+                        new SetupTimestampEditCommand(
+                            editUi,
+                            homeUi,
+                            w));
+                });
 
             ThreadPool.QueueUserWorkItem(
-                o => e.Execute(
-                    new SetupMainCommand(
-                        s,
-                        w)));
+                o =>
+                {
+                    e.Execute(
+                        new SetupMainCommand(
+                            s,
+                            w));
+                });
 
             ThreadPool.QueueUserWorkItem(
-                o => e.Execute(
-                    new SetupShutdownCommand(
-                        w)));
+                o =>
+                {
+                    e.Execute(
+                        new SetupShutdownCommand(
+                            w));
+                });
 
             ThreadPool.QueueUserWorkItem(
-                o => e.Execute(
-                    new SetupLicenseCommand(
-                        licenseUi,
-                        w)));
+                o =>
+                {
+                    e.Execute(
+                        new SetupLicenseCommand(
+                            licenseUi,
+                            w));
+                });
 
             homeFinished.WaitOne();
 
@@ -475,6 +504,7 @@
         protected readonly Gen<Lotter, DailyUi> newDailyUi;
         protected readonly Gen<ConfigUi> newConfigUi;
         protected readonly Gen<Ui, LicenseUi> newLicenseUi;
+        protected readonly Gen<Messenger> newMessenger;
         protected readonly Gen<MethodRunner, ConfigSaver> newConfigSaver;
         protected readonly Gen<MethodRunner, SettingsProvider> newSettingsProvider;
         protected readonly Gen<MethodRunner, TimestampReaderWriter> newReaderWriter;
