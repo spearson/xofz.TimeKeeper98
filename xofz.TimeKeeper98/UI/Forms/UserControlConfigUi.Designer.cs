@@ -50,6 +50,7 @@
             this.saveIntervalKey = new System.Windows.Forms.Button();
             this.timerIntervalPicker = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
+            this.resetIntervalKey = new System.Windows.Forms.Button();
             this.core98GroupBox.SuspendLayout();
             this.timestampCountGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.timerIntervalPicker)).BeginInit();
@@ -343,9 +344,26 @@
             this.label7.TabIndex = 107;
             this.label7.Text = "Timer interval (seconds)";
             // 
+            // resetIntervalKey
+            // 
+            this.resetIntervalKey.AutoSize = true;
+            this.resetIntervalKey.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.resetIntervalKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.resetIntervalKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.resetIntervalKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.resetIntervalKey.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resetIntervalKey.Location = new System.Drawing.Point(3, 295);
+            this.resetIntervalKey.Name = "resetIntervalKey";
+            this.resetIntervalKey.Size = new System.Drawing.Size(72, 34);
+            this.resetIntervalKey.TabIndex = 108;
+            this.resetIntervalKey.Text = "Reset";
+            this.resetIntervalKey.UseVisualStyleBackColor = true;
+            this.resetIntervalKey.Click += new System.EventHandler(this.resetIntervalKey_Click);
+            // 
             // UserControlConfigUi
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.resetIntervalKey);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.timerIntervalPicker);
             this.Controls.Add(this.saveIntervalKey);
@@ -396,5 +414,6 @@
         private System.Windows.Forms.Button saveIntervalKey;
         private System.Windows.Forms.NumericUpDown timerIntervalPicker;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button resetIntervalKey;
     }
 }

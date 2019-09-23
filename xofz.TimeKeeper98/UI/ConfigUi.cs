@@ -22,6 +22,8 @@
 
         event Do SaveIntervalKeyTapped;
 
+        event Do ResetIntervalKeyTapped;
+
         event Do PublishKeyTapped;
 
         bool PromptChecked { get; set; }

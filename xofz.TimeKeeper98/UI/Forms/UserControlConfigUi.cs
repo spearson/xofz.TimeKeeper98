@@ -18,6 +18,8 @@
 
         public virtual event Do SaveIntervalKeyTapped;
 
+        public virtual event Do ResetIntervalKeyTapped;
+
         public virtual event Do PublishKeyTapped;
 
         public virtual event Do PromptSelected;
@@ -104,7 +106,8 @@
                     return;
                 }
 
-                ThreadPool.QueueUserWorkItem(o => sss.Invoke());
+                ThreadPool.QueueUserWorkItem(
+                    o => sss.Invoke());
                 return;
             }
 
@@ -114,10 +117,13 @@
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => ssu.Invoke());
+            ThreadPool.QueueUserWorkItem(
+                o => ssu.Invoke());
         }
 
-        private void promptCheckBox_CheckedChanged(object sender, System.EventArgs e)
+        private void promptCheckBox_CheckedChanged(
+            object sender,
+            System.EventArgs e)
         {
             if (this.promptCheckBox.Checked)
             {
@@ -127,7 +133,8 @@
                     return;
                 }
 
-                ThreadPool.QueueUserWorkItem(o => ps.Invoke());
+                ThreadPool.QueueUserWorkItem(
+                    o => ps.Invoke());
                 return;
             }
 
@@ -137,10 +144,13 @@
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => pu.Invoke());
+            ThreadPool.QueueUserWorkItem(
+                o => pu.Invoke());
         }
 
-        private void saveTitleTextKey_Click(object sender, System.EventArgs e)
+        private void saveTitleTextKey_Click(
+            object sender, 
+            System.EventArgs e)
         {
             var sttkt = this.SaveTitleTextKeyTapped;
             if (sttkt == null)
@@ -148,10 +158,13 @@
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => sttkt.Invoke());
+            ThreadPool.QueueUserWorkItem(
+                o => sttkt.Invoke());
         }
 
-        private void resetTitleTextKey_Click(object sender, System.EventArgs e)
+        private void resetTitleTextKey_Click(
+            object sender,
+            System.EventArgs e)
         {
             var rttkt = this.ResetTitleTextKeyTapped;
             if (rttkt == null)
@@ -159,10 +172,13 @@
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => rttkt.Invoke());
+            ThreadPool.QueueUserWorkItem(
+                o => rttkt.Invoke());
         }
 
-        private void defaultTitleTextKeyTapped_Click(object sender, System.EventArgs e)
+        private void defaultTitleTextKeyTapped_Click(
+            object sender, 
+            System.EventArgs e)
         {
             var dttkt = this.DefaultTitleTextKeyTapped;
             if (dttkt == null)
@@ -170,10 +186,13 @@
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => dttkt.Invoke());
+            ThreadPool.QueueUserWorkItem(
+                o => dttkt.Invoke());
         }
 
-        private void keyboardKey_Click(object sender, System.EventArgs e)
+        private void keyboardKey_Click(
+            object sender,
+            System.EventArgs e)
         {
             var kkt = this.KeyboardKeyTapped;
             if (kkt == null)
@@ -181,10 +200,13 @@
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => kkt.Invoke());
+            ThreadPool.QueueUserWorkItem(
+                o => kkt.Invoke());
         }
 
-        private void publishKey_Click(object sender, System.EventArgs e)
+        private void publishKey_Click(
+            object sender, 
+            System.EventArgs e)
         {
             var pkt = this.PublishKeyTapped;
             if (pkt == null)
@@ -192,10 +214,13 @@
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => pkt.Invoke());
+            ThreadPool.QueueUserWorkItem(
+                o => pkt.Invoke());
         }
 
-        private void SaveIntervalKey_Click(object sender, EventArgs e)
+        private void SaveIntervalKey_Click(
+            object sender, 
+            EventArgs e)
         {
             var sikt = this.SaveIntervalKeyTapped;
             if (sikt == null)
@@ -205,6 +230,20 @@
 
             ThreadPool.QueueUserWorkItem(
                 o => sikt.Invoke());
+        }
+
+        private void resetIntervalKey_Click(
+            object sender, 
+            EventArgs e)
+        {
+            var rikt = this.ResetIntervalKeyTapped;
+            if (rikt == null)
+            {
+                return;
+            }
+
+            ThreadPool.QueueUserWorkItem(o =>
+                rikt.Invoke());
         }
     }
 }

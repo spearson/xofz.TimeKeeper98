@@ -53,6 +53,7 @@
     <Compile Include="Framework\Config\KeyboardKeyTappedHandler.cs" />
     <Compile Include="Framework\Config\PromptSelectedHandler.cs" />
     <Compile Include="Framework\Config\PromptUnselectedHandler.cs" />
+    <Compile Include="Framework\Config\ResetIntervalKeyTappedHandler.cs" />
     <Compile Include="Framework\Config\ResetTitleTextKeyTappedHandler.cs" />
     <Compile Include="Framework\Config\SaveIntervalKeyTappedHandler.cs" />
     <Compile Include="Framework\Config\SaveTitleTextKeyTappedHandler.cs" />

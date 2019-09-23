@@ -45,6 +45,8 @@
             w.RegisterDependency(
                 new SaveIntervalKeyTappedHandler(w));
             w.RegisterDependency(
+                new ResetIntervalKeyTappedHandler(w));
+            w.RegisterDependency(
                 new PromptSelectedHandler(w));
             w.RegisterDependency(
                 new PromptUnselectedHandler(w));

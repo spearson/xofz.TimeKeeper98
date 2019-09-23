@@ -76,6 +76,10 @@
                     this.ui_SaveIntervalKeyTapped);
                 sub.Subscribe(
                     this.ui,
+                    nameof(this.ui.ResetIntervalKeyTapped),
+                    this.ui_ResetIntervalKeyTapped);
+                sub.Subscribe(
+                    this.ui,
                     nameof(this.ui.PublishKeyTapped),
                     this.ui_PublishKeyTapped);
                 r.Run<Navigator>(n =>
@@ -196,6 +200,16 @@
         {
             var r = this.runner;
             r.Run<SaveIntervalKeyTappedHandler>(handler =>
+            {
+                handler.Handle(
+                    this.ui);
+            });
+        }
+
+        private void ui_ResetIntervalKeyTapped()
+        {
+            var r = this.runner;
+            r.Run<ResetIntervalKeyTappedHandler>(handler =>
             {
                 handler.Handle(
                     this.ui);
