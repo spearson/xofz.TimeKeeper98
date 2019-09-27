@@ -340,8 +340,14 @@
 
             var homeFinished = new ManualResetEvent(false);
             var homeNavFinished = new ManualResetEvent(false);
+            var statsFinished = new ManualResetEvent(false);
+            var editFinished = new ManualResetEvent(false);
             var timestampsFinished = new ManualResetEvent(false);
             var dailyFinished = new ManualResetEvent(false);
+            var mainFinished = new ManualResetEvent(false);
+            var shutdownFinished = new ManualResetEvent(false);
+            var licenseFinished = new ManualResetEvent(false);
+            var configFinished = new ManualResetEvent(false);
 
             ThreadPool.QueueUserWorkItem(
                 o =>
@@ -376,6 +382,7 @@
                             statsUi,
                             homeUi,
                             w));
+                    statsFinished.Set();
                 });
 
             ThreadPool.QueueUserWorkItem(
@@ -386,6 +393,7 @@
                             editUi,
                             homeUi,
                             w));
+                    editFinished.Set();
                 });
 
             ThreadPool.QueueUserWorkItem(
@@ -395,6 +403,7 @@
                         new SetupMainCommand(
                             s,
                             w));
+                    mainFinished.Set();
                 });
 
             ThreadPool.QueueUserWorkItem(
@@ -403,6 +412,7 @@
                     e.Execute(
                         new SetupShutdownCommand(
                             w));
+                    shutdownFinished.Set();
                 });
 
             ThreadPool.QueueUserWorkItem(
@@ -412,6 +422,7 @@
                         new SetupLicenseCommand(
                             licenseUi,
                             w));
+                    licenseFinished.Set();
                 });
 
             homeFinished.WaitOne();
@@ -470,7 +481,15 @@
                         configUi,
                         homeUi,
                         w));
+                configFinished.Set();
             });
+
+            statsFinished.WaitOne();
+            editFinished.WaitOne();
+            mainFinished.WaitOne();
+            shutdownFinished.WaitOne();
+            licenseFinished.WaitOne();
+            configFinished.WaitOne();
         }
 
         protected virtual void setMainShell(
