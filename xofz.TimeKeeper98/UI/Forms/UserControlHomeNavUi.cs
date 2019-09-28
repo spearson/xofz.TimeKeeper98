@@ -9,7 +9,8 @@
     public partial class UserControlHomeNavUi 
         : UserControlUi, HomeNavUi
     {
-        public UserControlHomeNavUi(Lotter lotter)
+        public UserControlHomeNavUi(
+            Lotter lotter)
         {
             this.InitializeComponent();
 
@@ -40,15 +41,15 @@
             this.InitializeComponent();
         }
 
-        public event Do StatisticsKeyTapped;
+        public virtual event Do StatisticsKeyTapped;
 
-        public event Do TimestampsKeyTapped;
+        public virtual event Do TimestampsKeyTapped;
 
-        public event Do DailyKeyTapped;
+        public virtual event Do DailyKeyTapped;
 
-        public event Do ConfigKeyTapped;
+        public virtual event Do ConfigKeyTapped;
 
-        public event Do ExitKeyTapped;
+        public virtual event Do ExitKeyTapped;
 
         string HomeNavUi.ActiveKeyLabel
         {
@@ -89,7 +90,9 @@
             }
         }
 
-        private void timestampsKey_Click(object sender, EventArgs e)
+        protected virtual void timestampsKey_Click(
+            object sender,
+            EventArgs e)
         {
             var tkt = this.TimestampsKeyTapped;
             if (tkt == null)
@@ -101,7 +104,9 @@
                 tkt.Invoke());
         }
 
-        private void statisticsKey_Click(object sender, EventArgs e)
+        protected virtual void statisticsKey_Click(
+            object sender,
+            EventArgs e)
         {
             var skt = this.StatisticsKeyTapped;
             if (skt == null)
@@ -113,7 +118,9 @@
                 skt.Invoke());
         }
 
-        private void dailyKey_Click(object sender, EventArgs e)
+        protected virtual void dailyKey_Click(
+            object sender, 
+            EventArgs e)
         {
             var dkt = this.DailyKeyTapped;
             if (dkt == null)
@@ -125,7 +132,9 @@
                 dkt.Invoke());
         }
 
-        private void configKey_Click(object sender, EventArgs e)
+        protected virtual void configKey_Click(
+            object sender, 
+            EventArgs e)
         {
             var ckt = this.ConfigKeyTapped;
             if (ckt == null)
@@ -137,7 +146,9 @@
                 ckt.Invoke());
         }
 
-        private void exitKey_Click(object sender, EventArgs e)
+        protected virtual void exitKey_Click(
+            object sender, 
+            EventArgs e)
         {
             var ekt = this.ExitKeyTapped;
             if (ekt == null)

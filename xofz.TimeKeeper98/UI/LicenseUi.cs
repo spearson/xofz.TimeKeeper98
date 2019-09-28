@@ -2,7 +2,8 @@
 {
     using xofz.UI;
 
-    public interface LicenseUi : PopupUi
+    public interface LicenseUi 
+        : PopupUi
     {
         event Do AcceptKeyTapped;
 

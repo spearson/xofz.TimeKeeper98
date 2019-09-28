@@ -2,7 +2,8 @@
 {
     using xofz.UI;
 
-    public interface ConfigUi : Ui
+    public interface ConfigUi 
+        : Ui
     {
         event Do PromptSelected;
 

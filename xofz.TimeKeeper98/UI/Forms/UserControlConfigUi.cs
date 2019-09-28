@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading;
+    using System.Windows.Forms;
     using xofz.UI.Forms;
 
     public partial class UserControlConfigUi 
@@ -94,7 +95,7 @@
             this.titleTextTextBox.SelectAll();
         }
 
-        private void showSecondsCheckBox_CheckedChanged(
+        protected virtual void showSecondsCheckBox_CheckedChanged(
             object sender, 
             System.EventArgs e)
         {
@@ -121,7 +122,7 @@
                 o => ssu.Invoke());
         }
 
-        private void promptCheckBox_CheckedChanged(
+        protected virtual void promptCheckBox_CheckedChanged(
             object sender,
             System.EventArgs e)
         {
@@ -148,7 +149,7 @@
                 o => pu.Invoke());
         }
 
-        private void saveTitleTextKey_Click(
+        protected virtual void saveTitleTextKey_Click(
             object sender, 
             System.EventArgs e)
         {
@@ -162,7 +163,7 @@
                 o => sttkt.Invoke());
         }
 
-        private void resetTitleTextKey_Click(
+        protected virtual void resetTitleTextKey_Click(
             object sender,
             System.EventArgs e)
         {
@@ -176,7 +177,7 @@
                 o => rttkt.Invoke());
         }
 
-        private void defaultTitleTextKeyTapped_Click(
+        protected virtual void defaultTitleTextKeyTapped_Click(
             object sender, 
             System.EventArgs e)
         {
@@ -190,7 +191,7 @@
                 o => dttkt.Invoke());
         }
 
-        private void keyboardKey_Click(
+        protected virtual void keyboardKey_Click(
             object sender,
             System.EventArgs e)
         {
@@ -204,7 +205,7 @@
                 o => kkt.Invoke());
         }
 
-        private void publishKey_Click(
+        protected virtual void publishKey_Click(
             object sender, 
             System.EventArgs e)
         {
@@ -218,7 +219,7 @@
                 o => pkt.Invoke());
         }
 
-        private void SaveIntervalKey_Click(
+        protected virtual void SaveIntervalKey_Click(
             object sender, 
             EventArgs e)
         {
@@ -232,7 +233,7 @@
                 o => sikt.Invoke());
         }
 
-        private void resetIntervalKey_Click(
+        protected virtual void resetIntervalKey_Click(
             object sender, 
             EventArgs e)
         {
@@ -244,6 +245,25 @@
 
             ThreadPool.QueueUserWorkItem(o =>
                 rikt.Invoke());
+        }
+
+        protected virtual void timerIntervalPicker_KeyPress(
+            object sender,
+            System.Windows.Forms.KeyPressEventArgs e)
+        {
+            if (e.KeyChar != (char)Keys.Enter)
+            {
+                return;
+            }
+
+            var skt = this.SaveIntervalKeyTapped;
+            if (skt == null)
+            {
+                return;
+            }
+
+            ThreadPool.QueueUserWorkItem(
+                o => skt.Invoke());
         }
     }
 }

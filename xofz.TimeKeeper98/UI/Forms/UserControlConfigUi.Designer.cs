@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelLabel = new System.Windows.Forms.Label();
             this.showSecondsCheckBox = new System.Windows.Forms.CheckBox();
             this.promptCheckBox = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.titleTextTextBox = new System.Windows.Forms.TextBox();
             this.resetTitleTextKey = new System.Windows.Forms.Button();
             this.saveTitleTextKey = new System.Windows.Forms.Button();
-            this.defaultTitleTextKeyTapped = new System.Windows.Forms.Button();
+            this.defaultTitleTextKey = new System.Windows.Forms.Button();
             this.keyboardKey = new System.Windows.Forms.Button();
             this.publishKey = new System.Windows.Forms.Button();
             this.core98GroupBox = new System.Windows.Forms.GroupBox();
@@ -56,16 +56,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.timerIntervalPicker)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // labelLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(0, 2);
-            this.label1.Margin = new System.Windows.Forms.Padding(0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 29);
-            this.label1.TabIndex = 99;
-            this.label1.Text = "Config";
+            this.labelLabel.AutoSize = true;
+            this.labelLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLabel.Location = new System.Drawing.Point(0, 2);
+            this.labelLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.labelLabel.Name = "labelLabel";
+            this.labelLabel.Size = new System.Drawing.Size(89, 29);
+            this.labelLabel.TabIndex = 99;
+            this.labelLabel.Text = "Config";
             // 
             // showSecondsCheckBox
             // 
@@ -149,21 +149,21 @@
             this.saveTitleTextKey.UseVisualStyleBackColor = true;
             this.saveTitleTextKey.Click += new System.EventHandler(this.saveTitleTextKey_Click);
             // 
-            // defaultTitleTextKeyTapped
+            // defaultTitleTextKey
             // 
-            this.defaultTitleTextKeyTapped.AutoSize = true;
-            this.defaultTitleTextKeyTapped.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.defaultTitleTextKeyTapped.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
-            this.defaultTitleTextKeyTapped.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.defaultTitleTextKeyTapped.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.defaultTitleTextKeyTapped.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.defaultTitleTextKeyTapped.Location = new System.Drawing.Point(714, 106);
-            this.defaultTitleTextKeyTapped.Name = "defaultTitleTextKeyTapped";
-            this.defaultTitleTextKeyTapped.Size = new System.Drawing.Size(92, 34);
-            this.defaultTitleTextKeyTapped.TabIndex = 5;
-            this.defaultTitleTextKeyTapped.Text = "Default";
-            this.defaultTitleTextKeyTapped.UseVisualStyleBackColor = true;
-            this.defaultTitleTextKeyTapped.Click += new System.EventHandler(this.defaultTitleTextKeyTapped_Click);
+            this.defaultTitleTextKey.AutoSize = true;
+            this.defaultTitleTextKey.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.defaultTitleTextKey.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.defaultTitleTextKey.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.defaultTitleTextKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.defaultTitleTextKey.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.defaultTitleTextKey.Location = new System.Drawing.Point(714, 106);
+            this.defaultTitleTextKey.Name = "defaultTitleTextKey";
+            this.defaultTitleTextKey.Size = new System.Drawing.Size(92, 34);
+            this.defaultTitleTextKey.TabIndex = 5;
+            this.defaultTitleTextKey.Text = "Default";
+            this.defaultTitleTextKey.UseVisualStyleBackColor = true;
+            this.defaultTitleTextKey.Click += new System.EventHandler(this.defaultTitleTextKeyTapped_Click);
             // 
             // keyboardKey
             // 
@@ -333,6 +333,7 @@
             0,
             0,
             0});
+            this.timerIntervalPicker.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.timerIntervalPicker_KeyPress);
             // 
             // label7
             // 
@@ -370,14 +371,14 @@
             this.Controls.Add(this.timestampCountGroupBox);
             this.Controls.Add(this.core98GroupBox);
             this.Controls.Add(this.keyboardKey);
-            this.Controls.Add(this.defaultTitleTextKeyTapped);
+            this.Controls.Add(this.defaultTitleTextKey);
             this.Controls.Add(this.saveTitleTextKey);
             this.Controls.Add(this.resetTitleTextKey);
             this.Controls.Add(this.titleTextTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.promptCheckBox);
             this.Controls.Add(this.showSecondsCheckBox);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelLabel);
             this.Name = "UserControlConfigUi";
             this.Size = new System.Drawing.Size(884, 345);
             this.core98GroupBox.ResumeLayout(false);
@@ -391,29 +392,28 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox showSecondsCheckBox;
-        private System.Windows.Forms.CheckBox promptCheckBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox titleTextTextBox;
-        private System.Windows.Forms.Button resetTitleTextKey;
-        private System.Windows.Forms.Button saveTitleTextKey;
-        private System.Windows.Forms.Button defaultTitleTextKeyTapped;
-        private System.Windows.Forms.Button keyboardKey;
-        private System.Windows.Forms.Button publishKey;
         private System.Windows.Forms.GroupBox core98GroupBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label totalTimeStampCountLabel;
         private System.Windows.Forms.GroupBox timestampCountGroupBox;
-        private System.Windows.Forms.Label statisticsRangeTimestampCountLabel;
-        private System.Windows.Forms.Label thisWeekTimestampCountLabel;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button saveIntervalKey;
-        private System.Windows.Forms.NumericUpDown timerIntervalPicker;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button resetIntervalKey;
+        protected System.Windows.Forms.CheckBox promptCheckBox;
+        protected System.Windows.Forms.TextBox titleTextTextBox;
+        protected System.Windows.Forms.Button resetTitleTextKey;
+        protected System.Windows.Forms.Button saveTitleTextKey;
+        protected System.Windows.Forms.Button defaultTitleTextKey;
+        protected System.Windows.Forms.Button keyboardKey;
+        protected System.Windows.Forms.CheckBox showSecondsCheckBox;
+        protected System.Windows.Forms.Button publishKey;
+        protected System.Windows.Forms.Label totalTimeStampCountLabel;
+        protected System.Windows.Forms.Label statisticsRangeTimestampCountLabel;
+        protected System.Windows.Forms.Label thisWeekTimestampCountLabel;
+        protected System.Windows.Forms.Button saveIntervalKey;
+        protected System.Windows.Forms.NumericUpDown timerIntervalPicker;
+        protected System.Windows.Forms.Button resetIntervalKey;
+        protected System.Windows.Forms.Label labelLabel;
     }
 }

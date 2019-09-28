@@ -27,6 +27,7 @@
                     {
                         interval = 1;
                     }
+
                     t.Start(
                         interval * 1000);
                 },

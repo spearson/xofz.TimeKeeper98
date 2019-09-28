@@ -14,11 +14,11 @@
             this.InitializeComponent();
         }
 
-        public event Do InKeyTapped;
+        public virtual event Do InKeyTapped;
 
-        public event Do OutKeyTapped;
+        public virtual event Do OutKeyTapped;
 
-        public event Do EditKeyTapped;
+        public virtual event Do EditKeyTapped;
 
         bool HomeUi.InKeyVisible
         {
@@ -97,7 +97,8 @@
                 set => this.versionLabel.Text = VersionFlavorText + value;
         }
 
-        private const string CoreVersionFlavorText = @"Powered by x(z) Core98 v";
+        protected const string CoreVersionFlavorText =
+            @"Powered by x(z) Core98 v";
 
         string HomeUi.CoreVersion
         {
@@ -116,7 +117,9 @@
             set => this.coreVersionLabel.Text = CoreVersionFlavorText + value;
         }
 
-        private void inKey_Click(object sender, EventArgs e)
+        protected virtual void inKey_Click(
+            object sender, 
+            EventArgs e)
         {
             var ikt = this.InKeyTapped;
             if (ikt == null)
@@ -124,10 +127,13 @@
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => ikt.Invoke());
+            ThreadPool.QueueUserWorkItem(
+                o => ikt.Invoke());
         }
 
-        private void outKey_Click(object sender, EventArgs e)
+        protected virtual void outKey_Click(
+            object sender, 
+            EventArgs e)
         {
             var okt = this.OutKeyTapped;
             if (okt == null)
@@ -135,10 +141,13 @@
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => okt.Invoke());
+            ThreadPool.QueueUserWorkItem(
+                o => okt.Invoke());
         }
 
-        private void editKey_Click(object sender, EventArgs e)
+        protected virtual void editKey_Click(
+            object sender, 
+            EventArgs e)
         {
             var ekt = this.EditKeyTapped;
             if (ekt == null)
@@ -146,7 +155,8 @@
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => ekt.Invoke());
+            ThreadPool.QueueUserWorkItem(
+                o => ekt.Invoke());
         }
     }
 }

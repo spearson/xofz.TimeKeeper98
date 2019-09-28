@@ -3,7 +3,8 @@
     using System;
     using xofz.UI;
 
-    public interface StatisticsUi : Ui
+    public interface StatisticsUi 
+        : Ui
     {
         event Do DateChanged;
 

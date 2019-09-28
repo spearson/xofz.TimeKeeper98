@@ -30,11 +30,11 @@
         {
             this.inKey = new System.Windows.Forms.Button();
             this.outKey = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.timeThisWeekLabelLabel = new System.Windows.Forms.Label();
             this.timeThisWeekLabel = new System.Windows.Forms.Label();
             this.screenPanel = new System.Windows.Forms.Panel();
             this.timeTodayLabel = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.timeTodayLabelLabel = new System.Windows.Forms.Label();
             this.coreVersionLabel = new System.Windows.Forms.Label();
             this.versionLabel = new System.Windows.Forms.Label();
             this.editKey = new System.Windows.Forms.Button();
@@ -78,16 +78,16 @@
             this.outKey.UseVisualStyleBackColor = false;
             this.outKey.Click += new System.EventHandler(this.outKey_Click);
             // 
-            // label2
+            // timeThisWeekLabelLabel
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(10, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 20);
-            this.label2.TabIndex = 99;
-            this.label2.Text = "This Week:";
+            this.timeThisWeekLabelLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.timeThisWeekLabelLabel.AutoSize = true;
+            this.timeThisWeekLabelLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeThisWeekLabelLabel.Location = new System.Drawing.Point(10, 16);
+            this.timeThisWeekLabelLabel.Name = "timeThisWeekLabelLabel";
+            this.timeThisWeekLabelLabel.Size = new System.Drawing.Size(97, 20);
+            this.timeThisWeekLabelLabel.TabIndex = 99;
+            this.timeThisWeekLabelLabel.Text = "This Week:";
             // 
             // timeThisWeekLabel
             // 
@@ -120,16 +120,16 @@
             this.timeTodayLabel.Text = "000h 00m 00s";
             this.timeTodayLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label4
+            // timeTodayLabelLabel
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(10, 72);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(62, 20);
-            this.label4.TabIndex = 99;
-            this.label4.Text = "Today:";
+            this.timeTodayLabelLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.timeTodayLabelLabel.AutoSize = true;
+            this.timeTodayLabelLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeTodayLabelLabel.Location = new System.Drawing.Point(10, 72);
+            this.timeTodayLabelLabel.Name = "timeTodayLabelLabel";
+            this.timeTodayLabelLabel.Size = new System.Drawing.Size(62, 20);
+            this.timeTodayLabelLabel.TabIndex = 99;
+            this.timeTodayLabelLabel.Text = "Today:";
             // 
             // coreVersionLabel
             // 
@@ -174,9 +174,9 @@
             // 
             // timeWorkedContainer
             // 
-            this.timeWorkedContainer.Controls.Add(this.label2);
+            this.timeWorkedContainer.Controls.Add(this.timeThisWeekLabelLabel);
             this.timeWorkedContainer.Controls.Add(this.timeThisWeekLabel);
-            this.timeWorkedContainer.Controls.Add(this.label4);
+            this.timeWorkedContainer.Controls.Add(this.timeTodayLabelLabel);
             this.timeWorkedContainer.Controls.Add(this.timeTodayLabel);
             this.timeWorkedContainer.Location = new System.Drawing.Point(666, 0);
             this.timeWorkedContainer.Margin = new System.Windows.Forms.Padding(0);
@@ -206,16 +206,16 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button inKey;
-        private System.Windows.Forms.Button outKey;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label timeThisWeekLabel;
-        private System.Windows.Forms.Panel screenPanel;
-        private System.Windows.Forms.Label timeTodayLabel;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label coreVersionLabel;
         private System.Windows.Forms.Label versionLabel;
-        private System.Windows.Forms.Button editKey;
-        private System.Windows.Forms.GroupBox timeWorkedContainer;
+        protected System.Windows.Forms.Button inKey;
+        protected System.Windows.Forms.Button outKey;
+        protected System.Windows.Forms.Button editKey;
+        protected System.Windows.Forms.GroupBox timeWorkedContainer;
+        protected System.Windows.Forms.Label timeThisWeekLabelLabel;
+        protected System.Windows.Forms.Label timeThisWeekLabel;
+        protected System.Windows.Forms.Panel screenPanel;
+        protected System.Windows.Forms.Label timeTodayLabel;
+        protected System.Windows.Forms.Label timeTodayLabelLabel;
     }
 }

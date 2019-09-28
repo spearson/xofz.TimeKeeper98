@@ -2,7 +2,8 @@
 {
     using xofz.UI;
 
-    public interface TimestampsUi : Ui
+    public interface TimestampsUi 
+        : Ui
     {
         event Do CurrentKeyTapped;
 

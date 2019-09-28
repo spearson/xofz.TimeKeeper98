@@ -20,9 +20,9 @@
             this.InitializeComponent();
         }
 
-        public event Do CurrentKeyTapped;
+        public virtual event Do CurrentKeyTapped;
 
-        public event Do StatisticsRangeKeyTapped;
+        public virtual event Do StatisticsRangeKeyTapped;
 
         Lot<string> DailyUi.Info
         {
@@ -54,7 +54,9 @@
             }
         }
 
-        private void currentKey_Click(object sender, EventArgs e)
+        protected virtual void currentKey_Click(
+            object sender, 
+            EventArgs e)
         {
             var ckt = this.CurrentKeyTapped;
             if (ckt == null)
@@ -62,10 +64,13 @@
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => ckt.Invoke());
+            ThreadPool.QueueUserWorkItem(
+                o => ckt.Invoke());
         }
 
-        private void statisticsRangeKey_Click(object sender, EventArgs e)
+        protected virtual void statisticsRangeKey_Click(
+            object sender, 
+            EventArgs e)
         {
             var srkt = this.StatisticsRangeKeyTapped;
             if (srkt == null)
@@ -73,7 +78,8 @@
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => srkt.Invoke());
+            ThreadPool.QueueUserWorkItem(
+                o => srkt.Invoke());
         }
 
         protected readonly Lotter lotter;

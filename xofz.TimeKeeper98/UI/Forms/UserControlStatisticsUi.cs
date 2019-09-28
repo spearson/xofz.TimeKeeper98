@@ -5,20 +5,21 @@
     using System.Windows.Forms;
     using xofz.UI.Forms;
 
-    public partial class UserControlStatisticsUi : UserControlUi, StatisticsUi
+    public partial class UserControlStatisticsUi 
+        : UserControlUi, StatisticsUi
     {
         public UserControlStatisticsUi()
         {
             this.InitializeComponent();
         }
 
-        public event Do DateChanged;
+        public virtual event Do DateChanged;
 
-        public event Do PreviousWeekKeyTapped;
+        public virtual event Do PreviousWeekKeyTapped;
 
-        public event Do CurrentWeekKeyTapped;
+        public virtual event Do CurrentWeekKeyTapped;
 
-        public event Do NextWeekKeyTapped;
+        public virtual event Do NextWeekKeyTapped;
 
         DateTime StatisticsUi.StartDate
         {
@@ -62,7 +63,7 @@
             set => this.maxDailyLabel.Text = value;
         }
 
-        private void startDatePicker_DateChanged(
+        protected virtual void startDatePicker_DateChanged(
             object sender, 
             DateRangeEventArgs e)
         {
@@ -76,7 +77,7 @@
                 o => dc.Invoke());
         }
 
-        private void endDatePicker_DateChanged(
+        protected virtual void endDatePicker_DateChanged(
             object sender, 
             DateRangeEventArgs e)
         {
@@ -90,7 +91,7 @@
                 o => dc.Invoke());
         }
 
-        private void previousWeekKey_Click(
+        protected virtual void previousWeekKey_Click(
             object sender, 
             EventArgs e)
         {
@@ -104,7 +105,7 @@
                 o => pwkt.Invoke());
         }
 
-        private void nextWeekKey_Click(
+        protected virtual void nextWeekKey_Click(
             object sender, 
             EventArgs e)
         {
@@ -118,7 +119,7 @@
                 o => nwkt.Invoke());
         }
 
-        private void currentWeekKey_Click(
+        protected virtual void currentWeekKey_Click(
             object sender, 
             EventArgs e)
         {

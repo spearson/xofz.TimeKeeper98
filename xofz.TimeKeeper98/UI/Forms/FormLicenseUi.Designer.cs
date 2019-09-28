@@ -101,8 +101,8 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox licenseTextBox;
-        private System.Windows.Forms.Button acceptKey;
-        private System.Windows.Forms.Button rejectKey;
+        protected System.Windows.Forms.TextBox licenseTextBox;
+        protected System.Windows.Forms.Button acceptKey;
+        protected System.Windows.Forms.Button rejectKey;
     }
 }

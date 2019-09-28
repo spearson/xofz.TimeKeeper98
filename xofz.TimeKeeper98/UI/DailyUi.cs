@@ -2,7 +2,8 @@
 {
     using xofz.UI;
 
-    public interface DailyUi : Ui
+    public interface DailyUi 
+        : Ui
     {
         event Do CurrentKeyTapped;
 

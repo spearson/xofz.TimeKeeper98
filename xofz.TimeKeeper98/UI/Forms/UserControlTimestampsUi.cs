@@ -20,11 +20,11 @@
             this.InitializeComponent();
         }
 
-        public event Do CurrentKeyTapped;
+        public virtual event Do CurrentKeyTapped;
 
-        public event Do StatisticsRangeKeyTapped;
+        public virtual event Do StatisticsRangeKeyTapped;
 
-        public event Do<bool> ShowDurationChanged;
+        public virtual event Do<bool> ShowDurationChanged;
 
         Lot<string> TimestampsUi.InTimes
         {
@@ -102,7 +102,7 @@
             }
         }
 
-        private void showDurationsCheckBox_CheckedChanged(
+        protected virtual void showDurationsCheckBox_CheckedChanged(
             object sender, 
             EventArgs e)
         {
@@ -117,7 +117,9 @@
                 o => sdc.Invoke(shouldShow));
         }
 
-        private void statisticsRangeKey_Click(object sender, EventArgs e)
+        protected virtual void statisticsRangeKey_Click(
+            object sender, 
+            EventArgs e)
         {
             var srkt = this.StatisticsRangeKeyTapped;
             if (srkt == null)
@@ -125,10 +127,13 @@
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => srkt.Invoke());
+            ThreadPool.QueueUserWorkItem(
+                o => srkt.Invoke());
         }
 
-        private void currentKey_Click(object sender, EventArgs e)
+        protected virtual void currentKey_Click(
+            object sender,
+            EventArgs e)
         {
             var ckt = this.CurrentKeyTapped;
             if (ckt == null)
@@ -136,7 +141,8 @@
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => ckt.Invoke());
+            ThreadPool.QueueUserWorkItem(
+                o => ckt.Invoke());
         }
 
         protected readonly Lotter lotter;

@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.timesInTextBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.timesInLabel = new System.Windows.Forms.Label();
+            this.timesOutLabel = new System.Windows.Forms.Label();
             this.timesOutTextBox = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.timesSplicedLabel = new System.Windows.Forms.Label();
             this.timesSplicedListBox = new System.Windows.Forms.ListBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.labelLabel = new System.Windows.Forms.Label();
             this.currentKey = new System.Windows.Forms.RadioButton();
             this.statisticsRangeKey = new System.Windows.Forms.RadioButton();
             this.showDurationsCheckBox = new System.Windows.Forms.CheckBox();
@@ -52,27 +52,27 @@
             this.timesInTextBox.Size = new System.Drawing.Size(180, 277);
             this.timesInTextBox.TabIndex = 3;
             // 
-            // label1
+            // timesInLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(0, 40);
-            this.label1.Margin = new System.Windows.Forms.Padding(0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(108, 25);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Times in:";
+            this.timesInLabel.AutoSize = true;
+            this.timesInLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timesInLabel.Location = new System.Drawing.Point(0, 40);
+            this.timesInLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.timesInLabel.Name = "timesInLabel";
+            this.timesInLabel.Size = new System.Drawing.Size(108, 25);
+            this.timesInLabel.TabIndex = 1;
+            this.timesInLabel.Text = "Times in:";
             // 
-            // label2
+            // timesOutLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(175, 40);
-            this.label2.Margin = new System.Windows.Forms.Padding(0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(122, 25);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Times out:";
+            this.timesOutLabel.AutoSize = true;
+            this.timesOutLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timesOutLabel.Location = new System.Drawing.Point(175, 40);
+            this.timesOutLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.timesOutLabel.Name = "timesOutLabel";
+            this.timesOutLabel.Size = new System.Drawing.Size(122, 25);
+            this.timesOutLabel.TabIndex = 3;
+            this.timesOutLabel.Text = "Times out:";
             // 
             // timesOutTextBox
             // 
@@ -86,16 +86,16 @@
             this.timesOutTextBox.Size = new System.Drawing.Size(180, 277);
             this.timesOutTextBox.TabIndex = 4;
             // 
-            // label3
+            // timesSplicedLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(358, 40);
-            this.label3.Margin = new System.Windows.Forms.Padding(0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(258, 25);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Times spliced together:";
+            this.timesSplicedLabel.AutoSize = true;
+            this.timesSplicedLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timesSplicedLabel.Location = new System.Drawing.Point(358, 40);
+            this.timesSplicedLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.timesSplicedLabel.Name = "timesSplicedLabel";
+            this.timesSplicedLabel.Size = new System.Drawing.Size(258, 25);
+            this.timesSplicedLabel.TabIndex = 4;
+            this.timesSplicedLabel.Text = "Times spliced together:";
             // 
             // timesSplicedListBox
             // 
@@ -113,16 +113,16 @@
             this.timesSplicedListBox.Size = new System.Drawing.Size(524, 270);
             this.timesSplicedListBox.TabIndex = 5;
             // 
-            // label4
+            // labelLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(0, 2);
-            this.label4.Margin = new System.Windows.Forms.Padding(0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(156, 29);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Timestamps";
+            this.labelLabel.AutoSize = true;
+            this.labelLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLabel.Location = new System.Drawing.Point(0, 2);
+            this.labelLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.labelLabel.Name = "labelLabel";
+            this.labelLabel.Size = new System.Drawing.Size(156, 29);
+            this.labelLabel.TabIndex = 6;
+            this.labelLabel.Text = "Timestamps";
             // 
             // currentKey
             // 
@@ -178,12 +178,12 @@
             this.Controls.Add(this.showDurationsCheckBox);
             this.Controls.Add(this.statisticsRangeKey);
             this.Controls.Add(this.currentKey);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.labelLabel);
             this.Controls.Add(this.timesSplicedListBox);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.timesSplicedLabel);
+            this.Controls.Add(this.timesOutLabel);
             this.Controls.Add(this.timesOutTextBox);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.timesInLabel);
             this.Controls.Add(this.timesInTextBox);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "UserControlTimestampsUi";
@@ -194,16 +194,15 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox timesInTextBox;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox timesOutTextBox;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ListBox timesSplicedListBox;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.RadioButton currentKey;
-        private System.Windows.Forms.RadioButton statisticsRangeKey;
-        private System.Windows.Forms.CheckBox showDurationsCheckBox;
+        protected System.Windows.Forms.Label labelLabel;
+        protected System.Windows.Forms.RadioButton currentKey;
+        protected System.Windows.Forms.RadioButton statisticsRangeKey;
+        protected System.Windows.Forms.CheckBox showDurationsCheckBox;
+        protected System.Windows.Forms.TextBox timesInTextBox;
+        protected System.Windows.Forms.Label timesInLabel;
+        protected System.Windows.Forms.Label timesOutLabel;
+        protected System.Windows.Forms.TextBox timesOutTextBox;
+        protected System.Windows.Forms.Label timesSplicedLabel;
+        protected System.Windows.Forms.ListBox timesSplicedListBox;
     }
 }

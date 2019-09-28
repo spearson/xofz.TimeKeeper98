@@ -2,7 +2,8 @@
 {
     using xofz.UI;
 
-    public interface HomeNavUi : Ui
+    public interface HomeNavUi 
+        : Ui
     {
         event Do StatisticsKeyTapped;
 

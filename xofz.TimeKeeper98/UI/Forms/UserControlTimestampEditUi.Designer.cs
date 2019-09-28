@@ -31,7 +31,7 @@
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.saveKey = new System.Windows.Forms.Button();
             this.cancelKey = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.noteLabel = new System.Windows.Forms.Label();
             this.saveCurrentKey = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -82,16 +82,16 @@
             this.cancelKey.UseVisualStyleBackColor = true;
             this.cancelKey.Click += new System.EventHandler(this.cancelKey_Click);
             // 
-            // label1
+            // noteLabel
             // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label1.Location = new System.Drawing.Point(0, 39);
-            this.label1.Margin = new System.Windows.Forms.Padding(0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(403, 58);
-            this.label1.TabIndex = 99;
-            this.label1.Text = "Note: edited timestamp must be before current time and after previous timestamp";
+            this.noteLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noteLabel.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.noteLabel.Location = new System.Drawing.Point(0, 39);
+            this.noteLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.noteLabel.Name = "noteLabel";
+            this.noteLabel.Size = new System.Drawing.Size(403, 58);
+            this.noteLabel.TabIndex = 99;
+            this.noteLabel.Text = "Note: edited timestamp must be before current time and after previous timestamp";
             // 
             // saveCurrentKey
             // 
@@ -114,7 +114,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.saveCurrentKey);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.noteLabel);
             this.Controls.Add(this.cancelKey);
             this.Controls.Add(this.saveKey);
             this.Controls.Add(this.dateTimePicker);
@@ -127,11 +127,10 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DateTimePicker dateTimePicker;
-        private System.Windows.Forms.Button saveKey;
-        private System.Windows.Forms.Button cancelKey;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button saveCurrentKey;
+        protected System.Windows.Forms.DateTimePicker dateTimePicker;
+        protected System.Windows.Forms.Button saveKey;
+        protected System.Windows.Forms.Button cancelKey;
+        protected System.Windows.Forms.Button saveCurrentKey;
+        protected System.Windows.Forms.Label noteLabel;
     }
 }

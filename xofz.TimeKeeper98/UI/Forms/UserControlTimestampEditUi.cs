@@ -34,7 +34,9 @@
             set => this.dateTimePicker.Value = value;
         }
 
-        private void saveKey_Click(object sender, EventArgs e)
+        protected virtual void saveKey_Click(
+            object sender, 
+            EventArgs e)
         {
             var skt = this.SaveKeyTapped;
             if (skt == null)
@@ -46,7 +48,9 @@
                 o => skt.Invoke());
         }
 
-        private void cancelKey_Click(object sender, EventArgs e)
+        protected virtual void cancelKey_Click(
+            object sender,
+            EventArgs e)
         {
             var ckt = this.CancelKeyTapped;
             if (ckt == null)
@@ -58,7 +62,9 @@
                 o => ckt.Invoke());
         }
 
-        private void saveCurrentKey_Click(object sender, EventArgs e)
+        protected virtual void saveCurrentKey_Click(
+            object sender,
+            EventArgs e)
         {
             var sckt = this.SaveCurrentKeyTapped;
             if (sckt == null)
@@ -70,7 +76,7 @@
                 o => sckt.Invoke());
         }
 
-        private void dateTimePicker_KeyPress(
+        protected virtual void dateTimePicker_KeyPress(
             object sender, 
             KeyPressEventArgs e)
         {

@@ -7,7 +7,7 @@
     using xofz.UI.Forms;
 
     public partial class FormMainUi 
-        : FormUi, MainUi, TimeKeeperShellUi, TitleUi
+        : FormUi, TimeKeeperShellUi, TitleUi
     {
         public FormMainUi()
         {
@@ -18,9 +18,9 @@
             var h = this.Handle;
         }
 
-        public event Do ShutdownRequested;
+        public virtual event Do ShutdownRequested;
 
-        ShellUi TimeKeeperShellUi.NavUi => this.navUi;
+        ShellUi TimeKeeperShellUi.NavUi => this.appNavUi;
 
         void ShellUi.SwitchUi(Ui newUi)
         {
@@ -52,7 +52,5 @@
             ThreadPool.QueueUserWorkItem(
                 o => sr.Invoke());
         }
-
-        
     }
 }

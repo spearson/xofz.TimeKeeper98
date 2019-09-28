@@ -2,7 +2,8 @@
 {
     using xofz.UI;
 
-    public interface TitleUi : Ui
+    public interface TitleUi 
+        : Ui
     {
         string Title { get; set; }
     }

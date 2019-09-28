@@ -2,7 +2,8 @@
 {
     using xofz.UI;
 
-    public interface HomeUi : ShellUi
+    public interface HomeUi 
+        : ShellUi
     {
         event Do InKeyTapped;
 

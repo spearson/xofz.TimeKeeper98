@@ -3,7 +3,8 @@
     using System;
     using xofz.UI;
 
-    public interface TimestampEditUi : Ui
+    public interface TimestampEditUi 
+        : Ui
     {
         event Do SaveKeyTapped;
 
