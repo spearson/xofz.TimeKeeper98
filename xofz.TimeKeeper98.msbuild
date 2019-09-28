@@ -11,11 +11,12 @@
   <PropertyGroup>
     <Version>$(BUILD_NUMBER)</Version>
     <ProjectName>xofz.TimeKeeper98</ProjectName>
-    <BuildDir>$(ProjectName)\bin\Release</BuildDir>
+    <BuildFolder>$(ProjectName)\bin\Release</BuildFolder>
     <WorkingFolder>$(teamcity_build_workingDir)</WorkingFolder>
     <ZipFolder>$(ProjectName)-v$(Version)</ZipFolder>
     <DeployFolder>H:\Dropbox\xofz.Apps\TimeKeeper98</DeployFolder>
     <DeployFolder2>H:\OneDrive\xofz.Apps\TimeKeeper98</DeployFolder2>
+    <VersionFileName>version-$(Version).txt</VersionFileName>
   </PropertyGroup>
 
 
@@ -43,7 +44,7 @@
     Name="Build"
     DependsOnTargets="ChangeVersion">
     <RemoveDir
-      Directories="$(BuildDir)"
+      Directories="$(BuildFolder)"
     />
     <MSBuild
       Projects="$(ProjectName).sln"
@@ -60,15 +61,22 @@
       Directories="$(ZipFolder)" 
       Condition="!Exists('$(ZipFolder)')"
     />
+    <Move 
+      SourceFiles="$(BuildFolder)\version.txt" 
+      DestinationFiles="$(BuildFolder)\$(VersionFileName)" 
+    />
     <ItemGroup>
       <FilesToMove
-        Include="$(BuildDir)\$(ProjectName).exe"
+        Include="$(BuildFolder)\$(ProjectName).exe"
       />
       <FilesToMove
-        Include="$(BuildDir)\$(ProjectName).pdb"
+        Include="$(BuildFolder)\$(ProjectName).pdb"
       />
       <FilesToMove
-        Include="$(BuildDir)\$(ProjectName).exe.config"
+        Include="$(BuildFolder)\$(ProjectName).exe.config"
+      />
+      <FilesToMove
+        Include="$(BuildFolder)\$(VersionFileName)"
       />
     </ItemGroup>
     <MV
