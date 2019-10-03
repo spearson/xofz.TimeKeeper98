@@ -159,12 +159,11 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
         protected System.Windows.Forms.Button statisticsKey;
         protected System.Windows.Forms.Button exitKey;
         protected System.Windows.Forms.Button timestampsKey;
         protected System.Windows.Forms.Button dailyKey;
         protected System.Windows.Forms.Button configKey;
+        protected System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
     }
 }

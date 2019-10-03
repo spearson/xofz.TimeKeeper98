@@ -31,7 +31,7 @@
             this.labelLabel = new System.Windows.Forms.Label();
             this.showSecondsCheckBox = new System.Windows.Forms.CheckBox();
             this.promptCheckBox = new System.Windows.Forms.CheckBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.titleTextLabel = new System.Windows.Forms.Label();
             this.titleTextTextBox = new System.Windows.Forms.TextBox();
             this.resetTitleTextKey = new System.Windows.Forms.Button();
             this.saveTitleTextKey = new System.Windows.Forms.Button();
@@ -39,17 +39,17 @@
             this.keyboardKey = new System.Windows.Forms.Button();
             this.publishKey = new System.Windows.Forms.Button();
             this.core98GroupBox = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.publishNotifyLabel = new System.Windows.Forms.Label();
+            this.totalTimestampCountLabelLabel = new System.Windows.Forms.Label();
             this.totalTimeStampCountLabel = new System.Windows.Forms.Label();
             this.timestampCountGroupBox = new System.Windows.Forms.GroupBox();
             this.statisticsRangeTimestampCountLabel = new System.Windows.Forms.Label();
             this.thisWeekTimestampCountLabel = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.statisticsRangeTimestampCountLabelLabel = new System.Windows.Forms.Label();
+            this.thisWeekTimestampCountLabelLabel = new System.Windows.Forms.Label();
             this.saveIntervalKey = new System.Windows.Forms.Button();
             this.timerIntervalPicker = new System.Windows.Forms.NumericUpDown();
-            this.label7 = new System.Windows.Forms.Label();
+            this.timerIntervalLabel = new System.Windows.Forms.Label();
             this.resetIntervalKey = new System.Windows.Forms.Button();
             this.core98GroupBox.SuspendLayout();
             this.timestampCountGroupBox.SuspendLayout();
@@ -99,15 +99,15 @@
             this.promptCheckBox.UseVisualStyleBackColor = true;
             this.promptCheckBox.CheckedChanged += new System.EventHandler(this.promptCheckBox_CheckedChanged);
             // 
-            // label2
+            // titleTextLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(1, 82);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(83, 20);
-            this.label2.TabIndex = 99;
-            this.label2.Text = "Title text:";
+            this.titleTextLabel.AutoSize = true;
+            this.titleTextLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleTextLabel.Location = new System.Drawing.Point(1, 82);
+            this.titleTextLabel.Name = "titleTextLabel";
+            this.titleTextLabel.Size = new System.Drawing.Size(83, 20);
+            this.titleTextLabel.TabIndex = 99;
+            this.titleTextLabel.Text = "Title text:";
             // 
             // titleTextTextBox
             // 
@@ -199,7 +199,7 @@
             // 
             // core98GroupBox
             // 
-            this.core98GroupBox.Controls.Add(this.label3);
+            this.core98GroupBox.Controls.Add(this.publishNotifyLabel);
             this.core98GroupBox.Controls.Add(this.publishKey);
             this.core98GroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.core98GroupBox.Location = new System.Drawing.Point(503, 165);
@@ -209,25 +209,25 @@
             this.core98GroupBox.TabStop = false;
             this.core98GroupBox.Text = "xofz.Core98";
             // 
-            // label3
+            // publishNotifyLabel
             // 
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 28);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(255, 57);
-            this.label3.TabIndex = 101;
-            this.label3.Text = "Library and PDB may be published to current program directory after accepting lic" +
+            this.publishNotifyLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.publishNotifyLabel.Location = new System.Drawing.Point(6, 28);
+            this.publishNotifyLabel.Name = "publishNotifyLabel";
+            this.publishNotifyLabel.Size = new System.Drawing.Size(255, 57);
+            this.publishNotifyLabel.TabIndex = 101;
+            this.publishNotifyLabel.Text = "Library and PDB may be published to current program directory after accepting lic" +
     "ense";
             // 
-            // label4
+            // totalTimestampCountLabelLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(72, 43);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(42, 16);
-            this.label4.TabIndex = 102;
-            this.label4.Text = "Total:";
+            this.totalTimestampCountLabelLabel.AutoSize = true;
+            this.totalTimestampCountLabelLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalTimestampCountLabelLabel.Location = new System.Drawing.Point(72, 43);
+            this.totalTimestampCountLabelLabel.Name = "totalTimestampCountLabelLabel";
+            this.totalTimestampCountLabelLabel.Size = new System.Drawing.Size(42, 16);
+            this.totalTimestampCountLabelLabel.TabIndex = 102;
+            this.totalTimestampCountLabelLabel.Text = "Total:";
             // 
             // totalTimeStampCountLabel
             // 
@@ -243,10 +243,10 @@
             // 
             this.timestampCountGroupBox.Controls.Add(this.statisticsRangeTimestampCountLabel);
             this.timestampCountGroupBox.Controls.Add(this.thisWeekTimestampCountLabel);
-            this.timestampCountGroupBox.Controls.Add(this.label6);
-            this.timestampCountGroupBox.Controls.Add(this.label5);
+            this.timestampCountGroupBox.Controls.Add(this.statisticsRangeTimestampCountLabelLabel);
+            this.timestampCountGroupBox.Controls.Add(this.thisWeekTimestampCountLabelLabel);
             this.timestampCountGroupBox.Controls.Add(this.totalTimeStampCountLabel);
-            this.timestampCountGroupBox.Controls.Add(this.label4);
+            this.timestampCountGroupBox.Controls.Add(this.totalTimestampCountLabelLabel);
             this.timestampCountGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timestampCountGroupBox.Location = new System.Drawing.Point(263, 165);
             this.timestampCountGroupBox.Name = "timestampCountGroupBox";
@@ -275,25 +275,25 @@
             this.thisWeekTimestampCountLabel.TabIndex = 106;
             this.thisWeekTimestampCountLabel.Text = "0000000";
             // 
-            // label6
+            // statisticsRangeTimestampCountLabelLabel
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(6, 132);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(108, 16);
-            this.label6.TabIndex = 105;
-            this.label6.Text = "Statistics Range:";
+            this.statisticsRangeTimestampCountLabelLabel.AutoSize = true;
+            this.statisticsRangeTimestampCountLabelLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statisticsRangeTimestampCountLabelLabel.Location = new System.Drawing.Point(6, 132);
+            this.statisticsRangeTimestampCountLabelLabel.Name = "statisticsRangeTimestampCountLabelLabel";
+            this.statisticsRangeTimestampCountLabelLabel.Size = new System.Drawing.Size(108, 16);
+            this.statisticsRangeTimestampCountLabelLabel.TabIndex = 105;
+            this.statisticsRangeTimestampCountLabelLabel.Text = "Statistics Range:";
             // 
-            // label5
+            // thisWeekTimestampCountLabelLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(42, 88);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(72, 16);
-            this.label5.TabIndex = 104;
-            this.label5.Text = "This week:";
+            this.thisWeekTimestampCountLabelLabel.AutoSize = true;
+            this.thisWeekTimestampCountLabelLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.thisWeekTimestampCountLabelLabel.Location = new System.Drawing.Point(42, 88);
+            this.thisWeekTimestampCountLabelLabel.Name = "thisWeekTimestampCountLabelLabel";
+            this.thisWeekTimestampCountLabelLabel.Size = new System.Drawing.Size(72, 16);
+            this.thisWeekTimestampCountLabelLabel.TabIndex = 104;
+            this.thisWeekTimestampCountLabelLabel.Text = "This week:";
             // 
             // saveIntervalKey
             // 
@@ -335,15 +335,15 @@
             0});
             this.timerIntervalPicker.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.timerIntervalPicker_KeyPress);
             // 
-            // label7
+            // timerIntervalLabel
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(1, 230);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(200, 20);
-            this.label7.TabIndex = 107;
-            this.label7.Text = "Timer interval (seconds)";
+            this.timerIntervalLabel.AutoSize = true;
+            this.timerIntervalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timerIntervalLabel.Location = new System.Drawing.Point(1, 230);
+            this.timerIntervalLabel.Name = "timerIntervalLabel";
+            this.timerIntervalLabel.Size = new System.Drawing.Size(200, 20);
+            this.timerIntervalLabel.TabIndex = 107;
+            this.timerIntervalLabel.Text = "Timer interval (seconds)";
             // 
             // resetIntervalKey
             // 
@@ -365,7 +365,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.resetIntervalKey);
-            this.Controls.Add(this.label7);
+            this.Controls.Add(this.timerIntervalLabel);
             this.Controls.Add(this.timerIntervalPicker);
             this.Controls.Add(this.saveIntervalKey);
             this.Controls.Add(this.timestampCountGroupBox);
@@ -375,7 +375,7 @@
             this.Controls.Add(this.saveTitleTextKey);
             this.Controls.Add(this.resetTitleTextKey);
             this.Controls.Add(this.titleTextTextBox);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.titleTextLabel);
             this.Controls.Add(this.promptCheckBox);
             this.Controls.Add(this.showSecondsCheckBox);
             this.Controls.Add(this.labelLabel);
@@ -392,14 +392,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox core98GroupBox;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.GroupBox timestampCountGroupBox;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label7;
         protected System.Windows.Forms.CheckBox promptCheckBox;
         protected System.Windows.Forms.TextBox titleTextTextBox;
         protected System.Windows.Forms.Button resetTitleTextKey;
@@ -415,5 +407,13 @@
         protected System.Windows.Forms.NumericUpDown timerIntervalPicker;
         protected System.Windows.Forms.Button resetIntervalKey;
         protected System.Windows.Forms.Label labelLabel;
+        protected System.Windows.Forms.Label titleTextLabel;
+        protected System.Windows.Forms.GroupBox core98GroupBox;
+        protected System.Windows.Forms.Label publishNotifyLabel;
+        protected System.Windows.Forms.Label totalTimestampCountLabelLabel;
+        protected System.Windows.Forms.GroupBox timestampCountGroupBox;
+        protected System.Windows.Forms.Label statisticsRangeTimestampCountLabelLabel;
+        protected System.Windows.Forms.Label thisWeekTimestampCountLabelLabel;
+        protected System.Windows.Forms.Label timerIntervalLabel;
     }
 }

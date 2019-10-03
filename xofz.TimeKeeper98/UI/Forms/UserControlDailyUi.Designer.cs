@@ -107,9 +107,9 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label label4;
         protected System.Windows.Forms.RadioButton statisticsRangeKey;
         protected System.Windows.Forms.RadioButton currentKey;
         protected System.Windows.Forms.TextBox infoTextBox;
+        protected System.Windows.Forms.Label label4;
     }
 }

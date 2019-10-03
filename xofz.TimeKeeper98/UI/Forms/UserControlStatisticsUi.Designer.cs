@@ -246,7 +246,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label timeWorkedLabel;
         protected System.Windows.Forms.Label labelLabel;
         protected System.Windows.Forms.Label endLabel;
         protected System.Windows.Forms.Label startLabel;
@@ -262,5 +261,6 @@
         protected System.Windows.Forms.Label minDailyLabelLabel;
         protected System.Windows.Forms.Label maxDailyLabel;
         protected System.Windows.Forms.Label maxDailyLabelLabel;
+        protected System.Windows.Forms.Label timeWorkedLabel;
     }
 }

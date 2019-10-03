@@ -206,8 +206,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label coreVersionLabel;
-        private System.Windows.Forms.Label versionLabel;
         protected System.Windows.Forms.Button inKey;
         protected System.Windows.Forms.Button outKey;
         protected System.Windows.Forms.Button editKey;
@@ -217,5 +215,7 @@
         protected System.Windows.Forms.Panel screenPanel;
         protected System.Windows.Forms.Label timeTodayLabel;
         protected System.Windows.Forms.Label timeTodayLabelLabel;
+        protected System.Windows.Forms.Label coreVersionLabel;
+        protected System.Windows.Forms.Label versionLabel;
     }
 }

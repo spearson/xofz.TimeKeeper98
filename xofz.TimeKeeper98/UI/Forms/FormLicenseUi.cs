@@ -39,7 +39,9 @@
             this.Show(s);
         }
 
-        private void rejectKey_Click(object sender, System.EventArgs e)
+        protected virtual void rejectKey_Click(
+            object sender, 
+            System.EventArgs e)
         {
             var rkt = this.RejectKeyTapped;
             if (rkt == null)
@@ -47,10 +49,13 @@
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => rkt.Invoke());
+            ThreadPool.QueueUserWorkItem(
+                o => rkt.Invoke());
         }
 
-        private void acceptKey_Click(object sender, System.EventArgs e)
+        protected virtual void acceptKey_Click(
+            object sender, 
+            System.EventArgs e)
         {
             var akt = this.AcceptKeyTapped;
             if (akt == null)
@@ -58,10 +63,11 @@
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => akt.Invoke());
+            ThreadPool.QueueUserWorkItem(
+                o => akt.Invoke());
         }
 
-        private void this_FormClosing(
+        protected virtual void this_FormClosing(
             object sender,
             FormClosingEventArgs e)
         {
@@ -72,7 +78,8 @@
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem(o => rkt.Invoke());
+            ThreadPool.QueueUserWorkItem(
+                o => rkt.Invoke());
         }
 
         protected readonly Form shell;
