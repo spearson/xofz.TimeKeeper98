@@ -22,7 +22,8 @@
 
         ShellUi TimeKeeperShellUi.NavUi => this.appNavUi;
 
-        void ShellUi.SwitchUi(Ui newUi)
+        void ShellUi.SwitchUi(
+            Ui newUi)
         {
             var control = newUi as Control;
             ControlHelpers.SafeReplace(

@@ -175,9 +175,18 @@
             {
                 return collection;
             }
-            
 
-            foreach (var filePath in Directory.GetFiles(md))
+            string[] allDataFiles;
+            try
+            {
+                allDataFiles = Directory.GetFiles(md);
+            }
+            catch
+            {
+                return collection;
+            }
+
+            foreach (var filePath in allDataFiles)
             {
                 IEnumerable<string> lines;
                 try
@@ -211,6 +220,7 @@
         {
             var r = this.runner;
             var md = this.mainDirectory;
+            string filePath;
 
             try
             {
@@ -218,6 +228,8 @@
                 {
                     Directory.CreateDirectory(md);
                 }
+
+                filePath = Path.Combine(md, DataFileName);
             }
             catch
             {
@@ -225,8 +237,6 @@
             }
 
             var tickCount = DateTime.Now.Ticks;
-            var filePath = Path.Combine(md, DataFileName);
-
             try
             {
                 if (File.Exists(filePath))
@@ -277,11 +287,12 @@
             return true;
         }
 
-        void TimestampWriter.EditLastTimestamp(DateTime newTimestamp)
+        void TimestampWriter.EditLastTimestamp(
+            DateTime newTimestamp)
         {
             var r = this.runner;
             var md = this.mainDirectory;
-            string[] filesInDir;
+            string[] allDataFiles;
             try
             {
                 if (!Directory.Exists(md))
@@ -289,7 +300,7 @@
                     return;
                 }
 
-                filesInDir = Directory.GetFiles(md);
+                allDataFiles = Directory.GetFiles(md);
             }
             catch
             {
@@ -298,14 +309,15 @@
 
 
             var orderedPaths = EnumerableHelpers.OrderByDescending(
-                filesInDir,
+                allDataFiles,
                 s => s);
             if (orderedPaths.Count < 1)
             {
                 return;
             }
 
-            var path = EnumerableHelpers.First(orderedPaths);
+            var path = EnumerableHelpers.First(
+                orderedPaths);
             string[] times;
             try
             {
