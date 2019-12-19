@@ -83,8 +83,11 @@
 
             var w = this.web;
             w.Run<StartHandler>(handler =>
+            {
                 handler.Handle(
-                    this.ui));
+                    this.ui);
+            });
+
             Interlocked.CompareExchange(
                 ref this.startedIf1, 
                 1, 

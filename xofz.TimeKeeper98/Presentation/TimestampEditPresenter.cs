@@ -60,35 +60,32 @@
             base.Start();
 
             var r = this.runner;
-            HomeNavUi hnUi = null;
-            HomeUi homeUi = null;
             r.Run<Navigator>(nav =>
             {
-                hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
-                homeUi = nav.GetUi<HomePresenter, HomeUi>();
-            });
+                var hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
+                var homeUi = nav.GetUi<HomePresenter, HomeUi>();
 
-            r.Run<StartHandler>(handler =>
-            {
-                handler.Handle(
-                    this.ui,
-                    hnUi,
-                    homeUi);
+                r.Run<StartHandler>(handler =>
+                {
+                    handler.Handle(
+                        this.ui,
+                        hnUi,
+                        homeUi);
+                });
             });
+            
         }
 
         public override void Stop()
         {
             var r = this.runner;
-            HomeUi homeUi = null;
             r.Run<Navigator>(nav =>
             {
-                homeUi = nav.GetUi<HomePresenter, HomeUi>();
-            });
-
-            r.Run<StopHandler>(handler =>
-            {
-                handler.Handle(homeUi);
+                var homeUi = nav.GetUi<HomePresenter, HomeUi>();
+                r.Run<StopHandler>(handler =>
+                {
+                    handler.Handle(homeUi);
+                });
             });
         }
 

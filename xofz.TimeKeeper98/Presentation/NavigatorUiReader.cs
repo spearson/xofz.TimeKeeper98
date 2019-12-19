@@ -5,7 +5,8 @@
     using xofz.TimeKeeper98.Framework;
     using xofz.TimeKeeper98.UI;
 
-    public sealed class NavigatorUiReader : UiReader
+    public sealed class NavigatorUiReader 
+        : UiReader
     {
         public NavigatorUiReader(
             MethodRunner runner)

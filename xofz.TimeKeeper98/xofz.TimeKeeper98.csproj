@@ -80,6 +80,7 @@
     <Compile Include="Framework\HomeNav\StatisticsKeyTappedHandler.cs" />
     <Compile Include="Framework\HomeNav\TimestampsKeyTappedHandler.cs" />
     <Compile Include="Framework\Home\DependencyNames.cs" />
+    <Compile Include="Framework\Home\EditKeyTappedHandler.cs" />
     <Compile Include="Framework\Home\InKeyTappedHandler.cs" />
     <Compile Include="Framework\Home\OutKeyTappedHandler.cs" />
     <Compile Include="Framework\Home\SetupHandler.cs" />

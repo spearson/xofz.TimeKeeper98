@@ -109,9 +109,15 @@
         private void ui_EditKeyTapped()
         {
             var w = this.web;
-            w.Run<Navigator>(n =>
+            w.Run<Navigator>(nav =>
             {
-                n.Present<TimestampEditPresenter>();
+                Do presentEditor = nav.Present<TimestampEditPresenter>;
+                w.Run<EditKeyTappedHandler>(handler =>
+                {
+                    handler.Handle(
+                        this.ui,
+                        presentEditor);
+                });
             });
         }
 

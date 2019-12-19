@@ -99,20 +99,18 @@
             base.Start();
 
             var w = this.web;
-            HomeNavUi hnUi = null;
-            StatisticsUi statsUi = null;
             w.Run<Navigator>(nav =>
             {
-                hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
-                statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
-            });
+                var hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
+                var statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
 
-            w.Run<StartHandler>(handler =>
-            {
-                handler.Handle(
-                    this.ui,
-                    hnUi,
-                    statsUi);
+                w.Run<StartHandler>(handler =>
+                {
+                    handler.Handle(
+                        this.ui,
+                        hnUi,
+                        statsUi);
+                });
             });
 
             Interlocked.CompareExchange(
@@ -137,20 +135,18 @@
             }
 
             var w = this.web;
-            HomeNavUi hnUi = null;
-            StatisticsUi statsUi = null;
             w.Run<Navigator>(nav =>
             {
-                hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
-                statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
-            });
+                var hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
+                var statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
 
-            w.Run<HomeUiInKeyTappedHandler>(handler =>
-            {
-                handler.Handle(
-                    this.ui,
-                    hnUi,
-                    statsUi);
+                w.Run<HomeUiInKeyTappedHandler>(handler =>
+                {
+                    handler.Handle(
+                        this.ui,
+                        hnUi,
+                        statsUi);
+                });
             });
         }
 
@@ -162,20 +158,18 @@
             }
 
             var w = this.web;
-            HomeNavUi hnUi = null;
-            StatisticsUi statsUi = null;
             w.Run<Navigator>(nav =>
             {
-                hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
-                statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
-            });
+                var hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
+                var statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
 
-            w.Run<HomeUiOutKeyTappedHandler>(handler =>
-            {
-                handler.Handle(
-                    this.ui,
-                    hnUi,
-                    statsUi);
+                w.Run<HomeUiOutKeyTappedHandler>(handler =>
+                {
+                    handler.Handle(
+                        this.ui,
+                        hnUi,
+                        statsUi);
+                });
             });
         }
 
@@ -187,20 +181,18 @@
             }
 
             var w = this.web;
-            HomeNavUi hnUi = null;
-            StatisticsUi statsUi = null;
             w.Run<Navigator>(nav =>
             {
-                hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
-                statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
-            });
+                var hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
+                var statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
 
-            w.Run<CurrentKeyTappedHandler>(handler =>
-            {
-                handler.Handle(
-                    this.ui,
-                    hnUi,
-                    statsUi);
+                w.Run<CurrentKeyTappedHandler>(handler =>
+                {
+                    handler.Handle(
+                        this.ui,
+                        hnUi,
+                        statsUi);
+                });
             });
         }
 
@@ -212,20 +204,17 @@
             }
 
             var w = this.web;
-            HomeNavUi hnUi = null;
-            StatisticsUi statsUi = null;
             w.Run<Navigator>(nav =>
             {
-                hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
-                statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
-            });
-
-            w.Run<StatisticsRangeKeyTappedHandler>(handler =>
-            {
-                handler.Handle(
-                    this.ui,
-                    hnUi,
-                    statsUi);
+                var hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
+                var statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
+                w.Run<StatisticsRangeKeyTappedHandler>(handler =>
+                {
+                    handler.Handle(
+                        this.ui,
+                        hnUi,
+                        statsUi);
+                });
             });
         }
 
@@ -238,26 +227,24 @@
             }
 
             var w = this.web;
-            HomeNavUi hnUi = null;
-            StatisticsUi statsUi = null;
             w.Run<Navigator>(nav =>
             {
-                hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
-                statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
-            });
+                var hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
+                var statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
 
-            w.Run<ShowDurationsChangedHandler>(handler =>
-            {
-                handler.Handle(
-                    this.ui,
-                    hnUi,
-                    statsUi,
-                    shouldShow);
+                w.Run<ShowDurationsChangedHandler>(handler =>
+                {
+                    handler.Handle(
+                        this.ui,
+                        hnUi,
+                        statsUi,
+                        shouldShow);
+                });
             });
         }
 
-        private long 
-            setupIf1, 
+        private long
+            setupIf1,
             startedIf1;
         private readonly TimestampsUi ui;
         private readonly MethodWeb web;

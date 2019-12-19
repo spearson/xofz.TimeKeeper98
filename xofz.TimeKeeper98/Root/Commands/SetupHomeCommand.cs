@@ -70,15 +70,17 @@
                 new VersionReader(
                     Assembly.GetExecutingAssembly()));
             w.RegisterDependency(
+                new SetupHandler(w));
+            w.RegisterDependency(
+                new StartHandler(w));
+            w.RegisterDependency(
                 new InKeyTappedHandler(w));
             w.RegisterDependency(
                 new OutKeyTappedHandler(w));
             w.RegisterDependency(
+                new EditKeyTappedHandler(w));
+            w.RegisterDependency(
                 new TimerHandler(w));
-            w.RegisterDependency(
-                new StartHandler(w));
-            w.RegisterDependency(
-                new SetupHandler(w));
             w.RegisterDependency(
                 new LatchHolder
                 {

@@ -82,9 +82,9 @@
                     this.ui,
                     nameof(this.ui.PublishKeyTapped),
                     this.ui_PublishKeyTapped);
-                r.Run<Navigator>(n =>
+                r.Run<Navigator>(nav =>
                 {
-                    var homeUi = n.GetUi<HomePresenter, HomeUi>();
+                    var homeUi = nav.GetUi<HomePresenter, HomeUi>();
                     sub.Subscribe(
                         homeUi,
                         nameof(homeUi.InKeyTapped),

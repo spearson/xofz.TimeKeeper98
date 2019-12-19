@@ -7,7 +7,8 @@
     using xofz.TimeKeeper98.UI;
     using xofz.UI;
 
-    public sealed class StatisticsPresenter : Presenter
+    public sealed class StatisticsPresenter
+        : Presenter
     {
         public StatisticsPresenter(
             StatisticsUi ui,
@@ -34,6 +35,7 @@
             {
                 handler.Handle(this.ui);
             });
+
             r.Run<EventSubscriber>(subscriber =>
             {
                 subscriber.Subscribe(
@@ -71,17 +73,18 @@
             var r = this.runner;
 
             base.Start();
-
-            HomeNavUi hnUi = null;
             r.Run<Navigator>(nav =>
             {
-                hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
+                var hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
+                r.Run<StartHandler>(handler =>
+                {
+                    handler.Handle(
+                        this.ui, 
+                        hnUi);
+                });
             });
 
-            r.Run<StartHandler>(handler =>
-            {
-                handler.Handle(this.ui, hnUi);
-            });
+            
         }
 
         public override void Stop()
