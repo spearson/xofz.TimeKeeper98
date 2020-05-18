@@ -30,6 +30,7 @@
                         });
                 });
         }
+
         protected readonly MethodRunner runner;
     }
 }
