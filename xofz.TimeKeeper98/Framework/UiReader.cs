@@ -4,8 +4,10 @@
 
     public interface UiReader
     {
-        void ReadHomeNav(out HomeNavUi ui);
+        void ReadHomeNav(
+            out HomeNavUi ui);
 
-        void ReadStatistics(out StatisticsUi ui);
+        void ReadStatistics(
+            out StatisticsUi ui);
     }
 }

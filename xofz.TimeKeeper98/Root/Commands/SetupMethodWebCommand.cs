@@ -8,7 +8,8 @@
     using xofz.TimeKeeper98.Framework;
     using xofz.Framework.Logging.Logs;
 
-    public class SetupMethodWebCommand : Command
+    public class SetupMethodWebCommand 
+        : Command
     {
         public SetupMethodWebCommand(
             MethodWebV2 web,
@@ -57,6 +58,8 @@
             w.RegisterDependency(
                 new TextFileLog(exceptionsLogName + @".log"),
                 exceptionsLogName);
+            w.RegisterDependency(
+                new TimeProvider());
         }
 
         protected readonly MethodWebV2 web;

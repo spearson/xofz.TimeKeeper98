@@ -14,7 +14,8 @@
     using xofz.TimeKeeper98.UI;
     using xofz.UI;
 
-    public class SetupHomeCommand : Command
+    public class SetupHomeCommand 
+        : Command
     {
         public SetupHomeCommand(
             HomeUi ui,
@@ -50,7 +51,7 @@
         {
             var w = this.web;
             w.RegisterDependency(
-                new DateCalculator());
+                new DateCalculator(w));
             w.RegisterDependency(
                 new EnumerableTrapper<DateTime>());
             w.RegisterDependency(

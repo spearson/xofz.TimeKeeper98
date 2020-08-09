@@ -236,7 +236,13 @@
                 return false;
             }
 
-            var tickCount = DateTime.Now.Ticks;
+            var now = DateTime.Now;
+            r.Run<TimeProvider>(provider =>
+            {
+                now = provider.Now();
+            });
+
+            var tickCount = now.Ticks;
             try
             {
                 if (File.Exists(filePath))

@@ -29,7 +29,13 @@
 
         public virtual TimeSpan TimeWorkedToday()
         {
+            var r = this.runner;
             var today = DateTime.Today;
+            r.Run<TimeProvider>(provider =>
+            {
+                today = provider.Now().Date;
+            });
+
             var beginning = today;
             var end = today.AddDays(1);
 
@@ -40,6 +46,7 @@
             DateTime beginning, 
             DateTime end)
         {
+            var r = this.runner;
             var allTimes = this.allTimes();
             TimeSpan timeWorked = TimeSpan.Zero;
             var timesInRange = new LinkedList<DateTime>();
@@ -59,6 +66,12 @@
 
                 if (time > end)
                 {
+                    if (timesInRange.Count < 1 && timeCounter % 2 == 1)
+                    {
+                        // clocked in at beginning
+                        timesInRange.AddLast(beginning);
+                    }
+
                     if (timesInRange.Count % 2 == 1)
                     {
                         // clocked in at end
@@ -69,7 +82,7 @@
                 }
 
                 checkIfClockedInBeforeFirst:
-                if (timesInRange.Count == 0 && timeCounter % 2 == 1)
+                if (timesInRange.Count < 1 && timeCounter % 2 == 1)
                 {
                     // clocked in at start of range
                     timesInRange.AddFirst(beginning);
@@ -90,6 +103,11 @@
                 if (!e.MoveNext())
                 {
                     var now = DateTime.Now;
+                    r.Run<TimeProvider>(provider =>
+                    {
+                        now = provider.Now();
+                    });
+
                     if (end.Date > now)
                     {
                         if (inTime < now)

@@ -28,8 +28,7 @@
                         interval = 1;
                     }
 
-                    t.Start(
-                        interval * 1000);
+                    t.Start(interval * 1000);
                 },
                 DependencyNames.Timer);
         }

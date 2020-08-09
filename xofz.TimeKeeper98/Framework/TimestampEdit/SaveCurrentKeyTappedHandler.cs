@@ -21,6 +21,11 @@
                 uiRW =>
             {
                 var currentTime = DateTime.Now;
+                r.Run<TimeProvider>(provider =>
+                {
+                    currentTime = provider.Now();
+                });
+
                 uiRW.WriteSync(
                     ui,
                     () =>

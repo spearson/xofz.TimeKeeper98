@@ -8,7 +8,8 @@
     using xofz.TimeKeeper98.UI;
     using xofz.UI;
 
-    public class SetupHomeNavCommand : Command
+    public class SetupHomeNavCommand 
+        : Command
     {
         public SetupHomeNavCommand(
             HomeNavUi ui,

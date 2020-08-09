@@ -16,6 +16,23 @@
         }
 
         public virtual void Handle(
+            TimestampsUi ui)
+        {
+            var r = this.runner;
+            r.Run<UiReader>(reader =>
+            {
+                reader.ReadHomeNav(
+                    out var homeNavUi);
+                reader.ReadStatistics(
+                    out var statsUi);
+                this.Handle(
+                    ui,
+                    homeNavUi,
+                    statsUi);
+            });
+        }
+
+        public virtual void Handle(
             TimestampsUi ui,
             HomeNavUi homeNavUi,
             StatisticsUi statsUi)
@@ -102,7 +119,13 @@
                     {
                         if (inNow && firstIn)
                         {
-                            if (DateTime.Now > end.AddDays(1))
+                            var now = DateTime.Now;
+                            r.Run<TimeProvider>(provider =>
+                            {
+                                now = provider.Now();
+                            });
+
+                            if (now > end.AddDays(1))
                             {
                                 // was clocked in at end of range
                                 timesInRange.AddLast(end);

@@ -9,7 +9,8 @@
     using xofz.TimeKeeper98.UI;
     using xofz.UI;
 
-    public class SetupConfigCommand : Command
+    public class SetupConfigCommand 
+        : Command
     {
         public SetupConfigCommand(
             ConfigUi ui,

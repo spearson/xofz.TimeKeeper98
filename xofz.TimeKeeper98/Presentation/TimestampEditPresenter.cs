@@ -7,7 +7,8 @@
     using xofz.TimeKeeper98.Framework.TimestampEdit;
     using xofz.TimeKeeper98.UI;
 
-    public sealed class TimestampEditPresenter : Presenter
+    public sealed class TimestampEditPresenter 
+        : Presenter
     {
         public TimestampEditPresenter(
             TimestampEditUi ui,

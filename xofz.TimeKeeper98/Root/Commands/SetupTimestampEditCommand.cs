@@ -7,7 +7,8 @@
     using xofz.TimeKeeper98.Presentation;
     using xofz.TimeKeeper98.UI;
 
-    public class SetupTimestampEditCommand : Command
+    public class SetupTimestampEditCommand 
+        : Command
     {
         public SetupTimestampEditCommand(
             TimestampEditUi ui,

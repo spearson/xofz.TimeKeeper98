@@ -72,7 +72,13 @@
                     }
 
                     checkNow:
-                    if (newTimestamp > DateTime.Now)
+                    var now = DateTime.Now;
+                    r.Run<TimeProvider>(provider =>
+                    {
+                        now = provider.Now();
+                    });
+
+                    if (newTimestamp > now)
                     {
                         r.Run<Messenger>(m =>
                         {

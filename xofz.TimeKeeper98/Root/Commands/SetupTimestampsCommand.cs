@@ -8,7 +8,8 @@
     using xofz.TimeKeeper98.UI;
     using xofz.UI;
 
-    public class SetupTimestampsCommand : Command
+    public class SetupTimestampsCommand 
+        : Command
     {
         public SetupTimestampsCommand(
             TimestampsUi ui,

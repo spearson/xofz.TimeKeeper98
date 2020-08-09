@@ -8,7 +8,8 @@
     using xofz.TimeKeeper98.UI;
     using xofz.UI;
 
-    public sealed class TimestampsPresenter : Presenter
+    public sealed class TimestampsPresenter 
+        : Presenter
     {
         public TimestampsPresenter(
             TimestampsUi ui, 

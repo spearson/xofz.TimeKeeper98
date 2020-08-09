@@ -6,7 +6,8 @@
     using xofz.TimeKeeper98.Presentation;
     using xofz.TimeKeeper98.UI;
 
-    public class SetupLicenseCommand : Command
+    public class SetupLicenseCommand 
+        : Command
     {
         public SetupLicenseCommand(
             LicenseUi ui,

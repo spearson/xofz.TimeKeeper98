@@ -7,7 +7,8 @@
     using xofz.TimeKeeper98.UI;
     using xofz.UI;
 
-    public class SetupStatisticsCommand : Command
+    public class SetupStatisticsCommand
+        : Command
     {
         public SetupStatisticsCommand(
             StatisticsUi ui,

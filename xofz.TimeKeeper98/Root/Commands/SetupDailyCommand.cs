@@ -8,7 +8,8 @@
     using xofz.TimeKeeper98.UI;
     using xofz.UI;
 
-    public class SetupDailyCommand : Command
+    public class SetupDailyCommand 
+        : Command
     {
         public SetupDailyCommand(
             DailyUi ui,
