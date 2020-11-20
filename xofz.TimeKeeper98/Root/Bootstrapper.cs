@@ -248,10 +248,9 @@
 
         public virtual void Bootstrap()
         {
-            if (Interlocked.CompareExchange(
+            if (Interlocked.Exchange(
                     ref this.bootstrappedIf1,
-                    1,
-                    0) == 1)
+                    1) == 1)
             {
                 return;
             }

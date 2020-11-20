@@ -93,8 +93,9 @@
 
         IEnumerable<DateTime> TimestampReader.Read()
         {
-            while (Interlocked.CompareExchange(
-                ref this.readingIf1, 1, 0) == 1)
+            while (Interlocked.Exchange(
+                ref this.readingIf1, 
+                1) == 1)
             {
                 Thread.Sleep(0);
             }
@@ -107,10 +108,9 @@
             }
 
             var firstRead = false;
-            if (Interlocked.CompareExchange(
+            if (Interlocked.Exchange(
                     ref this.firstReadIf0, 
-                    1, 
-                    0) == 0)
+                    1) == 0)
             {
                 firstRead = true;
                 trapper.TrapNow(this.readAllTimestamps());
@@ -118,10 +118,9 @@
 
             r.Run<FieldHolder>(holder =>
             {
-                if (Interlocked.CompareExchange(
+                if (Interlocked.Exchange(
                         ref holder.needToTrapIf1, 
-                        0, 
-                        1) == 1)
+                        0) == 1)
                 {
                     if (!firstRead)
                     {
@@ -130,10 +129,9 @@
                 }
             });
 
-            Interlocked.CompareExchange(
+            Interlocked.Exchange(
                 ref this.readingIf1, 
-                0, 
-                1);
+                0);
             var tc = trapper.TrappedCollection;
             if (tc == null)
             {
@@ -284,10 +282,9 @@
             succeeded:
             r.Run<FieldHolder>(holder =>
             {
-                Interlocked.CompareExchange(
+                Interlocked.Exchange(
                     ref holder.needToTrapIf1,
-                    1,
-                    0);
+                    1);
             });
             
             return true;
@@ -358,10 +355,9 @@
 
             r.Run<FieldHolder>(holder =>
             {
-                Interlocked.CompareExchange(
+                Interlocked.Exchange(
                     ref holder.needToTrapIf1,
-                    1,
-                    0);
+                    1);
             });
 
         }

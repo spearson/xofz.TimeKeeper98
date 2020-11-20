@@ -22,12 +22,11 @@
         protected virtual void pingApp()
         {
             var r = this.runner;
-            r.Run<FieldHolder>(holder =>
+            r.Run<FieldHolder>(fields =>
             {
-                Interlocked.CompareExchange(
-                    ref holder.needToTrapIf1,
-                    1,
-                    0);
+                Interlocked.Exchange(
+                    ref fields.needToTrapIf1,
+                    1);
             });
             r.Run<Do>(refreshHome =>
                 {

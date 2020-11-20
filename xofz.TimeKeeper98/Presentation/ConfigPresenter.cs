@@ -22,10 +22,9 @@
 
         public void Setup()
         {
-            if (Interlocked.CompareExchange(
+            if (Interlocked.Exchange(
                     ref this.setupIf1, 
-                    1, 
-                    0) == 1)
+                    1) == 1)
             {
                 return;
             }
@@ -85,6 +84,11 @@
                 r.Run<Navigator>(nav =>
                 {
                     var homeUi = nav.GetUi<HomePresenter, HomeUi>();
+                    if (homeUi == null)
+                    {
+                        return;
+                    }
+
                     sub.Subscribe(
                         homeUi,
                         nameof(homeUi.InKeyTapped),
@@ -110,18 +114,16 @@
                 handler.Handle(this.ui);
             });
 
-            Interlocked.CompareExchange(
+            Interlocked.Exchange(
                 ref this.startedIf1, 
-                1, 
-                0);
+                1);
         }
 
         public override void Stop()
         {
-            Interlocked.CompareExchange(
+            Interlocked.Exchange(
                 ref this.startedIf1, 
-                0, 
-                1);
+                0);
         }
 
         private void ui_PromptSelected()

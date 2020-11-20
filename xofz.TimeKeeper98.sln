@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.8
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xofz.TimeKeeper98", "xofz.TimeKeeper98\xofz.TimeKeeper98.csproj", "{084C471D-35EF-46D1-B6A3-3D79091FEAA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xofz.TimeKeeper98.Tests", "xofz.TimeKeeper98.Tests\xofz.TimeKeeper98.Tests.csproj", "{CD207211-6199-4FD9-AE00-BAF8D905ADC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{084C471D-35EF-46D1-B6A3-3D79091FEAA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{084C471D-35EF-46D1-B6A3-3D79091FEAA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{084C471D-35EF-46D1-B6A3-3D79091FEAA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD207211-6199-4FD9-AE00-BAF8D905ADC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD207211-6199-4FD9-AE00-BAF8D905ADC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD207211-6199-4FD9-AE00-BAF8D905ADC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD207211-6199-4FD9-AE00-BAF8D905ADC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
