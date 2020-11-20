@@ -64,6 +64,8 @@
   <ItemGroup>
     <Compile Include="Presentation\ConfigPresenterTests.cs" />
     <Compile Include="Presentation\DailyPresenterTests.cs" />
+    <Compile Include="Presentation\HomeNavPresenterTests.cs" />
+    <Compile Include="Presentation\HomePresenterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
