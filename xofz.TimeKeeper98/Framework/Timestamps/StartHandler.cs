@@ -192,7 +192,7 @@
                                         });
                             short indexer = 0;
                             DateTime
-                                currentInTime = default(DateTime),
+                                currentInTime = default,
                                 currentOutTime;
                             ICollection<TimeSpan> durations = new LinkedList<TimeSpan>();
                             foreach (var splicedTime in splicedTimes)
@@ -211,7 +211,6 @@
                                     currentOutTime = splicedTime;
                                     durations.Add(currentOutTime - currentInTime);
                                     indexer = 0;
-                                    continue;
                                 }
                             }
 

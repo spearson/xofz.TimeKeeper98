@@ -2,12 +2,12 @@
 {
     public class MethodNames
     {
-        public const string RefreshDaily = @"RefreshDaily";
+        public const string RefreshDaily = nameof(RefreshDaily);
 
-        public const string RefreshHome = @"RefreshHome";
+        public const string RefreshHome = nameof(RefreshHome);
 
-        public const string RefreshTimestamps = @"RefreshTimestamps";
+        public const string RefreshTimestamps = nameof(RefreshTimestamps);
 
-        public const string RefreshConfig = @"RefreshConfig";
+        public const string RefreshConfig = nameof(RefreshConfig);
     }
 }

@@ -67,7 +67,11 @@
     <Compile Include="Presentation\HomeNavPresenterTests.cs" />
     <Compile Include="Presentation\HomePresenterTests.cs" />
     <Compile Include="Presentation\LicensePresenterTests.cs" />
+    <Compile Include="Presentation\NavigatorNavLogicReaderTests.cs" />
+    <Compile Include="Presentation\NavigatorUiReaderTests.cs" />
     <Compile Include="Presentation\StatisticsPresenterTests.cs" />
+    <Compile Include="Presentation\TimestampEditPresenterTests.cs" />
+    <Compile Include="Presentation\TimestampsPresenterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
