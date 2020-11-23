@@ -62,6 +62,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Framework\Config\DefaultTitleTextKeyTappedHandlerTests.cs" />
+    <Compile Include="Framework\Config\HomeUiInKeyTappedHandlerTests.cs" />
+    <Compile Include="Framework\Config\HomeUiOutKeyTappedHandlerTests.cs" />
+    <Compile Include="Framework\Config\KeyboardKeyTappedHandlerTests.cs" />
+    <Compile Include="Framework\Config\PromptSelectedHandlerTests.cs" />
+    <Compile Include="Framework\Config\PromptUnselectedHandlerTests.cs" />
+    <Compile Include="Framework\Config\PublishKeyTappedHandlerTests.cs" />
+    <Compile Include="Framework\Config\ResetIntervalKeyTappedHandlerTests.cs" />
+    <Compile Include="Framework\Config\ResetTitleTextKeyTappedHandlerTests.cs" />
+    <Compile Include="Framework\Config\SaveIntervalKeyTappedHandlerTests.cs" />
+    <Compile Include="Framework\Config\SaveTitleTextKeyTappedHandlerTests.cs" />
+    <Compile Include="Framework\Config\SetupHandlerTests.cs" />
+    <Compile Include="Framework\Config\ShowSecondsSelectedHandlerTests.cs" />
+    <Compile Include="Framework\Config\ShowSecondsUnselectedHandlerTests.cs" />
     <Compile Include="Presentation\ConfigPresenterTests.cs" />
     <Compile Include="Presentation\DailyPresenterTests.cs" />
     <Compile Include="Presentation\HomeNavPresenterTests.cs" />

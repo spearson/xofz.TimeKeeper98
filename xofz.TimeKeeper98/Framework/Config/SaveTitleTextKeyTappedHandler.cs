@@ -7,7 +7,7 @@
     public class SaveTitleTextKeyTappedHandler
     {
         public SaveTitleTextKeyTappedHandler(
-            MethodWeb runner)
+            MethodRunner runner)
         {
             this.runner = runner;
         }
