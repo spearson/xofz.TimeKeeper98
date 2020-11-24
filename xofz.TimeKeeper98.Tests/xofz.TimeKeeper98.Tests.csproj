@@ -82,6 +82,12 @@
     <Compile Include="Framework\Daily\SetupHandlerTests.cs" />
     <Compile Include="Framework\Daily\StartHandlerTests.cs" />
     <Compile Include="Framework\Daily\StatisticsRangeKeyTappedHandlerTests.cs" />
+    <Compile Include="Framework\Home\EditKeyTappedHandlerTests.cs" />
+    <Compile Include="Framework\Home\InKeyTappedHandlerTests.cs" />
+    <Compile Include="Framework\Home\OutKeyTappedHandlerTests.cs" />
+    <Compile Include="Framework\Home\SetupHandlerTests.cs" />
+    <Compile Include="Framework\Home\StartHandlerTests.cs" />
+    <Compile Include="Framework\Home\TimerHandlerTests.cs" />
     <Compile Include="Presentation\ConfigPresenterTests.cs" />
     <Compile Include="Presentation\DailyPresenterTests.cs" />
     <Compile Include="Presentation\HomeNavPresenterTests.cs" />

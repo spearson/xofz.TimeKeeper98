@@ -44,8 +44,8 @@
                     r.Run<LatchHolder>(timerLatch =>
                         {
                             timerLatch.Latch.WaitOne();
-                        }
-                        , DependencyNames.Latch);
+                        },
+                        DependencyNames.Latch);
                 },
                 DependencyNames.Timer);
 
