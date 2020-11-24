@@ -1,5 +1,6 @@
 ﻿namespace xofz.TimeKeeper98.Framework.Statistics
 {
+    using System;
     using xofz.Framework;
     using xofz.TimeKeeper98.UI;
     using xofz.UI;
@@ -24,16 +25,20 @@
                 var currentEnd = uiRW.Read(
                     ui,
                     () => ui.EndDate);
-                var newStart = currentStart.AddDays(7);
-                var newEnd = currentEnd.AddDays(7);
+                r.Run<SettingsHolder>(settings =>
+                {
+                    var weekLength = settings.WeekLength;
+                    var newStart = currentStart.Add(weekLength);
+                    var newEnd = currentEnd.Add(weekLength);
 
-                uiRW.Write(
-                    ui,
-                    () =>
-                    {
-                        ui.StartDate = newStart;
-                        ui.EndDate = newEnd;
-                    });
+                    uiRW.Write(
+                        ui,
+                        () =>
+                        {
+                            ui.StartDate = newStart;
+                            ui.EndDate = newEnd;
+                        });
+                });
             });
         }
 

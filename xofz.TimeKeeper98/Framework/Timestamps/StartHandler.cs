@@ -53,7 +53,13 @@
             {
                 showCurrent = settings.ShowCurrent;
             });
-            DateTime start = DateTime.Today, end = start.AddDays(1);
+            var start = DateTime.Today;
+            r.Run<TimeProvider>(provider =>
+            {
+                start = provider.Now().Date;
+            });
+
+            var end = start.AddDays(1);
             if (showCurrent)
             {
                 r.Run<DateCalculator>(

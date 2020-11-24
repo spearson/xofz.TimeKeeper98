@@ -93,6 +93,7 @@
     <Compile Include="Framework\SettingsProvider.cs" />
     <Compile Include="Framework\SettingsProviders\AppConfigSettingsProvider.cs" />
     <Compile Include="Framework\SettingsProviders\Constants.cs" />
+    <Compile Include="Framework\Statistics\SettingsHolder.cs" />
     <Compile Include="Framework\Statistics\DependencyNames.cs" />
     <Compile Include="Framework\TimeProvider.cs" />
     <Compile Include="Framework\TimeSpanViewers\MinutesTimeSpanViewer.cs" />

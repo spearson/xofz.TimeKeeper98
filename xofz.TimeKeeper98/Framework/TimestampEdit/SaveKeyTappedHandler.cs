@@ -44,14 +44,14 @@
                         ui,
                         () => ui.EditedTimestamp);
                     var allColl = reader.ReadAll();
-                    var allTimestamps = allColl as LinkedList<DateTime>
+                    var allLL = allColl as LinkedList<DateTime>
                                         ?? new LinkedList<DateTime>(allColl);
-                    if (allTimestamps.Count < 2)
+                    if (allLL.Count < 2)
                     {
                         goto checkNow;
                     }
 
-                    var previousTimestamp = allTimestamps
+                    var previousTimestamp = allLL
                         .Last
                         ?.Previous
                         ?.Value;

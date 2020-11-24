@@ -2,6 +2,7 @@
 {
     public class DependencyNames
     {
-        public const string Timer = @"StatisticsTimer";
+        public const string Timer =
+            nameof(Statistics) + nameof(xofz.Framework.Timer);
     }
 }

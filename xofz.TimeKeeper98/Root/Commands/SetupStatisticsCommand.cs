@@ -53,6 +53,8 @@
                 new DateChangedHandler(w));
             w.RegisterDependency(
                 new TimerHandler(w));
+            w.RegisterDependency(
+                new SettingsHolder());
         }
 
         protected readonly StatisticsUi ui;
