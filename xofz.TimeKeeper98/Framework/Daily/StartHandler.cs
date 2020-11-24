@@ -18,10 +18,11 @@
             DailyUi ui)
         {
             var r = this.runner;
-            var reader = r.Run<UiReader>();
-            r.Run<UiReaderWriter>(uiRW =>
+            r.Run<UiReaderWriter, UiReader>(
+                (uiRW, reader) =>
             {
-                reader.ReadHomeNav(out var homeNavUi);
+                reader.ReadHomeNav(
+                    out var homeNavUi);
                 uiRW.Write(
                     homeNavUi,
                     () =>
@@ -29,13 +30,21 @@
                         homeNavUi.ActiveKeyLabel = NavKeyLabels.Daily;
                     });
             });
+
             var showCurrent = true;
             r.Run<SettingsHolder>(settings =>
             {
                 showCurrent = settings.ShowCurrent;
             });
 
-            reader.ReadStatistics(out var statsUi);
+            StatisticsUi statsUi = null;
+            r.Run<UiReader>(reader =>
+            {
+                reader.ReadStatistics(
+                    out var statisticsUi);
+                statsUi = statisticsUi;
+            });
+
             var ll = new LinkedListLot<string>();
             r.Run<
                 StatisticsCalculator, 

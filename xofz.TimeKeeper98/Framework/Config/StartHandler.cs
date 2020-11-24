@@ -32,7 +32,8 @@
                 (uiRW, timestampReader, uiReader, dateCalc) =>
                 {
                     var allTimestamps = timestampReader.ReadAll();
-                    uiReader.ReadStatistics(out var statsUi);
+                    uiReader.ReadStatistics(
+                        out var statsUi);
                     var start = uiRW.Read(
                         statsUi,
                         () => statsUi.StartDate);

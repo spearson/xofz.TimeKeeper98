@@ -14,8 +14,8 @@
 
         void ConfigSaver.Save()
         {
-            var w = this.runner;
-            w.Run<GlobalSettingsHolder>(settings =>
+            var r = this.runner;
+            r.Run<GlobalSettingsHolder>(settings =>
             {
                 var sb = new StringBuilder();
                 sb.Append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n" +

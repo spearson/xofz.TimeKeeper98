@@ -76,6 +76,12 @@
     <Compile Include="Framework\Config\SetupHandlerTests.cs" />
     <Compile Include="Framework\Config\ShowSecondsSelectedHandlerTests.cs" />
     <Compile Include="Framework\Config\ShowSecondsUnselectedHandlerTests.cs" />
+    <Compile Include="Framework\Config\StartHandlerTests.cs" />
+    <Compile Include="Framework\Daily\CurrentKeyTappedHandlerTests.cs" />
+    <Compile Include="Framework\Daily\HomeUiOutKeyTappedHandlerTests.cs" />
+    <Compile Include="Framework\Daily\SetupHandlerTests.cs" />
+    <Compile Include="Framework\Daily\StartHandlerTests.cs" />
+    <Compile Include="Framework\Daily\StatisticsRangeKeyTappedHandlerTests.cs" />
     <Compile Include="Presentation\ConfigPresenterTests.cs" />
     <Compile Include="Presentation\DailyPresenterTests.cs" />
     <Compile Include="Presentation\HomeNavPresenterTests.cs" />
