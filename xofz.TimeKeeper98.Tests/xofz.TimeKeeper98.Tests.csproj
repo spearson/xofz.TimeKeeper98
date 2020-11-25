@@ -127,6 +127,7 @@
     <Compile Include="Presentation\TimestampEditPresenterTests.cs" />
     <Compile Include="Presentation\TimestampsPresenterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Root\BootstrapperTests.cs" />
     <Compile Include="Root\Commands\SetupConfigCommandTests.cs" />
     <Compile Include="Root\Commands\SetupDailyCommandTests.cs" />
     <Compile Include="Root\Commands\SetupHomeCommandTests.cs" />

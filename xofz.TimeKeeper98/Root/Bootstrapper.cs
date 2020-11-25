@@ -299,7 +299,6 @@
                 return;
             }
 
-
             w.Run<EventSubscriber>(sub =>
             {
                 var cd = AppDomain.CurrentDomain;
