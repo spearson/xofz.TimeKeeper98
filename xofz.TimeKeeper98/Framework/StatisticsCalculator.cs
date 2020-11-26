@@ -21,10 +21,12 @@
         {
             var r = this.runner;
             var calc = r.Run<DateCalculator>();
-            var beginning = calc.StartOfWeek();
-            var end = calc.EndOfWeek().AddDays(1);
+            var beginning = calc?.StartOfWeek();
+            var end = calc?.EndOfWeek().AddDays(1);
 
-            return this.TimeWorked(beginning, end);
+            return this.TimeWorked(
+                beginning ?? DateTime.MaxValue, 
+                end ?? DateTime.MaxValue);
         }
 
         public virtual TimeSpan TimeWorkedToday()
@@ -48,7 +50,7 @@
         {
             var r = this.runner;
             var allTimes = this.allTimes();
-            TimeSpan timeWorked = TimeSpan.Zero;
+            var timeWorked = TimeSpan.Zero;
             var timesInRange = new LinkedList<DateTime>();
             long timeCounter = 0;
             foreach (var time in allTimes)
@@ -206,8 +208,10 @@
         protected virtual ICollection<DateTime> allTimes()
         {
             var r = this.runner;
-            return r.Run<TimestampReader>()
-                       ?.ReadAll() 
+            return EnumerableHelpers.OrderBy(
+                       r.Run<TimestampReader>()
+                           ?.ReadAll(),
+                       ts => ts)
                    ?? new LinkedList<DateTime>();
         }
 

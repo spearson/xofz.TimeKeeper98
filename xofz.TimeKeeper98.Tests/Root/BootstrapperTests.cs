@@ -1,8 +1,11 @@
 ﻿namespace xofz.TimeKeeper98.Tests.Root
 {
     using System;
+    using System.Collections.Generic;
     using FakeItEasy;
+    using Ploeh.AutoFixture;
     using xofz.Framework;
+    using xofz.Framework.Logging;
     using xofz.Framework.Lotters;
     using xofz.Presentation;
     using xofz.Root;
@@ -26,6 +29,7 @@
                     this.executor);
                 this.web = new MethodWebV2();
                 this.nav = A.Fake<Navigator>();
+                this.fixture = new Fixture();
 
                 var command = A.Fake<SetupMethodWebCommand>();
                 A
@@ -45,9 +49,10 @@
             }
 
             protected readonly CommandExecutor executor;
-            protected readonly Bootstrapper bootstrapper;
+            protected readonly TestBootstrapper bootstrapper;
             protected readonly MethodWebV2 web;
             protected readonly Navigator nav;
+            protected readonly Fixture fixture;
         }
 
         public class TestBootstrapper
@@ -273,6 +278,24 @@
                 A
                     .CallTo(() => this.executor.Execute(
                         A<SetupConfigCommand>.Ignored))
+                    .MustHaveHappened();
+            }
+
+            [Fact]
+            public void Unhandled_exceptions_are_logged()
+            {
+                var w = this.web;
+                var le = A.Fake<LogEditor>();
+                w.RegisterDependency(
+                    le,
+                    LogNames.Exceptions);
+
+                this.bootstrapper.HandleException(
+                    this.fixture.Create<UnhandledExceptionEventArgs>());
+                A
+                    .CallTo(() => le.AddEntry(
+                        DefaultEntryTypes.Error,
+                        A<IEnumerable<string>>.Ignored))
                     .MustHaveHappened();
             }
         }

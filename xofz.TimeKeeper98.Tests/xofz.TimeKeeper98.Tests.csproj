@@ -82,6 +82,8 @@
     <Compile Include="Framework\Daily\SetupHandlerTests.cs" />
     <Compile Include="Framework\Daily\StartHandlerTests.cs" />
     <Compile Include="Framework\Daily\StatisticsRangeKeyTappedHandlerTests.cs" />
+    <Compile Include="Framework\DataWatcherTests.cs" />
+    <Compile Include="Framework\DateCalculatorTests.cs" />
     <Compile Include="Framework\HomeNav\ConfigKeyTappedHandlerTests.cs" />
     <Compile Include="Framework\HomeNav\DailyKeyTappedHandlerTests.cs" />
     <Compile Include="Framework\HomeNav\ExitKeyTappedHandlerTests.cs" />
@@ -95,6 +97,7 @@
     <Compile Include="Framework\Home\TimerHandlerTests.cs" />
     <Compile Include="Framework\License\AcceptKeyTappedHandlerTests.cs" />
     <Compile Include="Framework\License\RejectKeyTappedHandlerTests.cs" />
+    <Compile Include="Framework\StatisticsCalculatorTests.cs" />
     <Compile Include="Framework\Statistics\CurrentWeekKeyTappedHandlerTests.cs" />
     <Compile Include="Framework\Statistics\DateChangedHandlerTests.cs" />
     <Compile Include="Framework\Statistics\NextWeekKeyTappedHandlerTests.cs" />
