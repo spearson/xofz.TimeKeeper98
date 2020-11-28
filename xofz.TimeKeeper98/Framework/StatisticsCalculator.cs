@@ -98,8 +98,9 @@
                 timesInRange.AddLast(time);
             }
 
-            var e = timesInRange.GetEnumerator();
-            while (e.MoveNext())
+            var e = ((ICollection<DateTime>)timesInRange)
+                .GetEnumerator();
+            while (e?.MoveNext() ?? false)
             {
                 var inTime = e.Current;
                 if (!e.MoveNext())
@@ -127,6 +128,7 @@
                 var outTime = e.Current;
                 timeWorked += outTime - inTime;
             }
+
             e.Dispose();
 
             return timeWorked;

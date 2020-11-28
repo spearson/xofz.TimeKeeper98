@@ -41,7 +41,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="xofz.Core98, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>H:\Dropbox\Libraries\xofz.Core98\xofz.Core98.dll</HintPath>
+      <HintPath>H:\OneDrive\Libraries\xofz.Core98\xofz.Core98.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

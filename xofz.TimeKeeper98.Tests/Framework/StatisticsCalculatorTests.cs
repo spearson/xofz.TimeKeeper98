@@ -141,9 +141,9 @@
             {
                 this.dateCalc = A.Fake<DateCalculator>();
                 var w = this.web;
-                w.Unregister<DateCalculator>();
                 w.RegisterDependency(
                     this.dateCalc);
+                w.Unregister<DateCalculator>();
             }
 
             [Fact]

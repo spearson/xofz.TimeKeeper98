@@ -93,11 +93,12 @@
 
         IEnumerable<DateTime> TimestampReader.Read()
         {
+            const long zero = 0;
+            const long one = 1;
             while (Interlocked.Exchange(
                 ref this.readingIf1, 
-                1) == 1)
+                one) == one)
             {
-                Thread.Sleep(0);
             }
 
             var r = this.runner;
@@ -110,28 +111,30 @@
             var firstRead = false;
             if (Interlocked.Exchange(
                     ref this.firstReadIf0, 
-                    1) == 0)
+                    one) == zero)
             {
                 firstRead = true;
-                trapper.TrapNow(this.readAllTimestamps());
+                trapper.TrapNow(
+                    this.readAllTimestamps());
             }
 
             r.Run<FieldHolder>(holder =>
             {
                 if (Interlocked.Exchange(
                         ref holder.needToTrapIf1, 
-                        0) == 1)
+                        zero) == one)
                 {
                     if (!firstRead)
                     {
-                        trapper.TrapNow(this.readAllTimestamps());
+                        trapper.TrapNow(
+                            this.readAllTimestamps());
                     }
                 }
             });
 
             Interlocked.Exchange(
                 ref this.readingIf1, 
-                0);
+                zero);
             var tc = trapper.TrappedCollection;
             if (tc == null)
             {
@@ -243,43 +246,17 @@
             var tickCount = now.Ticks;
             try
             {
-                if (File.Exists(filePath))
-                {
-                    ICollection<string> allTimes = new LinkedList<string>(
-                        File.ReadAllLines(filePath));
-                    allTimes = EnumerableHelpers.OrderBy(
-                        allTimes,
-                        s => s,
-                        StringComparer.InvariantCulture);
-                    if (allTimes.Count < 1)
-                    {
-                        goto writeNewFile;
-                    }
-
-                    allTimes.Add(tickCount.ToString());
-                    var array = EnumerableHelpers.ToArray(
-                        allTimes);
-                    File.WriteAllLines(filePath, array);
-
-                    goto succeeded;
-                }
+                var line = tickCount
+                           + Environment.NewLine;
+                File.AppendAllText(
+                    filePath,
+                    line);
             }
             catch
             {
                 return false;
             }
 
-            writeNewFile:
-            try
-            {
-                File.WriteAllText(filePath, tickCount.ToString());
-            }
-            catch
-            {
-                return false;
-            }
-            
-            succeeded:
             r.Run<FieldHolder>(holder =>
             {
                 Interlocked.Exchange(
