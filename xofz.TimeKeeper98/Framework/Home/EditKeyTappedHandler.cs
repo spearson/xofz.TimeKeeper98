@@ -16,6 +16,7 @@
             Do presentEditor)
         {
             var r = this.runner;
+
             presentEditor?.Invoke();
         }
 

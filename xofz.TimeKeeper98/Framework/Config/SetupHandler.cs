@@ -16,7 +16,7 @@
             ConfigUi ui)
         {
             var r = this.runner;
-            r.Run<GlobalSettingsHolder>(settings =>
+            r?.Run<GlobalSettingsHolder>(settings =>
             {
                 var p = settings.Prompt;
                 if (p)
@@ -45,7 +45,7 @@
                 });
             });
 
-            r.Run<GlobalSettingsHolder, UiReaderWriter>(
+            r?.Run<GlobalSettingsHolder, UiReaderWriter>(
                 (settings, uiRW) =>
                 {
                     var interval = settings
@@ -59,12 +59,12 @@
 
                 });
 
-            r.Run<ResetTitleTextKeyTappedHandler>(handler =>
+            r?.Run<ResetTitleTextKeyTappedHandler>(handler =>
             {
                 handler.Handle(ui);
             });
 
-            r.Run<GlobalSettingsHolder>(settings =>
+            r?.Run<GlobalSettingsHolder>(settings =>
             {
                 var ss = settings.ShowSeconds;
                 if (ss)

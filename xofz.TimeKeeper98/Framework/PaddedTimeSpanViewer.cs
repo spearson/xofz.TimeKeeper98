@@ -4,12 +4,13 @@
 
     public class PaddedTimeSpanViewer
     {
-        public virtual string ReadableString(TimeSpan timeSpan)
+        public virtual string ReadableString(
+            TimeSpan timeSpan)
         {
             return ((long)timeSpan.TotalHours).ToString().PadLeft(3)
-                   + "h "
+                   + 'h' + ' '
                    + timeSpan.Minutes.ToString().PadLeft(2) 
-                   + "m "
+                   + 'm' + ' '
                    + timeSpan.Seconds.ToString().PadLeft(2) 
                    + 's';
         }

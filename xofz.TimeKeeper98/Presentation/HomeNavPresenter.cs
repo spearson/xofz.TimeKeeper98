@@ -22,15 +22,16 @@
 
         public void Setup()
         {
+            const byte one = 1;
             if (Interlocked.Exchange(
                     ref this.setupIf1, 
-                    1) == 1)
+                    one) == one)
             {
                 return;
             }
 
             var r = this.runner;
-            r.Run<EventSubscriber>(subscriber =>
+            r?.Run<EventSubscriber>(subscriber =>
             {
                 subscriber.Subscribe(
                     this.ui,
@@ -54,14 +55,14 @@
                     this.ui_ExitKeyTapped);
             });
 
-            r.Run<Navigator>(nav => 
+            r?.Run<Navigator>(nav => 
                 nav.RegisterPresenter(this));
         }
 
         private void ui_StatisticsKeyTapped()
         {
             var r = this.runner;
-            r.Run<StatisticsKeyTappedHandler>(
+            r?.Run<StatisticsKeyTappedHandler>(
                 handler =>
                 {
                     handler.Handle();
@@ -71,7 +72,7 @@
         private void ui_TimestampsKeyTapped()
         {
             var r = this.runner;
-            r.Run<TimestampsKeyTappedHandler>(
+            r?.Run<TimestampsKeyTappedHandler>(
                 handler =>
                 {
                     handler.Handle();
@@ -81,7 +82,7 @@
         private void ui_DailyKeyTapped()
         {
             var r = this.runner;
-            r.Run<DailyKeyTappedHandler>(
+            r?.Run<DailyKeyTappedHandler>(
                 handler =>
                 {
                     handler.Handle();
@@ -91,7 +92,7 @@
         private void ui_ConfigKeyTapped()
         {
             var r = this.runner;
-            r.Run<ConfigKeyTappedHandler>(
+            r?.Run<ConfigKeyTappedHandler>(
                 handler =>
                 {
                     handler.Handle();
@@ -101,7 +102,7 @@
         private void ui_ExitKeyTapped()
         {
             var r = this.runner;
-            r.Run<ExitKeyTappedHandler>(
+            r?.Run<ExitKeyTappedHandler>(
                 handler =>
                 {
                     handler.Handle();

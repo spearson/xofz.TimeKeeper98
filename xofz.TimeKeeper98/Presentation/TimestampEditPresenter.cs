@@ -22,20 +22,21 @@
 
         public void Setup()
         {
+            const byte one = 1;
             if (Interlocked.Exchange(
                     ref this.setupIf1, 
-                    1) == 1)
+                    one) == one)
             {
                 return;
             }
 
             var r = this.runner;
-            r.Run<SetupHandler>(handler =>
+            r?.Run<SetupHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
 
-            r.Run<EventSubscriber>(subscriber =>
+            r?.Run<EventSubscriber>(subscriber =>
             {
                 subscriber.Subscribe(
                     this.ui,
@@ -51,7 +52,7 @@
                     this.ui_SaveCurrentKeyTapped);
             });
 
-            r.Run<Navigator>(nav => 
+            r?.Run<Navigator>(nav => 
                 nav.RegisterPresenter(this));
         }
 
@@ -60,7 +61,7 @@
             base.Start();
 
             var r = this.runner;
-            r.Run<Navigator>(nav =>
+            r?.Run<Navigator>(nav =>
             {
                 var hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
                 var homeUi = nav.GetUi<HomePresenter, HomeUi>();
@@ -79,7 +80,7 @@
         public override void Stop()
         {
             var r = this.runner;
-            r.Run<Navigator>(nav =>
+            r?.Run<Navigator>(nav =>
             {
                 var homeUi = nav.GetUi<HomePresenter, HomeUi>();
                 r.Run<StopHandler>(handler =>
@@ -92,7 +93,7 @@
         private void ui_SaveKeyTapped()
         {
             var r = this.runner;
-            r.Run<SaveKeyTappedHandler>(handler =>
+            r?.Run<SaveKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -101,7 +102,7 @@
         private void ui_SaveCurrentKeyTapped()
         {
             var r = this.runner;
-            r.Run<SaveCurrentKeyTappedHandler>(handler =>
+            r?.Run<SaveCurrentKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -110,7 +111,7 @@
         private void ui_CancelKeyTapped()
         {
             var r = this.runner;
-            r.Run<CancelKeyTappedHandler>(handler =>
+            r?.Run<CancelKeyTappedHandler>(handler =>
             {
                 handler.Handle();
             });

@@ -16,7 +16,7 @@
             ConfigUi ui)
         {
             var r = this.runner;
-            r.Run<GlobalSettingsHolder, UiReaderWriter>(
+            r?.Run<GlobalSettingsHolder, UiReaderWriter>(
                 (settings, uiRW) =>
                 {
                     var titleText = UiConstants.DefaultTitle;
@@ -31,6 +31,7 @@
                     {
                         saver.Save();
                     });
+
                     r.Run<TitleUi>(shell =>
                     {
                         uiRW.Write(

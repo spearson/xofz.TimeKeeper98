@@ -17,11 +17,12 @@
             StatisticsUi statsUi)
         {
             var r = this.runner;
-            r.Run<SettingsHolder>(settings =>
+            r?.Run<SettingsHolder>(settings =>
             {
                 settings.ShowCurrent = false;
             });
-            r.Run<StartHandler>(handler =>
+
+            r?.Run<StartHandler>(handler =>
             {
                 handler.Handle(
                     ui,

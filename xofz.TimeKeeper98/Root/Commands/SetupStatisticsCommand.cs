@@ -34,26 +34,26 @@
         protected virtual void registerDependencies()
         {
             var w = this.web;
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new xofz.Framework.Timer(),
                 DependencyNames.Timer);
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new SetupHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new StartHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new StopHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new CurrentWeekKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new PreviousWeekKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new NextWeekKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new DateChangedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new TimerHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new SettingsHolder());
         }
 

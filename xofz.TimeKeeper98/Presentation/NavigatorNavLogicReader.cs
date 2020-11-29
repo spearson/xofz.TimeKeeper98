@@ -16,7 +16,7 @@
         void NavLogicReader.ReadTimestamps(
             out Do presentTimestamps)
         {
-            var nav = this.runner.Run<Navigator>();
+            var nav = this.runner?.Run<Navigator>();
             if (nav == null)
             {
                 presentTimestamps = null;
@@ -29,7 +29,7 @@
         void NavLogicReader.ReadStatistics(
             out Do presentStatistics)
         {
-            var nav = this.runner.Run<Navigator>();
+            var nav = this.runner?.Run<Navigator>();
             if (nav == null)
             {
                 presentStatistics = null;
@@ -42,7 +42,7 @@
         void NavLogicReader.ReadDaily(
             out Do presentDaily)
         {
-            var nav = this.runner.Run<Navigator>();
+            var nav = this.runner?.Run<Navigator>();
             if (nav == null)
             {
                 presentDaily = null;
@@ -55,7 +55,7 @@
         void NavLogicReader.ReadConfig(
             out Do presentConfig)
         {
-            var nav = this.runner.Run<Navigator>();
+            var nav = this.runner?.Run<Navigator>();
             if (nav == null)
             {
                 presentConfig = null;
@@ -68,7 +68,7 @@
         void NavLogicReader.ReadLicense(
             out Do presentLicense)
         {
-            var nav = this.runner.Run<Navigator>();
+            var nav = this.runner?.Run<Navigator>();
             if (nav == null)
             {
                 presentLicense = null;
@@ -81,7 +81,7 @@
         void NavLogicReader.ReadExit(
             out Do exit)
         {
-            var nav = this.runner.Run<Navigator>();
+            var nav = this.runner?.Run<Navigator>();
             if (nav == null)
             {
                 exit = null;

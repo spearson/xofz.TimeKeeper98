@@ -19,7 +19,7 @@
         {
             var r = this.runner;
             var accepted = true;
-            r.Run<UiReaderWriter, GlobalSettingsHolder, Messenger>(
+            r?.Run<UiReaderWriter, GlobalSettingsHolder, Messenger>(
                 (uiRW, settings, m) =>
                 {
                     if (settings.Prompt)
@@ -35,7 +35,7 @@
                 return;
             }
 
-            r.Run<
+            r?.Run<
                 TimestampReader, 
                 UiReaderWriter>(
                 (reader, uiRW) =>

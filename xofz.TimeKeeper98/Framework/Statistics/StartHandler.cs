@@ -17,7 +17,7 @@
             HomeNavUi hnUi)
         {
             var r = this.runner;
-            r.Run<UiReaderWriter>(uiRW =>
+            r?.Run<UiReaderWriter>(uiRW =>
             {
                 uiRW.Write(
                     hnUi,
@@ -28,13 +28,13 @@
                     });
             });
 
-            r.Run<TimerHandler>(handler =>
+            r?.Run<TimerHandler>(handler =>
             {
                 handler.Handle(
                     ui);
             });
 
-            r.Run<xofz.Framework.Timer, GlobalSettingsHolder>(
+            r?.Run<xofz.Framework.Timer, GlobalSettingsHolder>(
                 (t, settings) =>
                 {
                     var interval = settings.TimerIntervalSeconds;
@@ -42,6 +42,7 @@
                     {
                         interval = 1;
                     }
+
                     t.Start(interval * 1000);
                 },
                 DependencyNames.Timer);

@@ -16,7 +16,7 @@
             ConfigUi ui)
         {
             var r = this.runner;
-            r.Run<GlobalSettingsHolder, UiReaderWriter>(
+            r?.Run<GlobalSettingsHolder, UiReaderWriter>(
                 (settings, uiRW) =>
                 {
                     var titleText = settings.TitleText;

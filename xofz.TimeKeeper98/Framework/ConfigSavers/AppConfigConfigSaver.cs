@@ -4,7 +4,8 @@
     using System.Text;
     using xofz.Framework;
 
-    public sealed class AppConfigConfigSaver : ConfigSaver
+    public sealed class AppConfigConfigSaver 
+        : ConfigSaver
     {
         public AppConfigConfigSaver(
             MethodRunner runner)
@@ -15,7 +16,7 @@
         void ConfigSaver.Save()
         {
             var r = this.runner;
-            r.Run<GlobalSettingsHolder>(settings =>
+            r?.Run<GlobalSettingsHolder>(settings =>
             {
                 var sb = new StringBuilder();
                 sb.Append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n" +

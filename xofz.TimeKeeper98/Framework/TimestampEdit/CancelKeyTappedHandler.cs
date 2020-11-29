@@ -14,7 +14,7 @@
         public virtual void Handle()
         {
             var r = this.runner;
-            r.Run<SettingsHolder, NavLogicReader>(
+            r?.Run<SettingsHolder, NavLogicReader>(
                 (settings, navReader) =>
                 {
                     switch (settings.LastVisitedKeyLabel)

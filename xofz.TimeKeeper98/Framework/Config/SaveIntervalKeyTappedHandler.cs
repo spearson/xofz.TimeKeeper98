@@ -16,7 +16,7 @@
             ConfigUi ui)
         {
             var r = this.runner;
-            r.Run<UiReaderWriter>(uiRW =>
+            r?.Run<UiReaderWriter>(uiRW =>
             {
                 var interval = uiRW.Read(
                     ui,

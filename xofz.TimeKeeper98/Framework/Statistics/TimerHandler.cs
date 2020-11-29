@@ -16,7 +16,7 @@
             StatisticsUi ui)
         {
             var r = this.runner;
-            r.Run<
+            r?.Run<
                 UiReaderWriter,
                 StatisticsCalculator,
                 TimeSpanViewer>(

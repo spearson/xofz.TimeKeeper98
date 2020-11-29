@@ -22,20 +22,21 @@
 
         public void Setup()
         {
+            const byte one = 1;
             if (Interlocked.Exchange(
                     ref this.setupIf1, 
-                    1) == 1)
+                    one) == one)
             {
                 return;
             }
 
             var r = this.runner;
-            r.Run<SetupHandler>(handler =>
+            r?.Run<SetupHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
 
-            r.Run<EventSubscriber>(subscriber =>
+            r?.Run<EventSubscriber>(subscriber =>
             {
                 subscriber.Subscribe(
                     this.ui,
@@ -63,16 +64,16 @@
                     DependencyNames.Timer);
             });
 
-            r.Run<Navigator>(nav =>
+            r?.Run<Navigator>(nav =>
                 nav.RegisterPresenter(this));
         }
 
         public override void Start()
         {
-            var r = this.runner;
-
             base.Start();
-            r.Run<Navigator>(nav =>
+
+            var r = this.runner;
+            r?.Run<Navigator>(nav =>
             {
                 var hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
                 r.Run<StartHandler>(handler =>
@@ -89,7 +90,7 @@
         public override void Stop()
         {
             var r = this.runner;
-            r.Run<StopHandler>(handler =>
+            r?.Run<StopHandler>(handler =>
             {
                 handler.Handle();
             });
@@ -98,7 +99,7 @@
         private void ui_CurrentWeekKeyTapped()
         {
             var r = this.runner;
-            r.Run<CurrentWeekKeyTappedHandler>(handler =>
+            r?.Run<CurrentWeekKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -107,7 +108,7 @@
         private void ui_PreviousWeekKeyTapped()
         {
             var r = this.runner;
-            r.Run<PreviousWeekKeyTappedHandler>(handler =>
+            r?.Run<PreviousWeekKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -116,7 +117,7 @@
         private void ui_NextWeekKeyTapped()
         {
             var r = this.runner;
-            r.Run<NextWeekKeyTappedHandler>(handler =>
+            r?.Run<NextWeekKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -125,7 +126,7 @@
         private void ui_DateChanged()
         {
             var r = this.runner;
-            r.Run<DateChangedHandler>(handler =>
+            r?.Run<DateChangedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -134,7 +135,7 @@
         private void timer_Elapsed()
         {
             var r = this.runner;
-            r.Run<TimerHandler>(handler =>
+            r?.Run<TimerHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });

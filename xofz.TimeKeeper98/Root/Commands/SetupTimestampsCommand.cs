@@ -35,25 +35,25 @@
         protected virtual void registerDependencies()
         {
             var w = this.web;
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new EnumerableSplitter());
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new EnumerableSplicer());
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new SetupHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new StartHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new SettingsHolder());
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new HomeUiInKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new HomeUiOutKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new CurrentKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new StatisticsRangeKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new ShowDurationsChangedHandler(w));
         }
 

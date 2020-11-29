@@ -20,7 +20,7 @@
         public virtual TimeSpan TimeWorkedThisWeek()
         {
             var r = this.runner;
-            var calc = r.Run<DateCalculator>();
+            var calc = r?.Run<DateCalculator>();
             var beginning = calc?.StartOfWeek();
             var end = calc?.EndOfWeek().AddDays(1);
 
@@ -33,7 +33,7 @@
         {
             var r = this.runner;
             var today = DateTime.Today;
-            r.Run<TimeProvider>(provider =>
+            r?.Run<TimeProvider>(provider =>
             {
                 today = provider.Now().Date;
             });
@@ -106,7 +106,7 @@
                 if (!e.MoveNext())
                 {
                     var now = DateTime.Now;
-                    r.Run<TimeProvider>(provider =>
+                    r?.Run<TimeProvider>(provider =>
                     {
                         now = provider.Now();
                     });
@@ -145,36 +145,41 @@
                 numberOfDays = 1;
             }
 
-            return new TimeSpan(totalTimeWorked.Ticks / numberOfDays);
+            return new TimeSpan(
+                totalTimeWorked.Ticks / numberOfDays);
         }
 
         public virtual TimeSpan MinDailyTimeWorked(
             DateTime beginning, 
             DateTime end)
         {
+            var zero = TimeSpan.Zero;
             if (beginning > end)
             {
-                return TimeSpan.Zero;
+                return zero;
             }
 
-            var minTimeWorked = TimeSpan.MaxValue;
+            var max = TimeSpan.MaxValue;
+            var minTimeWorked = max;
             var currentDay = beginning;
             while (currentDay < end)
             {
+                var nextDay = currentDay.AddDays(1);
                 var timeWorked = this.TimeWorked(
                     currentDay, 
-                    currentDay.AddDays(1));
-                if (timeWorked > TimeSpan.Zero && timeWorked < minTimeWorked)
+                    nextDay);
+                if (timeWorked > zero &&
+                    timeWorked < minTimeWorked)
                 {
                     minTimeWorked = timeWorked;
                 }
 
-                currentDay = currentDay.AddDays(1);
+                currentDay = nextDay;
             }
 
-            if (minTimeWorked == TimeSpan.MaxValue)
+            if (minTimeWorked == max)
             {
-                return TimeSpan.Zero;
+                return zero;
             }
 
             return minTimeWorked;
@@ -184,24 +189,26 @@
             DateTime beginning, 
             DateTime end)
         {
+            var zero = TimeSpan.Zero;
             if (beginning > end)
             {
-                return TimeSpan.Zero;
+                return zero;
             }
 
             var maxTimeWorked = TimeSpan.Zero;
             var currentDay = beginning;
             while (currentDay < end)
             {
+                var nextDay = currentDay.AddDays(1);
                 var timeWorked = this.TimeWorked(
                     currentDay,
-                    currentDay.AddDays(1));
+                    nextDay);
                 if (timeWorked > maxTimeWorked)
                 {
                     maxTimeWorked = timeWorked;
                 }
 
-                currentDay = currentDay.AddDays(1);
+                currentDay = nextDay;
             }
 
             return maxTimeWorked;
@@ -211,7 +218,7 @@
         {
             var r = this.runner;
             return EnumerableHelpers.OrderBy(
-                       r.Run<TimestampReader>()
+                       r?.Run<TimestampReader>()
                            ?.ReadAll(),
                        ts => ts)
                    ?? new LinkedList<DateTime>();

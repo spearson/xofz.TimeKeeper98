@@ -7,7 +7,7 @@
         public override string ReadableString(TimeSpan timeSpan)
         {
             return (long) timeSpan.TotalHours
-                   + "h "
+                   + @"h "
                    + timeSpan.Minutes
                    + 'm';
         }

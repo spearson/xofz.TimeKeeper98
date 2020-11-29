@@ -17,7 +17,7 @@
         void UiReader.ReadHomeNav(
             out HomeNavUi ui)
         {
-            var nav = this.runner.Run<Navigator>();
+            var nav = this.runner?.Run<Navigator>();
             if (nav == null)
             {
                 ui = null;
@@ -30,7 +30,7 @@
         void UiReader.ReadStatistics(
             out StatisticsUi ui)
         {
-            var nav = this.runner.Run<Navigator>();
+            var nav = this.runner?.Run<Navigator>();
             if (nav == null)
             {
                 ui = null;

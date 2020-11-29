@@ -9,7 +9,7 @@
             = @"yyyy/MM/dd hh:mm:ss tt";
 
         public virtual string TitleText { get; set; }
-            = @"x(z) TimeKeeper98";
+            = @"x(z)" + nameof(TimeKeeper98);
 
         public virtual bool Prompt { get; set; }
             = true;

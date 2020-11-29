@@ -16,7 +16,7 @@
             HomeUi ui)
         {
             var r = this.runner;
-            r.Run<UiReaderWriter>(uiRW =>
+            r?.Run<UiReaderWriter>(uiRW =>
             {
                 r.Run<
                     StatisticsCalculator,

@@ -16,7 +16,7 @@
             ConfigUi ui)
         {
             var r = this.runner;
-            r.Run<KeyboardLoader>(loader =>
+            r?.Run<KeyboardLoader>(loader =>
             {
                 try
                 {
@@ -27,7 +27,8 @@
                     // oh noes!! windows 98!
                 }
             });
-            r.Run<UiReaderWriter>(uiRW =>
+
+            r?.Run<UiReaderWriter>(uiRW =>
             {
                 uiRW.Write(
                     ui,

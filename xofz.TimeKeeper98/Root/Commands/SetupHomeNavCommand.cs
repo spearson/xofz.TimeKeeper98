@@ -36,17 +36,17 @@
         protected virtual void registerDependencies()
         {
             var w = this.web;
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 this.navReader);
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new TimestampsKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new StatisticsKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new DailyKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new ConfigKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new ExitKeyTappedHandler(w));
         }
 

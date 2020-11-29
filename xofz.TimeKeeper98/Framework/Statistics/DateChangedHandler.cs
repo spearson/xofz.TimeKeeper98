@@ -15,7 +15,7 @@
             StatisticsUi ui)
         {
             var r = this.runner;
-            r.Run<TimerHandler>(handler =>
+            r?.Run<TimerHandler>(handler =>
             {
                 handler.Handle(ui);
             });

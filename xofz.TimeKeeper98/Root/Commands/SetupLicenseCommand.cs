@@ -20,6 +20,7 @@
         public override void Execute()
         {
             this.registerDependencies();
+
             new LicensePresenter(
                     this.ui,
                     this.web)
@@ -29,9 +30,9 @@
         protected virtual void registerDependencies()
         {
             var w = this.web;
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new AcceptKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new RejectKeyTappedHandler(w));
         }
 

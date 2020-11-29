@@ -34,19 +34,19 @@
         protected virtual void registerDependencies()
         {
             var w = this.web;
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new SettingsHolder());
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new SetupHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new StartHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new StopHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new SaveKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new CancelKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new SaveCurrentKeyTappedHandler(w));
         }
 

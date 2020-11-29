@@ -23,15 +23,16 @@
 
         public void Setup()
         {
+            const byte one = 1;
             if (Interlocked.Exchange(
                     ref this.setupIf1, 
-                    1) == 1)
+                    one) == one)
             {
                 return;
             }
 
             var w = this.web;
-            w.Run<EventSubscriber>(sub =>
+            w?.Run<EventSubscriber>(sub =>
             {
                 sub.Subscribe(
                     this.ui,
@@ -56,12 +57,12 @@
                 });
             });
 
-            w.Run<SetupHandler>(handler =>
+            w?.Run<SetupHandler>(handler =>
             {
                 handler.Handle();
             });
 
-            w.Run<Navigator>(nav =>
+            w?.Run<Navigator>(nav =>
             {
                 Do refreshDaily = () =>
                 {
@@ -89,7 +90,7 @@
             base.Start();
 
             var w = this.web;
-            w.Run<StartHandler>(handler =>
+            w?.Run<StartHandler>(handler =>
             {
                 handler.Handle(
                     this.ui);
@@ -110,7 +111,7 @@
         private void ui_CurrentKeyTapped()
         {
             var w = this.web;
-            w.Run<CurrentKeyTappedHandler>(handler =>
+            w?.Run<CurrentKeyTappedHandler>(handler =>
             {
                 handler.Handle(
                     this.ui);
@@ -120,7 +121,7 @@
         private void ui_StatisticsRangeKeyTapped()
         {
             var w = this.web;
-            w.Run<StatisticsRangeKeyTappedHandler>(handler =>
+            w?.Run<StatisticsRangeKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -134,7 +135,7 @@
             }
 
             var w = this.web;
-            w.Run<HomeUiOutKeyTappedHandler>(handler =>
+            w?.Run<HomeUiOutKeyTappedHandler>(handler =>
             {
                 handler.Handle(
                     this.ui);

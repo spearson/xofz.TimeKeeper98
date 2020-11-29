@@ -16,11 +16,12 @@
             LicenseUi ui)
         {
             var r = this.runner;
-            r.Run<Core98Publisher>(pub =>
+            r?.Run<Core98Publisher>(pub =>
             {
                 pub.Publish();
             });
-            r.Run<UiReaderWriter>(uiRW =>
+
+            r?.Run<UiReaderWriter>(uiRW =>
             {
                 uiRW.Write(
                     ui,

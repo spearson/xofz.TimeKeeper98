@@ -26,6 +26,7 @@
         public override void Execute()
         {
             this.registerDependencies();
+
             new DailyPresenter(
                     this.ui,
                     this.shell,
@@ -36,19 +37,19 @@
         protected virtual void registerDependencies()
         {
             var w = this.web;
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 this.uiReader);
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new SettingsHolder());
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new SetupHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new StartHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new CurrentKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new StatisticsRangeKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new HomeUiOutKeyTappedHandler(w));
         }
 

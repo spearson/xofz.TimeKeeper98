@@ -16,7 +16,8 @@
             var bootstrapper = new Bootstrapper();
             bootstrapper.Bootstrap();
 
-            Application.Run(bootstrapper.Shell as Form);
+            Application.Run(
+                bootstrapper.Shell as Form);
         }
 
         private static Assembly currentDomain_AssemblyResolve(

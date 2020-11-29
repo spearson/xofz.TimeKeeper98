@@ -13,7 +13,7 @@
         public virtual void Handle()
         {
             var r = this.runner;
-            r.Run<NavLogicReader>(reader =>
+            r?.Run<NavLogicReader>(reader =>
             {
                 reader.ReadLicense(
                     out var presentLicense);

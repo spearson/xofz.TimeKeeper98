@@ -50,39 +50,39 @@
         protected virtual void registerDependencies()
         {
             var w = this.web;
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new DateCalculator(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new EnumerableTrapper<DateTime>());
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 this.newReaderWriter?.Invoke(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new FieldHolder());
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new xofz.Framework.Timer(),
                 DependencyNames.Timer);
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new MinutesTimeSpanViewer());
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new MinutesPaddedTimeSpanViewer());
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new StatisticsCalculator(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new VersionReader(
                     Assembly.GetExecutingAssembly()));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new SetupHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new StartHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new InKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new OutKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new EditKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new TimerHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new LatchHolder
                 {
                     Latch = new ManualResetEvent(true)

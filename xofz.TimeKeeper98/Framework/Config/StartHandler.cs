@@ -16,7 +16,7 @@
             ConfigUi ui)
         {
             var r = this.runner;
-            r.Run<UiReader, UiReaderWriter>((reader, uiRW) =>
+            r?.Run<UiReader, UiReaderWriter>((reader, uiRW) =>
             {
                 reader.ReadHomeNav(
                     out var homeNavUi);
@@ -28,10 +28,10 @@
                     });
             });
 
-            r.Run<UiReaderWriter, TimestampReader, UiReader, DateCalculator>(
-                (uiRW, timestampReader, uiReader, dateCalc) =>
+            r?.Run<UiReaderWriter, TimestampReader, UiReader, DateCalculator>(
+                (uiRW, reader, uiReader, dateCalc) =>
                 {
-                    var allTimestamps = timestampReader.ReadAll();
+                    var allTimestamps = reader.ReadAll();
                     uiReader.ReadStatistics(
                         out var statsUi);
                     var start = uiRW.Read(

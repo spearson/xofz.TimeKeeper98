@@ -4,7 +4,8 @@
 
     public class TimeSpanViewer
     {
-        public virtual string ReadableString(TimeSpan timeSpan)
+        public virtual string ReadableString(
+            TimeSpan timeSpan)
         {
             return (long)timeSpan.TotalHours + @"h "
                    + timeSpan.Minutes + @"m "

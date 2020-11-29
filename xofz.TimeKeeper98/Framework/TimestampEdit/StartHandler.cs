@@ -20,7 +20,7 @@
             HomeUi homeUi)
         {
             var r = this.runner;
-            r.Run<UiReaderWriter>(uiRW =>
+            r?.Run<UiReaderWriter>(uiRW =>
             {
                 r.Run<TimestampReader>(reader =>
                     {

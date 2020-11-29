@@ -25,6 +25,7 @@
         public override void Execute()
         {
             this.registerDependencies();
+
             new ConfigPresenter(
                     this.ui,
                     this.shell,
@@ -35,46 +36,50 @@
         protected virtual void registerDependencies()
         {
             var w = this.web;
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new SetupHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new StartHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new ShowSecondsSelectedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new ShowSecondsUnselectedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new SaveIntervalKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new ResetIntervalKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new PromptSelectedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new PromptUnselectedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new SaveTitleTextKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new ResetTitleTextKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new DefaultTitleTextKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new KeyboardLoader());
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new KeyboardKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new PublishKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new Core98Publisher(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new HomeUiInKeyTappedHandler(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new HomeUiOutKeyTappedHandler(w));
-            w.RegisterDependency((Do) (() =>
+            w?.RegisterDependency((Do) (() =>
                 {
-                    w.Run<Navigator, StartHandler>((nav, handler) =>
+                    w.Run<Navigator>(nav =>
                     {
-                        handler.Handle(
-                            nav.GetUi<ConfigPresenter, ConfigUi>());
+                        var configUi = nav.GetUi<ConfigPresenter, ConfigUi>();
+                        w.Run<StartHandler>(handler =>
+                        {
+                            handler.Handle(
+                                configUi);
+                        });
                     });
                 }),
                 MethodNames.RefreshConfig);

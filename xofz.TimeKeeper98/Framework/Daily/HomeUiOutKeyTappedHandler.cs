@@ -15,7 +15,7 @@
             DailyUi ui)
         {
             var r = this.runner;
-            r.Run<StartHandler>(handler =>
+            r?.Run<StartHandler>(handler =>
             {
                 handler.Handle(
                     ui);

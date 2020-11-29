@@ -102,7 +102,7 @@
             }
 
             var r = this.runner;
-            var trapper = r.Run<EnumerableTrapper<DateTime>>();
+            var trapper = r?.Run<EnumerableTrapper<DateTime>>();
             if (trapper == null)
             {
                 yield break;
@@ -118,7 +118,7 @@
                     this.readAllTimestamps());
             }
 
-            r.Run<FieldHolder>(holder =>
+            r?.Run<FieldHolder>(holder =>
             {
                 if (Interlocked.Exchange(
                         ref holder.needToTrapIf1, 
@@ -156,7 +156,7 @@
             }
 
             var r = this.runner;
-            return r.Run<EnumerableTrapper<DateTime>>()
+            return r?.Run<EnumerableTrapper<DateTime>>()
                        ?.TrappedCollection
                    ?? new LinkedList<DateTime>();
         }
@@ -238,7 +238,7 @@
             }
 
             var now = DateTime.Now;
-            r.Run<TimeProvider>(provider =>
+            r?.Run<TimeProvider>(provider =>
             {
                 now = provider.Now();
             });
@@ -257,7 +257,7 @@
                 return false;
             }
 
-            r.Run<FieldHolder>(holder =>
+            r?.Run<FieldHolder>(holder =>
             {
                 Interlocked.Exchange(
                     ref holder.needToTrapIf1,
@@ -330,7 +330,7 @@
                 return;
             }
 
-            r.Run<FieldHolder>(holder =>
+            r?.Run<FieldHolder>(holder =>
             {
                 Interlocked.Exchange(
                     ref holder.needToTrapIf1,

@@ -23,15 +23,16 @@
 
         public void Setup()
         {
+            const byte one = 1;
             if (Interlocked.Exchange(
                     ref this.setupIf1,
-                    1) == 1)
+                    one) == one)
             {
                 return;
             }
 
             var w = this.web;
-            w.Run<EventSubscriber>(subscriber =>
+            w?.Run<EventSubscriber>(subscriber =>
             {
                 subscriber.Subscribe(
                     this.ui,
@@ -55,12 +56,12 @@
                     DependencyNames.Timer);
             });
 
-            w.Run<SetupHandler>(handler =>
+            w?.Run<SetupHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
 
-            w.Run<Navigator>(nav =>
+            w?.Run<Navigator>(nav =>
             {
                 Do refreshHome = () =>
                 {
@@ -80,10 +81,10 @@
 
         public override void Start()
         {
-            var w = this.web;
-
             base.Start();
-            w.Run<StartHandler>(handler =>
+
+            var w = this.web;
+            w?.Run<StartHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -92,7 +93,7 @@
         private void ui_InKeyTapped()
         {
             var w = this.web;
-            w.Run<InKeyTappedHandler>(handler =>
+            w?.Run<InKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -101,7 +102,7 @@
         private void ui_OutKeyTapped()
         {
             var w = this.web;
-            w.Run<OutKeyTappedHandler>(handler =>
+            w?.Run<OutKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -110,7 +111,7 @@
         private void ui_EditKeyTapped()
         {
             var w = this.web;
-            w.Run<Navigator>(nav =>
+            w?.Run<Navigator>(nav =>
             {
                 Do presentEditor = nav.Present<TimestampEditPresenter>;
                 w.Run<EditKeyTappedHandler>(handler =>
@@ -125,7 +126,7 @@
         private void timer_Elapsed()
         {
             var w = this.web;
-            w.Run<TimerHandler>(handler =>
+            w?.Run<TimerHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });

@@ -150,6 +150,15 @@
                 Assert.NotNull(
                     this.web.Run<TimeProvider>());
             }
+
+            [Fact]
+            public void Registers_a_Do_Do()
+            {
+                this.command.Execute();
+
+                Assert.NotNull(
+                    this.web.Run<Do<Do>>());
+            }
         }
     }
 }

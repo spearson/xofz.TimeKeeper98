@@ -13,7 +13,7 @@
         public virtual void Handle()
         {
             var r = this.runner;
-            r.Run<SettingsHolder>(settings =>
+            r?.Run<SettingsHolder>(settings =>
             {
                 settings.ShowCurrent = true;
             });

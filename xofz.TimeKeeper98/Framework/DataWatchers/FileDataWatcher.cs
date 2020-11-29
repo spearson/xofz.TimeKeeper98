@@ -16,18 +16,19 @@
 
         public override void Setup()
         {
+            const byte one = 1;
             if (Interlocked.Exchange(
                     ref this.setupIf1, 
-                    1) == 1)
+                    one) == one)
             {
                 return;
             }
 
             var w = this.web;
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new FileSystemWatcher(
                     FileTimestampManager.DataDirectory));
-            w.Run<FileSystemWatcher, EventSubscriber>(
+            w?.Run<FileSystemWatcher, EventSubscriber>(
                 (watcher, sub) =>
                 {
                     FileSystemEventHandler handler
@@ -51,13 +52,14 @@
                         nameof(watcher.Renamed),
                         handler2);
                 });
-            w.RegisterDependency(this);
+
+            w?.RegisterDependency(this);
         }
 
         public override void Start()
         {
             var w = this.web;
-            w.Run<FileSystemWatcher>(watcher =>
+            w?.Run<FileSystemWatcher>(watcher =>
             {
                 try
                 {
@@ -73,7 +75,7 @@
         public override void Stop()
         {
             var w = this.web;
-            w.Run<FileSystemWatcher>(watcher =>
+            w?.Run<FileSystemWatcher>(watcher =>
             {
                 watcher.EnableRaisingEvents = false;
             });

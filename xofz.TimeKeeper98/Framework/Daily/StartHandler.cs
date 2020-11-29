@@ -18,7 +18,7 @@
             DailyUi ui)
         {
             var r = this.runner;
-            r.Run<UiReaderWriter, UiReader>(
+            r?.Run<UiReaderWriter, UiReader>(
                 (uiRW, reader) =>
             {
                 reader.ReadHomeNav(
@@ -32,13 +32,13 @@
             });
 
             var showCurrent = true;
-            r.Run<SettingsHolder>(settings =>
+            r?.Run<SettingsHolder>(settings =>
             {
                 showCurrent = settings.ShowCurrent;
             });
 
             StatisticsUi statsUi = null;
-            r.Run<UiReader>(reader =>
+            r?.Run<UiReader>(reader =>
             {
                 reader.ReadStatistics(
                     out var statisticsUi);
@@ -46,7 +46,7 @@
             });
 
             var ll = new LinkedListLot<string>();
-            r.Run<
+            r?.Run<
                 StatisticsCalculator, 
                 DateCalculator,
                 UiReaderWriter,
@@ -86,7 +86,7 @@
                 }
             });
 
-            r.Run<UiReaderWriter>(uiRW =>
+            r?.Run<UiReaderWriter>(uiRW =>
             {
                 uiRW.Write(
                     ui,

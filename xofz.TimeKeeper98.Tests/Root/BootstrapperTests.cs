@@ -46,6 +46,8 @@
                     new LinkedListLotter());
                 w.RegisterDependency(
                     this.nav);
+                w.RegisterDependency(
+                    ((Do<Do>)(act => act.Invoke())));
             }
 
             protected readonly CommandExecutor executor;

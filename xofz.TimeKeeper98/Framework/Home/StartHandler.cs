@@ -15,11 +15,11 @@
             HomeUi ui)
         {
             var r = this.runner;
-            r.Run<TimerHandler>(handler =>
+            r?.Run<TimerHandler>(handler =>
             {
                 handler.Handle(ui);
             });
-            r.Run<xofz.Framework.Timer, GlobalSettingsHolder>(
+            r?.Run<xofz.Framework.Timer, GlobalSettingsHolder>(
                 (t, settings) =>
                 {
                     var interval = settings.TimerIntervalSeconds;

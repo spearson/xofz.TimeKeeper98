@@ -7,6 +7,10 @@
     public class AppConfigSettingsProvider
         : SettingsProvider
     {
+        public AppConfigSettingsProvider()
+        {
+        }
+
         public AppConfigSettingsProvider(
             MethodRunner runner)
         {

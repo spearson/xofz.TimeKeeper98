@@ -119,7 +119,7 @@
             Gen<MethodRunner, SettingsProvider> newSettingsProvider)
             : this(
                 new CommandExecutor(),
-                new FormsUiMessagePumper(), 
+                new FormsUiMessagePumper(),
                 () => new FormMainUi(),
                 () => new UserControlHomeUi(),
                 lotter => new UserControlHomeNavUi(lotter),
@@ -128,7 +128,7 @@
                 () => new UserControlTimestampEditUi(),
                 lotter => new UserControlDailyUi(lotter),
                 () => new UserControlConfigUi(),
-                shell => new FormLicenseUi(shell as FormUi),
+                shell => new FormLicenseUi(shell as System.Windows.Forms.Form),
                 newConfigSaver,
                 newSettingsProvider,
                 runner => new FileTimestampManager(runner),
@@ -152,7 +152,7 @@
                 () => new UserControlTimestampEditUi(),
                 lotter => new UserControlDailyUi(lotter),
                 () => new UserControlConfigUi(),
-                shell => new FormLicenseUi(shell as FormUi),
+                shell => new FormLicenseUi(shell as System.Windows.Forms.Form),
                 newConfigSaver,
                 newSettingsProvider,
                 runner => new FileTimestampManager(runner),
@@ -248,9 +248,10 @@
 
         public virtual void Bootstrap()
         {
+            const byte one = 1;
             if (Interlocked.Exchange(
                     ref this.bootstrappedIf1,
-                    1) == 1)
+                    one) == one)
             {
                 return;
             }
@@ -280,6 +281,11 @@
         protected virtual void onBootstrap()
         {
             var s = this.mainShell;
+            if (s == null)
+            {
+                return;
+            }
+
             var m = this.newMessenger?.Invoke();
             if (m != null)
             {
@@ -287,19 +293,14 @@
             }
 
             var e = this.executor;
-            e.Execute(new SetupMethodWebCommand(
+            e?.Execute(new SetupMethodWebCommand(
                 new MethodWebV2(),
                 m,
                 this.newConfigSaver,
                 this.newSettingsProvider));
 
-            var w = e.Get<SetupMethodWebCommand>()?.W;
-            if (w == null)
-            {
-                return;
-            }
-
-            w.Run<EventSubscriber>(sub =>
+            var w = e?.Get<SetupMethodWebCommand>()?.W;
+            w?.Run<EventSubscriber>(sub =>
             {
                 var cd = AppDomain.CurrentDomain;
                 UnhandledExceptionEventHandler handler = this.handleException;
@@ -308,7 +309,7 @@
                     nameof(cd.UnhandledException),
                     handler);
             });
-            w.RegisterDependency(s);
+            w?.RegisterDependency(s);
 
             HomeUi homeUi = null;
             HomeNavUi homeNavUi = null;
@@ -318,7 +319,7 @@
             DailyUi dailyUi = null;
             ConfigUi configUi = null;
             LicenseUi licenseUi = null;
-            w.Run<UiReaderWriter, Lotter>(
+            w?.Run<UiReaderWriter, Lotter>(
                 (uiRW, lotter) =>
                 {
                     uiRW.WriteSync(
@@ -347,10 +348,12 @@
             var licenseFinished = new ManualResetEvent(false);
             var configFinished = new ManualResetEvent(false);
 
-            ThreadPool.QueueUserWorkItem(
-                o =>
+            w?.Run<Do<Do>>(invoker =>
+            {
+                invoker.Invoke(
+                    () =>
                 {
-                    e.Execute(
+                    e?.Execute(
                         new SetupHomeCommand(
                             homeUi,
                             s,
@@ -360,134 +363,146 @@
                     homeFinished.Set();
                 });
 
-            ThreadPool.QueueUserWorkItem(
-                o =>
-                {
-                    e.Execute(
-                        new SetupHomeNavCommand(
-                            homeNavUi,
-                            s.NavUi,
-                            new NavigatorNavLogicReader(w),
-                            w));
-                    homeNavFinished.Set();
-                });
+                invoker.Invoke(
+                    () =>
+                    {
+                        e?.Execute(
+                            new SetupHomeNavCommand(
+                                homeNavUi,
+                                s.NavUi,
+                                new NavigatorNavLogicReader(w),
+                                w));
+                        homeNavFinished.Set();
+                    });
 
-            ThreadPool.QueueUserWorkItem(
-                o =>
-                {
-                    e.Execute(
-                        new SetupStatisticsCommand(
-                            statsUi,
-                            homeUi,
-                            w));
-                    statsFinished.Set();
-                });
+                invoker.Invoke(
+                    () =>
+                    {
+                        e?.Execute(
+                            new SetupStatisticsCommand(
+                                statsUi,
+                                homeUi,
+                                w));
+                        statsFinished.Set();
+                    });
 
-            ThreadPool.QueueUserWorkItem(
-                o =>
-                {
-                    e.Execute(
-                        new SetupTimestampEditCommand(
-                            editUi,
-                            homeUi,
-                            w));
-                    editFinished.Set();
-                });
+                invoker.Invoke(
+                    () =>
+                    {
+                        e?.Execute(
+                            new SetupTimestampEditCommand(
+                                editUi,
+                                homeUi,
+                                w));
+                        editFinished.Set();
+                    });
 
-            ThreadPool.QueueUserWorkItem(
-                o =>
-                {
-                    e.Execute(
-                        new SetupMainCommand(
-                            s,
-                            w));
-                    mainFinished.Set();
-                });
+                invoker.Invoke(
+                    () =>
+                    {
+                        e?.Execute(
+                            new SetupMainCommand(
+                                s,
+                                w));
+                        mainFinished.Set();
+                    });
 
-            ThreadPool.QueueUserWorkItem(
-                o =>
-                {
-                    e.Execute(
-                        new SetupShutdownCommand(
-                            w));
-                    shutdownFinished.Set();
-                });
+                invoker.Invoke(
+                    () =>
+                    {
+                        e?.Execute(
+                            new SetupShutdownCommand(
+                                w));
+                        shutdownFinished.Set();
+                    });
 
-            ThreadPool.QueueUserWorkItem(
-                o =>
-                {
-                    e.Execute(
-                        new SetupLicenseCommand(
-                            licenseUi,
-                            w));
-                    licenseFinished.Set();
-                });
+                invoker.Invoke(
+                    () =>
+                    {
+                        e?.Execute(
+                            new SetupLicenseCommand(
+                                licenseUi,
+                                w));
+                        licenseFinished.Set();
+                    });
 
-            homeFinished.WaitOne();
+                homeFinished.WaitOne();
 
-            ThreadPool.QueueUserWorkItem(
-                o =>
-                {
-                    e.Execute(
-                        new SetupTimestampsCommand(
-                            timestampsUi,
-                            homeUi,
-                            w));
-                    timestampsFinished.Set();
-                });
+                invoker.Invoke(
+                    () =>
+                    {
+                        e?.Execute(
+                            new SetupTimestampsCommand(
+                                timestampsUi,
+                                homeUi,
+                                w));
+                        timestampsFinished.Set();
+                    });
 
-            ThreadPool.QueueUserWorkItem(
-                o =>
-                {
-                    e.Execute(
-                        new SetupDailyCommand(
-                            dailyUi,
-                            homeUi,
-                            new NavigatorUiReader(w),
-                            w));
-                    dailyFinished.Set();
-                });
+                invoker.Invoke(
+                    () =>
+                    {
+                        e?.Execute(
+                            new SetupDailyCommand(
+                                dailyUi,
+                                homeUi,
+                                new NavigatorUiReader(w),
+                                w));
+                        dailyFinished.Set();
+                    });
+            });
 
             // update to single-file format
-            w.Run<FileTimestampManager>(manager =>
+            w?.Run<FileTimestampManager>(manager =>
             {
                 manager.ConvertToSingleFile();
             });
 
-            w.Run<DataWatcher>(watcher =>
+            w?.Run<DataWatcher>(watcher =>
             {
                 watcher.Start();
             });
 
-            w.Run<Navigator>(
-                n =>
+            w?.Run<Navigator>(
+                nav =>
                 {
-                    n.Present<HomePresenter>();
+                    nav.Present<HomePresenter>();
 
-                    homeNavFinished.WaitOne();
-                    n.PresentFluidly<HomeNavPresenter>();
+                    w.Run<Do<Do>>(invoker =>
+                    {
+                        homeNavFinished.WaitOne();
+                    });
+                    
+                    nav.PresentFluidly<HomeNavPresenter>();
 
-                    timestampsFinished.WaitOne();
-                    n.PresentFluidly<TimestampsPresenter>();
+                    w.Run<Do<Do>>(invoker =>
+                    {
+                        timestampsFinished.WaitOne();
+                    });
+
+                    nav.PresentFluidly<TimestampsPresenter>();
                 });
 
-            dailyFinished.WaitOne();
-            ThreadPool.QueueUserWorkItem(o =>
+            w?.Run<Do<Do>>(invoker =>
             {
-                e.Execute(
-                    new SetupConfigCommand(
-                        configUi,
-                        homeUi,
-                        w));
-                configFinished.Set();
-            });
+                dailyFinished.WaitOne();
+                invoker.Invoke(() =>
+                {
+                    e?.Execute(
+                        new SetupConfigCommand(
+                            configUi,
+                            homeUi,
+                            w));
+                    configFinished.Set();
+                });
 
-            statsFinished.WaitOne();
-            editFinished.WaitOne();
-            mainFinished.WaitOne();
-            shutdownFinished.WaitOne();
-            licenseFinished.WaitOne();
-            configFinished.WaitOne();
+                statsFinished.WaitOne();
+                editFinished.WaitOne();
+                mainFinished.WaitOne();
+                shutdownFinished.WaitOne();
+                licenseFinished.WaitOne();
+                configFinished.WaitOne();
+            });
         }
 
         protected virtual void setMainShell(
@@ -500,7 +515,7 @@
             object sender,
             UnhandledExceptionEventArgs e)
         {
-            var w = this.executor.Get<SetupMethodWebCommand>()?.W;
+            var w = this.executor?.Get<SetupMethodWebCommand>()?.W;
             w?.Run<LogEditor>(le =>
                 {
                     LogHelpers.AddEntry(le, e);

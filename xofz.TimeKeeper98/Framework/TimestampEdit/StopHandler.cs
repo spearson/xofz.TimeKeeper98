@@ -15,8 +15,8 @@
         public virtual void Handle(
             HomeUi homeUi)
         {
-            var w = this.runner;
-            w.Run<UiReaderWriter>(uiRW =>
+            var r = this.runner;
+            r?.Run<UiReaderWriter>(uiRW =>
             {
                 uiRW.Write(
                     homeUi,

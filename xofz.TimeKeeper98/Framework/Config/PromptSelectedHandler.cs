@@ -15,7 +15,7 @@
             ConfigUi ui)
         {
             var r = this.runner;
-            r.Run<GlobalSettingsHolder>(settings =>
+            r?.Run<GlobalSettingsHolder>(settings =>
             {
                 if (!settings.Prompt)
                 {

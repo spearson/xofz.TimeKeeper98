@@ -6,6 +6,7 @@
     {
         bool Write();
 
-        void EditLastTimestamp(DateTime newTimestamp);
+        void EditLastTimestamp(
+            DateTime newTimestamp);
     }
 }

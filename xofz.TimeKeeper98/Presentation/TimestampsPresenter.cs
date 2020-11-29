@@ -23,20 +23,21 @@
 
         public void Setup()
         {
+            const byte one = 1;
             if (Interlocked.Exchange(
                     ref this.setupIf1,
-                    1) == 1)
+                    one) == one)
             {
                 return;
             }
 
             var w = this.web;
-            w.Run<SetupHandler>(handler =>
+            w?.Run<SetupHandler>(handler =>
             {
                 handler.Handle();
             });
 
-            w.Run<EventSubscriber>(sub =>
+            w?.Run<EventSubscriber>(sub =>
             {
                 sub.Subscribe(
                     this.ui,
@@ -64,11 +65,12 @@
                 });
             });
 
-            w.Run<Navigator>(nav =>
+            w?.Run<Navigator>(nav =>
             {
                 Do refreshTimestamps = () =>
                 {
-                    if (Interlocked.Read(ref this.startedIf1) != 1)
+                    if (Interlocked.Read(
+                        ref this.startedIf1) != one)
                     {
                         return;
                     }
@@ -99,7 +101,7 @@
             base.Start();
 
             var w = this.web;
-            w.Run<Navigator>(nav =>
+            w?.Run<Navigator>(nav =>
             {
                 var hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
                 var statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
@@ -133,7 +135,7 @@
             }
 
             var w = this.web;
-            w.Run<Navigator>(nav =>
+            w?.Run<Navigator>(nav =>
             {
                 var hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
                 var statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
@@ -156,7 +158,7 @@
             }
 
             var w = this.web;
-            w.Run<Navigator>(nav =>
+            w?.Run<Navigator>(nav =>
             {
                 var hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
                 var statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
@@ -179,7 +181,7 @@
             }
 
             var w = this.web;
-            w.Run<Navigator>(nav =>
+            w?.Run<Navigator>(nav =>
             {
                 var hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
                 var statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
@@ -202,7 +204,7 @@
             }
 
             var w = this.web;
-            w.Run<Navigator>(nav =>
+            w?.Run<Navigator>(nav =>
             {
                 var hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
                 var statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();
@@ -225,7 +227,7 @@
             }
 
             var w = this.web;
-            w.Run<Navigator>(nav =>
+            w?.Run<Navigator>(nav =>
             {
                 var hnUi = nav.GetUi<HomeNavPresenter, HomeNavUi>();
                 var statsUi = nav.GetUi<StatisticsPresenter, StatisticsUi>();

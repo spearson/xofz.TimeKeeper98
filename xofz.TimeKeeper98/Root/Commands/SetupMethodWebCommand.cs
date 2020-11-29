@@ -1,5 +1,6 @@
 ﻿namespace xofz.TimeKeeper98.Root.Commands
 {
+    using System.Threading;
     using xofz.Framework;
     using xofz.Framework.Lotters;
     using xofz.Presentation;
@@ -33,33 +34,36 @@
         protected virtual void registerDependencies()
         {
             var w = this.web;
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new UiReaderWriter());
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new NavigatorV2(w));
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 this.messenger);
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new EventRaiser());
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new LinkedListLotter());
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new EventSubscriber());
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 this.newSettingsProvider?.Invoke(w));
-            w.Run<SettingsProvider>(provider =>
+            w?.Run<SettingsProvider>(provider =>
             {
                 w.RegisterDependency(
                     provider.Provide());
             });
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 this.newConfigSaver?.Invoke(w));
             var exceptionsLogName = LogNames.Exceptions;
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new TextFileLog(exceptionsLogName + @".log"),
                 exceptionsLogName);
-            w.RegisterDependency(
+            w?.RegisterDependency(
                 new TimeProvider());
+            w?.RegisterDependency(
+                (Do<Do>)(act => ThreadPool.QueueUserWorkItem(
+                    o => act?.Invoke())));
         }
 
         protected readonly MethodWebV2 web;

@@ -22,20 +22,21 @@
 
         public void Setup()
         {
+            const byte one = 1;
             if (Interlocked.Exchange(
                     ref this.setupIf1, 
-                    1) == 1)
+                    one) == one)
             {
                 return;
             }
 
             var r = this.runner;
-            r.Run<SetupHandler>(handler =>
+            r?.Run<SetupHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
 
-            r.Run<EventSubscriber>(sub =>
+            r?.Run<EventSubscriber>(sub =>
             {
                 sub.Subscribe(
                     this.ui,
@@ -100,7 +101,7 @@
                 });
             });
 
-            r.Run<Navigator>(nav =>
+            r?.Run<Navigator>(nav =>
                 nav.RegisterPresenter(this));
         }
 
@@ -109,7 +110,7 @@
             base.Start();
 
             var r = this.runner;
-            r.Run<StartHandler>(handler =>
+            r?.Run<StartHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -129,7 +130,7 @@
         private void ui_PromptSelected()
         {
             var r = this.runner;
-            r.Run<PromptSelectedHandler>(handler =>
+            r?.Run<PromptSelectedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -138,7 +139,7 @@
         private void ui_KeyboardKeyTapped()
         {
             var r = this.runner;
-            r.Run<KeyboardKeyTappedHandler>(handler =>
+            r?.Run<KeyboardKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -147,7 +148,7 @@
         private void ui_PromptUnselected()
         {
             var r = this.runner;
-            r.Run<PromptUnselectedHandler>(handler =>
+            r?.Run<PromptUnselectedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -156,7 +157,7 @@
         private void ui_SaveTitleTextKeyTapped()
         {
             var r = this.runner;
-            r.Run<SaveTitleTextKeyTappedHandler>(handler =>
+            r?.Run<SaveTitleTextKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -165,7 +166,7 @@
         private void ui_ResetTitleTextKeyTapped()
         {
             var r = this.runner;
-            r.Run<ResetTitleTextKeyTappedHandler>(handler =>
+            r?.Run<ResetTitleTextKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -174,7 +175,7 @@
         private void ui_DefaultTitleTextKeyTapped()
         {
             var r = this.runner;
-            r.Run<DefaultTitleTextKeyTappedHandler>(handler =>
+            r?.Run<DefaultTitleTextKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -183,7 +184,7 @@
         private void ui_ShowSecondsSelected()
         {
             var r = this.runner;
-            r.Run<ShowSecondsSelectedHandler>(handler =>
+            r?.Run<ShowSecondsSelectedHandler>(handler =>
             {
                 handler.Handle();
             });
@@ -192,7 +193,7 @@
         private void ui_ShowSecondsUnselected()
         {
             var r = this.runner;
-            r.Run<ShowSecondsUnselectedHandler>(handler =>
+            r?.Run<ShowSecondsUnselectedHandler>(handler =>
             {
                 handler.Handle();
             });
@@ -201,7 +202,7 @@
         private void ui_SaveIntervalKeyTapped()
         {
             var r = this.runner;
-            r.Run<SaveIntervalKeyTappedHandler>(handler =>
+            r?.Run<SaveIntervalKeyTappedHandler>(handler =>
             {
                 handler.Handle(
                     this.ui);
@@ -211,7 +212,7 @@
         private void ui_ResetIntervalKeyTapped()
         {
             var r = this.runner;
-            r.Run<ResetIntervalKeyTappedHandler>(handler =>
+            r?.Run<ResetIntervalKeyTappedHandler>(handler =>
             {
                 handler.Handle(
                     this.ui);
@@ -221,7 +222,7 @@
         private void ui_PublishKeyTapped()
         {
             var r = this.runner;
-            r.Run<PublishKeyTappedHandler>(handler =>
+            r?.Run<PublishKeyTappedHandler>(handler =>
             {
                 handler.Handle();
             });
@@ -236,7 +237,7 @@
             }
 
             var r = this.runner;
-            r.Run<HomeUiInKeyTappedHandler>(handler =>
+            r?.Run<HomeUiInKeyTappedHandler>(handler =>
             {
                 handler.Handle(
                     this.ui);
@@ -252,7 +253,7 @@
             }
 
             var r = this.runner;
-            r.Run<HomeUiOutKeyTappedHandler>(handler =>
+            r?.Run<HomeUiOutKeyTappedHandler>(handler =>
             {
                 handler.Handle(
                     this.ui);

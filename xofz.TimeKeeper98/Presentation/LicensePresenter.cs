@@ -20,15 +20,16 @@
 
         public void Setup()
         {
+            const byte one = 1;
             if (Interlocked.Exchange(
                     ref this.setupIf1, 
-                    1) == 1)
+                    one) == one)
             {
                 return;
             }
 
             var r = this.runner;
-            r.Run<EventSubscriber>(sub =>
+            r?.Run<EventSubscriber>(sub =>
             {
                 sub.Subscribe(
                     this.ui,
@@ -40,14 +41,14 @@
                     this.ui_RejectKeyTapped);
             });
 
-            r.Run<Navigator>(nav => 
+            r?.Run<Navigator>(nav => 
                 nav.RegisterPresenter(this));
         }
 
         private void ui_AcceptKeyTapped()
         {
             var r = this.runner;
-            r.Run<AcceptKeyTappedHandler>(handler =>
+            r?.Run<AcceptKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });
@@ -56,7 +57,7 @@
         private void ui_RejectKeyTapped()
         {
             var r = this.runner;
-            r.Run<RejectKeyTappedHandler>(handler =>
+            r?.Run<RejectKeyTappedHandler>(handler =>
             {
                 handler.Handle(this.ui);
             });

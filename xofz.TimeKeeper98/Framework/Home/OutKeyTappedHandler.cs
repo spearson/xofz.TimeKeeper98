@@ -18,7 +18,7 @@
             var r = this.runner;
 
             var accepted = true;
-            r.Run<GlobalSettingsHolder>(settings =>
+            r?.Run<GlobalSettingsHolder>(settings =>
             {
                 if (settings.Prompt)
                 {
@@ -38,7 +38,7 @@
                 return;
             }
 
-            r.Run<xofz.Framework.Timer>(t =>
+            r?.Run<xofz.Framework.Timer>(t =>
                 {
                     t.Stop();
                     r.Run<LatchHolder>(timerLatch =>
@@ -49,7 +49,7 @@
                 },
                 DependencyNames.Timer);
 
-            r.Run<
+            r?.Run<
                 UiReaderWriter, 
                 TimestampWriter,
                 DataWatcher>(
@@ -66,7 +66,7 @@
                 watcher.Start();
             });
 
-            r.Run<StartHandler>(handler =>
+            r?.Run<StartHandler>(handler =>
             {
                 handler.Handle(ui);
             });

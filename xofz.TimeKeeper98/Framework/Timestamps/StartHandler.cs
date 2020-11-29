@@ -19,7 +19,7 @@
             TimestampsUi ui)
         {
             var r = this.runner;
-            r.Run<UiReader>(reader =>
+            r?.Run<UiReader>(reader =>
             {
                 reader.ReadHomeNav(
                     out var homeNavUi);
@@ -38,7 +38,7 @@
             StatisticsUi statsUi)
         {
             var r = this.runner;
-            r.Run<UiReaderWriter>(uiRW =>
+            r?.Run<UiReaderWriter>(uiRW =>
             {
                 uiRW.Write(
                     homeNavUi,
@@ -49,12 +49,12 @@
             });
 
             var showCurrent = true;
-            r.Run<SettingsHolder>(settings =>
+            r?.Run<SettingsHolder>(settings =>
             {
                 showCurrent = settings.ShowCurrent;
             });
             var start = DateTime.Today;
-            r.Run<TimeProvider>(provider =>
+            r?.Run<TimeProvider>(provider =>
             {
                 start = provider.Now().Date;
             });
@@ -62,7 +62,7 @@
             var end = start.AddDays(1);
             if (showCurrent)
             {
-                r.Run<DateCalculator>(
+                r?.Run<DateCalculator>(
                     calc =>
                     {
                         start = calc.StartOfWeek();
@@ -71,7 +71,7 @@
                 goto findAndSetTimesInRange;
             }
 
-            r.Run<UiReaderWriter>(uiRW =>
+            r?.Run<UiReaderWriter>(uiRW =>
             {
                 start = uiRW.Read(
                     statsUi,
@@ -83,7 +83,7 @@
             });
 
             findAndSetTimesInRange:
-            r.Run<
+            r?.Run<
                 TimestampReader,
                 Lotter,
                 EnumerableSplitter,
@@ -283,7 +283,7 @@
         {
             var r = this.runner;
             var inTime = false;
-            r.Run<TimestampReader>(reader =>
+            r?.Run<TimestampReader>(reader =>
             {
                 long indexer = 0;
                 foreach (var ts in reader.Read())
@@ -306,7 +306,7 @@
         {
             var r = this.runner;
             string formattedTimestamp = null;
-            r.Run<GlobalSettingsHolder>(settings =>
+            r?.Run<GlobalSettingsHolder>(settings =>
             {
                 formattedTimestamp = timeStamp.ToString(
                     settings.TimestampFormat);

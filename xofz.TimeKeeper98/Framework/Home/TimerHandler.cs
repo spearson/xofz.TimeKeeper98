@@ -16,43 +16,43 @@
             HomeUi ui)
         {
             var r = this.runner;
-            r.Run<LatchHolder>(timerLatch =>
+            r?.Run<LatchHolder>(timerLatch =>
                 {
                     timerLatch.Latch.Reset();
                 },
                 DependencyNames.Latch);
-            r.Run<
+            r?.Run<
                 UiReaderWriter,
                 StatisticsCalculator,
                 PaddedTimeSpanViewer,
                 TimestampReader>(
-            (uiRW, calc, viewer, reader) =>
-            {
-                var timeThisWeek = calc.TimeWorkedThisWeek();
-                var timeToday = calc.TimeWorkedToday();
-                var thisWeekString = viewer.ReadableString(timeThisWeek);
-                var todayString = viewer.ReadableString(timeToday);
-                var outKeyVisible = calc.ClockedIn();
-                var editKeyEnabled = false;
-                foreach (var timestamp in reader.Read())
+                (uiRW, calc, viewer, reader) =>
                 {
-                    editKeyEnabled = true;
-                    break;
-                }
-
-                uiRW.Write(
-                    ui,
-                    () =>
+                    var timeThisWeek = calc.TimeWorkedThisWeek();
+                    var timeToday = calc.TimeWorkedToday();
+                    var thisWeekString = viewer.ReadableString(timeThisWeek);
+                    var todayString = viewer.ReadableString(timeToday);
+                    var outKeyVisible = calc.ClockedIn();
+                    var editKeyEnabled = false;
+                    foreach (var timestamp in reader.Read())
                     {
-                        ui.EditKeyEnabled = editKeyEnabled;
-                        ui.TimeWorkedThisWeek = thisWeekString;
-                        ui.TimeWorkedToday = todayString;
-                        ui.InKeyVisible = !outKeyVisible;
-                        ui.OutKeyVisible = outKeyVisible;
-                    });
-            });
+                        editKeyEnabled = true;
+                        break;
+                    }
 
-            r.Run<LatchHolder>(timerLatch =>
+                    uiRW.Write(
+                        ui,
+                        () =>
+                        {
+                            ui.EditKeyEnabled = editKeyEnabled;
+                            ui.TimeWorkedThisWeek = thisWeekString;
+                            ui.TimeWorkedToday = todayString;
+                            ui.InKeyVisible = !outKeyVisible;
+                            ui.OutKeyVisible = outKeyVisible;
+                        });
+                });
+
+            r?.Run<LatchHolder>(timerLatch =>
                 {
                     timerLatch.Latch.Set();
                 },

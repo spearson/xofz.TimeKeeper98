@@ -15,12 +15,15 @@
         public virtual void Handle()
         {
             var w = this.web;
-            w.Unregister<PaddedTimeSpanViewer>();
-            w.RegisterDependency(new PaddedTimeSpanViewer());
-            w.Unregister<TimeSpanViewer>();
-            w.RegisterDependency(
+            w?.Unregister<PaddedTimeSpanViewer>();
+            w?.RegisterDependency(
+                new PaddedTimeSpanViewer());
+
+            w?.Unregister<TimeSpanViewer>();
+            w?.RegisterDependency(
                 new TimeSpanViewer());
-            w.Run<GlobalSettingsHolder>(settings =>
+
+            w?.Run<GlobalSettingsHolder>(settings =>
             {
                 if (!settings.ShowSeconds)
                 {
@@ -32,19 +35,19 @@
                 }
             });
 
-            w.Run<Do>(
+            w?.Run<Do>(
                 refreshHome =>
                 {
                     refreshHome?.Invoke();
                 },
                 MethodNames.RefreshHome);
-            w.Run<Do>(
+            w?.Run<Do>(
                 refreshTimestamps =>
                 {
                     refreshTimestamps?.Invoke();
                 },
                 MethodNames.RefreshTimestamps);
-            w.Run<Do>(
+            w?.Run<Do>(
                 refreshDaily =>
                 {
                     refreshDaily?.Invoke();

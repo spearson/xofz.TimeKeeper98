@@ -22,28 +22,28 @@
         protected virtual void pingApp()
         {
             var r = this.runner;
-            r.Run<FieldHolder>(fields =>
+            r?.Run<FieldHolder>(fields =>
             {
                 Interlocked.Exchange(
                     ref fields.needToTrapIf1,
                     1);
             });
-            r.Run<Do>(refreshHome =>
+            r?.Run<Do>(refreshHome =>
                 {
                     refreshHome.Invoke();
                 },
                 MethodNames.RefreshHome);
-            r.Run<Do>(refreshTimestamps =>
+            r?.Run<Do>(refreshTimestamps =>
                 {
                     refreshTimestamps.Invoke();
                 },
                 MethodNames.RefreshTimestamps);
-            r.Run<Do>(refreshDaily =>
+            r?.Run<Do>(refreshDaily =>
                 {
                     refreshDaily.Invoke();
                 },
                 MethodNames.RefreshDaily);
-            r.Run<Do>(refreshConfig =>
+            r?.Run<Do>(refreshConfig =>
                 {
                     refreshConfig.Invoke();
                 },

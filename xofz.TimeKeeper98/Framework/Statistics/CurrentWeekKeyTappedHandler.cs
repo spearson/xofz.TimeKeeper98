@@ -16,7 +16,7 @@
             StatisticsUi ui)
         {
             var r = this.runner;
-            r.Run<DateCalculator, UiReaderWriter>(
+            r?.Run<DateCalculator, UiReaderWriter>(
                 (calc, uiRW) =>
                 {
                     var start = calc.StartOfWeek();
