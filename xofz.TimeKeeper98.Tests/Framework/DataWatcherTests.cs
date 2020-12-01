@@ -45,7 +45,8 @@
             protected readonly Do refreshConfig;
         }
 
-        public class PingingDataWatcher : DataWatcher
+        public class PingingDataWatcher 
+            : DataWatcher
         {
             public PingingDataWatcher(
                 MethodRunner runner) 

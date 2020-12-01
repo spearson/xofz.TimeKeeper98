@@ -50,8 +50,10 @@
             protected readonly TimestampReader reader;
             protected DateCalculator dateCalc;
             protected static Fixture fixture = new Fixture();
-            protected static readonly ICollection<DateTime> allOfTheTimes 
+
+            protected static readonly ICollection<DateTime> allOfTheTimes
                 = new LinkedList<DateTime>();
+
             protected const short timestampCount = 0xFFF;
         }
 
@@ -182,20 +184,36 @@
                 var w = this.web;
                 w.Unregister<DateCalculator>();
                 w.RegisterDependency(
-                    new DateCalculator());
-                var allTimes = new LinkedList<DateTime>(new []
+                    A.Fake<DateCalculator>());
+                w.Run<DateCalculator>(fakeDater =>
                 {
-                    new DateTime(2020, 11, 24, 7, 0, 0), 
-                    new DateTime(2020, 11, 24, 1, 45, 0), 
-                    new DateTime(2020, 11, 24, 2, 40, 0), 
-                    new DateTime(2020, 11, 24, 5, 40, 0), 
+                    A
+                        .CallTo(() => fakeDater.StartOfWeek())
+                        .Returns(new DateTime(
+                            2020,
+                            11,
+                            24));
+                    A
+                        .CallTo(() => fakeDater.EndOfWeek())
+                        .Returns(new DateTime(
+                            2020,
+                            11,
+                            25));
+                });
+
+                var allTimes = new LinkedList<DateTime>(new[]
+                {
+                    new DateTime(2020, 11, 24, 7, 0, 0),
+                    new DateTime(2020, 11, 24, 1, 45, 0),
+                    new DateTime(2020, 11, 24, 2, 40, 0),
+                    new DateTime(2020, 11, 24, 5, 40, 0),
                 });
                 A
                     .CallTo(() => this.reader.ReadAll())
                     .Returns(allTimes);
 
                 Assert.Equal(
-                    new TimeSpan(0, 2, 15, 0), 
+                    new TimeSpan(0, 2, 15, 0),
                     this.calc.TimeWorkedThisWeek());
             }
         }

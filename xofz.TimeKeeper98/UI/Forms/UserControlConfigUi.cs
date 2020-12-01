@@ -10,7 +10,7 @@
     {
         public UserControlConfigUi()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         public virtual event Do ShowSecondsSelected;
@@ -51,12 +51,22 @@
 
         int ConfigUi.TimerIntervalSeconds
         {
-            get => Convert
-                .ToInt32(
-                    Math
-                        .Round(
-                            this.timerIntervalPicker.Value,
-                            0));
+            get
+            {
+                try
+                {
+                    return Convert
+                        .ToInt32(
+                            Math.Round(
+                                    this.timerIntervalPicker.Value,
+                                    0));
+                }
+                catch
+                {
+                    return 0;
+                }
+                
+            }
 
             set => this.timerIntervalPicker.Value = value;
         }

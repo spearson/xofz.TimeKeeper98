@@ -2,6 +2,6 @@
 {
     public class LogNames
     {
-        public const string Exceptions = @"Exceptions";
+        public const string Exceptions = nameof(Exceptions);
     }
 }
