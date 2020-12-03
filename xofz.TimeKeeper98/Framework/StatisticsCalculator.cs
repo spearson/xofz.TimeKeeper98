@@ -23,10 +23,11 @@
             var calc = r?.Run<DateCalculator>();
             var beginning = calc?.StartOfWeek();
             var end = calc?.EndOfWeek().AddDays(1);
+            var max = DateTime.MaxValue;
 
             return this.TimeWorked(
-                beginning ?? DateTime.MaxValue, 
-                end ?? DateTime.MaxValue);
+                beginning ?? max, 
+                end ?? max);
         }
 
         public virtual TimeSpan TimeWorkedToday()
