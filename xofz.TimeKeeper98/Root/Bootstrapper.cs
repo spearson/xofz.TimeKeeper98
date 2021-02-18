@@ -4,6 +4,7 @@
     using System.Threading;
     using xofz.Framework;
     using xofz.Framework.Logging;
+    using xofz.Framework.Main;
     using xofz.Presentation;
     using xofz.Root;
     using xofz.Root.Commands;
@@ -403,7 +404,8 @@
                         e?.Execute(
                             new SetupMainCommand(
                                 s,
-                                w));
+                                w,
+                                new SettingsHolder()));
                         mainFinished.Set();
                     });
 
