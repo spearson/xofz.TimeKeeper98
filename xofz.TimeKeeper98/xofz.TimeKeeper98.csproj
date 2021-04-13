@@ -282,6 +282,9 @@
     <None Include="Resources\TimeKeeper98 Icon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ms-PL.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="version.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
