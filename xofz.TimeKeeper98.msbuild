@@ -1,5 +1,5 @@
 <Project
-  DefaultTargets="ChangeVersion;Build;Test;Zip;Deploy"
+  DefaultTargets="WriteAssemblyInfo;Build;Test;Zip;Deploy"
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
 
@@ -9,28 +9,35 @@
 
 
   <PropertyGroup>
+    <!-- TeamCity environment variable name -->
     <Version>$(BUILD_NUMBER)</Version>
     <ProjectName>xofz.TimeKeeper98</ProjectName>
+    <TestProjectName>$(ProjectName).Tests</TestProjectName>
     <BuildFolder>$(ProjectName)\bin\Release</BuildFolder>
+    <TestBuildFolder>$(TestProjectName)\bin\Release</TestBuildFolder>
+    <LicenseFilePath>$(BuildFolder)\ms-PL.txt</LicenseFilePath>
+    <!-- TeamCity environment variable name -->
     <WorkingFolder>$(teamcity_build_workingDir)</WorkingFolder>
-    <ZipFolder>$(ProjectName)-v$(Version)</ZipFolder>
-    <DeployFolder>H:\Dropbox\xofz.Apps\TimeKeeper98</DeployFolder>
-    <DeployFolder2>H:\OneDrive\xofz.Apps\TimeKeeper98</DeployFolder2>
-    <VersionFileName>version-$(Version).txt</VersionFileName>
+    <ZipFolder>$(BuildFolder)\$(ProjectName)-v$(Version)</ZipFolder>
+    <ZipFileName>$(ProjectName)-v$(Version).zip</ZipFileName>
+    <AppsFolder>H:\Dropbox\xofz.Apps</AppsFolder>
+    <AppsFolder2>H:\OneDrive\xofz.Apps</AppsFolder2>
+    <VersionFilePath>$(BuildFolder)\version-$(Version).txt</VersionFilePath>
+    <DeployFolder>$(AppsFolder)\TimeKeeper98</DeployFolder>
+    <DeployFolder2>$(AppsFolder2)\TimeKeeper98</DeployFolder2>
   </PropertyGroup>
 
 
-  <Target Name="ChangeVersion">
+  <Target
+    Name="WriteAssemblyInfo">
     <AssemblyInfo
       CodeLanguage="CS" 
       OutputFile="$(ProjectName)\Properties\AssemblyInfo.cs"
       AssemblyTitle="$(ProjectName)" 
       AssemblyDescription="This app is for tracking the number of hours worked each week."
-      AssemblyConfiguration=""
       AssemblyCompany="x(z)"
-      AssemblyProduct="TimeKeeper98"
+      AssemblyProduct="x(z) TimeKeeper98"
       AssemblyCopyright="Copyright (c) x(z)"
-      AssemblyTrademark=""
       ComVisible="false"
       Guid="084c471d-35ef-46d1-b6a3-3d79091feaa8"
       AssemblyVersion="$(Version)"
@@ -42,7 +49,7 @@
 
   <Target
     Name="Build"
-    DependsOnTargets="ChangeVersion">
+    DependsOnTargets="WriteAssemblyInfo">
     <RemoveDir
       Directories="$(BuildFolder)"
     />
@@ -53,39 +60,57 @@
     />
   </Target>
   
-  <UsingTask AssemblyFile="H:\Dropbox\Libraries\xUnit\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit" />
-  <Target Name="Test" DependsOnTargets="Build">
-    <xunit Assemblies="$(ProjectName).Tests\bin\Release\$(ProjectName).Tests.dll" />
+  <UsingTask
+    AssemblyFile="H:\OneDrive\Libraries\xUnit\xunit.runner.msbuild.dll" 
+    TaskName="Xunit.Runner.MSBuild.xunit"
+  />
+  <Target
+    Name="Test"
+    DependsOnTargets="Build">
+    <xunit
+      Assemblies="$(TestBuildFolder)\$(TestProjectName).dll"
+    />
   </Target>
   
   
   <Target 
     Name="Zip" 
-    DependsOnTargets="Build">
+    DependsOnTargets="Test">
     <MakeDir 
       Directories="$(ZipFolder)" 
       Condition="!Exists('$(ZipFolder)')"
     />
+    <ItemGroup>
+       <FilesToDelete
+         Include="$(ZipFolder)\*.*"
+       />
+    </ItemGroup>
+    <Delete
+      Files="$(FilesToDelete)"
+    />
     <Move 
       SourceFiles="$(BuildFolder)\version.txt" 
-      DestinationFiles="$(BuildFolder)\$(VersionFileName)" 
+      DestinationFiles="$(VersionFilePath)" 
     />
     <ItemGroup>
-      <FilesToMove
+      <FilesToCopy
         Include="$(BuildFolder)\$(ProjectName).exe"
       />
-      <FilesToMove
+      <FilesToCopy
         Include="$(BuildFolder)\$(ProjectName).pdb"
       />
-      <FilesToMove
+      <FilesToCopy
         Include="$(BuildFolder)\$(ProjectName).exe.config"
       />
-      <FilesToMove
-        Include="$(BuildFolder)\$(VersionFileName)"
+      <FilesToCopy
+        Include="$(VersionFilePath)"
+      />
+      <FilesToCopy
+        Include="$(LicenseFilePath)"
       />
     </ItemGroup>
-    <MV
-      SourceFiles="@(FilesToMove)"
+    <Copy
+      SourceFiles="@(FilesToCopy)"
       DestinationFolder="$(ZipFolder)"
     />
     <ItemGroup>
@@ -94,8 +119,8 @@
       />
     </ItemGroup>
     <Zip 
-      ZipFileName="$(ProjectName)-v$(Version).zip" 
-      WorkingDirectory="$(WorkingFolder)"
+      ZipFileName="$(ZipFileName)" 
+      WorkingDirectory="$(BuildFolder)"
       Files="@(FilesToZip)"
     />
   </Target>
