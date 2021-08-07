@@ -28,7 +28,8 @@
 
                         var ll = allColl as LinkedList<DateTime>
                                  ?? new LinkedList<DateTime>(allColl);
-                        if (ll.Count < 1)
+                        const byte one = 1;
+                        if (ll.Count < one)
                         {
                             return;
                         }

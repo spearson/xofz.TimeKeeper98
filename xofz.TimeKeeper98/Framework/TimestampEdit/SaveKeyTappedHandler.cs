@@ -46,7 +46,8 @@
                     var allColl = reader.ReadAll();
                     var allLL = allColl as LinkedList<DateTime>
                                         ?? new LinkedList<DateTime>(allColl);
-                    if (allLL.Count < 2)
+                    const byte two = 2;
+                    if (allLL.Count < two)
                     {
                         goto checkNow;
                     }

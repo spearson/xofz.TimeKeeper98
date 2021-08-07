@@ -38,6 +38,7 @@
             StatisticsUi statsUi)
         {
             var r = this.runner;
+            const byte one = 1;
             r?.Run<UiReaderWriter>(uiRW =>
             {
                 uiRW.Write(
@@ -59,14 +60,14 @@
                 start = provider.Now().Date;
             });
 
-            var end = start.AddDays(1);
+            var end = start.AddDays(one);
             if (showCurrent)
             {
                 r?.Run<DateCalculator>(
                     calc =>
                     {
                         start = calc.StartOfWeek();
-                        end = calc.EndOfWeek().AddDays(1);
+                        end = calc.EndOfWeek().AddDays(one);
                     });
                 goto findAndSetTimesInRange;
             }
@@ -108,7 +109,7 @@
                     }
 
                     bool firstIn;
-                    if (timesInRange.Count < 1)
+                    if (timesInRange.Count < one)
                     {
                         firstIn = false;
                         goto checkAdd;
@@ -119,8 +120,8 @@
                             timesInRange));
 
                     checkAdd:
-                    var inNow = allTimes.Count % 2 == 1;
-                    var oddTimesInRange = timesInRange.Count % 2 == 1;
+                    var inNow = allTimes.Count % two == one;
+                    var oddTimesInRange = timesInRange.Count % two == one;
                     if (oddTimesInRange)
                     {
                         if (inNow && firstIn)
@@ -131,7 +132,7 @@
                                 now = provider.Now();
                             });
 
-                            if (now > end.AddDays(1))
+                            if (now > end.AddDays(one))
                             {
                                 // was clocked in at end of range
                                 timesInRange.AddLast(end);
@@ -153,7 +154,7 @@
                         goto afterCheckClockedIn;
                     }
 
-                    if (inNow && !firstIn && timesInRange.Count > 0)
+                    if (inNow && !firstIn && timesInRange.Count > zero)
                     {
                         timesInRange.AddFirst(start.Date);
                     }
@@ -161,8 +162,8 @@
                     afterCheckClockedIn:
                     var splitTimesThisWeek = splitter.Split(
                         timesInRange,
-                        2);
-                    var inTimes = splitTimesThisWeek[0];
+                        two);
+                    var inTimes = splitTimesThisWeek[zero];
                     var uiTimesIn = lotter.Materialize(
                         EnumerableHelpers.Select(
                             inTimes,
@@ -174,7 +175,7 @@
                             ui.InTimes = uiTimesIn;
                         });
 
-                    var outTimes = splitTimesThisWeek[1];
+                    var outTimes = splitTimesThisWeek[one];
                     var uiTimesOut = lotter.Materialize(
                         EnumerableHelpers.Select(
                             outTimes,
@@ -196,14 +197,14 @@
                                             inTimes,
                                             outTimes
                                         });
-                            short indexer = 0;
+                            short indexer = zero;
                             DateTime
                                 currentInTime = default,
                                 currentOutTime;
                             ICollection<TimeSpan> durations = new LinkedList<TimeSpan>();
                             foreach (var splicedTime in splicedTimes)
                             {
-                                if (indexer == 0)
+                                if (indexer == zero)
                                 {
                                     // in time
                                     currentInTime = splicedTime;
@@ -211,12 +212,12 @@
                                     continue;
                                 }
 
-                                if (indexer == 1)
+                                if (indexer == one)
                                 {
                                     // out time
                                     currentOutTime = splicedTime;
                                     durations.Add(currentOutTime - currentInTime);
-                                    indexer = 0;
+                                    indexer = zero;
                                 }
                             }
 
@@ -237,11 +238,11 @@
                                 var closedLot = lot;
                                 r.Run<TimeSpanViewer>(v =>
                                 {
-                                    indexer = 0;
+                                    indexer = zero;
                                     var e = durations.GetEnumerator();
                                     foreach (var item in closedLot)
                                     {
-                                        if (indexer % 2 == 1)
+                                        if (indexer % two == one)
                                         {
                                             if (!e.MoveNext())
                                             {
@@ -285,12 +286,12 @@
             var inTime = false;
             r?.Run<TimestampReader>(reader =>
             {
-                long indexer = 0;
+                long indexer = zero;
                 foreach (var ts in reader.Read())
                 {
                     if (timestamp == ts)
                     {
-                        inTime = indexer % 2 == 0;
+                        inTime = indexer % two == zero;
                         break;
                     }
 
@@ -316,5 +317,8 @@
         }
         
         protected readonly MethodRunner runner;
+        protected const byte
+            zero = 0,
+            two = 2;
     }
 }
