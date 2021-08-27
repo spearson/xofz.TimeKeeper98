@@ -51,7 +51,7 @@
                 return false;
             }
 
-            ICollection<string> times = new LinkedList<string>();
+            ICollection<string> times = new XLinkedList<string>();
             try
             {
                 foreach (var file in Directory.GetFiles(md))
@@ -158,12 +158,12 @@
             var r = this.runner;
             return r?.Run<EnumerableTrapper<DateTime>>()
                        ?.TrappedCollection
-                   ?? new LinkedList<DateTime>();
+                   ?? new XLinkedList<DateTime>();
         }
 
         protected virtual ICollection<DateTime> readAllTimestamps()
         {
-            ICollection<DateTime> collection = new LinkedList<DateTime>();
+            ICollection<DateTime> collection = new XLinkedList<DateTime>();
             var md = this.mainDirectory;
             try
             {

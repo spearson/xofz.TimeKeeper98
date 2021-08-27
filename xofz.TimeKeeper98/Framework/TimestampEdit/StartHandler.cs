@@ -26,8 +26,8 @@
                     {
                         var allColl = reader.ReadAll();
 
-                        var ll = allColl as LinkedList<DateTime>
-                                 ?? new LinkedList<DateTime>(allColl);
+                        var ll = allColl as XLinkedList<DateTime>
+                                 ?? XLinkedList<DateTime>.Create(allColl);
                         const byte one = 1;
                         if (ll.Count < one)
                         {
@@ -35,8 +35,7 @@
                         }
 
                         var lastTimestamp = ll
-                            .Last
-                            .Value;
+                            .Tail;
                         uiRW.Write(
                             ui,
                             () =>

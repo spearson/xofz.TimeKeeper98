@@ -92,7 +92,7 @@
                 (reader, lotter, splitter, uiRW) =>
                 {
                     var allTimes = reader.ReadAll();
-                    var timesInRange = new LinkedList<DateTime>();
+                    var timesInRange = new XLinkedList<DateTime>();
                     foreach (var time in allTimes)
                     {
                         if (time < start)
@@ -105,7 +105,7 @@
                             continue;
                         }
 
-                        timesInRange.AddLast(time);
+                        timesInRange.AddTail(time);
                     }
 
                     bool firstIn;
@@ -135,7 +135,7 @@
                             if (now > end.AddDays(one))
                             {
                                 // was clocked in at end of range
-                                timesInRange.AddLast(end);
+                                timesInRange.AddTail(end);
                             }
 
                             // clocked in currently, do nothing
@@ -145,18 +145,18 @@
                         if (firstIn)
                         {
                             // clocked in at end of week
-                            timesInRange.AddLast(end.Date);
+                            timesInRange.AddTail(end.Date);
                             goto afterCheckClockedIn;
                         }
 
                         // clocked out now but was clocked in at start of week
-                        timesInRange.AddFirst(start.Date);
+                        timesInRange.AddHead(start.Date);
                         goto afterCheckClockedIn;
                     }
 
                     if (inNow && !firstIn && timesInRange.Count > zero)
                     {
-                        timesInRange.AddFirst(start.Date);
+                        timesInRange.AddHead(start.Date);
                     }
 
                     afterCheckClockedIn:
@@ -201,7 +201,7 @@
                             DateTime
                                 currentInTime = default,
                                 currentOutTime;
-                            ICollection<TimeSpan> durations = new LinkedList<TimeSpan>();
+                            ICollection<TimeSpan> durations = new XLinkedList<TimeSpan>();
                             foreach (var splicedTime in splicedTimes)
                             {
                                 if (indexer == zero)
@@ -234,7 +234,7 @@
 
                             if (showDurations)
                             {
-                                ICollection<string> newInOutTimes = new LinkedList<string>();
+                                ICollection<string> newInOutTimes = new XLinkedList<string>();
                                 var closedLot = lot;
                                 r.Run<TimeSpanViewer>(v =>
                                 {

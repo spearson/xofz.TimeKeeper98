@@ -52,7 +52,7 @@
             var r = this.runner;
             var allTimes = this.allTimes();
             var timeWorked = TimeSpan.Zero;
-            var timesInRange = new LinkedList<DateTime>();
+            var timesInRange = new XLinkedList<DateTime>();
             long timeCounter = 0;
             foreach (var time in allTimes)
             {
@@ -72,13 +72,13 @@
                     if (timesInRange.Count < 1 && timeCounter % 2 == 1)
                     {
                         // clocked in at beginning
-                        timesInRange.AddLast(beginning);
+                        timesInRange.AddTail(beginning);
                     }
 
                     if (timesInRange.Count % 2 == 1)
                     {
                         // clocked in at end
-                        timesInRange.AddLast(end);
+                        timesInRange.AddTail(end);
                     }
 
                     break;
@@ -88,7 +88,7 @@
                 if (timesInRange.Count < 1 && timeCounter % 2 == 1)
                 {
                     // clocked in at start of range
-                    timesInRange.AddFirst(beginning);
+                    timesInRange.AddHead(beginning);
                 }
 
                 if (timeCounter >= allTimes.Count)
@@ -96,7 +96,7 @@
                     break;
                 }
 
-                timesInRange.AddLast(time);
+                timesInRange.AddTail(time);
             }
 
             var e = ((ICollection<DateTime>)timesInRange)
@@ -218,11 +218,11 @@
         protected virtual ICollection<DateTime> allTimes()
         {
             var r = this.runner;
-            return EnumerableHelpers.OrderBy(
+            return XLinkedList<DateTime>.Create(
+                EnumerableHelpers.OrderBy(
                        r?.Run<TimestampReader>()
                            ?.ReadAll(),
-                       ts => ts)
-                   ?? new LinkedList<DateTime>();
+                       ts => ts));
         }
 
         protected readonly MethodRunner runner;
