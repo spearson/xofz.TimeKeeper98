@@ -52,7 +52,7 @@
             protected static Fixture fixture = new Fixture();
 
             protected static readonly ICollection<DateTime> allOfTheTimes
-                = new LinkedList<DateTime>();
+                = new XLinkedList<DateTime>();
 
             protected const short timestampCount = 0xFFF;
         }
@@ -201,7 +201,7 @@
                             25));
                 });
 
-                var allTimes = new LinkedList<DateTime>(new[]
+                var allTimes = XLinkedList<DateTime>.Create(new[]
                 {
                     new DateTime(2020, 11, 24, 7, 0, 0),
                     new DateTime(2020, 11, 24, 1, 45, 0),

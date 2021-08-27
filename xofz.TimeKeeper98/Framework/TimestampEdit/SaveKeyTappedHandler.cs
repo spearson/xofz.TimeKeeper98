@@ -1,7 +1,6 @@
 ﻿namespace xofz.TimeKeeper98.Framework.TimestampEdit
 {
     using System;
-    using System.Collections.Generic;
     using xofz.Framework;
     using xofz.TimeKeeper98.UI;
     using xofz.UI;
@@ -44,8 +43,8 @@
                         ui,
                         () => ui.EditedTimestamp);
                     var allColl = reader.ReadAll();
-                    var allLL = allColl as LinkedList<DateTime>
-                                        ?? new LinkedList<DateTime>(allColl);
+                    var allLL = allColl as XLinkedList<DateTime>
+                                        ?? XLinkedList<DateTime>.Create(allColl);
                     const byte two = 2;
                     if (allLL.Count < two)
                     {
@@ -53,9 +52,9 @@
                     }
 
                     var previousTimestamp = allLL
-                        .Last
+                        .TailN
                         ?.Previous
-                        ?.Value;
+                        ?.O;
                     if (newTimestamp < previousTimestamp)
                     {
                         r.Run<Messenger>(m =>
