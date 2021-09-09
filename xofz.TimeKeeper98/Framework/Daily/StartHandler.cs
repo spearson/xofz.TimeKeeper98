@@ -45,7 +45,7 @@
                 statsUi = statisticsUi;
             });
 
-            var ll = new LinkedListLot<string>();
+            var ll = new XLinkedListLot<string>();
             r?.Run<
                 StatisticsCalculator, 
                 DateCalculator,
@@ -74,7 +74,7 @@
                 {
                     var today = currentDay.Date;
                     var tomorrow = today.AddDays(1);
-                    ll.AddLast(
+                    ll.AddTail(
                         currentDay.Date.ToString(
                             @"yyyy/MM/dd ddd")
                         + @" ---- "
