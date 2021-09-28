@@ -88,6 +88,8 @@
                     Latch = new ManualResetEvent(true)
                 },
                 DependencyNames.Latch);
+            w?.RegisterDependency(
+                this.ui);
         }
 
         protected readonly HomeUi ui;

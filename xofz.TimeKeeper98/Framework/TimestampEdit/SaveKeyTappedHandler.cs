@@ -102,6 +102,22 @@
                         watcher.Start();
                     });
 
+                    r.Run<HomeUi, Framework.Home.TimerHandler>(
+                        (homeUi, handler) =>
+                        {
+                            handler.Handle(
+                                homeUi);
+                        });
+
+                    r.Run<UiReader, Framework.Statistics.TimerHandler>(
+                        (uiReader, handler) =>
+                        {
+                            uiReader.ReadStatistics(
+                                out var statsUi);
+                            handler.Handle(
+                                statsUi);
+                        });
+
                     r.Run<SettingsHolder, NavLogicReader>(
                         (settings, navReader) =>
                     {
