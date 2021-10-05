@@ -22,7 +22,7 @@
             {
                 if (s == null)
                 {
-                    return false;
+                    return falsity;
                 }
 
                 var buffer = new byte[0xFFFFFF];
@@ -37,7 +37,7 @@
                         if (resourceName.Contains(@".pdb"))
                         {
                             // done
-                            return true;
+                            return truth;
                         }
 
                         resourceName =
@@ -46,12 +46,15 @@
                     }
                     catch
                     {
-                        return false;
+                        return falsity;
                     }
                 }
             }
         }
 
         protected readonly MethodRunner runner;
+        protected const bool 
+            truth = true,
+            falsity = false;
     }
 }
