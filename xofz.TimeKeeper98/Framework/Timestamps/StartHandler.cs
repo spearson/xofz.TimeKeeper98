@@ -108,16 +108,18 @@
                         timesInRange.AddTail(time);
                     }
 
-                    bool firstIn;
+                    bool firstIn, lastIn;
                     if (timesInRange.Count < one)
                     {
                         firstIn = false;
+                        lastIn = false;
                         goto checkAdd;
                     }
 
                     firstIn = this.isInTime(
-                        EnumerableHelpers.FirstOrDefault(
-                            timesInRange));
+                        timesInRange.Head);
+                    lastIn = this.isInTime(
+                        timesInRange.Tail);
 
                     checkAdd:
                     var inNow = allTimes.Count % two == one;
@@ -161,7 +163,7 @@
                             timesInRange.AddHead(start.Date);
                         }
 
-                        if (!inNow)
+                        if (lastIn)
                         {
                             timesInRange.AddTail(end.Date);
                         }
