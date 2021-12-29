@@ -154,9 +154,17 @@
                         goto afterCheckClockedIn;
                     }
 
-                    if (inNow && !firstIn && timesInRange.Count > zero)
+                    if (timesInRange.Count > zero)
                     {
-                        timesInRange.AddHead(start.Date);
+                        if (!firstIn)
+                        {
+                            timesInRange.AddHead(start.Date);
+                        }
+
+                        if (!inNow)
+                        {
+                            timesInRange.AddTail(end.Date);
+                        }
                     }
 
                     afterCheckClockedIn:
