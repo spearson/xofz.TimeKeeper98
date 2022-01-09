@@ -54,10 +54,12 @@
             {
                 showCurrent = settings.ShowCurrent;
             });
+            var now = DateTime.Now;
             var start = DateTime.Today;
             r?.Run<TimeProvider>(provider =>
             {
-                start = provider.Now().Date;
+                now = provider.Now();
+                start = now.Date;
             });
 
             var end = start.AddDays(one);
@@ -128,12 +130,6 @@
                     {
                         if (inNow && firstIn)
                         {
-                            var now = DateTime.Now;
-                            r.Run<TimeProvider>(provider =>
-                            {
-                                now = provider.Now();
-                            });
-
                             if (now > end.AddDays(one))
                             {
                                 // was clocked in at end of range
@@ -163,7 +159,7 @@
                             timesInRange.AddHead(start.Date);
                         }
 
-                        if (lastIn)
+                        if (lastIn && end < now)
                         {
                             timesInRange.AddTail(end.Date);
                         }
