@@ -1,11 +1,11 @@
-﻿namespace xofz.TimeKeeper98.Presentation
+﻿namespace xofz.TimeKeeper98.Presentation.Presenters
 {
     using System.Threading;
     using xofz.Framework;
     using xofz.Presentation;
-    using xofz.UI;
     using xofz.TimeKeeper98.Framework.TimestampEdit;
     using xofz.TimeKeeper98.UI;
+    using xofz.UI;
 
     public sealed class TimestampEditPresenter 
         : Presenter

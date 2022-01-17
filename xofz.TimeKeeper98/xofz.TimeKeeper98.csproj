@@ -108,10 +108,10 @@
     <Compile Include="Framework\TimestampEdit\ErrorMessages.cs" />
     <Compile Include="Framework\TimestampReaderWriter.cs" />
     <Compile Include="Framework\UiReader.cs" />
-    <Compile Include="Presentation\ConfigPresenter.cs" />
-    <Compile Include="Presentation\LicensePresenter.cs" />
-    <Compile Include="Presentation\NavigatorNavLogicReader.cs" />
-    <Compile Include="Presentation\NavigatorUiReader.cs" />
+    <Compile Include="Presentation\Presenters\ConfigPresenter.cs" />
+    <Compile Include="Presentation\Presenters\LicensePresenter.cs" />
+    <Compile Include="Presentation\NavLogicReaders\NavigatorNavLogicReader.cs" />
+    <Compile Include="Presentation\UiReaders\NavigatorUiReader.cs" />
     <Compile Include="Root\Commands\SetupConfigCommand.cs" />
     <Compile Include="Root\Commands\SetupHomeNavCommand.cs" />
     <Compile Include="Root\Commands\SetupLicenseCommand.cs" />
@@ -159,12 +159,12 @@
     <Compile Include="Framework\Timestamps\StartHandler.cs" />
     <Compile Include="Framework\Timestamps\StatisticsRangeKeyTappedHandler.cs" />
     <Compile Include="Framework\TimestampWriter.cs" />
-    <Compile Include="Presentation\DailyPresenter.cs" />
-    <Compile Include="Presentation\HomeNavPresenter.cs" />
-    <Compile Include="Presentation\HomePresenter.cs" />
-    <Compile Include="Presentation\StatisticsPresenter.cs" />
-    <Compile Include="Presentation\TimestampEditPresenter.cs" />
-    <Compile Include="Presentation\TimestampsPresenter.cs" />
+    <Compile Include="Presentation\Presenters\DailyPresenter.cs" />
+    <Compile Include="Presentation\Presenters\HomeNavPresenter.cs" />
+    <Compile Include="Presentation\Presenters\HomePresenter.cs" />
+    <Compile Include="Presentation\Presenters\StatisticsPresenter.cs" />
+    <Compile Include="Presentation\Presenters\TimestampEditPresenter.cs" />
+    <Compile Include="Presentation\Presenters\TimestampsPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Root\Commands\SetupDailyCommand.cs" />
     <Compile Include="Root\Commands\SetupHomeCommand.cs" />
@@ -296,6 +296,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterResolveReferences">
     <ItemGroup>

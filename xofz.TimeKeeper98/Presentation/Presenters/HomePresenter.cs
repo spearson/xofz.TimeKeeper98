@@ -1,4 +1,4 @@
-﻿namespace xofz.TimeKeeper98.Presentation
+﻿namespace xofz.TimeKeeper98.Presentation.Presenters
 {
     using System.Threading;
     using xofz.Framework;

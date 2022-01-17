@@ -1,8 +1,10 @@
-﻿namespace xofz.TimeKeeper98.Presentation
+﻿namespace xofz.TimeKeeper98.Presentation.NavLogicReaders
 {
     using xofz.Framework;
     using xofz.Presentation;
+    using xofz.Presentation.Presenters;
     using xofz.TimeKeeper98.Framework;
+    using xofz.TimeKeeper98.Presentation.Presenters;
 
     public sealed class NavigatorNavLogicReader
         : NavLogicReader

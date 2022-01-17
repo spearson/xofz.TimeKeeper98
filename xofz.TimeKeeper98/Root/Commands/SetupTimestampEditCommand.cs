@@ -4,7 +4,7 @@
     using xofz.Root;
     using xofz.UI;
     using xofz.TimeKeeper98.Framework.TimestampEdit;
-    using xofz.TimeKeeper98.Presentation;
+    using xofz.TimeKeeper98.Presentation.Presenters;
     using xofz.TimeKeeper98.UI;
 
     public class SetupTimestampEditCommand 

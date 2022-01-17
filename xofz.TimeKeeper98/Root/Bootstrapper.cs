@@ -12,7 +12,9 @@
     using xofz.TimeKeeper98.Framework.ConfigSavers;
     using xofz.TimeKeeper98.Framework.DataWatchers;
     using xofz.TimeKeeper98.Framework.SettingsProviders;
-    using xofz.TimeKeeper98.Presentation;
+    using xofz.TimeKeeper98.Presentation.NavLogicReaders;
+    using xofz.TimeKeeper98.Presentation.Presenters;
+    using xofz.TimeKeeper98.Presentation.UiReaders;
     using xofz.TimeKeeper98.Root.Commands;
     using xofz.TimeKeeper98.UI;
     using xofz.TimeKeeper98.UI.Forms;

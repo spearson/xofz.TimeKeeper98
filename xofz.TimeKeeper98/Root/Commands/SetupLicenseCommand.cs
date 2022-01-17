@@ -3,7 +3,7 @@
     using xofz.Framework;
     using xofz.Root;
     using xofz.TimeKeeper98.Framework.License;
-    using xofz.TimeKeeper98.Presentation;
+    using xofz.TimeKeeper98.Presentation.Presenters;
     using xofz.TimeKeeper98.UI;
 
     public class SetupLicenseCommand 
