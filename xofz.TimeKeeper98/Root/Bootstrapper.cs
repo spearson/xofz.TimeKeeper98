@@ -20,6 +20,8 @@
     using xofz.TimeKeeper98.UI.Forms;
     using xofz.UI;
     using xofz.UI.Forms;
+    using xofz.UI.Forms.Messengers;
+    using xofz.UI.Forms.UiMessagePumpers;
 
     public class Bootstrapper
     {
