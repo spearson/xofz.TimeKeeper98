@@ -45,7 +45,8 @@
       <HintPath>H:\OneDrive\Libraries\AutoFixture\Ploeh.AutoFixture.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="xofz.Core98">
+    <Reference Include="xofz.Core98, Version=1.7.71.0, Culture=neutral, PublicKeyToken=bb6a24d2a0ca29ad, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>H:\OneDrive\Libraries\xofz.Core98\xofz.Core98.dll</HintPath>
     </Reference>
     <Reference Include="xunit.abstractions">
