@@ -12,12 +12,12 @@
             = @"x(z)" + nameof(TimeKeeper98);
 
         public virtual bool Prompt { get; set; }
-            = true;
+            = false;
 
         public virtual bool ShowSeconds { get; set; }
             = false;
 
         public virtual int TimerIntervalSeconds { get; set; }
-            = 1;
+            = 8;
     }
 }

@@ -77,7 +77,8 @@
             var w = this.web;
             w?.Run<FileSystemWatcher>(watcher =>
             {
-                watcher.EnableRaisingEvents = false;
+                const bool falsity = false;
+                watcher.EnableRaisingEvents = falsity;
             });
         }
 
